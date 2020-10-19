@@ -1,0 +1,8 @@
+{
+    "appService.deploySubpath": ".",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/b0dc1c27-5001-4b34-bc0e-9beea4f51058/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/hisignweb"
+}

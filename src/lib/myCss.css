@@ -1,0 +1,170 @@
+.container{
+    position:relative;
+    margin-top:30px;
+}
+
+.first-line{
+    position: fixed;
+    top:90px;
+    left:60px;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.instruction{
+    position: fixed;
+    top:120px;
+    left:60px;
+    font-size: 18px;
+    line-height: 30px;
+    color:#777777;
+}
+
+.right-screen{
+	position: absolute;
+	top: 62px;
+	left: 316px;
+	background-color: #FFFFFF;
+	height: 2000px;
+	width: 800px;
+}
+
+.left-screen{
+    position: fixed;
+    top:200px;
+    left:60px;
+}
+
+.left-screen>table{
+    border-radius: 15px;
+    background-color: #f8f8f8;
+    line-height: 30px;
+    font-size: 18px;
+    color:black;
+}
+
+#first-table-line{
+    background-color: #2C98E3;
+    color:white;
+}
+
+td{
+    padding:15px;
+}
+
+td>a{
+    text-decoration: none;
+}
+
+td>a:hover{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.left-screen>table, tr, td {
+    border: 1px solid #2C98E3;
+    border-collapse: collapse;
+}
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #2C98E3;
+    height:60px;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index: 30;
+    border-bottom:0.04em solid blue;
+}
+
+.glyphicon.glyphicon-envelope{
+    margin-left: 20px;
+    margin-top:5px;
+    margin-right:20px;
+    font-size: 50px;
+}
+
+li {
+    float: left;
+}
+
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover{
+    text-decoration: none;
+    background-color: #1D8CD9;
+    height:60px;
+}
+
+
+.list-item{
+    width:120px;
+    height:50px;
+    padding:15px;
+    text-align: center;
+}
+
+.list-item:hover{
+    background-color: #f8f8f8;
+    color:black;
+    cursor: pointer;
+}
+
+#complete-task-button{
+    color:#FFFFFF;
+    background-color: #159C6E;
+    padding:10px;
+    border-radius: 5px;
+}
+
+#complete-task-button:hover{
+    opacity: 0.8;
+}
+
+#next-button{
+    color:#000000;
+    background-color: #f8f8f8;
+    padding:10px;
+    margin-left:20px;
+    border-radius: 5px;
+}
+
+#next-button:hover{
+    opacity: 0.8;
+}
+
+#user-nav{
+    position: fixed;
+    right:0;
+    top:60px;
+    border:0.01em solid #2C98E3;
+}
+
+#user-nav>hr{
+    margin-bottom: 2px;
+    margin-top:2px;
+}
+
+#user-nav:hover{
+    background-color: #f8f8f8;
+}
+
+#user-nav>a,#user-nav>a:hover{
+    text-decoration: none;
+    float: none;
+    color: black;
+    padding: 5px 10px 5px 15px;
+}
