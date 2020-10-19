@@ -8,3 +8,6 @@
 .ant-menu:hover{
     color:thistle;
   }
+  .ant-checkbox {
+    zoom: 1.5;
+}
