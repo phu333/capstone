@@ -6,7 +6,7 @@ import './Column.css'
 import ContractTypeSearch from './ContractTypeSearch'
 import { createContractType, contractTypeInformation } from '../actions/ContractType'
 import { connect } from 'react-redux'
-import { UploadOutlined, FileOutlined, DeleteOutlined,UserOutlined,FileWordOutlined } from "@ant-design/icons"
+import { UploadOutlined, FileOutlined, DeleteOutlined, UserOutlined, FileWordOutlined } from "@ant-design/icons"
 const { Column } = Table;
 
 
@@ -29,29 +29,31 @@ class ContractTable extends React.Component {
   componentDidMount() {
 
     if (this.props.newContractType.length === 0) {
-        const contract1 = {
+      const contract1 = {
 
-          contract_type: 'Hop dong lao dong',
+        contract_type: 'Hop dong lao dong',
+        creator: "creator",
+        createDate: "date",
+        fileName: 'template1.dot',
+        status: "active"
 
-          fileName: 'template1.dot',
-          status: "active"
+      }
+      const contract2 = {
 
-        }
-        const contract2 = {
+        contract_type: 'Hop dong lao dong',
+        creator: "creator",
+        createDate: "date",
+        fileName: 'template1.dot',
+        status: "deactive"
 
-          contract_type: 'Hop dong lao dong',
+      }
 
-          fileName: 'template1.dot',
-          status: "deactive"
+      this.props.onSubmit(contract1)
+      this.props.onSubmit(contract2)
 
-        }
-        
-        this.props.onSubmit(contract1)
-        this.props.onSubmit(contract2)
-        
     }
 
-}
+  }
   render() {
     if (this.state.showTemplateCreate) {
       return (
@@ -60,25 +62,39 @@ class ContractTable extends React.Component {
       );
     } else {
       return (
-        <div style={{height: "100vh"}}><Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tải lên mẫu mới</Button>
+        <div style={{ height: "100vh" }}><Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tải lên mẫu mới</Button>
           <ContractTypeSearch />
           <Table dataSource={this.props.newContractType}
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}  >
-            <Column title="Loại hợp đồng" dataIndex="contract_type" key="contract_type" 
-            render={(text, record) => (
+            <Column title="Loại hợp đồng" dataIndex="contract_type" key="contract_type"
+              render={(text, record) => (
 
-              <a><FileOutlined />{text}</a>
+                <a><FileOutlined />{text}</a>
 
-          )}
+              )}
             />
 
             <Column title="Tên file" dataIndex="fileName" key="fileName"
-            render={(text, record) => (
+              render={(text, record) => (
 
-              <b><FileWordOutlined />{text}</b>
+                <b><FileWordOutlined />{text}</b>
 
-          )}
-             />
+              )}
+            />
+            <Column title="Người tạo" dataIndex="creator" key="creator"
+              render={(text, record) => (
+
+                <b>{text}</b>
+
+              )}
+            />
+            <Column title="Ngày tạo" dataIndex="createDate" key="createDate"
+              render={(text, record) => (
+
+                <b>{text}</b>
+
+              )}
+            />
             <Column title="trạng thái" dataIndex="status" key="status"
               render={(text, record) => {
                 let color = 'pink'
@@ -127,19 +143,19 @@ class ContractTable extends React.Component {
 }
 var mapDispatchToProps = (dispatch, props) => {
   return {
-      onSubmit: (contractType) => {
-          dispatch(createContractType(contractType))
-      }
+    onSubmit: (contractType) => {
+      dispatch(createContractType(contractType))
+    }
   }
 }
 var mapStateToProps = state => {
 
 
   return {
-      newContractType: state.myContractTypeReducer
+    newContractType: state.myContractTypeReducer
   }
 
 
 
 }
-export default connect(mapStateToProps, mapDispatchToProps) (ContractTable)
+export default connect(mapStateToProps, mapDispatchToProps)(ContractTable)

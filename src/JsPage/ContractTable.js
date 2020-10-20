@@ -166,7 +166,7 @@ class ContractTable extends Component {
                             <b>{text}</b>
 
                         )} />
-                        <Column title="người tạo hợp đồng" dataIndex="nguoi_tao_hd" key="nguoi_tao_hd"
+                        <Column title="bên tạo hợp đồng" dataIndex="ben_tao_hd" key="ben_tao_hd"
                         render={(text, record) => (
 
                             <b>{text}</b>
