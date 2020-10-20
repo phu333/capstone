@@ -68,7 +68,7 @@ class EmployeeSideMenu extends React.Component {
 
                 <Descriptions.Item><br />
                   <b style={{ color: ' white' }}>{login.username}</b><br />
-                  <b style={{ color: ' white' }}>{login.role}</b><br />
+                  
                   <b style={{ color: ' white' }}>Company ABC</b>
                 </Descriptions.Item>
 
