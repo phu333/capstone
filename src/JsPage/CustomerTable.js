@@ -42,7 +42,7 @@ class CustomerList extends React.Component {
       const contract2 = {
 
         name: 'Mike',
-        company: "cty 369",
+        company: "cty 370",
         address: '10 Downing Street',
         taxCode: "taxcode",
         faxCode: "faxcode",
@@ -83,39 +83,49 @@ class CustomerList extends React.Component {
         <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddCustomer} icon={<UserAddOutlined />}>Tạo khách hàng mới</Button>
           <CustomerSearch />
           <Table dataSource={this.props.newCustomer}
+            
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
-            <Column title="Tên doanh nghiệp" dataIndex="company" key="company" render={(text, record) => (
+            <Column title="Tên doanh nghiệp" dataIndex="company" key="company" 
+            sorter={(a, b) => a.company.localeCompare(b.company)}
+            sortDirections={['descend', 'ascend']}
+            render={(text, record) => (
 
               <b>{text}</b>
 
             )} />
 
-            <Column title="Người đại diện" dataIndex="name" key="name" render={(text, record) => (
+            <Column title="Người đại diện" dataIndex="name" key="name" 
+            sorter={(a, b) => a.name.localeCompare(b.name)}
+            sortDirections={['descend', 'ascend']}
+            render={(text, record) => (
 
               <b>{text}</b>
 
             )} />
-            <Column title="Địa chỉ" dataIndex="address" key="address" render={(text, record) => (
+            <Column title="Địa chỉ" dataIndex="address" key="address" 
+            sorter={(a, b) => a.address.localeCompare(b.address)}
+            sortDirections={['descend', 'ascend']}
+            render={(text, record) => (
 
               <b>{text}</b>
 
             )} />
-            <Column title="Mã số thuế" dataIndex="address" key="address" render={(text, record) => (
+            <Column title="Mã số thuế" dataIndex="taxCode" key="taxCode" render={(text, record) => (
 
               <b>{text}</b>
 
             )} />
-            <Column title="Số fax" dataIndex="address" key="address" render={(text, record) => (
+            <Column title="Số fax" dataIndex="faxCode" key="faxCode" render={(text, record) => (
 
               <b>{text}</b>
 
             )} />
-            <Column title="Số điện thoại" dataIndex="address" key="address" render={(text, record) => (
+            <Column title="Số điện thoại" dataIndex="phone" key="phone" render={(text, record) => (
 
               <b>{text}</b>
 
             )} />
-            <Column title="email" dataIndex="address" key="address" render={(text, record) => (
+            <Column title="email" dataIndex="email" key="email" render={(text, record) => (
 
               <a>{text}</a>
 

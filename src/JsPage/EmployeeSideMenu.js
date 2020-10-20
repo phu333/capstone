@@ -5,7 +5,7 @@ import React from 'react';
 import { Badge } from 'antd';
 import UpdateProfileCompany from './UpdateProfileCompany'
 import EmployeeTable from './EmployeeTable'
-import ContractTypeForAdmin from './ContractTypeForAdmin'
+
 import SignatureList from './SignatureList'
 import { UserOutlined, ToolOutlined, NotificationOutlined, LogoutOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import ContractTable from './ContractTable'
@@ -117,7 +117,7 @@ class EmployeeSideMenu extends React.Component {
               {this.state.showComponent === "profile" ? <UpdateProfile /> : null}
               {this.state.showComponent === "employee" ? <EmployeeTable /> : null}
               {this.state.showComponent === "signatureList" ? <SignatureList /> : null}
-              {this.state.showComponent === "contractType" ? <ContractTypeForAdmin /> : null}
+              
               {this.state.showComponent === "companyProfile" ? <UpdateProfileCompany /> : null}
 
 

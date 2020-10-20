@@ -39,13 +39,7 @@ class ContractSearch extends React.Component {
 
     render() {
         return (
-            <div>
-
-
-
-
-
-                <br />
+            
                 <div className="container">
                     <Select defaultValue="SearchByContractId" onChange={this.handleChange}>
                         <Option value="SearchByContractId">tìm kiếm theo số hợp đồng</Option>
@@ -129,7 +123,7 @@ class ContractSearch extends React.Component {
 
                 </div>
 
-            </div>);
+           );
     }
 }
 export default ContractSearch;
