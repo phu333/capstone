@@ -86,7 +86,7 @@ class AddEmployee extends React.Component {
 
             <React.Fragment>
                 <br />
-                <h2 style={{ textAlign: 'center' }}>Tạo người dùng</h2>
+                <h2 style={{ textAlign: 'center' }}>Tạo nhân viên</h2>
                 <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
                     <Col span={10} >
                         <Grid container spacing={3}>
@@ -148,29 +148,63 @@ class AddEmployee extends React.Component {
                                     autoComplete="shipping postal-code"
                                 />
                             </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    required
+                                    id="role"
+                                    name="chức vụ"
+                                    label="chức vụ"
+                                    fullWidth
+                                    autoComplete="shipping postal-code"
+                                />
+                            </Grid>
 
                             <Grid item xs={12}>
                                 <b>Quyền Hạn</b>
                                 <br />
                                 <Row>
                                     <Col span={8}>
-                                        <Checkbox onChange={onChange}>Ký</Checkbox>
+                                        <FormControlLabel 
+                                        control={ <Checkbox onChange={onChange} ></Checkbox>} 
+                                        label="ký"
+                                        />
+                                       
                                         <p></p>
                                     </Col>
                                     <Col span={8}>
-                                        <Checkbox onChange={onChange}>Quản lý hợp đồng</Checkbox>
+                                    <FormControlLabel 
+                                        control={ <Checkbox onChange={onChange} ></Checkbox>} 
+                                        label="Quản lý hợp đồng"
+                                        />
+                                       
+                                        
                                         <p></p>
                                     </Col>
                                     <Col span={8}>
-                                        <Checkbox onChange={onChange}>Quản lý nhân viên</Checkbox>
+                                    <FormControlLabel 
+                                        control={ <Checkbox onChange={onChange} ></Checkbox>} 
+                                        label="Quản lý nhân viên"
+                                        />
+                                       
+                                       
                                         <p></p>
                                     </Col>
                                     <Col span={8}>
-                                        <Checkbox onChange={onChange}>Quản lý loại hợp đồng</Checkbox>
+                                    <FormControlLabel 
+                                        control={ <Checkbox onChange={onChange} ></Checkbox>} 
+                                        label="Quản lý loại hợp đồng"
+                                        />
+                                       
+                                        
                                         <p></p>
                                     </Col>
                                     <Col span={8}>
-                                        <Checkbox onChange={onChange}>Quản lý chữ ký</Checkbox>
+                                    <FormControlLabel 
+                                        control={ <Checkbox onChange={onChange} ></Checkbox>} 
+                                        label="Quản lý chữ ký"
+                                        />
+                                       
+                                        
                                         <p></p>
                                     </Col>
                                 </Row>
