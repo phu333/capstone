@@ -6,7 +6,7 @@ import { UserOutlined, SettingOutlined, BellOutlined, LogoutOutlined } from "@an
 import { connect } from 'react-redux'
 import { logout, login } from '../actions/loginAction'
 import LoginPage from './Login/LoginPage'
-
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 
 class Header extends Component {
     constructor() {
@@ -24,6 +24,7 @@ class Header extends Component {
             logoutAction : true
         })
         this.props.onSubmit()
+        
     }
     render() {
        
@@ -77,7 +78,7 @@ class Header extends Component {
         </div>);
     })
     if(this.state.logoutAction){
-        return(<LoginPage/>);
+        
     }else{
         return(<div> { information }</div >);
     }
@@ -97,4 +98,4 @@ var mapStateToProps = state => {
         myLoginReducer: state.myLoginReducer
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default (connect(mapStateToProps, mapDispatchToProps))(Header);

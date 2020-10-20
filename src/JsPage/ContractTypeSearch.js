@@ -1,6 +1,7 @@
 import React from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import { Select, DatePicker, Button, Space, Breadcrumb, PageHeader, Input, InputNumber,Form } from 'antd';
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { Option } = Select;
 class ContractTypeSearch extends React.Component {
     constructor() {

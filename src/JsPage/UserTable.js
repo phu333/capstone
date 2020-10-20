@@ -8,6 +8,7 @@ import { createUser, userInformation } from '../actions/UserAction'
 import { connect } from 'react-redux'
 import { UploadOutlined, FileOutlined, DeleteOutlined, UserOutlined, EditOutlined } from "@ant-design/icons"
 import LoginPage from './Login/LoginPage'
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { Column, ColumnGroup } = Table;
 
 

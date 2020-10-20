@@ -4,6 +4,7 @@ import CreateContract from './CreateContract';
 import React from 'react';
 import ContractTypeSearch from './ContractTypeSearch'
 import {UserAddOutlined,SearchOutlined ,FileOutlined} from "@ant-design/icons"
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { Column } = Table;
 const dataSource = [
     {

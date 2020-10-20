@@ -6,6 +6,7 @@ import React from 'react';
 import './Column.css'
 import CustomerSearch from './CustomerSearch'
 import { createCustomer, customerInformation } from '../actions/CustomerAction'
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined } from "@ant-design/icons"
 const { Column } = Table;

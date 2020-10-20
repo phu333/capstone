@@ -11,6 +11,7 @@ import ViewContractPage from './ViewContractPage'
 import React, { Component } from 'react';
 import { createContract, contractInformation } from '../actions/ContractAction'
 import { connect } from 'react-redux'
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { Column } = Table;
 
 

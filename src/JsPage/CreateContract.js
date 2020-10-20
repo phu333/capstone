@@ -3,6 +3,7 @@ import { createContract, contractInformation, } from '../actions/ContractAction'
 import { Select, DatePicker, Descriptions, Space, Button, InputNumber, Form, PageHeader, Input, Row, Col } from 'antd';
 import { connect } from 'react-redux'
 import ContractTable from './ContractTable'
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import {
     FileExcelOutlined, IdcardOutlined, BankOutlined, PhoneOutlined, PrinterOutlined, HomeOutlined, MailOutlined
     , ContactsOutlined, CalendarOutlined, DollarOutlined, CloudDownloadOutlined, CloudUploadOutlined, AuditOutlined

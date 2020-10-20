@@ -1,6 +1,7 @@
 import 'antd/dist/antd.css';
 import { Table, Space, Button, Tag } from 'antd';
 import TemplateUpload from './TemplateUpload';
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import React from 'react';
 import './Column.css'
 import ContractTypeSearch from './ContractTypeSearch'

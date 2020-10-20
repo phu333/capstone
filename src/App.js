@@ -3,7 +3,7 @@ import React from 'react';
 import './App.css';
 import LoginPage from './JsPage/Login/LoginPage'
 import Particles from 'react-particles-js';
-
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 function App() {
 
   return (
@@ -31,7 +31,18 @@ function App() {
           }
         }}
       />
-      <LoginPage></LoginPage>
+      <Router>
+
+
+        <Route exact path="/capstone" component={LoginPage} />
+        <Route exact path="/capstone/" component={LoginPage} />
+        <Route exact path="/capstone/Login" component={LoginPage} />
+
+
+      </Router>
+
+
+
 
     </div>
   );

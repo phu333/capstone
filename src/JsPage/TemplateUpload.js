@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import { Select, DatePicker } from 'antd';
 import { List, Avatar, Button, Skeleton, Checkbox } from 'antd';
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { Option } = Select;
 class TemplateUpload extends React.Component {
     constructor() {

@@ -7,6 +7,7 @@ import UpdateContractExtension from './UpdateContractExtension'
 import React from 'react';
 import { createcontractExtension, contractExtensionInformation } from '../actions/ContractExtension'
 import { connect } from 'react-redux'
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { Column } = Table;
 
 

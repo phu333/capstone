@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import '../index.css';
-import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { Form, Input, Button, Row, Col } from 'antd';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';

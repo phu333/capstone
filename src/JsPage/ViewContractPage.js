@@ -8,6 +8,7 @@ import ContractExtensionTable from './ContractExtensionTable'
 import { Descriptions, InputNumber, Space, Button, DatePicker, Input, PageHeader, Form, Row, Col, Comment, List, Avatar } from 'antd';
 import ContractTable from './ContractTable'
 import moment from 'moment'
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { RangePicker } = DatePicker;
 
 const { TextArea } = Input;
