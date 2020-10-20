@@ -61,7 +61,7 @@ class UpdateProfileCompany extends React.Component {
                 <Button type="primary" value="cancel" onClick={this.Cancel}>
                         Trở về
               </Button>
-                <h2 style={{ textAlign: 'center' }}>Thông tin doanh nghiệp</h2>
+                <h2 style={{ textAlign: 'center' }}>Thông tin khách hàng</h2>
                 <Form
                     {...layout}
                     name="basic"

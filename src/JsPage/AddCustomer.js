@@ -12,6 +12,7 @@ import CustomerTable from './CustomerTable'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import { ReloadOutlined } from "@ant-design/icons"
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 const layout = {
@@ -78,6 +79,7 @@ class AddCustomer extends React.Component {
                     border: "solid"
                 }
                 }>
+                    <br/>
                     <Button type="primary" value="cancel" onClick={this.Cancel}>
                         Trở về
               </Button>
@@ -161,12 +163,12 @@ class AddCustomer extends React.Component {
                                 <div></div><br />
                                 <Grid item xs={12} sm={6}>
                                     <Button type="primary" >
-                                        Nộp
+                                    <CloudUploadOutlined />    Nộp
                             </Button>
                                     <Button type="primary" style={{
                                         margin: '0 8px',
                                     }} htmlType="button">
-                                        Reset
+                                    <ReloadOutlined />    Reset
                             </Button>
                                 </Grid>
                             </Col>

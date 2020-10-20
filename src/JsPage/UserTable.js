@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import { Table, Space, Tag } from 'antd';
+import { Table, Space, Tag,Switch } from 'antd';
 import ViewUser from './ViewUser'
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -63,7 +63,8 @@ class UserList extends React.Component {
     } else {
       var information = this.props.myLoginReducer.map((login, index) => {
         return (
-          <div style={{height: "100vh"}}>
+          <div style={{ height: "100vh" }}>
+                    <br/>
             <Header></Header>
             <Table dataSource={this.props.newUser}
               rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
@@ -129,8 +130,7 @@ class UserList extends React.Component {
                 key="status"
                 render={(text, record) => (
                   <Space size="middle">
-                    {text === "active" ? <DeleteOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.OpenViewCustomer}>Vô hiệu hóa</DeleteOutlined> : null}
-                    {text === "deactive" ? <UserOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.OpenViewCustomer}>kích hoạt</UserOutlined> : null}
+                    {text === "active" ? <Switch style={{ fontSize: '30px' }} onClick={this.OpenViewCustomer} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
                   </Space>
                 )}
               />

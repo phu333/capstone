@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import { Table, Space, Button, Tag } from 'antd';
+import { Table, Space, Button, Tag,Switch } from 'antd';
 import TemplateUpload from './TemplateUpload';
 import React from 'react';
 import './Column.css'
@@ -62,7 +62,9 @@ class ContractTable extends React.Component {
       );
     } else {
       return (
+
         <div style={{ height: "100vh" }}><Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tải lên mẫu mới</Button>
+        <br/>
           <ContractTypeSearch />
           <Table dataSource={this.props.newContractType}
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}  >
@@ -130,8 +132,7 @@ class ContractTable extends React.Component {
               key="status"
               render={(text, record) => (
                 <Space size="middle">
-                  {text === "active" ? <DeleteOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.OpenViewCustomer}>Vô hiệu hóa</DeleteOutlined> : null}
-                  {text === "deactive" ? <UserOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.OpenViewCustomer}>kích hoạt</UserOutlined> : null}
+                  {text === "active" ? <Switch style={{ fontSize: '30px' }} onClick={this.OpenViewCustomer} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
                 </Space>
               )}
             />

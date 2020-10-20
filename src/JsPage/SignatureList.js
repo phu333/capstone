@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import { Table, Space,Button,Tag } from 'antd';
+import { Table, Space,Button,Tag,Switch } from 'antd';
 import AddSignature from './AddSignature'
 import UpdateSignature from './UpdateSignature'
 import React from 'react';
@@ -89,7 +89,8 @@ class SignatureList extends React.Component {
         else {
             return (
                 <div style={{height: "100vh"}}><Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Thêm chữ ký mới</Button>
-                    <SignatureSearch/>
+                       <br/>
+                            <SignatureSearch/>
                     <Table dataSource={this.props.newSignature}
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
 
@@ -133,8 +134,7 @@ class SignatureList extends React.Component {
                             key="status"
                             render={(text, record) => (
                                 <Space size="middle">
-                                    {text === "active" ? <DeleteOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.OpenViewCustomer}>Vô hiệu hóa</DeleteOutlined> : null}
-                                    {text === "deactive" ? <UserOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.OpenViewCustomer}>kích hoạt</UserOutlined> : null}
+                  {text === "active" ?  <Switch style={{ fontSize: '30px' }} onClick={this.OpenViewCustomer} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked />: <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
                                 </Space>
                             )}
                         /></Table></div>

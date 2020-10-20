@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import { Table, Space, Tag,Button } from 'antd';
+import { Table, Space, Tag, Button,Switch } from 'antd';
 import AddEmployee from './AddEmployee'
 import ViewEmployee from './ViewEmployee'
 import React from 'react';
@@ -71,8 +71,9 @@ class EmployeeList extends React.Component {
     }
     else {
       return (
-        <div style={{height: "100vh"}}><Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button>
-          <EmployeeSearch/>
+        <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button>
+        <br/>
+          <EmployeeSearch />
           <Table dataSource={this.props.newEmployee}
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
 
@@ -126,8 +127,7 @@ class EmployeeList extends React.Component {
               key="status"
               render={(text, record) => (
                 <Space size="middle">
-                  {text === "active" ? <DeleteOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.OpenViewCustomer}>Vô hiệu hóa</DeleteOutlined> : null}
-                  {text === "deactive" ? <UserOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.OpenViewCustomer}>kích hoạt</UserOutlined> : null}
+                  {text === "active" ?  <Switch style={{ fontSize: '30px' }} onClick={this.OpenViewCustomer} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked />: <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
                 </Space>
               )}
             /></Table></div>
