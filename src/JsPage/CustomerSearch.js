@@ -38,13 +38,6 @@ class CustomerSearch extends React.Component {
 
     render() {
         return (
-
-
-
-
-
-
-
             <div className="container">
                 <Select defaultValue="SearchByCompanyName" onChange={this.handleChange}>
                     <Option value="SearchByPhone">tìm kiếm theo số điện thoại</Option>
