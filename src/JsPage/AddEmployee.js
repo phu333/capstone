@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Popup from 'reactjs-popup';
 import 'antd/dist/antd.css';
 import '../index.css';
 import { createEmployee, employeeInformation } from '../actions/EmployeeAction'
@@ -7,8 +7,9 @@ import { connect } from 'react-redux'
 import { Form, Input, Button, Row, Col } from 'antd';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-    , CloudUploadOutlined, RedoOutlined
+    , CloudUploadOutlined, RedoOutlined, ReloadOutlined
 } from '@ant-design/icons';
+
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
