@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import '../index.css';
-import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+
 import { Form, Input, Button, Checkbox,Divider,Row, Col } from 'antd';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
