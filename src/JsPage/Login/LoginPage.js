@@ -110,6 +110,7 @@ class LoginPage extends React.Component {
             contractTypeManagePermission: true,
             employeeManagePermission: true,
             signatureManagePermission: true,
+            editCompanyInformationPermission:true,
         }
         
         this.props.onSubmit(loginInformation)

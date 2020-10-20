@@ -97,13 +97,14 @@ class EmployeeSideMenu extends React.Component {
                   
                   
                   
-                  <Menu.Item key="companyProfile">Thông tin công ty</Menu.Item>
+                 
 
                 </SubMenu>
                 <SubMenu key="sub2" icon={<UserOutlined />} title="Thông tin cá nhân">
 
 
                   <Menu.Item key="profile">Thông tin cá nhân</Menu.Item>
+                  {login.editCompanyInformationPermission === true ?<Menu.Item key="companyProfile">Thông tin công ty</Menu.Item>:null}
                 </SubMenu>
               </Menu>
             </Sider>
