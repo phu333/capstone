@@ -32,6 +32,10 @@ class CustomerList extends React.Component {
         name: 'John',
         company: "cty 369",
         address: '10 Downing Street',
+        taxCode: "taxcode",
+        faxCode: "faxcode",
+        phone: "phone",
+        email: "email",
         status: "deactive",
 
       }
@@ -40,6 +44,10 @@ class CustomerList extends React.Component {
         name: 'Mike',
         company: "cty 369",
         address: '10 Downing Street',
+        taxCode: "taxcode",
+        faxCode: "faxcode",
+        phone: "phone",
+        email: "email",
         status: "active",
 
       }
@@ -90,6 +98,26 @@ class CustomerList extends React.Component {
             <Column title="Địa chỉ" dataIndex="address" key="address" render={(text, record) => (
 
               <b>{text}</b>
+
+            )} />
+            <Column title="Mã số thuế" dataIndex="address" key="address" render={(text, record) => (
+
+              <b>{text}</b>
+
+            )} />
+            <Column title="Số fax" dataIndex="address" key="address" render={(text, record) => (
+
+              <b>{text}</b>
+
+            )} />
+            <Column title="Số điện thoại" dataIndex="address" key="address" render={(text, record) => (
+
+              <b>{text}</b>
+
+            )} />
+            <Column title="email" dataIndex="address" key="address" render={(text, record) => (
+
+              <a>{text}</a>
 
             )} />
 
