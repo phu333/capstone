@@ -73,7 +73,12 @@ class AddContractExtension extends React.Component {
     }
     render() {
         if (this.state.finish) {
-            return (<ContractExtensionTable role={this.props.role} />);
+            return (
+                <Router>
+                    <Redirect push to={"/capstone/viewContract/"+ this.props.contractId} />
+                    <Route exact path="/capstone/viewContract/:id" render={() =>   <ContractExtensionTable contractId={this.props.contractId} role={this.props.role} />
+                    } /></Router>
+            );
         } else {
             return (
                 <div style={{ border: "solid", backgroundColor: "white",height: "100vh" }} >

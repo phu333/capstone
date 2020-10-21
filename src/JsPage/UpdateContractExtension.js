@@ -51,13 +51,16 @@ class UpdateContractExtension extends React.Component {
 
 
         if (this.state.finish) {
-            return (<ContractExtensionTable role={this.props.role} />);
+            return (<Router>
+                <Redirect push to={"/capstone/viewContract/"+ this.props.contractId} />
+                <Route exact path="/capstone/viewContract/:id" render={() =>   <ContractExtensionTable contractId={this.props.contractId} role={this.props.role} />
+                } /></Router>);
         } else {
 
             return (
 
                 <div style={{ border: "solid",height: "100vh" }} >
-                    <Button type="primary" value="cancel" onClick={this.Cancel}>
+                    <Button type="primary" value="cancel" onClick={this.onFinish}>
                         Trở về
               </Button>
 

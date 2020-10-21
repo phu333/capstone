@@ -67,7 +67,10 @@ class AddCustomer extends React.Component {
 
     render() {
         if (this.state.finish) {
-            return (<CustomerTable role={this.props.role} />);
+            return (<Router>
+                <Redirect push to={"/capstone/customerList"}  />
+                <Route exact path="/capstone/customerList" component={CustomerTable} />
+              </Router>);
         } else {
 
 

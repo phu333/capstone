@@ -8,7 +8,7 @@ import CustomerSearch from './CustomerSearch'
 import { createCustomer, customerInformation } from '../actions/CustomerAction'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined } from "@ant-design/icons"
+import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
 const { Column } = Table;
 
 
@@ -18,11 +18,11 @@ class CustomerList extends React.Component {
 
     this.state = {
       openCustomer: "",
-
+      customer:{},
     };
 
     this.OpenAddCustomer = this.OpenAddCustomer.bind(this);
-    this.OpenViewCustomer = this.OpenViewCustomer.bind(this);
+    
 
   }
   componentDidMount() {
@@ -65,18 +65,21 @@ class CustomerList extends React.Component {
 
     })
   }
-  OpenViewCustomer() {
-    this.setState({
-      openCustomer: "openViewCustomer",
-    })
-  }
+  
   render() {
     if (this.state.openCustomer === "openAddCustomer") {
       return (
-        <AddCustomer />
+        <Router>
+          <Redirect push to={"/capstone/addCustomer"} />
+          <Route exact path="/capstone/addCustomer" render={() => <AddCustomer />
+          } /></Router>
+
       );
     } else if (this.state.openCustomer === "openViewCustomer") {
-      return (<AddCustomer />);
+      return (<Router>
+        <Redirect push to={"/capstone/updateCustomer/"+this.state.customer.taxCode} />
+        <Route exact path="/capstone/updateCustomer/:id" render={() => <AddCustomer customer={this.state.customer} />
+        } /></Router>);
 
     }
     else {
@@ -84,33 +87,33 @@ class CustomerList extends React.Component {
         <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddCustomer} icon={<UserAddOutlined />}>Tạo khách hàng mới</Button>
           <CustomerSearch />
           <Table dataSource={this.props.newCustomer}
-            
+
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
-            <Column title="Tên doanh nghiệp" dataIndex="company" key="company" 
-            sorter={(a, b) => a.company.localeCompare(b.company)}
-            sortDirections={['descend', 'ascend']}
-            render={(text, record) => (
+            <Column title="Tên doanh nghiệp" dataIndex="company" key="company"
+              sorter={(a, b) => a.company.localeCompare(b.company)}
+              sortDirections={['descend', 'ascend']}
+              render={(text, record) => (
 
-              <b>{text}</b>
+                <b>{text}</b>
 
-            )} />
+              )} />
 
-            <Column title="Người đại diện" dataIndex="name" key="name" 
-            sorter={(a, b) => a.name.localeCompare(b.name)}
-            sortDirections={['descend', 'ascend']}
-            render={(text, record) => (
+            <Column title="Người đại diện" dataIndex="name" key="name"
+              sorter={(a, b) => a.name.localeCompare(b.name)}
+              sortDirections={['descend', 'ascend']}
+              render={(text, record) => (
 
-              <b>{text}</b>
+                <b>{text}</b>
 
-            )} />
-            <Column title="Địa chỉ" dataIndex="address" key="address" 
-            sorter={(a, b) => a.address.localeCompare(b.address)}
-            sortDirections={['descend', 'ascend']}
-            render={(text, record) => (
+              )} />
+            <Column title="Địa chỉ" dataIndex="address" key="address"
+              sorter={(a, b) => a.address.localeCompare(b.address)}
+              sortDirections={['descend', 'ascend']}
+              render={(text, record) => (
 
-              <b>{text}</b>
+                <b>{text}</b>
 
-            )} />
+              )} />
             <Column title="Mã số thuế" dataIndex="taxCode" key="taxCode" render={(text, record) => (
 
               <b>{text}</b>
@@ -156,7 +159,12 @@ class CustomerList extends React.Component {
               key="action"
               render={(text, record) => (
                 <Space size="middle">
-                  <EditOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.OpenViewCustomer}>Sửa</EditOutlined>
+                 <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                                    () => this.setState({
+                                        customer: text,
+                                        openCustomer: "openViewCustomer",
+                                    })
+                                } />
                 </Space>
               )}
             />

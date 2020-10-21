@@ -135,7 +135,12 @@ class ContractView extends React.Component {
         if (this.props.role === true) {
 
             if (this.state.openExtension) {
-                return (<ContractExtensionTable role={this.props.role} />);
+                return (
+                    <Router>
+                    <Redirect push to={"/capstone/viewContract/"+ this.props.contract.id+"/viewExtension"} />
+                    <Route exact path="/capstone/viewContract/:id/viewExtension" render={() =>   <ContractExtensionTable contractId={this.props.contract.id} role={this.props.role} />
+                    } /></Router>
+               );
             } else {
                 if (this.state.finish) {
                     return (<ContractTable role={this.props.role} />);

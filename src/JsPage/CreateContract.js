@@ -96,7 +96,12 @@ class CreateContract extends React.Component {
     render() {
 
         if (this.state.finish) {
-            return (<ContractTable role={this.props.role} />);
+            return (
+                <Router>
+                    <Redirect push to={"/capstone/contract" } />
+                    <Route exact path="/capstone/contract" render={() =>  <ContractTable role={this.props.role} />
+                    } /></Router>
+            );
         } else {
 
 

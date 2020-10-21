@@ -89,13 +89,20 @@ class ContractExtensionTable extends React.Component {
     render() {
         if (this.state.showCreateContractExtension) {
             return (
-                <AddContractExtension role={this.props.role} />
+                <Router>
+                    <Redirect push to={"/capstone/viewContract/"+ this.props.contractId+"/createExtension"} />
+                    <Route exact path="/capstone/viewContract/:id/createExtension" render={() =>   <AddContractExtension contractId={this.props.contractId} role={this.props.role} />
+                    } /></Router>
+                
 
             );
         } else if (this.state.showContractExtension) {
             return (
-                <UpdateContractExtension contract={this.state.contract} role={this.props.role} />
-
+                
+                <Router>
+                    <Redirect push to={"/capstone/viewContract/"+ this.props.contractId+"/updateExtension"} />
+                    <Route exact path="/capstone/viewContract/:id/updateExtension" render={() =>   <UpdateContractExtension contractId={this.props.contractId} contract={this.state.contract} role={this.props.role} />
+                    } /></Router>
             );
         }
         else {

@@ -40,8 +40,11 @@ class ChooseContractTemplate extends React.Component {
     render() {
         if (this.state.showTemplateCreate) {
             return (
-
-                <CreateContract role={this.props.role} />
+                <Router>
+                    <Redirect push to={"/capstone/createContract" } />
+                    <Route exact path="/capstone/createContract" render={() =>  <CreateContract role={this.props.role} />
+                    } /></Router>
+               
             );
         } else {
             return (

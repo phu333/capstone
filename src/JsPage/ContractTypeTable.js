@@ -58,8 +58,10 @@ class ContractTable extends React.Component {
   render() {
     if (this.state.showTemplateCreate) {
       return (
-
-        <TemplateUpload />
+        <Router>
+        <Redirect push to={"/capstone/uploadTemplate" } />
+        <Route exact path="/capstone/uploadTemplate" component={TemplateUpload} /></Router>
+       
       );
     } else {
       return (

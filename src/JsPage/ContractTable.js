@@ -54,7 +54,7 @@ class ContractTable extends Component {
 
         if (this.props.newContract.length === 0) {
             const contract1 = {
-
+                id:1,
                 contract_name: 'Hop dong lao dong',
                 status: "deactive",
                 ben_tao_hd: 'HiSign',
@@ -64,7 +64,7 @@ class ContractTable extends Component {
 
             }
             const contract2 = {
-
+                id:2,
                 contract_name: 'Hop dong lao dong',
                 status: "waiting for customer",
                 ben_tao_hd: 'HiSign',
@@ -74,7 +74,7 @@ class ContractTable extends Component {
 
             }
             const contract3 = {
-
+                id:3,
                 contract_name: 'Hop dong lao dong',
                 status: "pending",
                 ben_tao_hd: 'HiSign',
@@ -84,7 +84,7 @@ class ContractTable extends Component {
 
             }
             const contract4 = {
-
+                id:4,
                 contract_name: 'Hop dong lao dong',
                 status: "active",
                 ben_tao_hd: 'HiSign',
@@ -94,7 +94,7 @@ class ContractTable extends Component {
 
             }
             const contract5 = {
-
+                id:5,
                 contract_name: 'Hop dong mua ban',
                 status: "waiting for sign",
                 ben_tao_hd: 'cty 369',
@@ -129,11 +129,19 @@ class ContractTable extends Component {
 
         if (this.state.showCreateContract) {
             return (
-                <ChooseContractTemplate role={this.props.role} />
+                <Router>
+                    <Redirect push to={"/capstone/chooseTemplate" } />
+                    <Route exact path="/capstone/chooseTemplate" render={() => <ChooseContractTemplate role={this.props.role} />
+                    } /></Router>
+               
             );
         } else if (this.state.showContract) {
             return (
-                <ViewContractPage contract={this.state.contract} role={this.props.role} />
+                <Router>
+                <Redirect push to={"/capstone/viewContract/"+ this.state.contract.id} />
+                <Route exact path="/capstone/viewContract/:id" render={() =>  <ViewContractPage  contract={this.state.contract} role={this.props.role} />
+                } /></Router>
+               
             );
         }
         else {
