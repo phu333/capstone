@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 're
 import SignatureSearch from './SignatureSearch'
 import { createSignature, signatureInformation } from '../actions/SignatureAction'
 import { connect } from 'react-redux'
-import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined } from "@ant-design/icons"
+import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
 const { Column, ColumnGroup } = Table;
 
 
@@ -41,7 +41,7 @@ class SignatureList extends React.Component {
 
         };
         this.OpenAddEmployee = this.OpenAddEmployee.bind(this);
-        this.OpenViewEmployee = this.OpenViewEmployee.bind(this);
+        
     }
     componentDidMount() {
 
