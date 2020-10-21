@@ -4,7 +4,7 @@ import ContractSearch from './ContractSearch'
 import './Column.css'
 import {
     EyeOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
-    UsergroupAddOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
+    FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
 } from "@ant-design/icons"
 import ChooseContractTemplate from './ChooseContractTemplate'
 import ViewContractPage from './ViewContractPage'
@@ -54,7 +54,7 @@ class ContractTable extends Component {
 
         if (this.props.newContract.length === 0) {
             const contract1 = {
-                id:1,
+                id: 1,
                 contract_name: 'Hop dong lao dong',
                 status: "deactive",
                 ben_tao_hd: 'HiSign',
@@ -64,7 +64,7 @@ class ContractTable extends Component {
 
             }
             const contract2 = {
-                id:2,
+                id: 2,
                 contract_name: 'Hop dong lao dong',
                 status: "waiting for customer",
                 ben_tao_hd: 'HiSign',
@@ -74,7 +74,7 @@ class ContractTable extends Component {
 
             }
             const contract3 = {
-                id:3,
+                id: 3,
                 contract_name: 'Hop dong lao dong',
                 status: "pending",
                 ben_tao_hd: 'HiSign',
@@ -84,7 +84,7 @@ class ContractTable extends Component {
 
             }
             const contract4 = {
-                id:4,
+                id: 4,
                 contract_name: 'Hop dong lao dong',
                 status: "active",
                 ben_tao_hd: 'HiSign',
@@ -94,7 +94,7 @@ class ContractTable extends Component {
 
             }
             const contract5 = {
-                id:5,
+                id: 5,
                 contract_name: 'Hop dong mua ban',
                 status: "waiting for sign",
                 ben_tao_hd: 'cty 369',
@@ -130,24 +130,24 @@ class ContractTable extends Component {
         if (this.state.showCreateContract) {
             return (
                 <Router>
-                    <Redirect push to={"/capstone/chooseTemplate" } />
+                    <Redirect push to={"/capstone/chooseTemplate"} />
                     <Route exact path="/capstone/chooseTemplate" render={() => <ChooseContractTemplate role={this.props.role} />
                     } /></Router>
-               
+
             );
         } else if (this.state.showContract) {
             return (
                 <Router>
-                <Redirect push to={"/capstone/viewContract/"+ this.state.contract.id} />
-                <Route exact path="/capstone/viewContract/:id" render={() =>  <ViewContractPage  contract={this.state.contract} role={this.props.role} />
-                } /></Router>
-               
+                    <Redirect push to={"/capstone/viewContract/" + this.state.contract.id} />
+                    <Route exact path="/capstone/viewContract/:id" render={() => <ViewContractPage contract={this.state.contract} role={this.props.role} />
+                    } /></Router>
+
             );
         }
         else {
 
             return (
-                <div style={{height: "100vh"}}>
+                <div style={{ height: "100vh" }}>
                     <Space size="large">
                         <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContract}>Tạo hợp đồng</Button>
                         <Button type="primary" icon={<UploadOutlined />} >Tải lên hợp đồng</Button>
@@ -155,6 +155,11 @@ class ContractTable extends Component {
                     <ContractSearch />
                     <Table dataSource={this.props.newContract}
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}>
+                        <Column title="Mã hợp đồng" dataIndex="id" key="id"
+                            render={(text, record) => (
+                                <a><FileProtectOutlined /> {text}</a>
+                            )}
+                        />
                         <Column title="tên hợp đồng" dataIndex="contract_name" key="contract_name"
                             render={(text, record) => (
 
@@ -164,23 +169,23 @@ class ContractTable extends Component {
                         />
 
                         <Column title="bên đối tác" dataIndex="ben_tham_gia" key="ben_tham_gia"
-                        render={(text, record) => (
+                            render={(text, record) => (
 
-                            <b>{text}</b>
+                                <b>{text}</b>
 
-                        )} />
+                            )} />
                         <Column title="Ngày hết hạn" dataIndex="deadline" key="deadline"
-                        render={(text, record) => (
+                            render={(text, record) => (
 
-                            <b>{text}</b>
+                                <b>{text}</b>
 
-                        )} />
+                            )} />
                         <Column title="bên tạo hợp đồng" dataIndex="ben_tao_hd" key="ben_tao_hd"
-                        render={(text, record) => (
+                            render={(text, record) => (
 
-                            <b>{text}</b>
+                                <b>{text}</b>
 
-                        )} />
+                            )} />
                         <Column title="trạng thái" dataIndex="status" key="status"
                             render={(text, record) => {
                                 let color = 'pink'

@@ -142,8 +142,7 @@ class EmployeeList extends React.Component {
               key="status"
               render={(text, record) => (
                 <Space size="middle">
-                  {text === "active" ? <DeleteOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" >Vô hiệu hóa</DeleteOutlined> : null}
-                  {text === "deactive" ? <UserOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined">kích hoạt</UserOutlined> : null}
+                  {text === "active" ?  <Switch style={{ fontSize: '30px' }} onClick={this.OpenViewCustomer} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked />: <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
                 </Space>
               )}
             /></Table></div>
