@@ -74,7 +74,7 @@ class EmployeeList extends React.Component {
     } else if (this.state.openEmployee === "openViewEmployee") {
       return (
         <Router>
-          <Redirect push to={"/capstone/updateEmployee" + this.state.employee.name} />
+          <Redirect push to={"/capstone/updateEmployee/" + this.state.employee.name} />
       <Route exact path="/capstone/updateEmployee/:id" render={() => <ViewEmployee employee={this.state.employee} />} />
 
           </Router>
@@ -130,7 +130,7 @@ class EmployeeList extends React.Component {
                   <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
                     () => this.setState({
                       employee: text,
-                      openCustomer: "openViewEmployee",
+                      openEmployee: "openViewEmployee",
                     })
                   } />
                 </Space>

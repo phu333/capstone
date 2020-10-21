@@ -1,6 +1,6 @@
 import React from "react";
 import { SearchOutlined } from "@ant-design/icons";
-import { Select, DatePicker, Button, Space, Breadcrumb, PageHeader, Input, InputNumber,Form } from 'antd';
+import { Select, DatePicker, Button, Space, Breadcrumb, PageHeader, Input, InputNumber, Form } from 'antd';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { Option } = Select;
 class EmployeeSearch extends React.Component {
@@ -40,14 +40,7 @@ class EmployeeSearch extends React.Component {
     render() {
         return (
             <div className="container">
-                <Select defaultValue="SearchByName" onChange={this.handleChange}>
-                    <Option value="SearchByPhone">tìm kiếm theo số điện thoại</Option>
-                    <Option value="SearchByName">tìm kiếm theo tên </Option>
-                    
-                    <Option value="SearchByStatus">tìm kiếm theo trạng thái</Option>
-                    
-                    
-                </Select>
+
 
                 <PageHeader
                     className="site-page-header"
@@ -74,13 +67,21 @@ class EmployeeSearch extends React.Component {
                             onFinish={this.onFinish}
                             onFinishFailed={this.onFinishFailed}>
                             <Space size="large">
+                                <Select defaultValue="SearchByName" onChange={this.handleChange}>
+                                    <Option value="SearchByPhone">tìm kiếm theo số điện thoại</Option>
+                                    <Option value="SearchByName">tìm kiếm theo tên </Option>
+
+                                    <Option value="SearchByStatus">tìm kiếm theo trạng thái</Option>
+
+
+                                </Select>
                                 {this.state.SearchBy === "SearchByName" ?
                                     <> <Input name="searchValue" />
                                         <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} /></>
                                     : null}
                                 {this.state.SearchBy === "SearchByPhone" ? <> <Input name="searchValue" />
                                     <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} /></> : null}
-                               
+
 
 
                             </Space>

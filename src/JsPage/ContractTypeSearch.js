@@ -1,6 +1,6 @@
 import React from "react";
 import { SearchOutlined } from "@ant-design/icons";
-import { Select, DatePicker, Button, Space, Breadcrumb, PageHeader, Input, InputNumber,Form } from 'antd';
+import { Select, DatePicker, Button, Space, Breadcrumb, PageHeader, Input, InputNumber, Form } from 'antd';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { Option } = Select;
 class ContractTypeSearch extends React.Component {
@@ -39,13 +39,7 @@ class ContractTypeSearch extends React.Component {
     render() {
         return (
             <div className="container">
-                <Select defaultValue="SearchByContractType" onChange={this.handleChange}>
-                    <Option value="SearchByContractType">tìm kiếm theo loại hợp đồng</Option>
-                    <Option value="SearchByCreater">tìm kiếm theo người tạo</Option>
-                    <Option value="SearchByCreateDate">tìm kiếm theo ngày tạo</Option>
-                    <Option value="SearchByStatus">tìm kiếm theo trạng thái</Option>
-                    
-                </Select>
+
 
                 <PageHeader
                     className="site-page-header"
@@ -72,7 +66,13 @@ class ContractTypeSearch extends React.Component {
                             onFinish={this.onFinish}
                             onFinishFailed={this.onFinishFailed}>
                             <Space size="large">
-                               
+                                <Select defaultValue="SearchByContractType" onChange={this.handleChange}>
+                                    <Option value="SearchByContractType">tìm kiếm theo loại hợp đồng</Option>
+                                    <Option value="SearchByCreater">tìm kiếm theo người tạo</Option>
+                                    <Option value="SearchByCreateDate">tìm kiếm theo ngày tạo</Option>
+                                    <Option value="SearchByStatus">tìm kiếm theo trạng thái</Option>
+
+                                </Select>
                                 {this.state.SearchBy === "SearchByContractType" ?
                                     <> <Input name="searchValue" />
                                         <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} /></>

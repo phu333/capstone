@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import '../index.css';
 import { createEmployee, employeeInformation } from '../actions/EmployeeAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Row, Col } from 'antd';
+import { Space, Card, Button, Row, Col } from 'antd';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
@@ -88,38 +88,41 @@ class AddEmployee extends React.Component {
             <React.Fragment>
                 <br />
                 <h2 style={{ textAlign: 'center' }}>Tạo nhân viên</h2>
-                <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
-                    <Col span={10} >
+                
                         <Grid container spacing={3}>
-
-                            <Grid item xs={12} sm={6}>
+                        <Grid item xs={12}>
+                                
                                 <TextField
-                                    required
-                                    id="company"
-                                    name="Tên doanh nghiệp"
-                                    label="Tên doanh nghiệp"
+                                    id="name"
+                                    name="tên"
+                                    label="tên"
                                     fullWidth
-                                    autoComplete="Tên doanh nghiệp"
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="taxCode"
-                                    name="Mã số thuế"
-                                    label="Mã số thuế"
-                                    fullWidth
-                                    autoComplete="family-name"
+                                    autoComplete="shipping address-level2"
                                 />
                             </Grid>
                             <Grid item xs={12}>
+                                
                                 <TextField
-                                    id="faxCode"
-                                    name="số fax"
-                                    label="số fax"
+                                    id="username"
+                                    name="tên đăng nhập"
+                                    label="tên đăng nhập"
                                     fullWidth
-                                    autoComplete="shipping address-line1"
+                                    autoComplete="shipping address-level2"
                                 />
+                            </Grid>
+                            
+                            <Grid item xs={12}>
+                                
+                                <TextField
+                                    id="password"
+                                    name="mật khẩu"
+                                    label="mật khẩu"
+                                    fullWidth
+                                    autoComplete="shipping address-level2"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                
                                 <TextField
                                     id="email"
                                     name="địa chỉ mail"
@@ -139,16 +142,7 @@ class AddEmployee extends React.Component {
                             </Grid>
 
 
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="presentor"
-                                    name="Người đại diện"
-                                    label="Người đại diện"
-                                    fullWidth
-                                    autoComplete="shipping postal-code"
-                                />
-                            </Grid>
+                            
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     required
@@ -232,8 +226,7 @@ class AddEmployee extends React.Component {
                                 Trở về
               </Button>
                         </Grid>
-                    </Col>
-                </Row>
+                    
             </React.Fragment >
         );
     }

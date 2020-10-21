@@ -1,6 +1,6 @@
 import React from "react";
 import { SearchOutlined } from "@ant-design/icons";
-import { Select, DatePicker, Button, Space, Breadcrumb, PageHeader, Input, InputNumber,Form } from 'antd';
+import { Select, DatePicker, Button, Space, Breadcrumb, PageHeader, Input, InputNumber, Form } from 'antd';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { Option } = Select;
 class CustomerSearch extends React.Component {
@@ -40,14 +40,7 @@ class CustomerSearch extends React.Component {
     render() {
         return (
             <div className="container">
-                <Select defaultValue="SearchByCompanyName" onChange={this.handleChange}>
-                    <Option value="SearchByPhone">tìm kiếm theo số điện thoại</Option>
-                    <Option value="SearchByCompanyName">tìm kiếm theo tên doanh nghiệp</Option>
-                    <Option value="SearchByTaxCode">tìm kiếm theo mã số thuế</Option>
-                    <Option value="SearchByStatus">tìm kiếm theo trạng thái</Option>
-                    <Option value="SearchByFaxCode">tìm kiếm theo số fax</Option>
-                    <Option value="SearchByPresentor">tìm kiếm theo người đại diện</Option>
-                </Select>
+
 
                 <PageHeader
                     className="site-page-header"
@@ -74,6 +67,14 @@ class CustomerSearch extends React.Component {
                             onFinish={this.onFinish}
                             onFinishFailed={this.onFinishFailed}>
                             <Space size="large">
+                                <Select defaultValue="SearchByCompanyName" onChange={this.handleChange}>
+                                    <Option value="SearchByPhone">tìm kiếm theo số điện thoại</Option>
+                                    <Option value="SearchByCompanyName">tìm kiếm theo tên doanh nghiệp</Option>
+                                    <Option value="SearchByTaxCode">tìm kiếm theo mã số thuế</Option>
+                                    <Option value="SearchByStatus">tìm kiếm theo trạng thái</Option>
+                                    <Option value="SearchByFaxCode">tìm kiếm theo số fax</Option>
+                                    <Option value="SearchByPresentor">tìm kiếm theo người đại diện</Option>
+                                </Select>
                                 {this.state.SearchBy === "SearchByPhone" ?
                                     <> <Input name="searchValue" />
                                         <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} /></>
