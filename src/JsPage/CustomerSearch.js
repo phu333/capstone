@@ -1,6 +1,6 @@
 import React from "react";
-import { SearchOutlined } from "@ant-design/icons";
-import { Select, DatePicker, Button, Space, Breadcrumb, PageHeader, Input, InputNumber, Form } from 'antd';
+import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
+import { Select, DatePicker, Button, Space, Breadcrumb, PageHeader, Input, InputNumber, Form,Card,Radio,Dropdown } from 'antd';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { Option } = Select;
 class CustomerSearch extends React.Component {
@@ -9,7 +9,9 @@ class CustomerSearch extends React.Component {
 
         this.state = {
 
-            SearchBy: "SearchByCompanyName"
+            firstSearchValue: "all",
+            secondSearchValue: "all",
+            thirdSearchValue: "all",
         };
         this.handleChange = this.handleChange.bind(this);
 
@@ -35,9 +37,71 @@ class CustomerSearch extends React.Component {
     onFinishFailed = (errorInfo) => {
 
     };
-
+    onChangeFirstSearchValue = e => {
+        this.setState({
+            firstSearchValue: e.target.value
+        })
+    }
+    onChangeSecondSearchValue = e => {
+        this.setState({
+            secondSearchValue: e.target.value
+        })
+    }
+    onChangeThirdSearchValue = e => {
+        this.setState({
+            thirdSearchValue: e.target.value
+        })
+    }
 
     render() {
+        const radioStyle = {
+
+        };
+        const dropDown = (
+            <Space direction="horizontal">
+                <Card>
+                    <Radio.Group onChange={this.onChangeFirstSearchValue} value={this.state.firstSearchValue}>
+                        <Radio style={radioStyle} value={"SearchByCompanyName"}>
+                            tìm kiếm tên doanh nghiệp
+        </Radio>
+                        <Radio style={radioStyle} value={"SearchByTaxCode"}>
+                            tìm kiếm mã số thuế
+        </Radio>
+                        <Radio style={radioStyle} value={"all"}>
+                            tất cả
+        </Radio>
+
+
+                    </Radio.Group>
+                </Card>
+                {/* <Card>
+                    <Radio.Group onChange={this.onChangeSecondSearchValue} value={this.state.secondSearchValue}>
+                        <Radio style={radioStyle} value={"all"}>
+                            tất cả
+                        </Radio>
+
+                        <Radio style={radioStyle} value={"SearchByName"}>
+                            tìm kiếm bằng tên
+        </Radio>
+
+                    </Radio.Group>
+                </Card> */}
+                <Card>
+                    <Radio.Group onChange={this.onChangeThirdSearchValue} value={this.state.thirdSearchValue}>
+                        <Radio style={radioStyle} value={"all"}>
+                            tất cả
+                        </Radio>
+                        <Radio style={radioStyle} value={"active"}>
+                            đang có hiệu lực
+        </Radio>
+
+                        <Radio style={radioStyle} value={"deactive"}>
+                            hết hiệu lực
+        </Radio>
+                    </Radio.Group>
+                </Card>
+            </Space>
+        )
         return (
             <div className="container">
 
@@ -47,13 +111,7 @@ class CustomerSearch extends React.Component {
 
                     title={[<Space size="large">
 
-                        {this.state.SearchBy === "SearchByStatus" ?
-                            <Breadcrumb>
-                                <Breadcrumb.Item>Tất cả</Breadcrumb.Item>
 
-                                <Breadcrumb.Item>đang có hiệu lực</Breadcrumb.Item>
-                                <Breadcrumb.Item>hết hiệu lực</Breadcrumb.Item>
-                            </Breadcrumb> : null}
 
                     </Space>]}
                     extra={[
@@ -67,30 +125,18 @@ class CustomerSearch extends React.Component {
                             onFinish={this.onFinish}
                             onFinishFailed={this.onFinishFailed}>
                             <Space size="large">
-                                <Select defaultValue="SearchByCompanyName" onChange={this.handleChange}>
-                                    <Option value="SearchByPhone">tìm kiếm theo số điện thoại</Option>
-                                    <Option value="SearchByCompanyName">tìm kiếm theo tên doanh nghiệp</Option>
-                                    <Option value="SearchByTaxCode">tìm kiếm theo mã số thuế</Option>
-                                    <Option value="SearchByStatus">tìm kiếm theo trạng thái</Option>
-                                    <Option value="SearchByFaxCode">tìm kiếm theo số fax</Option>
-                                    <Option value="SearchByPresentor">tìm kiếm theo người đại diện</Option>
-                                </Select>
-                                {this.state.SearchBy === "SearchByPhone" ?
-                                    <> <Input name="searchValue" />
-                                        <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} /></>
-                                    : null}
-                                {this.state.SearchBy === "SearchByCompanyName" ? <> <Input name="searchValue" />
+                                <Dropdown overlay={dropDown} placement="bottomCenter" arrow>
+                                    <Button icon={<MenuOutlined />}>Tìm kiếm bằng</Button>
+                                </Dropdown>
+                               
+
+                                {this.state.firstSearchValue === "SearchByCompanyName" ? <> <Input name="searchValue" />
                                     <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} /></> : null}
-                                {this.state.SearchBy === "SearchByTaxCode" ?
+                                {this.state.firstSearchValue === "SearchByTaxCode" ?
                                     <> <Input name="searchValue" />
                                         <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} /></>
                                     : null}
-                                {this.state.SearchBy === "SearchByFaxCode" ? <> <Input name="searchValue" />
-                                    <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} /></> : null}
-                                {this.state.SearchBy === "SearchByPresentor" ?
-                                    <> <Input name="searchValue" />
-                                        <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} /></>
-                                    : null}
+
 
 
                             </Space>
