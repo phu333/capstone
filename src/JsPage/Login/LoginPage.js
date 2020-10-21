@@ -6,7 +6,7 @@ import { PageHeader, Space, Row, Col } from 'antd';
 import { GoogleLogin } from 'react-google-login';
 import { Form, Input, Button, Checkbox } from 'antd';
 import EmployeeSideMenu from '../EmployeeSideMenu';
-
+import { reactLocalStorage } from 'reactjs-localstorage';
 import UserTable from '../UserTable';
 import SendJoinRequest from '../SendJoinRequest'
 import ForgetPassword from '../ForgetPassword'
@@ -94,6 +94,7 @@ class LoginPage extends React.Component {
 
                         user: values.username,
                     })
+                    
                     break;
                 } else {
 
@@ -102,7 +103,7 @@ class LoginPage extends React.Component {
 
             }
         }
-        console.log(this.state.role)
+        
         let loginInformation = {
             username: this.state.user,
             signPermission: true,
@@ -113,7 +114,9 @@ class LoginPage extends React.Component {
             signatureManagePermission: true,
             editCompanyInformationPermission: true,
         }
-
+        const loginArray = []
+        loginArray.push(loginInformation)
+        reactLocalStorage.setObject('login',loginArray);
         this.props.onSubmit(loginInformation)
     };
 
@@ -161,11 +164,11 @@ class LoginPage extends React.Component {
             } else {
                 return (
                     <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
-                        
-                            <Redirect push to="/capstone/Login" />
 
-                           
-                        
+                        <Redirect push to="/capstone/Login" />
+
+
+
                         <Col span={10} >
                             <Form
                                 {...layout}

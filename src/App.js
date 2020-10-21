@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { reactLocalStorage } from 'reactjs-localstorage';
 import './App.css';
 import LoginPage from './JsPage/Login/LoginPage'
 import ContractTable from './JsPage/ContractTable'
@@ -14,8 +14,9 @@ import EmployeeSideMenu from './JsPage/EmployeeSideMenu';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 class App extends React.Component {
+
   render() {
-    var information = this.props.myLoginReducer.map((login, index) => {
+    var information = JSON.parse(reactLocalStorage.get('login', true)).map((login, index) => {
       return (<>
         <Route exact path="/capstone/SideMenu" component={EmployeeSideMenu} />
         <Route exact path="/capstone/customerList" component={CustomerTable} />
@@ -28,7 +29,7 @@ class App extends React.Component {
         <Route exact path="/capstone/companyProfile" component={UpdateProfileCompany} /></>);
 
     })
-    console.log(information)
+    console.log(JSON.parse(reactLocalStorage.get('login', true)))
     return (
       <div >
         <Particles
@@ -56,10 +57,10 @@ class App extends React.Component {
         />
         <Router>
 
-        <Redirect push to="/capstone/Login" />
+          <Redirect push to="/capstone/Login" />
 
           <Route exact path="/capstone/Login" component={LoginPage} />
-          {information}
+          {/* {information} */}
         </Router>
 
 
