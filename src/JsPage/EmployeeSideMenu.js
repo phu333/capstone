@@ -3,15 +3,17 @@ import { Menu, Layout } from 'antd';
 import { PageHeader, Avatar, Descriptions, Space, Tag, Affix, Button } from 'antd';
 import React from 'react';
 import { Badge } from 'antd';
-import UpdateProfileCompany from './UpdateProfileCompany'
-import EmployeeTable from './EmployeeTable'
-import { BrowserRouter as Router, Route, Switch, Redirect,useHistory } from 'react-router-dom'
-import SignatureList from './SignatureList'
+
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+
 import { UserOutlined, ToolOutlined, NotificationOutlined, LogoutOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import ContractTable from './ContractTable'
 import CustomerTable from './CustomerTable'
 import ContractTypeTable from './ContractTypeTable'
 import UpdateProfile from './UpdateProfile'
+import UpdateProfileCompany from './UpdateProfileCompany'
+import EmployeeTable from './EmployeeTable'
+import SignatureList from './SignatureList'
 import Header from './Header'
 import { createFromIconfontCN } from '@ant-design/icons';
 import { connect } from 'react-redux'
@@ -48,7 +50,13 @@ class EmployeeSideMenu extends React.Component {
     })
 
   };
+  componentDidMount() {
+    return (<Router>
+      <Redirect push to="/capstone/SideMenu" />
 
+      <Route exact path="/capstone/SideMenu" component={EmployeeSideMenu} />
+    </Router>);
+  }
   render() {
     console.log(this.props.myLoginReducer)
     if (this.props.myLoginReducer !== "logout") {
@@ -169,12 +177,12 @@ class EmployeeSideMenu extends React.Component {
 
       if (this.props.myLoginReducer === "Logout") {
 
-       
+
       } else {
         return (<div style={{ height: "100vh" }}> {information}</div >);
       }
     } else {
-      
+
     }
 
 
