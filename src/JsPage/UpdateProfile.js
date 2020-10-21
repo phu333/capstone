@@ -32,6 +32,7 @@ const tailLayout = {
     },
 };
 
+
 class UpdateProfile extends React.Component {
     constructor() {
         super();
@@ -76,11 +77,13 @@ class UpdateProfile extends React.Component {
                         <Grid item xs={12}>
 
                             <TextField
+                            placeholder="phu333"
                                 id="name"
                                 name="tên"
-                                label="tên"
+                                label="phu333"
                                 fullWidth
                                 autoComplete="shipping address-level2"
+                                disabled
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -88,9 +91,10 @@ class UpdateProfile extends React.Component {
                             <TextField
                                 id="username"
                                 name="tên đăng nhập"
-                                label="tên đăng nhập"
+                                label="phu333"
                                 fullWidth
                                 autoComplete="shipping address-level2"
+                                disabled
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -98,9 +102,10 @@ class UpdateProfile extends React.Component {
                                 required
                                 id="company"
                                 name="doanh nghiệp"
-                                label="doanh nghiệp"
+                                label="HiSign"
                                 fullWidth
                                 autoComplete="shipping postal-code"
+                                disabled
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -108,13 +113,14 @@ class UpdateProfile extends React.Component {
                                 required
                                 id="role"
                                 name="chức vụ"
-                                label="chức vụ"
+                                label="Secretary"
                                 fullWidth
                                 autoComplete="shipping postal-code"
+                                disabled
                             />
                         </Grid>
                     </Card>
-                    <Card style={{width:600, height:600}}>
+                    <Card style={{width:800, height:600}}>
                         <Grid item xs={12}>
 
                             <TextField
@@ -135,15 +141,17 @@ class UpdateProfile extends React.Component {
                                 autoComplete="shipping address-level2"
                             />
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} gutter={16}>
                             <TextField
                                 id="address"
                                 name="địa chỉ"
                                 label="địa chỉ"
                                 fullWidth
                                 autoComplete="shipping address-line2"
+                                
                             />
                         </Grid>
+                        <div style={{marginTop:"50px", paddingLeft:"200px"}}>
                         <Space size="large">
                             <Popup trigger={<Button type="primary" >
                                 <CloudUploadOutlined />  Nộp
@@ -163,6 +171,7 @@ class UpdateProfile extends React.Component {
                                 Trở về
               </Button>
                         </Space>
+                        </div>
                     </Card>
 
 
