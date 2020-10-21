@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import '../index.css';
-import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+
 import { Form, Input, Button, Checkbox } from 'antd';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined
 } from '@ant-design/icons';
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const layout = {
     labelCol: {
         span: 4,

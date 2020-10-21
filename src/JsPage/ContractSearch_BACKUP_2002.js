@@ -1,7 +1,10 @@
 import React from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import { Select, DatePicker, Button, Space, Breadcrumb, PageHeader, Input, InputNumber } from 'antd';
+<<<<<<< HEAD
+=======
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+>>>>>>> origin/main
 import Form from "antd/lib/form/Form";
 const { Option } = Select;
 const { RangePicker } = DatePicker;

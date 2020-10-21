@@ -6,8 +6,9 @@ import React from 'react';
 import './Column.css'
 import CustomerSearch from './CustomerSearch'
 import { createCustomer, customerInformation } from '../actions/CustomerAction'
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined } from "@ant-design/icons"
+import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
 const { Column } = Table;
 
 
@@ -17,11 +18,11 @@ class CustomerList extends React.Component {
 
     this.state = {
       openCustomer: "",
-
+      customer:{},
     };
 
     this.OpenAddCustomer = this.OpenAddCustomer.bind(this);
-    this.OpenViewCustomer = this.OpenViewCustomer.bind(this);
+    
 
   }
   componentDidMount() {
@@ -64,22 +65,26 @@ class CustomerList extends React.Component {
 
     })
   }
-  OpenViewCustomer() {
-    this.setState({
-      openCustomer: "openViewCustomer",
-    })
-  }
+  
   render() {
     if (this.state.openCustomer === "openAddCustomer") {
       return (
-        <AddCustomer />
+        <Router>
+          <Redirect push to={"/capstone/addCustomer"} />
+          <Route exact path="/capstone/addCustomer" render={() => <AddCustomer />
+          } /></Router>
+
       );
     } else if (this.state.openCustomer === "openViewCustomer") {
-      return (<AddCustomer />);
+      return (<Router>
+        <Redirect push to={"/capstone/updateCustomer/"+this.state.customer.taxCode} />
+        <Route exact path="/capstone/updateCustomer/:id" render={() => <AddCustomer customer={this.state.customer} />
+        } /></Router>);
 
     }
     else {
       return (
+<<<<<<< HEAD
         <div><br />
           <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddCustomer} icon={<UserAddOutlined />}>Tạo khách hàng mới</Button>
 
@@ -114,10 +119,22 @@ class CustomerList extends React.Component {
 
                 )} />*
               <Column title="Mã số thuế" dataIndex="taxCode" key="taxCode" render={(text, record) => (
+=======
+        <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddCustomer} icon={<UserAddOutlined />}>Tạo khách hàng mới</Button>
+          <CustomerSearch />
+          <Table dataSource={this.props.newCustomer}
+
+            rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
+            <Column title="Tên doanh nghiệp" dataIndex="company" key="company"
+              sorter={(a, b) => a.company.localeCompare(b.company)}
+              sortDirections={['descend', 'ascend']}
+              render={(text, record) => (
+>>>>>>> origin/main
 
                 <b>{text}</b>
 
               )} />
+<<<<<<< HEAD
                               
               <Column title="Số fax" dataIndex="faxCode" key="faxCode" render={(text, record) => (
 
@@ -125,10 +142,18 @@ class CustomerList extends React.Component {
 
               )} />*/}
               <Column title="Số điện thoại" dataIndex="phone" key="phone" render={(text, record) => (
+=======
+
+            <Column title="Người đại diện" dataIndex="name" key="name"
+              sorter={(a, b) => a.name.localeCompare(b.name)}
+              sortDirections={['descend', 'ascend']}
+              render={(text, record) => (
+>>>>>>> origin/main
 
                 <b>{text}</b>
 
               )} />
+<<<<<<< HEAD
               <Column title="email" dataIndex="email" key="email" render={(text, record) => (
 
                 <a>{text}</a>
@@ -177,6 +202,83 @@ class CustomerList extends React.Component {
               />
 
             </Table></div></div>
+=======
+            <Column title="Địa chỉ" dataIndex="address" key="address"
+              sorter={(a, b) => a.address.localeCompare(b.address)}
+              sortDirections={['descend', 'ascend']}
+              render={(text, record) => (
+
+                <b>{text}</b>
+
+              )} />
+            <Column title="Mã số thuế" dataIndex="taxCode" key="taxCode" render={(text, record) => (
+
+              <b>{text}</b>
+
+            )} />
+            <Column title="Số fax" dataIndex="faxCode" key="faxCode" render={(text, record) => (
+
+              <b>{text}</b>
+
+            )} />
+            <Column title="Số điện thoại" dataIndex="phone" key="phone" render={(text, record) => (
+
+              <b>{text}</b>
+
+            )} />
+            <Column title="email" dataIndex="email" key="email" render={(text, record) => (
+
+              <a>{text}</a>
+
+            )} />
+
+            <Column title="trạng thái" dataIndex="status" key="status"
+              render={(text, record) => {
+                let color = 'pink'
+                if (text === 'deactive') {
+                  color = 'red'
+                } else if (text === 'active') {
+                  color = 'green'
+                } else if (text === 'pending') {
+                  color = 'blue'
+                } else if (text === 'waiting for customer') {
+                  color = 'pink'
+                } else if (text === 'rejected') {
+                  color = 'grey'
+                }
+                return (<Tag color={color} key={text}>
+                  {text.toUpperCase()}
+                </Tag>);
+              }}
+            />
+            <Column
+              title="Cập nhật thông tin"
+              key="action"
+              render={(text, record) => (
+                <Space size="middle">
+                 <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                                    () => this.setState({
+                                        customer: text,
+                                        openCustomer: "openViewCustomer",
+                                    })
+                                } />
+                </Space>
+              )}
+            />
+            <Column
+              title="Tác vụ"
+              dataIndex="status"
+              key="status"
+              render={(text, record) => (
+                <Space size="middle">
+                  {text === "active" ? <DeleteOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.OpenViewCustomer}>Vô hiệu hóa</DeleteOutlined> : null}
+                  {text === "deactive" ? <UserOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.OpenViewCustomer}>kích hoạt</UserOutlined> : null}
+                </Space>
+              )}
+            />
+
+          </Table></div>
+>>>>>>> origin/main
       );
     }
 

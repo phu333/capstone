@@ -8,10 +8,10 @@ const myLoginReducer = (state = initialState, action) => {
       state.push(action.login)
       return [...state];
     case 'LOGOUT':
-      state = initialState
+      
       state.pop()
-      console.log(state)
-      return [...state];
+      
+      return [];
     default:
       return state;
   }

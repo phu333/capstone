@@ -1,8 +1,7 @@
 import React from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import { Button, Space, Breadcrumb, PageHeader } from 'antd';
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
-class SignatureSearch extends React.Component {
+class ContractSearch extends React.Component {
     
 
     render() {
@@ -22,7 +21,12 @@ class SignatureSearch extends React.Component {
 
                             <Breadcrumb>
                                 <Breadcrumb.Item>Tất cả</Breadcrumb.Item>
-                              
+                                <Breadcrumb.Item>
+                                    đang duyệt
+                            </Breadcrumb.Item>
+                                <Breadcrumb.Item>
+                                    đang chờ ký
+                            </Breadcrumb.Item>
                                 <Breadcrumb.Item>đang có hiệu lực</Breadcrumb.Item>
                                 <Breadcrumb.Item>hết hiệu lực</Breadcrumb.Item>
                             </Breadcrumb>
@@ -46,4 +50,4 @@ class SignatureSearch extends React.Component {
             </div>);
     }
 }
-export default SignatureSearch;
+export default ContractSearch;

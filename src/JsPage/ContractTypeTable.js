@@ -1,6 +1,7 @@
 import 'antd/dist/antd.css';
 import { Table, Space, Button, Tag,Switch } from 'antd';
 import TemplateUpload from './TemplateUpload';
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import React from 'react';
 import './Column.css'
 import ContractTypeSearch from './ContractTypeSearch'
@@ -57,14 +58,20 @@ class ContractTable extends React.Component {
   render() {
     if (this.state.showTemplateCreate) {
       return (
-
-        <TemplateUpload />
+        <Router>
+        <Redirect push to={"/capstone/uploadTemplate" } />
+        <Route exact path="/capstone/uploadTemplate" component={TemplateUpload} /></Router>
+       
       );
     } else {
       return (
+<<<<<<< HEAD
 
         <div style={{ height: "100vh" }}><Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tải lên mẫu mới</Button>
         <br/>
+=======
+        <div style={{ height: "100vh" }}><Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tải lên mẫu mới</Button>
+>>>>>>> origin/main
           <ContractTypeSearch />
           <Table dataSource={this.props.newContractType}
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}  >

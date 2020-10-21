@@ -7,7 +7,7 @@ import {
     , CloudUploadOutlined, RedoOutlined
 } from '@ant-design/icons';
 import { Form, Input, Button } from 'antd';
-
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const layout = {
     labelCol: {
         span: 4,

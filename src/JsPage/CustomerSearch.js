@@ -1,10 +1,15 @@
 import React from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import { Select, DatePicker, Button, Space, Breadcrumb, PageHeader, Input, InputNumber,Form } from 'antd';
+<<<<<<< HEAD
+=======
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+>>>>>>> origin/main
 const { Option } = Select;
 class CustomerSearch extends React.Component {
     constructor() {
         super();
+<<<<<<< HEAD
 
         this.state = {
 
@@ -38,13 +43,46 @@ class CustomerSearch extends React.Component {
 
     render() {
         return (
+=======
+
+        this.state = {
+>>>>>>> origin/main
+
+            SearchBy: "SearchByCompanyName"
+        };
+        this.handleChange = this.handleChange.bind(this);
+
+    }
+    handleChange(value) {
+        this.setState({
+            SearchBy: value
+        })
+    }
+    onFinish = (values) => {
+        console.log(values)
 
 
+    };
+    onChange(value, dateString) {
+        console.log('Selected Time: ', value);
+        console.log('Formatted Selected Time: ', dateString);
+    }
+
+    onOk(value) {
+        console.log('onOk: ', value);
+    }
+    onFinishFailed = (errorInfo) => {
+
+<<<<<<< HEAD
 
 
+=======
+    };
 
 
-
+    render() {
+        return (
+>>>>>>> origin/main
             <div className="container">
                 <Select defaultValue="SearchByCompanyName" onChange={this.handleChange}>
                     <Option value="SearchByPhone">tìm kiếm theo số điện thoại</Option>

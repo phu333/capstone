@@ -11,6 +11,7 @@ import ViewContractPage from './ViewContractPage'
 import React, { Component } from 'react';
 import { createContract, contractInformation } from '../actions/ContractAction'
 import { connect } from 'react-redux'
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { Column } = Table;
 
 
@@ -53,7 +54,11 @@ class ContractTable extends Component {
 
         if (this.props.newContract.length === 0) {
             const contract1 = {
+<<<<<<< HEAD
                 contract_code: 'se123',
+=======
+                id:1,
+>>>>>>> origin/main
                 contract_name: 'Hop dong lao dong',
                 status: "deactive",
                 ben_tao_hd: 'HiSign',
@@ -63,7 +68,11 @@ class ContractTable extends Component {
 
             }
             const contract2 = {
+<<<<<<< HEAD
                 contract_code: 'se456',
+=======
+                id:2,
+>>>>>>> origin/main
                 contract_name: 'Hop dong lao dong',
                 status: "waiting for customer",
                 ben_tao_hd: 'HiSign',
@@ -73,7 +82,11 @@ class ContractTable extends Component {
 
             }
             const contract3 = {
+<<<<<<< HEAD
                 contract_code: 'se789',
+=======
+                id:3,
+>>>>>>> origin/main
                 contract_name: 'Hop dong lao dong',
                 status: "pending",
                 ben_tao_hd: 'HiSign',
@@ -83,7 +96,11 @@ class ContractTable extends Component {
 
             }
             const contract4 = {
+<<<<<<< HEAD
                 contract_code: 'sb123',
+=======
+                id:4,
+>>>>>>> origin/main
                 contract_name: 'Hop dong lao dong',
                 status: "active",
                 ben_tao_hd: 'HiSign',
@@ -93,7 +110,11 @@ class ContractTable extends Component {
 
             }
             const contract5 = {
+<<<<<<< HEAD
                 contract_code: 'sb456',
+=======
+                id:5,
+>>>>>>> origin/main
                 contract_name: 'Hop dong mua ban',
                 status: "waiting for sign",
                 ben_tao_hd: 'cty 369',
@@ -128,11 +149,19 @@ class ContractTable extends Component {
 
         if (this.state.showCreateContract) {
             return (
-                <ChooseContractTemplate role={this.props.role} />
+                <Router>
+                    <Redirect push to={"/capstone/chooseTemplate" } />
+                    <Route exact path="/capstone/chooseTemplate" render={() => <ChooseContractTemplate role={this.props.role} />
+                    } /></Router>
+               
             );
         } else if (this.state.showContract) {
             return (
-                <ViewContractPage contract={this.state.contract} role={this.props.role} />
+                <Router>
+                <Redirect push to={"/capstone/viewContract/"+ this.state.contract.id} />
+                <Route exact path="/capstone/viewContract/:id" render={() =>  <ViewContractPage  contract={this.state.contract} role={this.props.role} />
+                } /></Router>
+               
             );
         }
         else {
@@ -173,9 +202,15 @@ class ContractTable extends Component {
 
                                 <b>{text}</b>
 
+<<<<<<< HEAD
                             )} />
                         <Column title="bên tạo hợp đồng" dataIndex="ben_tao_hd" key="ben_tao_hd"
                             render={(text, record) => (
+=======
+                        )} />
+                        <Column title="bên tạo hợp đồng" dataIndex="ben_tao_hd" key="ben_tao_hd"
+                        render={(text, record) => (
+>>>>>>> origin/main
 
                                 <b>{text}</b>
 

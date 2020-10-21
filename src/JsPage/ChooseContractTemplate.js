@@ -4,6 +4,7 @@ import CreateContract from './CreateContract';
 import React from 'react';
 import ContractTypeSearch from './ContractTypeSearch'
 import {UserAddOutlined,SearchOutlined ,FileOutlined} from "@ant-design/icons"
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { Column } = Table;
 const dataSource = [
     {
@@ -39,8 +40,11 @@ class ChooseContractTemplate extends React.Component {
     render() {
         if (this.state.showTemplateCreate) {
             return (
-
-                <CreateContract role={this.props.role} />
+                <Router>
+                    <Redirect push to={"/capstone/createContract" } />
+                    <Route exact path="/capstone/createContract" render={() =>  <CreateContract role={this.props.role} />
+                    } /></Router>
+               
             );
         } else {
             return (

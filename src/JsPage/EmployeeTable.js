@@ -1,5 +1,9 @@
 import 'antd/dist/antd.css';
+<<<<<<< HEAD
 import { Table, Space, Tag, Button,Switch } from 'antd';
+=======
+import { Table, Space, Tag, Button } from 'antd';
+>>>>>>> origin/main
 import AddEmployee from './AddEmployee'
 import ViewEmployee from './ViewEmployee'
 import React from 'react';
@@ -8,7 +12,8 @@ import ReactDOM from 'react-dom';
 import EmployeeSearch from './EmployeeSearch'
 import { createEmployee, employeeInformation } from '../actions/EmployeeAction'
 import { connect } from 'react-redux'
-import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined } from "@ant-design/icons"
+import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { Column, ColumnGroup } = Table;
 
 
@@ -18,7 +23,7 @@ class EmployeeList extends React.Component {
 
     this.state = {
 
-
+      employee: {},
       openEmployee: "",
 
     };
@@ -65,14 +70,27 @@ class EmployeeList extends React.Component {
   }
   render() {
     if (this.state.openEmployee === "openAddEmployee") {
-      return (<AddEmployee />);
+      return (
+        <Router>
+          <Redirect push to={"/capstone/addEmployee"} />
+          <Route exact path="/capstone/addEmployee" component={AddEmployee} /></Router>
+      );
     } else if (this.state.openEmployee === "openViewEmployee") {
-      return (<ViewEmployee />);
+      return (
+        <Router>
+          <Redirect push to={"/capstone/updateEmployee" + this.state.employee.name} />
+      <Route exact path="/capstone/updateEmployee/:id" render={() => <ViewEmployee employee={this.state.employee} />} />
+
+          </Router>
+      );
     }
     else {
       return (
         <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button>
+<<<<<<< HEAD
         <br/>
+=======
+>>>>>>> origin/main
           <EmployeeSearch />
           <Table dataSource={this.props.newEmployee}
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
@@ -117,7 +135,12 @@ class EmployeeList extends React.Component {
               key="action"
               render={(text, record) => (
                 <Space size="middle">
-                  <EditOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.OpenViewCustomer}>Sửa</EditOutlined>
+                  <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                    () => this.setState({
+                      employee: text,
+                      openCustomer: "openViewEmployee",
+                    })
+                  } />
                 </Space>
               )}
             />
@@ -127,7 +150,12 @@ class EmployeeList extends React.Component {
               key="status"
               render={(text, record) => (
                 <Space size="middle">
+<<<<<<< HEAD
                   {text === "active" ?  <Switch style={{ fontSize: '30px' }} onClick={this.OpenViewCustomer} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked />: <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
+=======
+                  {text === "active" ? <DeleteOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" >Vô hiệu hóa</DeleteOutlined> : null}
+                  {text === "deactive" ? <UserOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined">kích hoạt</UserOutlined> : null}
+>>>>>>> origin/main
                 </Space>
               )}
             /></Table></div>

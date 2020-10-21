@@ -15,6 +15,7 @@ import TextField from '@material-ui/core/TextField';
 import { ReloadOutlined } from "@ant-design/icons"
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const layout = {
     labelCol: {
         span: 4,
@@ -67,7 +68,10 @@ class AddCustomer extends React.Component {
 
     render() {
         if (this.state.finish) {
-            return (<CustomerTable role={this.props.role} />);
+            return (<Router>
+                <Redirect push to={"/capstone/customerList"}  />
+                <Route exact path="/capstone/customerList" component={CustomerTable} />
+              </Router>);
         } else {
 
 

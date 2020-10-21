@@ -5,7 +5,11 @@ import React from 'react';
 import { Badge } from 'antd';
 import UpdateProfileCompany from './UpdateProfileCompany'
 import EmployeeTable from './EmployeeTable'
+<<<<<<< HEAD
 
+=======
+import { BrowserRouter as Router, Route, Switch, Redirect,useHistory } from 'react-router-dom'
+>>>>>>> origin/main
 import SignatureList from './SignatureList'
 import { UserOutlined, ToolOutlined, NotificationOutlined, LogoutOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import ContractTable from './ContractTable'
@@ -50,13 +54,15 @@ class EmployeeSideMenu extends React.Component {
   };
 
   render() {
-    var information = this.props.myLoginReducer.map((login, index) => {
-      return (
-
-        <Layout style={{ height: "100vh" }}>
+    console.log(this.props.myLoginReducer)
+    if (this.props.myLoginReducer !== "logout") {
+      console.log(this.props.myLoginReducer)
+      var information = this.props.myLoginReducer.map((login, index) => {
+        return (
 
           <Layout style={{ height: "100vh" }}>
 
+<<<<<<< HEAD
             <Sider width={250} className="site-layout-background">
 
               <IconFont type="icon-javascript" style={{ fontSize: '60px', color: '#08c', marginLeft: "40%" }} />
@@ -119,23 +125,132 @@ class EmployeeSideMenu extends React.Component {
               {this.state.showComponent === "signatureList" ? <SignatureList /> : null}
               
               {this.state.showComponent === "companyProfile" ? <UpdateProfileCompany /> : null}
+=======
+            <Layout style={{ height: "100vh" }}>
+
+              <Sider width={250} className="site-layout-background">
+
+                <IconFont type="icon-javascript" style={{ fontSize: '60px', color: '#08c', marginLeft: "40%" }} />
+                <Descriptions size="small" column={2}   >
+
+                  <Descriptions.Item><Avatar size={70} icon={<UserOutlined />} /> </Descriptions.Item>
 
 
 
+                  <Descriptions.Item><br />
+                    <b style={{ color: ' white' }}>{login.username}</b><br />
+
+                    <b style={{ color: ' white' }}>Company ABC</b>
+                  </Descriptions.Item>
+
+                </Descriptions>
+                <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
+                  {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
+                </Button>
+                <Menu
+                  onClick={this.handleClick}
+                  title={[]}
+                  mode="inline"
+                  theme="dark"
+                  defaultSelectedKeys={["1"]}
+                  defaultOpenKeys={["sub1"]}
+                  style={{ height: "100%", borderRight: 0 }}
+                  inlineCollapsed={this.state.collapsed}
+                >
+                  <SubMenu key="sub1" icon={<ToolOutlined />} title="Quản lý">
+                    {login.contractManagePermision === true ? <Menu.Item key="contract">danh sách hợp đồng</Menu.Item> : null}
+                    {login.customerManagePermission === true ? <Menu.Item key="customerList">danh sách khách hàng</Menu.Item> : null}
+                    {login.contractTypeManagePermission === true ? <Menu.Item key="contractType">danh sách loại hợp đồng</Menu.Item> : null}
+                    {login.employeeManagePermission === true ? <Menu.Item key="employee">Nhân viên</Menu.Item> : null}
+                    {login.signatureManagePermission === true ? <Menu.Item key="signatureList">Danh sách chữ ký</Menu.Item> : null}
+
+
+
+
+
+
+
+                  </SubMenu>
+                  <SubMenu key="sub2" icon={<UserOutlined />} title="Thông tin cá nhân">
+
+>>>>>>> origin/main
+
+                    <Menu.Item key="profile">Thông tin cá nhân</Menu.Item>
+                    {login.editCompanyInformationPermission === true ? <Menu.Item key="companyProfile">Thông tin công ty</Menu.Item> : null}
+                  </SubMenu>
+                </Menu>
+              </Sider>
+              <Layout style={{ padding: "0 24px 24px", height: "100vh" }}>
+                <Affix onChange={(affixed) => console.log(affixed)}>
+                  <Header></Header>
+                </Affix>
+
+
+
+
+
+
+
+
+
+
+
+                {this.state.showComponent === "customerList" ?
+                  <Router>
+                    <Redirect push to={"/capstone/" + this.state.showComponent} />
+                    <Route exact path="/capstone/customerList" component={CustomerTable} />
+                  </Router>
+                  : null}
+                {this.state.showComponent === "contract" ?
+                  <Router>
+                    <Redirect push to={"/capstone/" + this.state.showComponent} />
+                    <Route exact path="/capstone/contract" render={() => <ContractTable role={login.signPermission} />
+                    } /></Router> : null}
+                {this.state.showComponent === "contractType" ?
+                  <Router>
+                    <Redirect push to={"/capstone/" + this.state.showComponent} />
+                    <Route exact path="/capstone/contractType" component={ContractTypeTable} /></Router> : null}
+                {this.state.showComponent === "profile" ?
+                  <Router>
+                    <Redirect push to={"/capstone/" + this.state.showComponent} />
+                    <Route exact path="/capstone/profile" component={UpdateProfile} /></Router> : null}
+                {this.state.showComponent === "employee" ?
+                  <Router>
+                    <Redirect push to={"/capstone/" + this.state.showComponent} />
+                    <Route exact path="/capstone/employee" component={EmployeeTable} /></Router> : null}
+                {this.state.showComponent === "signatureList" ?
+                  <Router>
+                    <Redirect push to={"/capstone/" + this.state.showComponent} />
+                    <Route exact path="/capstone/signatureList" component={SignatureList} /></Router> : null}
+
+                {this.state.showComponent === "companyProfile" ?
+                  <Router>
+                    <Redirect push to={"/capstone/" + this.state.showComponent} />
+                    <Route exact path="/capstone/companyProfile" component={UpdateProfileCompany} /></Router> : null}
+
+
+
+              </Layout>
             </Layout>
           </Layout>
-        </Layout>
-      );
-    })
-    if (information.length === 0) {
-      return (<LoginPage />);
+        );
+      })
+
+      if (this.props.myLoginReducer === "Logout") {
+
+       
+      } else {
+        return (<div style={{ height: "100vh" }}> {information}</div >);
+      }
     } else {
-      return (<div style={{ height: "100vh" }}> {information}</div >);
+      
     }
+
 
   }
 }
 var mapStateToProps = state => {
+  console.log(state.myLoginReducer)
   return {
     myLoginReducer: state.myLoginReducer
   }

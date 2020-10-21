@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { PageHeader, Space, Row, Col } from 'antd';
 import { GoogleLogin } from 'react-google-login';
 import { Form, Input, Button, Checkbox } from 'antd';
@@ -71,6 +71,7 @@ const initialState = {
     othersPage: "",
     user: ""
 }
+
 class LoginPage extends React.Component {
     constructor() {
         super();
@@ -110,8 +111,9 @@ class LoginPage extends React.Component {
             contractTypeManagePermission: true,
             employeeManagePermission: true,
             signatureManagePermission: true,
+            editCompanyInformationPermission: true,
         }
-        
+
         this.props.onSubmit(loginInformation)
     };
 
@@ -133,10 +135,16 @@ class LoginPage extends React.Component {
 
     }
     render() {
+
         var information = this.props.myLoginReducer.map((login, index) => {
 
             return (
-                <EmployeeSideMenu user={login} />);
+                <Router>
+                    <Redirect push to="/capstone/SideMenu" />
+
+                    <Route exact path="/capstone/SideMenu" component={EmployeeSideMenu} />
+                </Router>
+            );
 
         })
 
@@ -153,6 +161,11 @@ class LoginPage extends React.Component {
             } else {
                 return (
                     <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
+                        
+                            <Redirect push to="/capstone/Login" />
+
+                           
+                        
                         <Col span={10} >
                             <Form
                                 {...layout}
