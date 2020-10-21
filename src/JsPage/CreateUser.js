@@ -2,15 +2,9 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import '../index.css';
-<<<<<<< HEAD
-import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
-import { Form, Checkbox, Button, Row, Col } from 'antd';
-import { CloudUploadOutlined, ReloadOutlined } from "@ant-design/icons"
-=======
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { Form, Checkbox, Button, Row, Col } from 'antd';
 import { CloudUploadOutlined,ReloadOutlined } from "@ant-design/icons"
->>>>>>> origin/main
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -79,17 +73,12 @@ class SendJoinRequest extends React.Component {
             return (
 
                 <React.Fragment>
-<<<<<<< HEAD
-                    <br />
-=======
                     <br/>
->>>>>>> origin/main
                     <h2 style={{ textAlign: 'center' }}>Tạo người dùng</h2>
                     <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
                         <Col span={10} >
                             <Grid container spacing={3}>
 
-<<<<<<< HEAD
                                 <Grid item xs={12} >
                                     <TextField
                                         required
@@ -112,36 +101,6 @@ class SendJoinRequest extends React.Component {
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
 
-=======
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        required
-                                        id="company"
-                                        name="Tên doanh nghiệp"
-                                        label="Tên doanh nghiệp"
-                                        fullWidth
-                                        autoComplete="Tên doanh nghiệp"
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        required
-                                        id="taxCode"
-                                        name="Mã số thuế"
-                                        label="Mã số thuế"
-                                        fullWidth
-                                        autoComplete="family-name"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        id="faxCode"
-                                        name="số fax"
-                                        label="số fax"
-                                        fullWidth
-                                        autoComplete="shipping address-line1"
-                                    />
->>>>>>> origin/main
                                     <TextField
                                         id="email"
                                         name="địa chỉ mail"
@@ -150,10 +109,6 @@ class SendJoinRequest extends React.Component {
                                         autoComplete="shipping address-level2"
                                     />
                                 </Grid>
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/main
                                 <Grid item xs={12}>
                                     <TextField
                                         id="address"
@@ -169,31 +124,12 @@ class SendJoinRequest extends React.Component {
                                     <TextField
                                         required
                                         id="presentor"
-<<<<<<< HEAD
                                         name="chức vụ"
                                         label="chức vụ"
-=======
-                                        name="Người đại diện"
-                                        label="Người đại diện"
->>>>>>> origin/main
                                         fullWidth
                                         autoComplete="shipping postal-code"
                                     />
                                 </Grid>
-<<<<<<< HEAD
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        required
-                                        id="taxCode"
-                                        name="Mã số thuế"
-                                        label="Mã số thuế"
-                                        fullWidth
-                                        autoComplete="family-name"
-                                    />
-                                </Grid>
-=======
-
->>>>>>> origin/main
                                 <Grid item xs={12}>
                                     <b>Quyền Hạn</b>
                                     <br />
@@ -209,21 +145,6 @@ class SendJoinRequest extends React.Component {
                                         <Col span={8}>
                                             <Checkbox onChange={onChange}>Quản lý nhân viên</Checkbox>
                                             <p></p>
-<<<<<<< HEAD
-                                        </Col>
-                                        <Col span={8}>
-                                            <Checkbox onChange={onChange}>Quản lý loại hợp đồng</Checkbox>
-                                            <p></p>
-                                        </Col>
-                                        <Col span={8}>
-                                            <Checkbox onChange={onChange}>Quản lý khách hàng</Checkbox>
-                                            <p></p>
-                                        </Col>
-                                        <Col span={8}>
-                                            <Checkbox onChange={onChange}>Quản lý chữ ký</Checkbox>
-                                            <p></p>
-                                        </Col>
-=======
                                         </Col>                               
                                                  <Col span={8}>
                                             <Checkbox onChange={onChange}>Quản lý loại hợp đồng</Checkbox>
@@ -233,7 +154,10 @@ class SendJoinRequest extends React.Component {
                                             <Checkbox onChange={onChange}>Quản lý chữ ký</Checkbox>
                                             <p></p>
                                             </Col>
->>>>>>> origin/main
+                                            <Col span={8}>
+                                            <Checkbox onChange={onChange}>Quản lý khách hàng</Checkbox>
+                                            <p></p>
+                                            </Col>
                                     </Row>
                                 </Grid>
 
@@ -241,11 +165,7 @@ class SendJoinRequest extends React.Component {
                             <div></div><br />
                             <Grid item xs={12} sm={6}>
                                 <Popup trigger={<Button type="primary" >
-<<<<<<< HEAD
-                                    <CloudUploadOutlined />  Nộp
-=======
                                 <CloudUploadOutlined />  Nộp
->>>>>>> origin/main
                             </Button>} position="right center">
                                     <div>The sytem admin will contact you within 3 days</div>
                                     <Button onClick={this.onFinish} type="primary" >
@@ -256,11 +176,7 @@ class SendJoinRequest extends React.Component {
                                 <Button type="primary" style={{
                                     margin: '0 8px',
                                 }} htmlType="button">
-<<<<<<< HEAD
-                                    <ReloadOutlined />   Reset
-=======
                                  <ReloadOutlined />   Reset
->>>>>>> origin/main
                             </Button>
                             </Grid>
                         </Col>

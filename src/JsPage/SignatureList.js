@@ -1,18 +1,14 @@
 import 'antd/dist/antd.css';
-<<<<<<< HEAD
-import { Table, Space,Button,Tag,Switch } from 'antd';
-=======
-import { Table, Space, Button, Tag } from 'antd';
->>>>>>> origin/main
+import { Table, Space, Button, Tag, Switch } from 'antd';
 import AddSignature from './AddSignature'
 import UpdateSignature from './UpdateSignature'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import SignatureSearch from './SignatureSearch'
 import { createSignature, signatureInformation } from '../actions/SignatureAction'
 import { connect } from 'react-redux'
-import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
+import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, EyeOutlined } from "@ant-design/icons"
 const { Column, ColumnGroup } = Table;
 
 
@@ -41,17 +37,17 @@ class SignatureList extends React.Component {
                 },
             ],
             openEmployee: "",
-            signature:{},
+            signature: {},
 
         };
         this.OpenAddEmployee = this.OpenAddEmployee.bind(this);
-        
+
     }
     componentDidMount() {
 
         if (this.props.newSignature.length === 0) {
             const contract1 = {
-                serial:123123123123123123,
+                serial: 123123123123123123,
                 name: 'Mike',
                 email: "some email",
                 provider: 'Viettel',
@@ -60,7 +56,7 @@ class SignatureList extends React.Component {
 
             }
             const contract2 = {
-                serial:123123123123123123,
+                serial: 123123123123123123,
                 name: 'John',
                 email: "some email",
                 provider: 'Fpt',
@@ -80,7 +76,7 @@ class SignatureList extends React.Component {
             openEmployee: "openAddSignature",
         })
     }
-    
+
     render() {
         if (this.state.openEmployee === "openAddSignature") {
 
@@ -100,18 +96,20 @@ class SignatureList extends React.Component {
         }
         else {
             return (
-<<<<<<< HEAD
-                <div style={{height: "100vh"}}><Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Thêm chữ ký mới</Button>
-                       <br/>
-                            <SignatureSearch/>
-=======
-                <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Thêm chữ ký mới</Button>
+
+                <div style={{ height: "100vh" }}>
+                    <br />
+
+                    <Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Thêm chữ ký mới</Button>
                     <SignatureSearch />
->>>>>>> origin/main
                     <Table dataSource={this.props.newSignature}
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
 
-                        <Column title="Tên người sử dụng" dataIndex="name" key="name" />
+                        <Column title="Tên người sử dụng" dataIndex="name" key="name" render={(text, record) => (
+
+                            <a>{text}</a>
+
+                        )} />
 
                         <Column title="Nhà cung cấp" dataIndex="provider" key="provider" />
 
@@ -141,12 +139,12 @@ class SignatureList extends React.Component {
                             key="action"
                             render={(text, record) => (
                                 <Space size="middle">
-                                   <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
-                                    () => this.setState({
-                                        signature: text,
-                                        openCustomer: "openViewSignature",
-                                    })
-                                } />
+                                    <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                                        () => this.setState({
+                                            signature: text,
+                                            openCustomer: "openViewSignature",
+                                        })
+                                    } />
                                 </Space>
                             )}
                         />
@@ -156,12 +154,7 @@ class SignatureList extends React.Component {
                             key="status"
                             render={(text, record) => (
                                 <Space size="middle">
-<<<<<<< HEAD
-                  {text === "active" ?  <Switch style={{ fontSize: '30px' }} onClick={this.OpenViewCustomer} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked />: <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
-=======
-                                    {text === "active" ? <DeleteOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" >Vô hiệu hóa</DeleteOutlined> : null}
-                                    {text === "deactive" ? <UserOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" >kích hoạt</UserOutlined> : null}
->>>>>>> origin/main
+                                    {text === "active" ? <Switch style={{ fontSize: '30px' }} onClick={this.OpenViewCustomer} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
                                 </Space>
                             )}
                         /></Table></div>

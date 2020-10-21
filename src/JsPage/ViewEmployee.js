@@ -57,7 +57,7 @@ class ViewEmployee extends React.Component {
                 paddingLeft:"50px",
                 border:"solid"
             }
-            }>
+            }><br/>
                 <Button type="primary" value="cancel" onClick={this.Cancel}>
                         Trở về
               </Button>

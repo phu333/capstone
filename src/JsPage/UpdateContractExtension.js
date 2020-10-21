@@ -60,6 +60,7 @@ class UpdateContractExtension extends React.Component {
             return (
 
                 <div style={{ border: "solid",height: "100vh" }} >
+                    <br/>
                     <Button type="primary" value="cancel" onClick={this.onFinish}>
                         Trở về
               </Button>

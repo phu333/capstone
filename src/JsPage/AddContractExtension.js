@@ -82,6 +82,7 @@ class AddContractExtension extends React.Component {
         } else {
             return (
                 <div style={{ border: "solid", backgroundColor: "white",height: "100vh" }} >
+                    <br/>
                     <Button type="primary" value="cancel" onClick={this.Cancel}>
                         Trở về
               </Button>

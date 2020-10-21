@@ -148,6 +148,7 @@ class ContractView extends React.Component {
                     return (
 
                         <div style={{ height: "100vh" }}>
+                            <br/>
                             <Button type="primary" value="cancel" onClick={this.Cancel}>
                                 Trở về
                             </Button>

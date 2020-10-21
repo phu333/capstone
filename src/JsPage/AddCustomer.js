@@ -115,7 +115,7 @@ class AddCustomer extends React.Component {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <TextField
-                                            required
+
                                             id="faxCode"
                                             name="số fax"
                                             label="số fax"

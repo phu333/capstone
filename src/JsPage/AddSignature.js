@@ -4,10 +4,9 @@ import 'antd/dist/antd.css';
 import '../index.css';
 import { createSignature, signatureInformation } from '../actions/SignatureAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button,Row,Col } from 'antd';
+import { Form, Input, Button, Row, Col } from 'antd';
 import {
-    IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-    , CloudUploadOutlined, RedoOutlined
+    ReloadOutlined, CloudUploadOutlined
 } from '@ant-design/icons';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -66,7 +65,7 @@ class AddSignature extends React.Component {
         console.log('Failed:', errorInfo);
     };
 
-    Cancel = () =>{
+    Cancel = () => {
         this.setState({
             finish: true
         })
@@ -78,19 +77,20 @@ class AddSignature extends React.Component {
             <div style={{
                 margin: "auto",
                 width: "1000px",
-                paddingLeft:"50px",
-                border:"solid"
+                paddingLeft: "50px",
+                border: "solid"
             }
             }>
+                <br/>
                 <Button type="primary" value="cancel" onClick={this.Cancel}>
-                        Trở về
+                    Trở về
               </Button>
                 <h2 style={{ textAlign: 'center' }}>Thông tin chữ ký</h2>
                 <React.Fragment>
-                <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
-                    <Col span={10} >
-                        <Grid container spacing={3}>
-                            
+                    <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
+                        <Col span={10} >
+                            <Grid container spacing={3}>
+
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         required
@@ -123,6 +123,7 @@ class AddSignature extends React.Component {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
+                                        required
                                         id="expiredDate"
                                         name="Ngày hết hạn"
                                         label="Ngày hết hạn"
@@ -140,12 +141,24 @@ class AddSignature extends React.Component {
                                         autoComplete="nhà cung cấp chữ ký"
                                     />
                                 </Grid>
-                                
-                           
-                        </Grid>
-                    </Col>
-                </Row>
-            </React.Fragment>
+                                <Grid item xs={12} >
+                                    <Button type="primary" >
+                                        <CloudUploadOutlined />  Nộp
+                            </Button>
+
+                                    <Button type="primary" style={{
+                                        margin: '0 8px',
+                                    }} htmlType="button">
+                                        <ReloadOutlined />   Reset
+                            </Button>
+
+                                </Grid>
+
+
+                            </Grid>
+                        </Col>
+                    </Row>
+                </React.Fragment>
                 {/* <Form
                     {...layout}
                     name="basic"
@@ -232,4 +245,4 @@ var mapDispatchToProps = (dispatch, props) => {
         }
     }
 }
-export default connect(null, mapDispatchToProps) (AddSignature);
+export default connect(null, mapDispatchToProps)(AddSignature);

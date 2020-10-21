@@ -54,11 +54,7 @@ class ContractTable extends Component {
 
         if (this.props.newContract.length === 0) {
             const contract1 = {
-<<<<<<< HEAD
-                contract_code: 'se123',
-=======
-                id:1,
->>>>>>> origin/main
+                id: 'se123',
                 contract_name: 'Hop dong lao dong',
                 status: "deactive",
                 ben_tao_hd: 'HiSign',
@@ -68,11 +64,7 @@ class ContractTable extends Component {
 
             }
             const contract2 = {
-<<<<<<< HEAD
-                contract_code: 'se456',
-=======
-                id:2,
->>>>>>> origin/main
+                id: 'se456',
                 contract_name: 'Hop dong lao dong',
                 status: "waiting for customer",
                 ben_tao_hd: 'HiSign',
@@ -82,11 +74,7 @@ class ContractTable extends Component {
 
             }
             const contract3 = {
-<<<<<<< HEAD
-                contract_code: 'se789',
-=======
-                id:3,
->>>>>>> origin/main
+                id: 'se789',
                 contract_name: 'Hop dong lao dong',
                 status: "pending",
                 ben_tao_hd: 'HiSign',
@@ -96,11 +84,7 @@ class ContractTable extends Component {
 
             }
             const contract4 = {
-<<<<<<< HEAD
-                contract_code: 'sb123',
-=======
-                id:4,
->>>>>>> origin/main
+                id: 'sb123',
                 contract_name: 'Hop dong lao dong',
                 status: "active",
                 ben_tao_hd: 'HiSign',
@@ -110,11 +94,7 @@ class ContractTable extends Component {
 
             }
             const contract5 = {
-<<<<<<< HEAD
-                contract_code: 'sb456',
-=======
-                id:5,
->>>>>>> origin/main
+                id: 'sb456',
                 contract_name: 'Hop dong mua ban',
                 status: "waiting for sign",
                 ben_tao_hd: 'cty 369',
@@ -176,7 +156,7 @@ class ContractTable extends Component {
                     <ContractSearch />
                     <Table dataSource={this.props.newContract}
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}>
-                        <Column title="Mã hợp đồng" dataIndex="contract_code" key="contract_code"
+                        <Column title="Mã hợp đồng" dataIndex="id" key="id"
                             render={(text, record) => (
 
                                 <a><FileProtectOutlined /> {text}</a>
@@ -202,15 +182,9 @@ class ContractTable extends Component {
 
                                 <b>{text}</b>
 
-<<<<<<< HEAD
                             )} />
                         <Column title="bên tạo hợp đồng" dataIndex="ben_tao_hd" key="ben_tao_hd"
                             render={(text, record) => (
-=======
-                        )} />
-                        <Column title="bên tạo hợp đồng" dataIndex="ben_tao_hd" key="ben_tao_hd"
-                        render={(text, record) => (
->>>>>>> origin/main
 
                                 <b>{text}</b>
 

@@ -1,9 +1,5 @@
 import 'antd/dist/antd.css';
-<<<<<<< HEAD
 import { Table, Space, Tag, Button,Switch } from 'antd';
-=======
-import { Table, Space, Tag, Button } from 'antd';
->>>>>>> origin/main
 import AddEmployee from './AddEmployee'
 import ViewEmployee from './ViewEmployee'
 import React from 'react';
@@ -13,7 +9,7 @@ import EmployeeSearch from './EmployeeSearch'
 import { createEmployee, employeeInformation } from '../actions/EmployeeAction'
 import { connect } from 'react-redux'
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 const { Column, ColumnGroup } = Table;
 
 
@@ -86,18 +82,16 @@ class EmployeeList extends React.Component {
     }
     else {
       return (
-        <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button>
-<<<<<<< HEAD
-        <br/>
-=======
->>>>>>> origin/main
+        <div style={{ height: "100vh" }}>
+          <br/>
+          <Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button>
           <EmployeeSearch />
           <Table dataSource={this.props.newEmployee}
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
 
             <Column title="Tên" dataIndex="name" key="name" render={(text, record) => (
 
-              <b>{text}</b>
+              <a>{text}</a>
 
             )} />
             <Column title="email" dataIndex="email" key="email" render={(text, record) => (
@@ -150,12 +144,7 @@ class EmployeeList extends React.Component {
               key="status"
               render={(text, record) => (
                 <Space size="middle">
-<<<<<<< HEAD
                   {text === "active" ?  <Switch style={{ fontSize: '30px' }} onClick={this.OpenViewCustomer} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked />: <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
-=======
-                  {text === "active" ? <DeleteOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" >Vô hiệu hóa</DeleteOutlined> : null}
-                  {text === "deactive" ? <UserOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined">kích hoạt</UserOutlined> : null}
->>>>>>> origin/main
                 </Space>
               )}
             /></Table></div>
