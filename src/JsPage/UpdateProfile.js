@@ -4,28 +4,31 @@ import 'antd/dist/antd.css';
 import '../index.css';
 import { createEmployee, employeeInformation } from '../actions/EmployeeAction'
 
-import { Space, Card, Button, Descriptions, Avatar } from 'antd';
+import { Space, Card, Button, Descriptions, Avatar,Form,Input } from 'antd';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, UserOutlined
     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
 } from '@ant-design/icons';
 import { connect } from 'react-redux'
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+
 import "./Column.css"
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const layout = {
     labelCol: {
-        span: 4,
+        span: 6,
+
     },
     wrapperCol: {
-        span: 10,
+        span: 14,
     },
 };
 const tailLayout = {
+    wrapperCol: {
+        offset: 6,
+        span: 10,
+    },
+};
+const middleLayout = {
     wrapperCol: {
         offset: 6,
         span: 10,
@@ -57,13 +60,7 @@ class UpdateProfile extends React.Component {
 
 
     render() {
-        var i = 0;
-        function onChange(e) {
-            if (e.target == "checked") { i--; }
-            else { i++ }
-            console.log(`checked = ${e.target.checked}`);
-        }
-        function requirement() { if (i == 0) { } }
+       
         var information = this.props.myLoginReducer.map((login, index) => {
             return (
 
@@ -89,108 +86,138 @@ class UpdateProfile extends React.Component {
                             </Descriptions>
                         </Card>
                         <Card style={{ width: 600, height: 600 }}>
-                            <Grid item xs={12}>
+                        <Form
+                                {...layout}
+                                name="basic"
+                                className="employee-form"
+                                
+                                onFinish={this.onFinish}
+                                onFinishFailed={this.onFinishFailed}
 
-                                <TextField
-                                    id="name"
-                                    name="tên"
-                                    label="tên"
-                                    fullWidth
-                                    autoComplete="shipping address-level2"
-                                />
-                                <TextField
-                                    id="id"
-                                    name="id"
+                            >
+                                
+                                <Form.Item
+                                    label="Họ và tên"
+                                    name="name"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập tên ',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
                                     label="cmnd/cmt"
-                                    fullWidth
-                                    autoComplete="shipping address-level2"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
+                                    name="id"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập cmnd/cmt ',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Tên người dùng"
+                                    name="username"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập tên người dùng',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
 
-                                <TextField
-                                    id="username"
-                                    name="tên đăng nhập"
-                                    label="tên đăng nhập"
-                                    fullWidth
-                                    autoComplete="shipping address-level2"
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="company"
-                                    name="doanh nghiệp"
-                                    label="doanh nghiệp"
-                                    fullWidth
-                                    autoComplete="shipping postal-code"
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="role"
-                                    name="chức vụ"
-                                    label="chức vụ"
-                                    fullWidth
-                                    autoComplete="shipping postal-code"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
+                                <Form.Item
+                                    label="Mật khẩu"
+                                    name="password"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Mật khẩu',
+                                        },
+                                    ]}
+                                >
+                                    <Input.Password />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Điện thoại"
+                                    name="phone"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập sdt',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Địa chỉ"
+                                    name="address"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Địa chỉ',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Email"
+                                    name="Email"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Email',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Chức vụ"
+                                    name="role"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Chức vụ',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                               
 
-                                <TextField
-                                    id="password"
-                                    name="mật khẩu"
-                                    label="mật khẩu"
-                                    fullWidth
-                                    autoComplete="shipping address-level2"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
 
-                                <TextField
-                                    id="email"
-                                    name="địa chỉ mail"
-                                    label="địa chỉ mail"
-                                    fullWidth
-                                    autoComplete="shipping address-level2"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    id="address"
-                                    name="địa chỉ"
-                                    label="địa chỉ"
-                                    fullWidth
-                                    autoComplete="shipping address-line2"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
 
-                            </Grid>
-                            <br />
-                            <br />
-                            <Space size="large">
-                                {/* <Popup trigger={<Button type="primary" >
-                                    <CloudUploadOutlined />  Nộp
-                            </Button>} position="right center">
-                                    <div>bạn c</div>
-                                    <Button onClick={this.onFinish} type="primary" >
-                                        Xác nhận
-                            </Button>
-                                </Popup> */}
-                                <Button type="primary" >
-                                    <CloudUploadOutlined />  Nộp
-                            </Button>
-                                <Button type="primary" style={{
-                                    margin: '0 8px',
-                                }} htmlType="button">
-                                    <ReloadOutlined />   Reset
-                            </Button>
-                                {/* <Button type="primary" value="cancel" onClick={this.Cancel}>
-                                    Trở về
-              </Button> */}
-                            </Space>
+                                <Form.Item {...tailLayout}>
+                                    <Space size="large">
+                                        <Button type="primary" htmlType="submit" className="login-form-button">
+                                            Nộp
+                                </Button>
+                                <Button type="primary" htmlType="reset" className="login-form-button">
+                                            Reset
+                                </Button>
+                               
+                                        
+                                    </Space>
+                                </Form.Item>
+                                <Form.Item>
+
+                                </Form.Item>
+
+
+
+
+                            </Form>
+                            
                         </Card>
 
 

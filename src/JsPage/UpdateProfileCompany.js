@@ -7,24 +7,26 @@ import {
 } from '@ant-design/icons';
 import { createCustomer, customerInformation } from '../actions/CustomerAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Row, Col, Card } from 'antd';
+import { Form, Input, Button, Row, Col, Card,Space } from 'antd';
 import CustomerTable from './CustomerTable'
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import { ReloadOutlined } from "@ant-design/icons"
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const layout = {
     labelCol: {
-        span: 4,
+        span: 6,
+
     },
     wrapperCol: {
-        span: 10,
+        span: 14,
     },
 };
 const tailLayout = {
+    wrapperCol: {
+        offset: 6,
+        span: 10,
+    },
+};
+const middleLayout = {
     wrapperCol: {
         offset: 6,
         span: 10,
@@ -81,7 +83,162 @@ class UpdateProfileCompany extends React.Component {
                 <React.Fragment>
                     <Card>
                         <h2 style={{ textAlign: 'center' }}>Thông tin doanh nghiệp</h2>
-                        <Row type="flex" justify="center" align="middle" style={{ backgroundColor: "white", height: "100vh" }}>
+                        <Form
+                                {...layout}
+                                name="basic"
+                                className="employee-form"
+                                
+                                onFinish={this.onFinish}
+                                onFinishFailed={this.onFinishFailed}
+
+                            >
+                                <Form.Item
+                                    label="Tên doanh nghiệp"
+                                    name="company"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập tên doanh nghiệp',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Mã số thuế"
+                                    name="name"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Mã số thuế ',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Điện thoại"
+                                    name="phone"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập sdt',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Địa chỉ"
+                                    name="address"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Địa chỉ',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Email"
+                                    name="Email"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Email',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Giấy phép kinh doanh"
+                                    name="certificate"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Giấy phép kinh doanh ',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Tài khoản ngân hàng"
+                                    name="bankaccount"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Tài khoản ngân hàng ',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Người đại diện"
+                                    name="presentor"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập tên Người đại diện',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+
+                                
+                                
+                                <Form.Item
+                                    label="Chức vụ"
+                                    name="role"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Chức vụ',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                {/* <Form.Item
+                                    label="Mật khẩu"
+                                    name="password"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Mật khẩu',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item> */}
+
+
+
+                                <Form.Item {...tailLayout}>
+                                    <Space size="large">
+                                        <Button type="primary" htmlType="submit" className="login-form-button">
+                                            Nộp
+                                </Button>
+                                <Button type="primary" htmlType="reset" className="login-form-button">
+                                            Reset
+                                </Button>
+                               
+                                        
+                                    </Space>
+                                </Form.Item>
+                                <Form.Item>
+
+                                </Form.Item>
+
+
+
+
+                            </Form>
+                        {/* <Row type="flex" justify="center" align="middle" style={{ backgroundColor: "white", height: "100vh" }}>
                             <Col span={10} >
                                 <Grid container spacing={3}>
 
@@ -215,7 +372,7 @@ class UpdateProfileCompany extends React.Component {
                             </Button>
                                 </Grid>
                             </Col>
-                        </Row>
+                        </Row> */}
                     </Card>
                 </React.Fragment>
 

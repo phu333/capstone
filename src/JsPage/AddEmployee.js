@@ -4,27 +4,31 @@ import 'antd/dist/antd.css';
 import '../index.css';
 import { createEmployee, employeeInformation } from '../actions/EmployeeAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Row, Col } from 'antd';
+import { Form, Input, Button, Checkbox,Space,Card } from 'antd';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
 } from '@ant-design/icons';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+
+
 import "./Column.css"
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const layout = {
     labelCol: {
-        span: 4,
+        span: 6,
+
     },
     wrapperCol: {
-        span: 10,
+        span: 14,
     },
 };
 const tailLayout = {
+    wrapperCol: {
+        offset: 6,
+        span: 10,
+    },
+};
+const middleLayout = {
     wrapperCol: {
         offset: 6,
         span: 10,
@@ -64,160 +68,170 @@ class AddEmployee extends React.Component {
     }
     render() {
 
-        var i = 0;
-        function onChange(e) {
-            if (e.target == "checked") { i--; }
-            else { i++ }
-            console.log('checked = ${e.target.checked}');
-        }
-        function requirement() { if (i == 0) { } }
+        
         return (
-            <React.Fragment>
+            <Card>
                 <br />
                 <Button style={{width:'80px' }} type="primary" value="cancel" onClick={this.Cancel}>
                     Trở về
               </Button>
                 <h2 style={{ textAlign: 'center'}}>Tạo nhân viên</h2>
-                <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
-                    <Col span={10} >
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="firstname"
-                                    name="họ"
-                                    label="họ"
-                                    fullWidth
-                                    autoComplete="Họ nhân viên"
-                                />
-                            </Grid>                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="lastname"
-                                    name="Tên"
-                                    label="Tên"
-                                    fullWidth
-                                    autoComplete="Tên nhân viên"
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="taxCode"
-                                    name="Mã số thuế"
-                                    label="Mã số thuế"
-                                    fullWidth
-                                    autoComplete="family-name"
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="telePhone"
-                                    name="số điện thoại"
-                                    label="điện thoại"
-                                    fullWidth
-                                    autoComplete="shipping address-line1"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                            <TextField
-                                    required
-                                    id="email"
-                                    name="địa chỉ mail"
-                                    label="địa chỉ mail"
-                                    fullWidth
-                                    autoComplete="shipping address-level2"
-                                />
-                                <TextField
-                                    id="address"
-                                    name="địa chỉ"
-                                    label="địa chỉ"
-                                    fullWidth
-                                    autoComplete="shipping address-line2"
-                                />
-                            </Grid>
+                
+                    <Form
+                                {...layout}
+                                name="basic"
+                                className="employee-form"
+                                
+                                onFinish={this.onFinish}
+                                onFinishFailed={this.onFinishFailed}
 
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="role"
-                                    name="chức vụ"
-                                    label="chức vụ"
-                                    fullWidth
-                                    autoComplete="shipping postal-code"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <b>Quyền Hạn</b>
-                                <br />
-                                <Row>
-                                    <Col span={8}>
-                                        <FormControlLabel
-                                            control={<Checkbox onChange={onChange} ></Checkbox>}
-                                            label="ký"
-                                        />
-                                        <p></p>
-                                    </Col>
-                                    <Col span={8}>
-                                        <FormControlLabel
-                                            control={<Checkbox onChange={onChange} ></Checkbox>}
-                                            label="Quản lý hợp đồng"
-                                        />
-                                        <p></p>
-                                    </Col>
-                                    <Col span={8}>
-                                        <FormControlLabel
-                                            control={<Checkbox onChange={onChange} >Quản lý nhân viên</Checkbox>}
-                                            label="Quản lý nhân viên"
-                                        />
+                            >
+                                
+                                <Form.Item
+                                    label="Họ và tên"
+                                    name="name"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập tên ',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="cmnd/cmt"
+                                    name="id"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập cmnd/cmt ',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Tên người dùng"
+                                    name="username"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập tên người dùng',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
 
-                                        <p></p>
-                                    </Col>
-                                    <Col span={8}>
-                                        <FormControlLabel
-                                            control={<Checkbox onChange={onChange} ></Checkbox>}
-                                            label="Quản lý loại hợp đồng"
-                                        />
+                                {/* <Form.Item
+                                    label="Mật khẩu"
+                                    name="password"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Mật khẩu',
+                                        },
+                                    ]}
+                                >
+                                    <Input.Password />
+                                </Form.Item> */}
+                                <Form.Item
+                                    label="Điện thoại"
+                                    name="phone"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập sdt',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Địa chỉ"
+                                    name="address"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Địa chỉ',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Email"
+                                    name="Email"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Email',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Chức vụ"
+                                    name="role"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Chức vụ',
+                                        },
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item {...middleLayout} name="signPermission" valuePropName="unchecked" >
+                                    <Checkbox>Quyền ký</Checkbox>
+                                    
+                                </Form.Item>
+                                <Form.Item {...middleLayout} name="employeePermission" valuePropName="unchecked" >
+                                    <Checkbox>Quyền quản lý nhân viên</Checkbox>
+                                    
+                                </Form.Item>
+                                <Form.Item {...middleLayout} name="contractPermission" valuePropName="unchecked" >
+                                    <Checkbox>Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox>
+                                    
+                                </Form.Item>
+                                <Form.Item {...middleLayout} name="customerPermission" valuePropName="unchecked" >
+                                    <Checkbox>Quyền quản lý khách hàng</Checkbox>
+                                    
+                                </Form.Item>
+                                <Form.Item {...middleLayout} name="companyInfoPermission" valuePropName="unchecked" >
+                                    <Checkbox>Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox>
+                                    
+                                </Form.Item>
 
-                                        <p></p>
-                                    </Col>
-                                    <Col span={8}>
-                                        <FormControlLabel
-                                            control={<Checkbox onChange={onChange} ></Checkbox>}
-                                            label="Quản lý chữ ký"
-                                        />
-                                        <p></p>
-                                    </Col>
-                                    <Col span={8}>
-                                        <FormControlLabel
-                                            control={<Checkbox onChange={onChange} ></Checkbox>}
-                                            label="Quản lý khách hàng"
-                                        />
-                                        <p></p>
-                                    </Col>
-                                </Row>
-                            </Grid>
-                        </Grid>
-                        <div></div><br />
-                        <Grid item xs={12} sm={6}>
-                            <Popup trigger={<Button type="primary" >
-                                <CloudUploadOutlined />  Nộp
-                            </Button>} position="right center">
-                                <div>The sytem admin will contact you within 3 days</div>
-                                <Button onClick={this.onFinish} type="primary" >
-                                    Xác nhận
-                            </Button>
-                            </Popup>
-                            <Button type="primary" style={{
-                                margin: '0 8px',
-                            }} htmlType="button">
-                                <ReloadOutlined />   Reset
-                            </Button>
-                        </Grid>
-                    </Col>
-                </Row>
-            </React.Fragment >
+
+
+                                <Form.Item {...tailLayout}>
+                                    <Space size="large">
+                                        <Button type="primary" htmlType="submit" className="login-form-button">
+                                            Nộp
+                                </Button>
+                                <Button type="primary" htmlType="reset" className="login-form-button">
+                                            Reset
+                                </Button>
+                               
+                                        
+                                    </Space>
+                                </Form.Item>
+                                <Form.Item>
+
+                                </Form.Item>
+
+
+
+
+                            </Form>
+                        
+                        
+                        
+                   
+            </Card >
         );
     }
 }
