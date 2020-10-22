@@ -8,12 +8,8 @@ import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-rout
 import SignatureSearch from '../Search/SignatureSearch'
 import { createSignature, signatureInformation } from '../../actions/SignatureAction'
 import { connect } from 'react-redux'
-<<<<<<< HEAD:src/JsPage/SignatureList.js
-import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, EyeOutlined } from "@ant-design/icons"
-=======
 import "../Column.css"
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
->>>>>>> origin/main:src/JsPage/Table/SignatureList.js
 const { Column, ColumnGroup } = Table;
 
 
@@ -52,28 +48,16 @@ class SignatureList extends React.Component {
 
         if (this.props.newSignature.length === 0) {
             const contract1 = {
-<<<<<<< HEAD:src/JsPage/SignatureList.js
-                serial: 123123123123123123,
-                name: 'Mike',
-                email: "some email",
-=======
                 serial:123123123123123123,
                 
->>>>>>> origin/main:src/JsPage/Table/SignatureList.js
                 provider: 'Viettel',
                 status: "active",
                 expired: "12/11/2022"
 
             }
             const contract2 = {
-<<<<<<< HEAD:src/JsPage/SignatureList.js
-                serial: 123123123123123123,
-                name: 'John',
-                email: "some email",
-=======
                 serial:123123123123123123,
                
->>>>>>> origin/main:src/JsPage/Table/SignatureList.js
                 provider: 'Fpt',
                 status: "deactive",
                 expired: "12/12/2022"
