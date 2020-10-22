@@ -206,7 +206,7 @@ class CreateContract extends React.Component {
                                 onFinishFailed={this.onFinishFailed}
 
                             >
-                                <Space title="Nội dung hợp đồng" direction="vertical"    >
+                                <Space title="Nội dung hợp đồng" direction="vertical" style={{width:"100%"}}   >
                                     
                                      {this.state.currntPage === 1 ? <>
                                      <Card title="thời hạn hợp đồng"> <RangePicker

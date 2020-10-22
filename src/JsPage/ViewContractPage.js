@@ -239,7 +239,7 @@ class ContractView extends React.Component {
                                 onFinishFailed={this.onFinishFailed}
 
                             >
-                                <Space title="Nội dung hợp đồng" direction="vertical"    >
+                                <Space title="Nội dung hợp đồng" direction="vertical"  style={{width:"100%"}}  >
                                     
                                 {this.state.currentPage === 1 ? <>
                                      <Card title="thời hạn hợp đồng"> <RangePicker
@@ -530,7 +530,7 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                 onFinishFailed={this.onFinishFailed}
 
                             >
-                                <Space title="Nội dung hợp đồng" direction="vertical"    >
+                                <Space title="Nội dung hợp đồng" direction="vertical" style={{width:"100%"}}   >
                                     
                                 {this.state.currentPage === 1 ? <>
                                      <Card title="thời hạn hợp đồng"> <RangePicker
