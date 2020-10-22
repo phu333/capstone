@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import { Table, Space, Button, Tag, Switch } from 'antd';
+import { Table, Space, Button, Tag,Switch } from 'antd';
 import AddSignature from './AddSignature'
 import UpdateSignature from './UpdateSignature'
 import React from 'react';
@@ -36,12 +36,12 @@ class SignatureList extends React.Component {
                     expired: 2022
                 },
             ],
-            openEmployee: "",
-            signature: {},
+            openSignature: "",
+            signature:{},
 
         };
-        this.OpenAddEmployee = this.OpenAddEmployee.bind(this);
-
+        this.OpenAddSignature = this.OpenAddSignature.bind(this);
+        
     }
     componentDidMount() {
 
@@ -71,24 +71,24 @@ class SignatureList extends React.Component {
         }
 
     }
-    OpenAddEmployee() {
+    OpenAddSignature() {
         this.setState({
-            openEmployee: "openAddSignature",
+            openSignature: "openAddSignature",
         })
     }
 
     render() {
-        if (this.state.openEmployee === "openAddSignature") {
+        if (this.state.openSignature === "openAddSignature") {
 
             return (
                 <Router>
                     <Redirect push to={"/capstone/addSignature"} />
                     <Route exact path="/capstone/addSignature" component={AddSignature} /></Router>
             );
-        } else if (this.state.openEmployee === "openViewSignature") {
+        } else if (this.state.openSignature === "openViewSignature") {
             return (
                 <Router>
-                    <Redirect push to={"/capstone/updateSignature" + this.state.signature.serial} />
+                    <Redirect push to={"/capstone/updateSignature/" + this.state.signature.serial} />
                     <Route exact path="/capstone/updateSignature/:id" render={() => <UpdateSignature signature={this.state.signature} />} />
 
                 </Router>
@@ -96,20 +96,12 @@ class SignatureList extends React.Component {
         }
         else {
             return (
-
-                <div style={{ height: "100vh" }}>
-                    <br />
-
-                    <Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Thêm chữ ký mới</Button>
+                <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddSignature} icon={<UserAddOutlined />}>Thêm chữ ký mới</Button>
                     <SignatureSearch />
                     <Table dataSource={this.props.newSignature}
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
 
-                        <Column title="Tên người sử dụng" dataIndex="name" key="name" render={(text, record) => (
-
-                            <a>{text}</a>
-
-                        )} />
+                       
 
                         <Column title="Nhà cung cấp" dataIndex="provider" key="provider" />
 
@@ -139,12 +131,12 @@ class SignatureList extends React.Component {
                             key="action"
                             render={(text, record) => (
                                 <Space size="middle">
-                                    <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
-                                        () => this.setState({
-                                            signature: text,
-                                            openCustomer: "openViewSignature",
-                                        })
-                                    } />
+                                   <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                                    () => this.setState({
+                                        signature: text,
+                                        openSignature: "openViewSignature",
+                                    })
+                                } />
                                 </Space>
                             )}
                         />

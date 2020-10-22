@@ -87,20 +87,11 @@ class AddSignature extends React.Component {
               </Button>
                 <h2 style={{ textAlign: 'center' }}>Thông tin chữ ký</h2>
                 <React.Fragment>
-                    <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
-                        <Col span={10} >
-                            <Grid container spacing={3}>
-
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        required
-                                        id="holder"
-                                        name="Tên người giữ"
-                                        label="Tên người giữ"
-                                        fullWidth
-                                        autoComplete="given-name"
-                                    />
-                                </Grid>
+                <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
+                    <Col span={10} >
+                        <Grid container spacing={3}>
+                            
+                               
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         required
@@ -110,15 +101,14 @@ class AddSignature extends React.Component {
                                         fullWidth
                                         autoComplete="number"
                                     />
-                                </Grid>
+                                </Grid> 
                                 <Grid item xs={12}>
                                     <TextField
-                                        required
-                                        id="address1"
-                                        name="address1"
-                                        label="Address line 1"
+                                        id="startDate"
+                                        name="startDate"
+                                        label="Ngày cấp"
                                         fullWidth
-                                        autoComplete="shipping address-line1"
+                                        autoComplete="date"
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -141,96 +131,13 @@ class AddSignature extends React.Component {
                                         autoComplete="nhà cung cấp chữ ký"
                                     />
                                 </Grid>
-                                <Grid item xs={12} >
-                                    <Button type="primary" >
-                                        <CloudUploadOutlined />  Nộp
-                            </Button>
-
-                                    <Button type="primary" style={{
-                                        margin: '0 8px',
-                                    }} htmlType="button">
-                                        <ReloadOutlined />   Reset
-                            </Button>
-
-                                </Grid>
-
-
-                            </Grid>
-                        </Col>
-                    </Row>
-                </React.Fragment>
-                {/* <Form
-                    {...layout}
-                    name="basic"
-                    initialValues={{
-                        remember: true,
-                    }}
-                    labelAlign="left"
-                    onFinish={this.onFinish}
-                    onFinishFailed={this.onFinishFailed}
-                ><br />
-                    <Form.Item
-                        label={(<b><IdcardOutlined />{"Tên doanh nghiệp"} </b>)}
-                        name="companyname"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng nhập tên doanh nghiệp',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
-
-                    <Form.Item
-                        label={(<b><MailOutlined /> {"Địa chỉ Email"} </b>)}
-                        name="email"
-                        requiredMark="false"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng nhập Địa chỉ email',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        label={(<b><BankOutlined /> {"Mã số thuế"} </b>)}
-                        name="taxcode"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng nhập Mã số thuế',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        label={(<b><HomeOutlined /> {"Địa chỉ"} </b>)}
-                        name="address"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng nhập Địa chỉ',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
-
-                    <Form.Item {...tailLayout}>
-                        <Button type="primary" htmlType="submit">
-                            <CloudUploadOutlined /> Nộp
-                            </Button>
-                        <Button type="primary" style={{
-                            margin: '0 8px',
-                        }} htmlType="button">
-                            <RedoOutlined />    Reset
-                            </Button>
-                    </Form.Item>
-                </Form> */}
+                                
+                           
+                        </Grid>
+                    </Col>
+                </Row>
+            </React.Fragment>
+                
             </div >
         );
     }

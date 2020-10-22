@@ -2,7 +2,7 @@ import { Menu, Layout } from 'antd';
 import { PageHeader, Avatar, Dropdown, Space } from 'antd';
 import React, { Component } from 'react';
 import { Badge } from 'antd';
-import { UserOutlined, SettingOutlined, BellOutlined, LogoutOutlined } from "@ant-design/icons";
+import { UserOutlined, DownOutlined, BellOutlined, LogoutOutlined } from "@ant-design/icons";
 import { connect } from 'react-redux'
 import { logout, login } from '../actions/loginAction'
 import LoginPage from './Login/LoginPage'
@@ -62,15 +62,19 @@ class Header extends Component {
                 title={[
                 ]}
                 extra={[
+                    <Space direction="horizontal" size="large" >
                     <Dropdown overlay={notifications} placement="bottomCenter" trigger={['click']}>
-                    <Badge count={1}><BellOutlined style={{ fontSize: '30px', color: '#08c' }} /></Badge>
-                    </Dropdown>,
-                    ,
-                    <Dropdown.Button overlay={menu} placement="bottomCenter" icon={<SettingOutlined/>}>
-                        {login.username}
-                    </Dropdown.Button>
-
-                    ,
+                    <Badge count={1}><BellOutlined style={{ fontSize: '20px', color: '#08c' }} /></Badge>
+                    </Dropdown>
+                    <Space direction="horizontal" size="small" >
+                    <Avatar size={30} icon={<UserOutlined />} />
+                    <Dropdown overlay={menu} trigger={['click']}>
+                    <h className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                        {login.username} <DownOutlined />
+                    </h>
+                    </Dropdown>
+                    </Space>
+                    </Space>
                 ]}
             >
 

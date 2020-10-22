@@ -4,7 +4,7 @@ import ContractSearch from './ContractSearch'
 import './Column.css'
 import {
     EyeOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
-    FileProtectOutlined
+    FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
 } from "@ant-design/icons"
 import ChooseContractTemplate from './ChooseContractTemplate'
 import ViewContractPage from './ViewContractPage'
@@ -16,24 +16,7 @@ const { Column } = Table;
 
 
 const dataSource = []
-// for (var i = 0; i < 5; i++) {
 
-//     const contract = {
-
-//         contract_name: 'Hop dong lao dong',
-//         status: "pending",
-//         ben_tao_hd: 'HiSign',
-//         ben_tham_gia: 'cty 369',
-//         nguoi_tao_hd: "Nguyen Ngoc Phu",
-//         deadline: "12/12/2022",
-
-//     }
-//     dataSource.push(contract)
-
-
-
-
-// }
 
 class ContractTable extends Component {
     constructor() {
@@ -130,25 +113,24 @@ class ContractTable extends Component {
         if (this.state.showCreateContract) {
             return (
                 <Router>
-                    <Redirect push to={"/capstone/chooseTemplate" } />
+                    <Redirect push to={"/capstone/chooseTemplate"} />
                     <Route exact path="/capstone/chooseTemplate" render={() => <ChooseContractTemplate role={this.props.role} />
                     } /></Router>
-               
+
             );
         } else if (this.state.showContract) {
             return (
                 <Router>
-                <Redirect push to={"/capstone/viewContract/"+ this.state.contract.id} />
-                <Route exact path="/capstone/viewContract/:id" render={() =>  <ViewContractPage  contract={this.state.contract} role={this.props.role} />
-                } /></Router>
-               
+                    <Redirect push to={"/capstone/viewContract/" + this.state.contract.id} />
+                    <Route exact path="/capstone/viewContract/:id" render={() => <ViewContractPage contract={this.state.contract} role={this.props.role} />
+                    } /></Router>
+
             );
         }
         else {
 
             return (
                 <div style={{ height: "100vh" }}>
-                    <br />
                     <Space size="large">
                         <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContract}>Tạo hợp đồng</Button>
                         <Button type="primary" icon={<UploadOutlined />} >Tải lên hợp đồng</Button>
@@ -158,9 +140,7 @@ class ContractTable extends Component {
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}>
                         <Column title="Mã hợp đồng" dataIndex="id" key="id"
                             render={(text, record) => (
-
                                 <a><FileProtectOutlined /> {text}</a>
-
                             )}
                         />
                         <Column title="tên hợp đồng" dataIndex="contract_name" key="contract_name"

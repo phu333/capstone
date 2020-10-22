@@ -3,15 +3,17 @@ import { Menu, Layout } from 'antd';
 import { PageHeader, Avatar, Descriptions, Space, Tag, Affix, Button } from 'antd';
 import React from 'react';
 import { Badge } from 'antd';
-import UpdateProfileCompany from './UpdateProfileCompany'
-import EmployeeTable from './EmployeeTable'
-import { BrowserRouter as Router, Route, Switch, Redirect,useHistory } from 'react-router-dom'
-import SignatureList from './SignatureList'
+
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+
 import { UserOutlined, ToolOutlined, NotificationOutlined, LogoutOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import ContractTable from './ContractTable'
 import CustomerTable from './CustomerTable'
 import ContractTypeTable from './ContractTypeTable'
 import UpdateProfile from './UpdateProfile'
+import UpdateProfileCompany from './UpdateProfileCompany'
+import EmployeeTable from './EmployeeTable'
+import SignatureList from './SignatureList'
 import Header from './Header'
 import { createFromIconfontCN } from '@ant-design/icons';
 import { connect } from 'react-redux'
@@ -48,11 +50,17 @@ class EmployeeSideMenu extends React.Component {
     })
 
   };
+  componentDidMount() {
+    return (<Router>
+      <Redirect push to="/capstone/SideMenu" />
 
+      <Route exact path="/capstone/SideMenu" component={EmployeeSideMenu} />
+    </Router>);
+  }
   render() {
-    console.log(this.props.myLoginReducer)
+
     if (this.props.myLoginReducer !== "logout") {
-      console.log(this.props.myLoginReducer)
+
       var information = this.props.myLoginReducer.map((login, index) => {
         return (
 
@@ -60,33 +68,30 @@ class EmployeeSideMenu extends React.Component {
 
             <Layout style={{ height: "100vh" }}>
 
-              <Sider width={250} className="site-layout-background">
+              <Sider width={250} className="site-layout-background"
+              collapsible
+              collapsed={this.state.collapsed}
+              onCollapse={() => this.setState({
+                collapsed : !this.state.collapsed
+              })}
+              style={{
+                overflow: "auto",
+                height: "100vh",
+                position: "sticky",
+                top: 0,
+                left: 0
+              }}
+              >
 
                 <IconFont type="icon-javascript" style={{ fontSize: '60px', color: '#08c', marginLeft: "40%" }} />
-                <Descriptions size="small" column={2}   >
-
-                  <Descriptions.Item><Avatar size={70} icon={<UserOutlined />} /> </Descriptions.Item>
 
 
-
-                  <Descriptions.Item><br />
-                    <b style={{ color: ' white' }}>{login.username}</b><br />
-
-                    <b style={{ color: ' white' }}>Company ABC</b>
-                  </Descriptions.Item>
-
-                </Descriptions>
-                <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
-                  {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
-                </Button>
                 <Menu
                   onClick={this.handleClick}
-                  title={[]}
+                  defaultSelectedKeys={['1']}
+                  defaultOpenKeys={['sub1']}
                   mode="inline"
                   theme="dark"
-                  defaultSelectedKeys={["1"]}
-                  defaultOpenKeys={["sub1"]}
-                  style={{ height: "100%", borderRight: 0 }}
                   inlineCollapsed={this.state.collapsed}
                 >
                   <SubMenu key="sub1" icon={<ToolOutlined />} title="Quản lý">
@@ -109,10 +114,15 @@ class EmployeeSideMenu extends React.Component {
                     <Menu.Item key="profile">Thông tin cá nhân</Menu.Item>
                     {login.editCompanyInformationPermission === true ? <Menu.Item key="companyProfile">Thông tin công ty</Menu.Item> : null}
                   </SubMenu>
+                  {/* <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
+                    {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
+                  </Button> */}
                 </Menu>
+
               </Sider>
-              <Layout style={{ padding: "0 24px 24px", height: "100vh" }}>
+              <Layout style={{ padding: "0 24px 24px", height: "110vh" }}>
                 <Affix onChange={(affixed) => console.log(affixed)}>
+
                   <Header></Header>
                 </Affix>
 
@@ -169,12 +179,12 @@ class EmployeeSideMenu extends React.Component {
 
       if (this.props.myLoginReducer === "Logout") {
 
-       
+
       } else {
         return (<div style={{ height: "100vh" }}> {information}</div >);
       }
     } else {
-      
+
     }
 
 
