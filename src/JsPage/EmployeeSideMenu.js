@@ -58,9 +58,9 @@ class EmployeeSideMenu extends React.Component {
     </Router>);
   }
   render() {
-    console.log(this.props.myLoginReducer)
+
     if (this.props.myLoginReducer !== "logout") {
-      console.log(this.props.myLoginReducer)
+
       var information = this.props.myLoginReducer.map((login, index) => {
         return (
 
@@ -71,22 +71,8 @@ class EmployeeSideMenu extends React.Component {
               <Sider width={250} className="site-layout-background">
 
                 <IconFont type="icon-javascript" style={{ fontSize: '60px', color: '#08c', marginLeft: "40%" }} />
-                <Descriptions size="small" column={2}   >
-
-                  <Descriptions.Item><Avatar size={70} icon={<UserOutlined />} /> </Descriptions.Item>
 
 
-
-                  <Descriptions.Item><br />
-                    <b style={{ color: ' white' }}>{login.username}</b><br />
-
-                    <b style={{ color: ' white' }}>Company ABC</b>
-                  </Descriptions.Item>
-
-                </Descriptions>
-                <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
-                  {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
-                </Button>
                 <Menu
                   onClick={this.handleClick}
                   title={[]}
@@ -118,9 +104,13 @@ class EmployeeSideMenu extends React.Component {
                     {login.editCompanyInformationPermission === true ? <Menu.Item key="companyProfile">Thông tin công ty</Menu.Item> : null}
                   </SubMenu>
                 </Menu>
+                <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
+                    {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
+                  </Button>
               </Sider>
               <Layout style={{ padding: "0 24px 24px", height: "100vh" }}>
                 <Affix onChange={(affixed) => console.log(affixed)}>
+                 
                   <Header></Header>
                 </Affix>
 
