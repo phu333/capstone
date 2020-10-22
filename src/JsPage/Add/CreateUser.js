@@ -14,7 +14,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import "./Column.css"
 import 'reactjs-popup/dist/index.css';
-import LoginPage from './Login/LoginPage'
+import LoginPage from '../Login/LoginPage'
 const layout = {
     labelCol: {
         span: 6,

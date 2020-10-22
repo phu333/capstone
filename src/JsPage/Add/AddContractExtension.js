@@ -2,7 +2,7 @@ import React from 'react';
 
 
 import { Select, DatePicker, Descriptions, Space, Button, InputNumber, Form, Table, Input, Col, Card, Pagination } from 'antd';
-import ContractExtensionTable from './ContractExtensionTable'
+import ContractExtensionTable from '../Table/ContractExtensionTable'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import {
     DeleteOutlined, IdcardOutlined, BankOutlined, PhoneOutlined, PrinterOutlined, HomeOutlined, MailOutlined

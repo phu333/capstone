@@ -4,9 +4,9 @@ import {
     FileExcelOutlined, IdcardOutlined, BankOutlined, PhoneOutlined, PrinterOutlined, HomeOutlined, MailOutlined
     , ContactsOutlined, CalendarOutlined, DollarOutlined, DeleteOutlined, CloudUploadOutlined, AuditOutlined
 } from '@ant-design/icons';
-import ContractExtensionTable from './ContractExtensionTable'
+import ContractExtensionTable from '../Table/ContractExtensionTable'
 import { Descriptions, InputNumber, Space, Button, DatePicker, Input, Card, Form, Select, Table, Comment, List, Avatar,Pagination } from 'antd';
-import ContractTable from './ContractTable'
+import ContractTable from '../Table/ContractTable'
 import moment from 'moment'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const dateFormat = 'YYYY-MM-DD';

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { DeleteOutlined, SearchOutlined, FileOutlined } from "@ant-design/icons"
-import ContractExtensionTable from './ContractExtensionTable'
+import ContractExtensionTable from '../Table/ContractExtensionTable'
 import { Select, DatePicker, Input, Space, Button, List, Col, Table, InputNumber,Form,Comment,Card,Avatar,Pagination } from 'antd';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import moment from 'moment'

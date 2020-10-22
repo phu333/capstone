@@ -1,13 +1,14 @@
 import 'antd/dist/antd.css';
 import { Table, Space, Button, Tag,Switch } from 'antd';
-import AddSignature from './AddSignature'
-import UpdateSignature from './UpdateSignature'
+import AddSignature from '../Add/AddSignature'
+import UpdateSignature from '../Update/UpdateSignature'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
-import SignatureSearch from './SignatureSearch'
-import { createSignature, signatureInformation } from '../actions/SignatureAction'
+import SignatureSearch from '../Search/SignatureSearch'
+import { createSignature, signatureInformation } from '../../actions/SignatureAction'
 import { connect } from 'react-redux'
+import "../Column.css"
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
 const { Column, ColumnGroup } = Table;
 

@@ -1,11 +1,11 @@
 import 'antd/dist/antd.css';
 import { Table, Space, Button, Tag,Switch } from 'antd';
-import TemplateUpload from './TemplateUpload';
+import TemplateUpload from '../Add/TemplateUpload';
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import React from 'react';
-import './Column.css'
-import ContractTypeSearch from './ContractTypeSearch'
-import { createContractType, contractTypeInformation } from '../actions/ContractType'
+import "../Column.css"
+import ContractTypeSearch from '../Search/ContractTypeSearch'
+import { createContractType, contractTypeInformation } from '../../actions/ContractType'
 import { connect } from 'react-redux'
 import { UploadOutlined, FileOutlined, DeleteOutlined, UserOutlined, FileWordOutlined } from "@ant-design/icons"
 const { Column } = Table;

@@ -1,11 +1,11 @@
 import 'antd/dist/antd.css';
 import { Table, Space, Button, Tag, Switch } from 'antd';
-import AddCustomer from './AddCustomer'
-import ViewCustomer from './ViewCustomer'
+import AddCustomer from '../Add/AddCustomer'
+import ViewCustomer from '../Update/ViewCustomer'
 import React from 'react';
-import './Column.css'
-import CustomerSearch from './CustomerSearch'
-import { createCustomer, customerInformation } from '../actions/CustomerAction'
+import "../Column.css"
+import CustomerSearch from '../Search/CustomerSearch'
+import { createCustomer, customerInformation } from '../../actions/CustomerAction'
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, EyeOutlined } from "@ant-design/icons"
@@ -78,7 +78,7 @@ class CustomerList extends React.Component {
     } else if (this.state.openCustomer === "openViewCustomer") {
       return (<Router>
         <Redirect push to={"/capstone/updateCustomer/" + this.state.customer.taxCode} />
-        <Route exact path="/capstone/updateCustomer/:id" render={() => <AddCustomer customer={this.state.customer} />
+        <Route exact path="/capstone/updateCustomer/:id" render={() => <ViewCustomer customer={this.state.customer} />
         } /></Router>);
 
     }

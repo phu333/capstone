@@ -1,15 +1,15 @@
 import 'antd/dist/antd.css';
 import { Table, Button, Space, Tag } from 'antd';
-import ContractSearch from './ContractSearch'
-import './Column.css'
+import ContractSearch from '../Search/ContractSearch'
+import "../Column.css"
 import {
     EyeOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
     FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
 } from "@ant-design/icons"
-import ChooseContractTemplate from './ChooseContractTemplate'
-import ViewContractPage from './ViewContractPage'
+import ChooseContractTemplate from '../Add/ChooseContractTemplate'
+import ViewContractPage from '../Update/ViewContractPage'
 import React, { Component } from 'react';
-import { createContract, contractInformation } from '../actions/ContractAction'
+import { createContract, contractInformation } from '../../actions/ContractAction'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { Column } = Table;

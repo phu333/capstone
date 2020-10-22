@@ -1,17 +1,17 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
 import 'antd/dist/antd.css';
-import '../index.css';
-import { createEmployee, employeeInformation } from '../actions/EmployeeAction'
+import '../../index.css';
+import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
 import { Space, Card, Button, Form, Input, Checkbox } from 'antd';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
 } from '@ant-design/icons';
-import EmployeeTable from './EmployeeTable'
+import EmployeeTable from '../Table/EmployeeTable'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
-import "./Column.css"
+import "../Column.css"
 const layout = {
     labelCol: {
         span: 4,

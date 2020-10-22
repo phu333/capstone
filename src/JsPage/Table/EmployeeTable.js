@@ -1,12 +1,12 @@
 import 'antd/dist/antd.css';
 import { Table, Space, Tag, Button,Switch } from 'antd';
-import AddEmployee from './AddEmployee'
-import ViewEmployee from './ViewEmployee'
+import AddEmployee from '../Add/AddEmployee'
+import ViewEmployee from '../Update/ViewEmployee'
 import React from 'react';
-import './Column.css'
+import "../Column.css"
 import ReactDOM from 'react-dom';
-import EmployeeSearch from './EmployeeSearch'
-import { createEmployee, employeeInformation } from '../actions/EmployeeAction'
+import EmployeeSearch from '../Search/EmployeeSearch'
+import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'

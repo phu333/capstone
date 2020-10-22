@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 import { Badge } from 'antd';
 import { UserOutlined, DownOutlined, BellOutlined, LogoutOutlined } from "@ant-design/icons";
 import { connect } from 'react-redux'
-import { logout, login } from '../actions/loginAction'
-import LoginPage from './Login/LoginPage'
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { logout, login } from '../../actions/loginAction'
+
+
 
 class Header extends Component {
     constructor() {

@@ -1,8 +1,8 @@
 import React from 'react';
 
 import 'antd/dist/antd.css';
-import '../index.css';
-import { createSignature, signatureInformation } from '../actions/SignatureAction'
+import '../../index.css';
+import { createSignature, signatureInformation } from '../../actions/SignatureAction'
 import { connect } from 'react-redux'
 import { Form, Input, Button, Card, Space, DatePicker } from 'antd';
 import {
@@ -10,7 +10,7 @@ import {
     , CloudUploadOutlined, RedoOutlined
 } from '@ant-design/icons';
 import moment from 'moment'
-import SignatureList from './SignatureList'
+import SignatureList from '../Table/SignatureList'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const dateFormat = 'YYYY-MM-DD';
 const { RangePicker } = DatePicker;

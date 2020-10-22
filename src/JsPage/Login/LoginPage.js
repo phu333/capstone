@@ -5,11 +5,11 @@ import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 're
 import { PageHeader, Space, Row, Col } from 'antd';
 import { GoogleLogin } from 'react-google-login';
 import { Form, Input, Button, Checkbox } from 'antd';
-import EmployeeSideMenu from '../EmployeeSideMenu';
+import EmployeeSideMenu from './EmployeeSideMenu';
 import { reactLocalStorage } from 'reactjs-localstorage';
-import UserTable from '../UserTable';
-import SendJoinRequest from '../SendJoinRequest'
-import ForgetPassword from '../ForgetPassword'
+
+import SendJoinRequest from '../Add/SendJoinRequest'
+import ForgetPassword from './ForgetPassword'
 import { GoogleOutlined } from "@ant-design/icons"
 import { createFromIconfontCN } from '@ant-design/icons';
 import { connect } from 'react-redux'

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-import '../index.css';
+import '../../index.css';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { Form, Input, Button, Row, Col } from 'antd';
 import Grid from '@material-ui/core/Grid';
@@ -11,7 +11,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import LoginPage from './Login/LoginPage'
+import LoginPage from '../Login/LoginPage'
 const layout = {
     labelCol: {
         span: 6,

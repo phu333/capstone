@@ -1,8 +1,8 @@
 import React from 'react';
-import { createContract, contractInformation, } from '../actions/ContractAction'
+import { createContract, contractInformation, } from '../../actions/ContractAction'
 import { Select, DatePicker, Descriptions, Space, Button, InputNumber, Form, Table, Input, Col, Card, Pagination } from 'antd';
 import { connect } from 'react-redux'
-import ContractTable from './ContractTable'
+import ContractTable from '../Table/ContractTable'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import {
     DeleteOutlined, IdcardOutlined, BankOutlined, PhoneOutlined, PrinterOutlined, HomeOutlined, MailOutlined

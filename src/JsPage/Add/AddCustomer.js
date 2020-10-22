@@ -1,14 +1,14 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import '../index.css';
+import '../../index.css';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined
 } from '@ant-design/icons';
-import { createCustomer, customerInformation } from '../actions/CustomerAction'
+import { createCustomer, customerInformation } from '../../actions/CustomerAction'
 import { connect } from 'react-redux'
 import { Form, Input, Button, Checkbox,Space,Card } from 'antd';
-import CustomerTable from './CustomerTable'
+import CustomerTable from '../Table/CustomerTable'
 
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const layout = {

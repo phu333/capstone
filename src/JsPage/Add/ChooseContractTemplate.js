@@ -1,9 +1,9 @@
-import 'antd/dist/antd.css';
+
 import { Table, Space, Button, PageHeader } from 'antd';
-import CreateContract from './CreateContract';
+import CreateContract from '../Add/CreateContract';
 import React from 'react';
-import ContractTypeSearch from './ContractTypeSearch'
-import ContractTable from './ContractTable'
+import ContractTypeSearch from '../Search/ContractTypeSearch'
+import ContractTable from '../Table/ContractTable'
 import { UserAddOutlined, SearchOutlined, FileOutlined } from "@ant-design/icons"
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { Column } = Table;

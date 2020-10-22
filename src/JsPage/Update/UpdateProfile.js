@@ -1,8 +1,8 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
 import 'antd/dist/antd.css';
-import '../index.css';
-import { createEmployee, employeeInformation } from '../actions/EmployeeAction'
+import '../../index.css';
+import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 
 import { Space, Card, Button, Descriptions, Avatar,Form,Input } from 'antd';
 import {
@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons';
 import { connect } from 'react-redux'
 
-import "./Column.css"
+import "../Column.css"
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const layout = {
     labelCol: {

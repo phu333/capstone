@@ -1,13 +1,14 @@
-import 'antd/dist/antd.css';
+
 import { Table, Button,Tag } from 'antd';
-import ContractSearch from './ContractSearch'
+import ContractSearch from '../Search/ContractSearch'
 import { EyeOutlined,DeleteOutlined, FormOutlined, FileAddOutlined,ContainerOutlined } from "@ant-design/icons"
-import AddContractExtension from './AddContractExtension'
-import UpdateContractExtension from './UpdateContractExtension'
+import AddContractExtension from '../Add/AddContractExtension'
+import UpdateContractExtension from '../Update/UpdateContractExtension'
 import React from 'react';
-import { createcontractExtension, contractExtensionInformation } from '../actions/ContractExtension'
+import { createcontractExtension, contractExtensionInformation } from '../../actions/ContractExtension'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import "../Column.css"
 const { Column } = Table;
 
 
