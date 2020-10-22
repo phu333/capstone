@@ -69,12 +69,7 @@ class UpdateProfileCompany extends React.Component {
     };
 
     render() {
-        if (this.state.finish) {
-            return (<Router>
-                <Redirect push to={"/capstone/customerList"} />
-                <Route exact path="/capstone/customerList" component={CustomerTable} />
-            </Router>);
-        } else {
+        
 
 
             return (
@@ -212,7 +207,7 @@ class UpdateProfileCompany extends React.Component {
             );
         }
     }
-}
+
 
 
 export default UpdateProfileCompany;
