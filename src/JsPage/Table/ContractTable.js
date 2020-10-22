@@ -107,7 +107,32 @@ class ContractTable extends Component {
         })
     }
     render() {
+        const content = (
+            <div style={{display:"inline-block"}}>
+                <Button
+                    title="Xem chi tiết"
+                    key="action"
+                    onClick={
+                        () => this.setState({
+                            
+                            showContract: true
+                        })
+                    }
+                >Xem chi tiết</Button>
+                <Button
+                    title="Vô hiệu hóa"
+                    key="action"
+                    onClick={this.viewContract}
+                    
+                >Vô hiệu hóa</Button>
+                 <Button
+                    title="Ký"
+                    key="action"
+                    onClick={this.viewContract}
+                >Ký</Button> 
 
+            </div>
+        );
 
 
         if (this.state.showCreateContract) {
@@ -193,37 +218,17 @@ class ContractTable extends Component {
                             }}
                         />
                         <Column
-                            title="Xem chi tiết"
+                            title="Action"
                             key="action"
                             render={(text, record) => (
 
-                                <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
-                                    () => this.setState({
-                                        contract: text,
-                                        showContract: true
-                                    })
-                                } />
+                               <Popover content={content} title="please chose your action">
+                                <Button type="primary">Action</Button>
+                            </Popover>
+                             ) } />
 
-                            )}
-                        />
-                        <Column
-                            title="Vô hiệu hóa"
-                            key="action"
-                            render={(text, record) => (
-
-                                <DeleteOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.viewContract} />
-
-                            )}
-                        />
-                        {this.props.role === true ? <Column
-                            title="Ký"
-                            key="action"
-                            render={(text, record) => (
-
-                                <FormOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.viewContract} />
-
-                            )}
-                        /> : null}
+                            
+                        
 
                     </Table></div>
             );
