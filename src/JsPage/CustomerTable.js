@@ -136,6 +136,8 @@ class CustomerList extends React.Component {
             )} />
 
             <Column title="trạng thái" dataIndex="status" key="status"
+            sorter={(a, b) => a.status.localeCompare(b.status)}
+            sortDirections={['descend', 'ascend']}
               render={(text, record) => {
                 let color = 'pink'
                 if (text === 'deactive') {
@@ -174,8 +176,7 @@ class CustomerList extends React.Component {
               key="status"
               render={(text, record) => (
                 <Space size="middle">
-                  {text === "active" ? <DeleteOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.OpenViewCustomer}>Vô hiệu hóa</DeleteOutlined> : null}
-                  {text === "deactive" ? <UserOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.OpenViewCustomer}>kích hoạt</UserOutlined> : null}
+                  {text === "active" ?  <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked />: <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
                 </Space>
               )}
             />

@@ -87,7 +87,10 @@ class EmployeeList extends React.Component {
           <Table dataSource={this.props.newEmployee}
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
 
-            <Column title="Tên" dataIndex="name" key="name" render={(text, record) => (
+            <Column title="Tên" dataIndex="name" key="name" 
+            sorter={(a, b) => a.name.localeCompare(b.name)}
+            sortDirections={['descend', 'ascend']}
+            render={(text, record) => (
 
               <b>{text}</b>
 
@@ -103,6 +106,8 @@ class EmployeeList extends React.Component {
 
             )} />
             <Column title="trạng thái" dataIndex="status" key="status"
+            sorter={(a, b) => a.status.localeCompare(b.status)}
+            sortDirections={['descend', 'ascend']}
               render={(text, record) => {
                 let color = 'pink'
                 if (text === 'deactive') {
@@ -121,7 +126,10 @@ class EmployeeList extends React.Component {
                 </Tag>);
               }}
             />
-            <Column title="chức vụ" dataIndex="role" key="role" />
+            <Column title="chức vụ" dataIndex="role" 
+            sorter={(a, b) => a.role.localeCompare(b.role)}
+            sortDirections={['descend', 'ascend']}
+            key="role" />
             <Column
               title="Xem chi tiết"
               key="action"

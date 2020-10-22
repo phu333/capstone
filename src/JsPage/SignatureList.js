@@ -52,7 +52,7 @@ class SignatureList extends React.Component {
                 email: "some email",
                 provider: 'Viettel',
                 status: "active",
-                expired: 2022
+                expired: 12/11/2022
 
             }
             const contract2 = {
@@ -61,7 +61,7 @@ class SignatureList extends React.Component {
                 email: "some email",
                 provider: 'Fpt',
                 status: "deactive",
-                expired: 2022
+                expired: 12/12/2022
 
             }
 
@@ -103,10 +103,18 @@ class SignatureList extends React.Component {
 
                        
 
-                        <Column title="Nhà cung cấp" dataIndex="provider" key="provider" />
+                        <Column title="Nhà cung cấp" dataIndex="provider"
+                         sorter={(a, b) => a.provider.localeCompare(b.provider)}
+                         sortDirections={['descend', 'ascend']}
+                         key="provider" />
 
-                        <Column title="Ngày hết hạn" dataIndex="expired" key="expired" />
+                        <Column title="Ngày hết hạn"
+                         sorter={(a, b) => a.expired.localeCompare(b.expired)}
+                         sortDirections={['descend', 'ascend']}
+                         dataIndex="expired" key="expired" />
                         <Column title="trạng thái" dataIndex="status" key="status"
+                         sorter={(a, b) => a.status.localeCompare(b.status)}
+                         sortDirections={['descend', 'ascend']}
                             render={(text, record) => {
                                 let color = 'pink'
                                 if (text === 'deactive') {

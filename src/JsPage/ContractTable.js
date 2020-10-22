@@ -158,6 +158,8 @@ class ContractTable extends Component {
 
                             )} />
                         <Column title="Ngày hết hạn" dataIndex="deadline" key="deadline"
+                        sorter={(a, b) => a.deadline.localeCompare(b.deadline)}
+                        sortDirections={['descend', 'ascend']}
                             render={(text, record) => (
 
                                 <b>{text}</b>
@@ -170,6 +172,8 @@ class ContractTable extends Component {
 
                             )} />
                         <Column title="trạng thái" dataIndex="status" key="status"
+                        sorter={(a, b) => a.status.localeCompare(b.status)}
+                        sortDirections={['descend', 'ascend']}
                             render={(text, record) => {
                                 let color = 'pink'
                                 if (text === 'deactive') {
