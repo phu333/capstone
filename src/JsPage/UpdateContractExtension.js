@@ -45,6 +45,15 @@ class UpdateContractExtension extends React.Component {
 
 
     };
+    Cancel = () => {
+        this.setState({
+            finish: true
+        })
+
+
+
+
+    };
     log = (type) => console.log.bind(console, type);
     onChange(value, dateString) {
         console.log('Selected Time: ', value);

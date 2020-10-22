@@ -4,13 +4,13 @@ import 'antd/dist/antd.css';
 import '../index.css';
 import { createEmployee, employeeInformation } from '../actions/EmployeeAction'
 import { connect } from 'react-redux'
-import { Space, Card, Button, Form, Input,Checkbox } from 'antd';
+import { Space, Card, Button, Form, Input, Checkbox } from 'antd';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
 } from '@ant-design/icons';
-
-
+import EmployeeTable from './EmployeeTable'
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import "./Column.css"
 const layout = {
     labelCol: {
@@ -37,7 +37,8 @@ class ViewEmployee extends React.Component {
         super();
 
         this.state = {
-            isEdit:false
+            isEdit: false,
+            finish: false,
         };
 
         this.onFinish = this.onFinish.bind(this);
@@ -46,7 +47,7 @@ class ViewEmployee extends React.Component {
     onFinish = (values) => {
         console.log(values);
         this.setState({
-            isEdit:false
+            isEdit: false
         })
 
 
@@ -54,7 +55,7 @@ class ViewEmployee extends React.Component {
     };
     onEdit = (values) => {
         this.setState({
-            isEdit:true
+            isEdit: true
         })
 
 
@@ -64,175 +65,187 @@ class ViewEmployee extends React.Component {
     onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+    Cancel = () => {
+        this.setState({
+            finish: true
+        })
 
+
+
+
+    };
 
     render() {
-        
-        return (
-            
-            <Card>
-            <br />
-            <Button style={{width:'80px' }} type="primary" value="cancel" onClick={this.Cancel}>
-                Trở về
+        if (this.state.finish) {
+            return (<Router>
+                <Redirect push to={"/capstone/employee"} />
+                <Route exact path="/capstone/employee" component={EmployeeTable} /></Router>);
+        } else {
+            return (
+
+                <Card>
+                    <br />
+                    <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
+                        Trở về
           </Button>
-            <h2 style={{ textAlign: 'center'}}>Thông tin nhân viên</h2>
-            
-                <Form
-                            {...layout}
-                            name="basic"
-                            className="employee-form"
-                            
-                            onFinish={this.onFinish}
-                            onFinishFailed={this.onFinishFailed}
+                    <h2 style={{ textAlign: 'center' }}>Thông tin nhân viên</h2>
 
+                    <Form
+                        {...layout}
+                        name="basic"
+                        className="employee-form"
+
+                        onFinish={this.onFinish}
+                        onFinishFailed={this.onFinishFailed}
+
+                    >
+
+                        <Form.Item
+                            label="Họ và tên"
+
+                            name="name"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập tên ',
+                                },
+                            ]}
                         >
-                            
-                            <Form.Item
-                                label="Họ và tên"
-                                
-                                name="name"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập tên ',
-                                    },
-                                ]}
-                            >
-                                {this.state.isEdit === false ?
-                                <Input disabled defaultValue="Nguyen Van A"/> : 
-                                <Input defaultValue="Nguyen Van A"  />}
-                                
-                                
-                            </Form.Item>
-                            <Form.Item
-                                label="Tên người dùng"
-                                name="username"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập tên người dùng',
-                                    },
-                                ]}
-                            >
-                                {this.state.isEdit === false ?
-                                <Input disabled defaultValue="Ak47"/> : 
-                                <Input defaultValue="Ak47"  />}
-                            </Form.Item>
+                            {this.state.isEdit === false ?
+                                <Input disabled defaultValue="Nguyen Van A" /> :
+                                <Input defaultValue="Nguyen Van A" />}
 
-                            
-                            <Form.Item
-                                label="Điện thoại"
-                                name="phone"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập sdt',
-                                    },
-                                ]}
-                            >
-                                {this.state.isEdit === false ?
-                                <Input disabled defaultValue="3242424"/> : 
-                                <Input defaultValue="3242424"  />}
-                            </Form.Item>
-                            <Form.Item
-                                label="Địa chỉ"
-                                name="address"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Địa chỉ',
-                                    },
-                                ]}
-                            >
-                                {this.state.isEdit === false ?
-                                <Input disabled defaultValue="12/3/6/8"/> : 
-                                <Input defaultValue="12/3/6/8"  />}
-                            </Form.Item>
-                            <Form.Item
-                                label="Email"
-                                name="Email"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Mật khẩu',
-                                    },
-                                ]}
-                            >
-                                {this.state.isEdit === false ?
-                                <Input disabled defaultValue="Some email"/> : 
-                                <Input defaultValue="Some email"  />}
-                            </Form.Item>
-                            <Form.Item
-                                label="Chức vụ"
-                                name="role"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Mật khẩu',
-                                    },
-                                ]}
-                            >
-                                {this.state.isEdit === false ?
-                                <Input disabled defaultValue="Some email"/> : 
-                                <Input defaultValue="Some email"  />}
-                            </Form.Item>
-                            <Form.Item {...middleLayout} name="signPermission" valuePropName="unchecked" >
-                            {this.state.isEdit === false ?<Checkbox disabled>Quyền ký</Checkbox> :<Checkbox >Quyền ký</Checkbox>}   
-                                
-                                
-                            </Form.Item>
-                            <Form.Item {...middleLayout} name="employeePermission" valuePropName="checked" >
-                                
-                                {this.state.isEdit === false ?<Checkbox disabled >Quyền quản lý nhân viên</Checkbox> :<Checkbox>Quyền quản lý nhân viên</Checkbox>}  
-                            </Form.Item>
-                            <Form.Item {...middleLayout} name="contractPermission" valuePropName="checked" >
-                                
-                                {this.state.isEdit === false ?  <Checkbox disabled >Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox>:<Checkbox>Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox>}  
-                            </Form.Item>
-                            <Form.Item {...middleLayout} name="customerPermission" valuePropName="checked" >
-                                
-                                {this.state.isEdit === false ?<Checkbox disabled >Quyền quản lý khách hàng</Checkbox> :<Checkbox>Quyền quản lý khách hàng</Checkbox>}  
-                            </Form.Item>
-                            <Form.Item {...middleLayout} name="companyInfoPermission" valuePropName="unchecked" >
-                                
-                                {this.state.isEdit === false ? <Checkbox disabled >Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox>:<Checkbox>Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox>}  
-                            </Form.Item>
+
+                        </Form.Item>
+                        <Form.Item
+                            label="Tên người dùng"
+                            name="username"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập tên người dùng',
+                                },
+                            ]}
+                        >
+                            {this.state.isEdit === false ?
+                                <Input disabled defaultValue="Ak47" /> :
+                                <Input defaultValue="Ak47" />}
+                        </Form.Item>
+
+
+                        <Form.Item
+                            label="Điện thoại"
+                            name="phone"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập sdt',
+                                },
+                            ]}
+                        >
+                            {this.state.isEdit === false ?
+                                <Input disabled defaultValue="3242424" /> :
+                                <Input defaultValue="3242424" />}
+                        </Form.Item>
+                        <Form.Item
+                            label="Địa chỉ"
+                            name="address"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập Địa chỉ',
+                                },
+                            ]}
+                        >
+                            {this.state.isEdit === false ?
+                                <Input disabled defaultValue="12/3/6/8" /> :
+                                <Input defaultValue="12/3/6/8" />}
+                        </Form.Item>
+                        <Form.Item
+                            label="Email"
+                            name="Email"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập Mật khẩu',
+                                },
+                            ]}
+                        >
+                            {this.state.isEdit === false ?
+                                <Input disabled defaultValue="Some email" /> :
+                                <Input defaultValue="Some email" />}
+                        </Form.Item>
+                        <Form.Item
+                            label="Chức vụ"
+                            name="role"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập Mật khẩu',
+                                },
+                            ]}
+                        >
+                            {this.state.isEdit === false ?
+                                <Input disabled defaultValue="Some email" /> :
+                                <Input defaultValue="Some email" />}
+                        </Form.Item>
+                        <Form.Item {...middleLayout} name="signPermission" valuePropName="unchecked" >
+                            {this.state.isEdit === false ? <Checkbox disabled>Quyền ký</Checkbox> : <Checkbox >Quyền ký</Checkbox>}
+
+
+                        </Form.Item>
+                        <Form.Item {...middleLayout} name="employeePermission" valuePropName="checked" >
+
+                            {this.state.isEdit === false ? <Checkbox disabled >Quyền quản lý nhân viên</Checkbox> : <Checkbox>Quyền quản lý nhân viên</Checkbox>}
+                        </Form.Item>
+                        <Form.Item {...middleLayout} name="contractPermission" valuePropName="checked" >
+
+                            {this.state.isEdit === false ? <Checkbox disabled >Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox> : <Checkbox>Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox>}
+                        </Form.Item>
+                        <Form.Item {...middleLayout} name="customerPermission" valuePropName="checked" >
+
+                            {this.state.isEdit === false ? <Checkbox disabled >Quyền quản lý khách hàng</Checkbox> : <Checkbox>Quyền quản lý khách hàng</Checkbox>}
+                        </Form.Item>
+                        <Form.Item {...middleLayout} name="companyInfoPermission" valuePropName="unchecked" >
+
+                            {this.state.isEdit === false ? <Checkbox disabled >Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox> : <Checkbox>Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox>}
+                        </Form.Item>
 
 
 
-                            <Form.Item {...tailLayout}>
-                                <Space size="large">
-                                {this.state.isEdit === true ?<Button type="primary" htmlType="submit" className="login-form-button">
-                                        Nộp
-                            </Button> :null}
-                            {this.state.isEdit === true ?<Button type="primary" htmlType="reset" className="login-form-button">
-                                        Reset
-                            </Button> :null}
-                            
-                            {this.state.isEdit === false ?<Button type="primary" onClick={this.onEdit}  className="login-form-button">
-                                       Sửa
-                            </Button> :null}
-                           
-                                    
-                                </Space>
-                            </Form.Item>
-                            <Form.Item>
+                        <Form.Item {...tailLayout}>
+                            <Space size="large">
+                                {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
+                                    Nộp
+                            </Button> : null}
+                                {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
+                                    Reset
+                            </Button> : null}
 
-                            </Form.Item>
+                                {this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
+                                    Sửa
+                            </Button> : null}
+
+
+                            </Space>
+                        </Form.Item>
+                        <Form.Item>
+
+                        </Form.Item>
 
 
 
 
-                        </Form>
-                    
-                    
-                    
-               
-        </Card >
-        );
+                    </Form>
+
+
+
+
+                </Card >
+            );
+        }
+
     }
-
 }
-
 
 export default ViewEmployee;

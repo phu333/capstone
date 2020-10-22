@@ -4,12 +4,12 @@ import 'antd/dist/antd.css';
 import '../index.css';
 import { createEmployee, employeeInformation } from '../actions/EmployeeAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Checkbox,Space,Card } from 'antd';
+import { Form, Input, Button, Checkbox, Space, Card } from 'antd';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
 } from '@ant-design/icons';
-
+import EmployeeTable from './EmployeeTable'
 
 import "./Column.css"
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
@@ -67,164 +67,168 @@ class AddEmployee extends React.Component {
         })
     }
     render() {
+        if (this.state.finish) {
+            return (<Router>
+                <Redirect push to={"/capstone/employee" } />
+                <Route exact path="/capstone/employee" component={EmployeeTable} /></Router>);
+        } else {
 
-        
-        return (
-            <Card>
-                <br />
-                <Button style={{width:'80px' }} type="primary" value="cancel" onClick={this.Cancel}>
-                    Trở về
+            return (
+                <Card>
+                    <br />
+                    <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
+                        Trở về
               </Button>
-                <h2 style={{ textAlign: 'center'}}>Tạo nhân viên</h2>
-                
+                    <h2 style={{ textAlign: 'center' }}>Tạo nhân viên</h2>
+
                     <Form
-                                {...layout}
-                                name="basic"
-                                className="employee-form"
-                                
-                                onFinish={this.onFinish}
-                                onFinishFailed={this.onFinishFailed}
+                        {...layout}
+                        name="basic"
+                        className="employee-form"
 
-                            >
-                                
-                                <Form.Item
-                                    label="Họ và tên"
-                                    name="name"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập tên ',
-                                        },
-                                    ]}
-                                >
-                                    <Input placeholder="Họ và tên" />
-                                </Form.Item>
-                                <Form.Item
-                                    label="cmnd/cmt"
-                                    name="id"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập cmnd/cmt ',
-                                        },
-                                    ]}
-                                >
-                                    <Input placeholder="cmnd/cmt" />
-                                </Form.Item>
-                                <Form.Item
-                                    label="Tên người dùng"
-                                    name="username"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập tên người dùng',
-                                        },
-                                    ]}
-                                >
-                                    <Input placeholder="tên người dùng" />
-                                </Form.Item>
+                        onFinish={this.onFinish}
+                        onFinishFailed={this.onFinishFailed}
 
-                               
-                                <Form.Item
-                                    label="Điện thoại"
-                                    name="phone"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập sdt',
-                                        },
-                                    ]}
-                                >
-                                    <Input placeholder="Điện thoại" />
-                                </Form.Item>
-                                <Form.Item
-                                    label="Địa chỉ"
-                                    name="address"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập Địa chỉ',
-                                        },
-                                    ]}
-                                >
-                                    <Input placeholder="Địa chỉ" />
-                                </Form.Item>
-                                <Form.Item
-                                    label="Email"
-                                    name="Email"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập Email',
-                                        },
-                                    ]}
-                                >
-                                   <Input placeholder="Email" />
-                                </Form.Item>
-                                <Form.Item
-                                    label="Chức vụ"
-                                    name="role"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập Chức vụ',
-                                        },
-                                    ]}
-                                >
-                                    <Input placeholder="Chức vụ" />
-                                </Form.Item>
-                                <Form.Item {...middleLayout} name="signPermission" valuePropName="unchecked" >
-                                    <Checkbox>Quyền ký</Checkbox>
-                                    
-                                </Form.Item>
-                                <Form.Item {...middleLayout} name="employeePermission" valuePropName="unchecked" >
-                                    <Checkbox>Quyền quản lý nhân viên</Checkbox>
-                                    
-                                </Form.Item>
-                                <Form.Item {...middleLayout} name="contractPermission" valuePropName="unchecked" >
-                                    <Checkbox>Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox>
-                                    
-                                </Form.Item>
-                                <Form.Item {...middleLayout} name="customerPermission" valuePropName="unchecked" >
-                                    <Checkbox>Quyền quản lý khách hàng</Checkbox>
-                                    
-                                </Form.Item>
-                                <Form.Item {...middleLayout} name="companyInfoPermission" valuePropName="unchecked" >
-                                    <Checkbox>Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox>
-                                    
-                                </Form.Item>
+                    >
+
+                        <Form.Item
+                            label="Họ và tên"
+                            name="name"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập tên ',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Họ và tên" />
+                        </Form.Item>
+                        <Form.Item
+                            label="cmnd/cmt"
+                            name="id"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập cmnd/cmt ',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="cmnd/cmt" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Tên người dùng"
+                            name="username"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập tên người dùng',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="tên người dùng" />
+                        </Form.Item>
 
 
+                        <Form.Item
+                            label="Điện thoại"
+                            name="phone"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập sdt',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Điện thoại" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Địa chỉ"
+                            name="address"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập Địa chỉ',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Địa chỉ" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Email"
+                            name="Email"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập Email',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Email" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Chức vụ"
+                            name="role"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập Chức vụ',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Chức vụ" />
+                        </Form.Item>
+                        <Form.Item {...middleLayout} name="signPermission" valuePropName="unchecked" >
+                            <Checkbox>Quyền ký</Checkbox>
 
-                                <Form.Item {...tailLayout}>
-                                    <Space size="large">
-                                        <Button type="primary" htmlType="submit" className="login-form-button">
-                                            Nộp
+                        </Form.Item>
+                        <Form.Item {...middleLayout} name="employeePermission" valuePropName="unchecked" >
+                            <Checkbox>Quyền quản lý nhân viên</Checkbox>
+
+                        </Form.Item>
+                        <Form.Item {...middleLayout} name="contractPermission" valuePropName="unchecked" >
+                            <Checkbox>Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox>
+
+                        </Form.Item>
+                        <Form.Item {...middleLayout} name="customerPermission" valuePropName="unchecked" >
+                            <Checkbox>Quyền quản lý khách hàng</Checkbox>
+
+                        </Form.Item>
+                        <Form.Item {...middleLayout} name="companyInfoPermission" valuePropName="unchecked" >
+                            <Checkbox>Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox>
+
+                        </Form.Item>
+
+
+
+                        <Form.Item {...tailLayout}>
+                            <Space size="large">
+                                <Button type="primary" htmlType="submit" className="login-form-button">
+                                    Nộp
                                 </Button>
                                 <Button type="primary" htmlType="reset" className="login-form-button">
-                                            Reset
+                                    Reset
                                 </Button>
-                               
-                                        
-                                    </Space>
-                                </Form.Item>
-                                <Form.Item>
-
-                                </Form.Item>
 
 
+                            </Space>
+                        </Form.Item>
+                        <Form.Item>
+
+                        </Form.Item>
 
 
-                            </Form>
-                        
-                        
-                        
-                   
-            </Card >
-        );
+
+
+                    </Form>
+
+
+
+
+                </Card >
+            );
+        }
     }
 }
-
 var mapDispatchToProps = (dispatch, props) => {
     return {
         onSubmit: (employee) => {
