@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Popup from 'reactjs-popup';
 import 'antd/dist/antd.css';
 import '../index.css';
-
+import { Space, Card, Button, Row, Col } from 'antd';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -10,7 +11,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-    , CloudUploadOutlined, RedoOutlined
+    , CloudUploadOutlined, RedoOutlined, ReloadOutlined
 } from '@ant-design/icons';
 const layout = {
     labelCol: {
@@ -63,7 +64,7 @@ class UpdateProfileCompany extends React.Component {
             }
             }>
                 <React.Fragment>
-                    
+
                     <h2 style={{ textAlign: 'center' }}>Thông tin doanh nghiệp</h2>
                     <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
                         <Col span={10} >
