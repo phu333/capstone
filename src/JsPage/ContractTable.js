@@ -16,24 +16,7 @@ const { Column } = Table;
 
 
 const dataSource = []
-// for (var i = 0; i < 5; i++) {
 
-//     const contract = {
-
-//         contract_name: 'Hop dong lao dong',
-//         status: "pending",
-//         ben_tao_hd: 'HiSign',
-//         ben_tham_gia: 'cty 369',
-//         nguoi_tao_hd: "Nguyen Ngoc Phu",
-//         deadline: "12/12/2022",
-
-//     }
-//     dataSource.push(contract)
-
-
-
-
-// }
 
 class ContractTable extends Component {
     constructor() {
