@@ -1,7 +1,7 @@
 import 'antd/dist/antd.css';
-import { Table, Space, Button, Tag } from 'antd';
+import { Table, Space, Button, Tag,Switch } from 'antd';
 import TemplateUpload from './TemplateUpload';
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import React from 'react';
 import './Column.css'
 import ContractTypeSearch from './ContractTypeSearch'
@@ -132,8 +132,9 @@ class ContractTable extends React.Component {
               dataIndex="status"
               key="status"
               render={(text, record) => (
+                
                 <Space size="middle">
-                  {text === "active" ? <Switch style={{ fontSize: '30px' }} onClick={this.OpenViewCustomer} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
+                  {text === "active" ? <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
                 </Space>
               )}
             />

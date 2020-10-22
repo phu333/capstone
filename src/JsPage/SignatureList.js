@@ -1,10 +1,10 @@
 import 'antd/dist/antd.css';
-import { Table, Space, Button, Tag } from 'antd';
+import { Table, Space, Button, Tag,Switch } from 'antd';
 import AddSignature from './AddSignature'
 import UpdateSignature from './UpdateSignature'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import SignatureSearch from './SignatureSearch'
 import { createSignature, signatureInformation } from '../actions/SignatureAction'
 import { connect } from 'react-redux'

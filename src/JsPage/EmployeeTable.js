@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import { Table, Space, Tag, Button } from 'antd';
+import { Table, Space, Tag, Button,Switch } from 'antd';
 import AddEmployee from './AddEmployee'
 import ViewEmployee from './ViewEmployee'
 import React from 'react';
@@ -9,7 +9,7 @@ import EmployeeSearch from './EmployeeSearch'
 import { createEmployee, employeeInformation } from '../actions/EmployeeAction'
 import { connect } from 'react-redux'
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 const { Column, ColumnGroup } = Table;
 
 
@@ -142,7 +142,7 @@ class EmployeeList extends React.Component {
               key="status"
               render={(text, record) => (
                 <Space size="middle">
-                  {text === "active" ?  <Switch style={{ fontSize: '30px' }} onClick={this.OpenViewCustomer} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked />: <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
+                  {text === "active" ?  <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked />: <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
                 </Space>
               )}
             /></Table></div>
