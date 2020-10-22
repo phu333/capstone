@@ -9,8 +9,9 @@ import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined
 } from '@ant-design/icons';
-
+import moment from 'moment'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+const dateFormat = 'YYYY-MM-DD';
 const { RangePicker } = DatePicker;
 const layout = {
     labelCol: {
@@ -32,7 +33,7 @@ class UpdateSignature extends React.Component {
         super();
 
         this.state = {
-
+            isEdit: false
         };
 
         this.onFinish = this.onFinish.bind(this);
@@ -45,7 +46,15 @@ class UpdateSignature extends React.Component {
 
 
     };
+    onEdit = (values) => {
+        this.setState({
+            isEdit: true
+        })
 
+
+
+
+    };
     onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
@@ -82,7 +91,9 @@ class UpdateSignature extends React.Component {
                             },
                         ]}
                     >
-                        <Input />
+                       {this.state.isEdit === false ?
+                            <Input disabled defaultValue="123123123123" /> :
+                            <Input defaultValue="123123123123" />}
                     </Form.Item>
                     <Form.Item
                         label="Nhà cung cấp"
@@ -94,7 +105,9 @@ class UpdateSignature extends React.Component {
                             },
                         ]}
                     >
-                        <Input />
+                        {this.state.isEdit === false ?
+                            <Input disabled defaultValue="viettel" /> :
+                            <Input defaultValue="viettel" />}
                     </Form.Item>
                     <Form.Item
                         label="Thời hạn"
@@ -106,12 +119,22 @@ class UpdateSignature extends React.Component {
                             },
                         ]}
                     >
-                        <RangePicker
-                            showTime={{ format: 'HH:mm' }}
-                            format="YYYY-MM-DD HH:mm"
-                            onChange={this.onChange}
-                            onOk={this.onOk}
-                        />
+                        {this.state.isEdit === false ?
+                             <RangePicker
+                             disabled defaultValue={[moment('2019-09-03', dateFormat), moment('2019-11-22', dateFormat)]}
+                             showTime={{ format: 'HH:mm' }}
+                             format="YYYY-MM-DD HH:mm"
+                             onChange={this.onChange}
+                             onOk={this.onOk}
+                         /> :
+                         <RangePicker
+                         defaultValue={[moment('2019-09-03', dateFormat), moment('2019-11-22', dateFormat)]}
+                         showTime={{ format: 'HH:mm' }}
+                         format="YYYY-MM-DD HH:mm"
+                         onChange={this.onChange}
+                         onOk={this.onOk}
+                     />}
+                       
                     </Form.Item>
 
 
@@ -119,13 +142,16 @@ class UpdateSignature extends React.Component {
 
                     <Form.Item {...tailLayout}>
                         <Space size="large">
-                            <Button type="primary" htmlType="submit" className="login-form-button">
+                        {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
                                 Nộp
-                                </Button>
-                            <Button type="primary" htmlType="reset" className="login-form-button">
+                            </Button> : null}
+                            {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
                                 Reset
-                                </Button>
+                            </Button> : null}
 
+                            {this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
+                                Sửa
+                            </Button> : null}
 
                         </Space>
                     </Form.Item>

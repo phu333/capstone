@@ -40,7 +40,7 @@ class UpdateProfile extends React.Component {
         super();
 
         this.state = {
-
+            isEdit: false,
         };
 
         this.onFinish = this.onFinish.bind(this);
@@ -53,7 +53,15 @@ class UpdateProfile extends React.Component {
 
 
     };
+    onEdit = (values) => {
+        this.setState({
+            isEdit: true
+        })
 
+
+
+
+    };
     onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
@@ -106,7 +114,9 @@ class UpdateProfile extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    {this.state.isEdit === false ?
+                                    <Input disabled defaultValue="Nguyen Van D" /> :
+                                    <Input defaultValue="Nguyen Van D" />}
                                 </Form.Item>
                                 <Form.Item
                                     label="cmnd/cmt"
@@ -118,7 +128,9 @@ class UpdateProfile extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    {this.state.isEdit === false ?
+                                    <Input disabled defaultValue="324242342342" /> :
+                                    <Input defaultValue="324242342342" />}
                                 </Form.Item>
                                 <Form.Item
                                     label="Tên người dùng"
@@ -130,7 +142,7 @@ class UpdateProfile extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input disabled defaultValue="Ak95" />
                                 </Form.Item>
 
                                 <Form.Item
@@ -143,7 +155,10 @@ class UpdateProfile extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input.Password />
+                                    {this.state.isEdit === false ?
+                                    <Input.Password disabled defaultValue="123" /> :
+                                    <Input.Password defaultValue="123" />}
+                                   
                                 </Form.Item>
                                 <Form.Item
                                     label="Điện thoại"
@@ -155,7 +170,9 @@ class UpdateProfile extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    {this.state.isEdit === false ?
+                                    <Input disabled defaultValue="123123" /> :
+                                    <Input defaultValue="123123" />}
                                 </Form.Item>
                                 <Form.Item
                                     label="Địa chỉ"
@@ -167,7 +184,9 @@ class UpdateProfile extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                   {this.state.isEdit === false ?
+                                    <Input disabled defaultValue="12/3/4" /> :
+                                    <Input defaultValue="12/3/4" />}
                                 </Form.Item>
                                 <Form.Item
                                     label="Email"
@@ -179,7 +198,9 @@ class UpdateProfile extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    {this.state.isEdit === false ?
+                                    <Input disabled defaultValue="Email" /> :
+                                    <Input defaultValue="Email" />}
                                 </Form.Item>
                                 <Form.Item
                                     label="Chức vụ"
@@ -191,7 +212,7 @@ class UpdateProfile extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                   <Input disabled defaultValue="Giám đốc" />
                                 </Form.Item>
                                
 
@@ -199,12 +220,16 @@ class UpdateProfile extends React.Component {
 
                                 <Form.Item {...tailLayout}>
                                     <Space size="large">
-                                        <Button type="primary" htmlType="submit" className="login-form-button">
-                                            Nộp
-                                </Button>
-                                <Button type="primary" htmlType="reset" className="login-form-button">
-                                            Reset
-                                </Button>
+                                    {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
+                                        Nộp
+                            </Button> : null}
+                                    {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
+                                        Reset
+                            </Button> : null}
+
+                                    {this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
+                                        Sửa
+                            </Button> : null}
                                
                                         
                                     </Space>

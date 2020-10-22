@@ -37,7 +37,7 @@ class ViewEmployee extends React.Component {
         super();
 
         this.state = {
-
+            isEdit:false
         };
 
         this.onFinish = this.onFinish.bind(this);
@@ -45,12 +45,22 @@ class ViewEmployee extends React.Component {
     }
     onFinish = (values) => {
         console.log(values);
+        this.setState({
+            isEdit:false
+        })
+
+
+
+    };
+    onEdit = (values) => {
+        this.setState({
+            isEdit:true
+        })
 
 
 
 
     };
-
     onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
@@ -79,6 +89,7 @@ class ViewEmployee extends React.Component {
                             
                             <Form.Item
                                 label="Họ và tên"
+                                
                                 name="name"
                                 rules={[
                                     {
@@ -87,7 +98,11 @@ class ViewEmployee extends React.Component {
                                     },
                                 ]}
                             >
-                                <Input />
+                                {this.state.isEdit === false ?
+                                <Input disabled defaultValue="Nguyen Van A"/> : 
+                                <Input defaultValue="Nguyen Van A"  />}
+                                
+                                
                             </Form.Item>
                             <Form.Item
                                 label="Tên người dùng"
@@ -99,32 +114,25 @@ class ViewEmployee extends React.Component {
                                     },
                                 ]}
                             >
-                                <Input />
+                                {this.state.isEdit === false ?
+                                <Input disabled defaultValue="Ak47"/> : 
+                                <Input defaultValue="Ak47"  />}
                             </Form.Item>
 
-                            {/* <Form.Item
-                                label="Mật khẩu"
-                                name="password"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Mật khẩu',
-                                    },
-                                ]}
-                            >
-                                <Input.Password />
-                            </Form.Item> */}
+                            
                             <Form.Item
                                 label="Điện thoại"
                                 name="phone"
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Vui lòng nhập Mật khẩu',
+                                        message: 'Vui lòng nhập sdt',
                                     },
                                 ]}
                             >
-                                <Input />
+                                {this.state.isEdit === false ?
+                                <Input disabled defaultValue="3242424"/> : 
+                                <Input defaultValue="3242424"  />}
                             </Form.Item>
                             <Form.Item
                                 label="Địa chỉ"
@@ -132,11 +140,13 @@ class ViewEmployee extends React.Component {
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Vui lòng nhập Mật khẩu',
+                                        message: 'Vui lòng nhập Địa chỉ',
                                     },
                                 ]}
                             >
-                                <Input />
+                                {this.state.isEdit === false ?
+                                <Input disabled defaultValue="12/3/6/8"/> : 
+                                <Input defaultValue="12/3/6/8"  />}
                             </Form.Item>
                             <Form.Item
                                 label="Email"
@@ -148,7 +158,9 @@ class ViewEmployee extends React.Component {
                                     },
                                 ]}
                             >
-                                <Input />
+                                {this.state.isEdit === false ?
+                                <Input disabled defaultValue="Some email"/> : 
+                                <Input defaultValue="Some email"  />}
                             </Form.Item>
                             <Form.Item
                                 label="Chức vụ"
@@ -160,42 +172,47 @@ class ViewEmployee extends React.Component {
                                     },
                                 ]}
                             >
-                                <Input />
+                                {this.state.isEdit === false ?
+                                <Input disabled defaultValue="Some email"/> : 
+                                <Input defaultValue="Some email"  />}
                             </Form.Item>
                             <Form.Item {...middleLayout} name="signPermission" valuePropName="unchecked" >
-                                <Checkbox>Quyền ký</Checkbox>
+                            {this.state.isEdit === false ?<Checkbox disabled>Quyền ký</Checkbox> :<Checkbox >Quyền ký</Checkbox>}   
+                                
                                 
                             </Form.Item>
-                            <Form.Item {...middleLayout} name="employeePermission" valuePropName="unchecked" >
-                                <Checkbox>Quyền quản lý nhân viên</Checkbox>
+                            <Form.Item {...middleLayout} name="employeePermission" valuePropName="checked" >
                                 
+                                {this.state.isEdit === false ?<Checkbox disabled >Quyền quản lý nhân viên</Checkbox> :<Checkbox>Quyền quản lý nhân viên</Checkbox>}  
                             </Form.Item>
-                            <Form.Item {...middleLayout} name="contractPermission" valuePropName="unchecked" >
-                                <Checkbox>Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox>
+                            <Form.Item {...middleLayout} name="contractPermission" valuePropName="checked" >
                                 
+                                {this.state.isEdit === false ?  <Checkbox disabled >Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox>:<Checkbox>Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox>}  
                             </Form.Item>
-                            <Form.Item {...middleLayout} name="customerPermission" valuePropName="unchecked" >
-                                <Checkbox>Quyền quản lý khách hàng</Checkbox>
+                            <Form.Item {...middleLayout} name="customerPermission" valuePropName="checked" >
                                 
+                                {this.state.isEdit === false ?<Checkbox disabled >Quyền quản lý khách hàng</Checkbox> :<Checkbox>Quyền quản lý khách hàng</Checkbox>}  
                             </Form.Item>
                             <Form.Item {...middleLayout} name="companyInfoPermission" valuePropName="unchecked" >
-                                <Checkbox>Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox>
                                 
+                                {this.state.isEdit === false ? <Checkbox disabled >Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox>:<Checkbox>Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox>}  
                             </Form.Item>
 
 
 
                             <Form.Item {...tailLayout}>
                                 <Space size="large">
-                                    <Button type="primary" htmlType="submit" className="login-form-button">
+                                {this.state.isEdit === true ?<Button type="primary" htmlType="submit" className="login-form-button">
                                         Nộp
-                            </Button>
-                            <Button type="primary" htmlType="reset" className="login-form-button">
+                            </Button> :null}
+                            {this.state.isEdit === true ?<Button type="primary" htmlType="reset" className="login-form-button">
                                         Reset
-                            </Button>
-                            <Button type="primary"  className="login-form-button">
-                                        trở về
-                            </Button>
+                            </Button> :null}
+                            
+                            {this.state.isEdit === false ?<Button type="primary" onClick={this.onEdit}  className="login-form-button">
+                                       Sửa
+                            </Button> :null}
+                           
                                     
                                 </Space>
                             </Form.Item>
