@@ -5,7 +5,7 @@ import {
     , ContactsOutlined, CalendarOutlined, DollarOutlined, DeleteOutlined, CloudUploadOutlined, AuditOutlined
 } from '@ant-design/icons';
 import ContractExtensionTable from './ContractExtensionTable'
-import { Descriptions, InputNumber, Space, Button, DatePicker, Input, Card, Form, Select, Table, Comment, List, Avatar } from 'antd';
+import { Descriptions, InputNumber, Space, Button, DatePicker, Input, Card, Form, Select, Table, Comment, List, Avatar,Pagination } from 'antd';
 import ContractTable from './ContractTable'
 import moment from 'moment'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
@@ -81,7 +81,12 @@ class ContractView extends React.Component {
             });
         }, 1000);
     };
-
+    onPageChange = page => {
+        console.log(page);
+        this.setState({
+            currentPage: page,
+        });
+      };
     handleChange = e => {
         this.setState({
             value: e.target.value,
@@ -236,7 +241,8 @@ class ContractView extends React.Component {
                             >
                                 <Space title="Nội dung hợp đồng" direction="vertical"    >
                                     
-                                        <Card title="thời hạn hợp đồng"> <RangePicker
+                                {this.state.currentPage === 1 ? <>
+                                     <Card title="thời hạn hợp đồng"> <RangePicker
                                             showTime={{ format: 'HH:mm' }}
                                             format="YYYY-MM-DD HH:mm"
                                             onChange={this.onChange}
@@ -309,20 +315,28 @@ class ContractView extends React.Component {
                                             </Table>
                                         Giá cả trên chưa bao gồm thuế Giá  trị gia tăng.
 Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (Có Giấy chứng nhẫn hàng hoá cung cấp đạt tiêu chuẩn chất lượng của cơ quan Nhà nước có thẩm quyền)
-                                    </Card> 
-                                  
-                                        <Card title="Tổng giá">
+                                    </Card></> :null}   
+                                    {this.state.currentPage === 2 ? <><Card title="Tổng giá">
+                                    <InputNumber
 
+                                    formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                    parser={value => value.replace(/\$\s?|(,*)/g, '')}/>     
 
 
                                         </Card> 
                                         <Card title="Thuế">
+                                        <InputNumber
+                                        defaultValue={100}
+                                        min={0}
+                                        max={100}
+                                        formatter={value => `${value}%`}
+                                        parser={value => value.replace('%', '')}
+                                        
+                                        />                  
 
 
-
-                                        </Card> 
-                                    
-                                        <Card title="Phương thức thanh toán">
+                                        </Card> </> :null} 
+                                        {this.state.currentPage === 3 ? <> <Card title="Phương thức thanh toán">
                                             Tổng số tiền Bên Mua phải Thanh toán cho Bên Bán là: <InputNumber
 
                                                 formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
@@ -332,6 +346,7 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
 
                                         Giá trên chưa bao gồm thuế giá trị gia tăng.
                                     </Card> 
+
                                         <Card title="Thời hạn và phương thức thanh toán">
                                             Phương thức thanh toán: Thanh toán bằng tiền mặt hoặc chuyển khoản.
                                             Khi Bên A thanh toán tiền hàng theo các lần thanh toán, Bên B có nghĩa vụ ghi hoá đơn, chứng từ chứng nhận việc đã thanh toán của Bên A theo qui định của pháp luật.
@@ -342,8 +357,8 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                             Bên bán chuyển giao tài sản cho Bên mua tại<Input /> trong thời hạn <Input /> ngày kể từ ngày ký kết hợp đồng;
 
 
-                                    </Card> 
-                                        <Card title="Nghĩa vụ bên bán">
+                                    </Card>  </> :null} 
+                                    {this.state.currentPage === 4? <> <Card title="Nghĩa vụ bên bán">
                                             5.1.	Bên Bán chịu trách nhiệm về số lượng, chất lượng đối với toàn bộ các sản phẩm do Bên Bán cung cấp cho tới khi hàng đến <Input />
                                         5.2.	Bên Bán có nghĩa vụ giao hàng cho Bên mua tại<Input />.
                                         5.3.	Bên Bán có nghĩa vụ cung cấp mọi chỉ dẫn cần thiết đối với việc bảo quản, sử dụng hàng hoá theo quy định của Hợp đồng này cho Bên mua.F
@@ -367,8 +382,8 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                             -	Nếu Bên mua không thực hiện đúng nghĩa vụ tiếp nhận hàng theo qui định của Hợp đồng này thì sẽ bị phạt số tiền là 0,05% Tổng giá trị Hợp đồng cho 01 ngày vi phạm.
                                             
                                             
-                                     </Card> 
-                                        <Card title="Các trường hợp chấm dứt hợp đồng">
+                                     </Card>  </> :null} 
+                                     {this.state.currentPage === 5? <> <Card title="Các trường hợp chấm dứt hợp đồng">
                                             Trong qúa trình thực hiện Hợp đồng này nếu xảy ra bất kỳ sự bất đồng nào,
                                             Bên nảy sinh bất đồng sẽ thông báo cho bên kia bằng văn bản.
                                             Hai bên sẽ thương lượng để giải quyết các bất đồng đó.
@@ -384,7 +399,7 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
 
 
 
-                                        </Card> 
+                                        </Card>   </> :null} 
 
                                 </Space>
                                         <Space size="large">
@@ -424,6 +439,7 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                                         </Button> : null}
                                         </Space>
                                     </Form>
+                                    <Pagination onChange={this.onPageChange} defaultCurrent={this.state.currentPage} total={50} />
                                 </Card>
 
                             </Space>
@@ -516,7 +532,8 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                             >
                                 <Space title="Nội dung hợp đồng" direction="vertical"    >
                                     
-                                        <Card title="thời hạn hợp đồng"> <RangePicker
+                                {this.state.currentPage === 1 ? <>
+                                     <Card title="thời hạn hợp đồng"> <RangePicker
                                             showTime={{ format: 'HH:mm' }}
                                             format="YYYY-MM-DD HH:mm"
                                             onChange={this.onChange}
@@ -589,9 +606,8 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                             </Table>
                                         Giá cả trên chưa bao gồm thuế Giá  trị gia tăng.
 Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (Có Giấy chứng nhẫn hàng hoá cung cấp đạt tiêu chuẩn chất lượng của cơ quan Nhà nước có thẩm quyền)
-                                    </Card> 
-                                  
-                                        <Card title="Tổng giá">
+                                    </Card></> :null}   
+                                    {this.state.currentPage === 2 ? <><Card title="Tổng giá">
 
 
 
@@ -600,9 +616,8 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
 
 
 
-                                        </Card> 
-                                    
-                                        <Card title="Phương thức thanh toán">
+                                        </Card> </> :null} 
+                                        {this.state.currentPage === 3 ? <> <Card title="Phương thức thanh toán">
                                             Tổng số tiền Bên Mua phải Thanh toán cho Bên Bán là: <InputNumber
 
                                                 formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
@@ -612,6 +627,7 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
 
                                         Giá trên chưa bao gồm thuế giá trị gia tăng.
                                     </Card> 
+
                                         <Card title="Thời hạn và phương thức thanh toán">
                                             Phương thức thanh toán: Thanh toán bằng tiền mặt hoặc chuyển khoản.
                                             Khi Bên A thanh toán tiền hàng theo các lần thanh toán, Bên B có nghĩa vụ ghi hoá đơn, chứng từ chứng nhận việc đã thanh toán của Bên A theo qui định của pháp luật.
@@ -622,8 +638,8 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                             Bên bán chuyển giao tài sản cho Bên mua tại<Input /> trong thời hạn <Input /> ngày kể từ ngày ký kết hợp đồng;
 
 
-                                    </Card> 
-                                        <Card title="Nghĩa vụ bên bán">
+                                    </Card>  </> :null} 
+                                    {this.state.currentPage === 4? <> <Card title="Nghĩa vụ bên bán">
                                             5.1.	Bên Bán chịu trách nhiệm về số lượng, chất lượng đối với toàn bộ các sản phẩm do Bên Bán cung cấp cho tới khi hàng đến <Input />
                                         5.2.	Bên Bán có nghĩa vụ giao hàng cho Bên mua tại<Input />.
                                         5.3.	Bên Bán có nghĩa vụ cung cấp mọi chỉ dẫn cần thiết đối với việc bảo quản, sử dụng hàng hoá theo quy định của Hợp đồng này cho Bên mua.F
@@ -647,8 +663,8 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                             -	Nếu Bên mua không thực hiện đúng nghĩa vụ tiếp nhận hàng theo qui định của Hợp đồng này thì sẽ bị phạt số tiền là 0,05% Tổng giá trị Hợp đồng cho 01 ngày vi phạm.
                                             
                                             
-                                     </Card> 
-                                        <Card title="Các trường hợp chấm dứt hợp đồng">
+                                     </Card>  </> :null} 
+                                     {this.state.currentPage === 5? <> <Card title="Các trường hợp chấm dứt hợp đồng">
                                             Trong qúa trình thực hiện Hợp đồng này nếu xảy ra bất kỳ sự bất đồng nào,
                                             Bên nảy sinh bất đồng sẽ thông báo cho bên kia bằng văn bản.
                                             Hai bên sẽ thương lượng để giải quyết các bất đồng đó.
@@ -664,9 +680,10 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
 
 
 
-                                        </Card> 
+                                        </Card>   </> :null} 
 
                                 </Space>
+
                                         <Space size="large">
                                         {comments.length > 0 && <CommentList comments={comments} />}
                                             
@@ -683,6 +700,7 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                             
                                         </Space>
                                     </Form>
+                                    <Pagination onChange={this.onPageChange} defaultCurrent={this.state.currentPage} total={50} />
                                 </Card>
 
                             </Space>
