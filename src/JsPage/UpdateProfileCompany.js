@@ -126,6 +126,14 @@ class UpdateProfileCompany extends React.Component {
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
+                                    <TextField
+                                            required
+                                            id="bankaccount"
+                                            name="bankaccount"
+                                            label="Tài khoản ngân hàng"
+                                            fullWidth
+                                            autoComplete="family-name"
+                                        />
                                         <TextField
                                             required
                                             id="bankname"

@@ -68,19 +68,30 @@ class EmployeeSideMenu extends React.Component {
 
             <Layout style={{ height: "100vh" }}>
 
-              <Sider width={250} className="site-layout-background">
+              <Sider width={250} className="site-layout-background"
+              collapsible
+              collapsed={this.state.collapsed}
+              onCollapse={() => this.setState({
+                collapsed : !this.state.collapsed
+              })}
+              style={{
+                overflow: "auto",
+                height: "100vh",
+                position: "sticky",
+                top: 0,
+                left: 0
+              }}
+              >
 
                 <IconFont type="icon-javascript" style={{ fontSize: '60px', color: '#08c', marginLeft: "40%" }} />
 
 
                 <Menu
                   onClick={this.handleClick}
-                  title={[]}
+                  defaultSelectedKeys={['1']}
+                  defaultOpenKeys={['sub1']}
                   mode="inline"
                   theme="dark"
-                  defaultSelectedKeys={["1"]}
-                  defaultOpenKeys={["sub1"]}
-                  style={{ height: "100%", borderRight: 0 }}
                   inlineCollapsed={this.state.collapsed}
                 >
                   <SubMenu key="sub1" icon={<ToolOutlined />} title="Quản lý">
@@ -103,9 +114,9 @@ class EmployeeSideMenu extends React.Component {
                     <Menu.Item key="profile">Thông tin cá nhân</Menu.Item>
                     {login.editCompanyInformationPermission === true ? <Menu.Item key="companyProfile">Thông tin công ty</Menu.Item> : null}
                   </SubMenu>
-                  <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
+                  {/* <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
                     {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
-                  </Button>
+                  </Button> */}
                 </Menu>
 
               </Sider>
