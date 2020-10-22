@@ -48,20 +48,18 @@ class SignatureList extends React.Component {
         if (this.props.newSignature.length === 0) {
             const contract1 = {
                 serial:123123123123123123,
-                name: 'Mike',
-                email: "some email",
+                
                 provider: 'Viettel',
                 status: "active",
-                expired: 12/11/2022
+                expired: "12/11/2022"
 
             }
             const contract2 = {
                 serial:123123123123123123,
-                name: 'John',
-                email: "some email",
+               
                 provider: 'Fpt',
                 status: "deactive",
-                expired: 12/12/2022
+                expired: "12/12/2022"
 
             }
 

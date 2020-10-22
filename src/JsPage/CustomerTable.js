@@ -1,14 +1,14 @@
 import 'antd/dist/antd.css';
-import { Table, Space, Button, Tag } from 'antd';
+import { Table, Space, Button, Tag, Switch } from 'antd';
 import AddCustomer from './AddCustomer'
 import ViewCustomer from './ViewCustomer'
 import React from 'react';
 import './Column.css'
 import CustomerSearch from './CustomerSearch'
 import { createCustomer, customerInformation } from '../actions/CustomerAction'
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
+import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, EyeOutlined } from "@ant-design/icons"
 const { Column } = Table;
 
 
@@ -18,11 +18,11 @@ class CustomerList extends React.Component {
 
     this.state = {
       openCustomer: "",
-      customer:{},
+      customer: {},
     };
 
     this.OpenAddCustomer = this.OpenAddCustomer.bind(this);
-    
+
 
   }
   componentDidMount() {
@@ -33,9 +33,9 @@ class CustomerList extends React.Component {
         name: 'John',
         company: "cty 369",
         address: '10 Downing Street',
-        taxCode: "taxcode",
-        faxCode: "faxcode",
-        phone: "phone",
+        taxCode: "2342342424",
+        faxCode: "686786776978979",
+        phone: "456456456",
         email: "email",
         status: "deactive",
 
@@ -44,10 +44,10 @@ class CustomerList extends React.Component {
 
         name: 'Mike',
         company: "cty 370",
-        address: '10 Downing Street',
-        taxCode: "taxcode",
-        faxCode: "faxcode",
-        phone: "phone",
+        address: '10 asdasd Street',
+        taxCode: "464646456456",
+        faxCode: "4564564564564564",
+        phone: "123123123",
         email: "email",
         status: "active",
 
@@ -65,7 +65,7 @@ class CustomerList extends React.Component {
 
     })
   }
-  
+
   render() {
     if (this.state.openCustomer === "openAddCustomer") {
       return (
@@ -77,7 +77,7 @@ class CustomerList extends React.Component {
       );
     } else if (this.state.openCustomer === "openViewCustomer") {
       return (<Router>
-        <Redirect push to={"/capstone/updateCustomer/"+this.state.customer.taxCode} />
+        <Redirect push to={"/capstone/updateCustomer/" + this.state.customer.taxCode} />
         <Route exact path="/capstone/updateCustomer/:id" render={() => <AddCustomer customer={this.state.customer} />
         } /></Router>);
 
@@ -136,8 +136,8 @@ class CustomerList extends React.Component {
             )} />
 
             <Column title="trạng thái" dataIndex="status" key="status"
-            sorter={(a, b) => a.status.localeCompare(b.status)}
-            sortDirections={['descend', 'ascend']}
+              sorter={(a, b) => a.status.localeCompare(b.status)}
+              sortDirections={['descend', 'ascend']}
               render={(text, record) => {
                 let color = 'pink'
                 if (text === 'deactive') {
@@ -157,16 +157,16 @@ class CustomerList extends React.Component {
               }}
             />
             <Column
-              title="Cập nhật thông tin"
+              title="Xem thông tin"
               key="action"
               render={(text, record) => (
                 <Space size="middle">
-                 <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
-                                    () => this.setState({
-                                        customer: text,
-                                        openCustomer: "openViewCustomer",
-                                    })
-                                } />
+                  <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                    () => this.setState({
+                      customer: text,
+                      openCustomer: "openViewCustomer",
+                    })
+                  } />
                 </Space>
               )}
             />
@@ -174,9 +174,11 @@ class CustomerList extends React.Component {
               title="Tác vụ"
               dataIndex="status"
               key="status"
+              sorter={(a, b) => a.status.localeCompare(b.status)}
+              sortDirections={['descend', 'ascend']}
               render={(text, record) => (
                 <Space size="middle">
-                  {text === "active" ?  <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked />: <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
+                  {text === "active" ? <Switch style={{ fontSize: '20px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked /> : <Switch style={{ fontSize: '20px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
                 </Space>
               )}
             />
