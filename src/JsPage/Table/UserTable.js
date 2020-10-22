@@ -3,12 +3,17 @@ import { Table, Space, Tag,Switch } from 'antd';
 import ViewUser from './ViewUser'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Header from './Header'
+import Header from '../Login/Header'
 import { createUser, userInformation } from '../actions/UserAction'
 import { connect } from 'react-redux'
 import { UploadOutlined, FileOutlined, DeleteOutlined, UserOutlined, EditOutlined } from "@ant-design/icons"
+<<<<<<< HEAD:src/JsPage/UserTable.js
 import LoginPage from './Login/LoginPage'
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
+=======
+import LoginPage from '../Login/LoginPage'
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+>>>>>>> origin/main:src/JsPage/Table/UserTable.js
 const { Column, ColumnGroup } = Table;
 
 

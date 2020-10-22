@@ -2,15 +2,15 @@ import React from 'react';
 import { reactLocalStorage } from 'reactjs-localstorage';
 import './App.css';
 import LoginPage from './JsPage/Login/LoginPage'
-import ContractTable from './JsPage/ContractTable'
-import CustomerTable from './JsPage/CustomerTable'
-import ContractTypeTable from './JsPage/ContractTypeTable'
-import UpdateProfile from './JsPage/UpdateProfile'
-import UpdateProfileCompany from './JsPage/UpdateProfileCompany'
-import EmployeeTable from './JsPage/EmployeeTable'
-import SignatureList from './JsPage/SignatureList'
+import ContractTable from './JsPage/Table/ContractTable'
+import CustomerTable from './JsPage/Table/CustomerTable'
+import ContractTypeTable from './JsPage/Table/ContractTypeTable'
+import UpdateProfile from './JsPage/Update/UpdateProfile'
+import UpdateProfileCompany from './JsPage/Update/UpdateProfileCompany'
+import EmployeeTable from './JsPage/Table/EmployeeTable'
+import SignatureList from './JsPage/Table/SignatureList'
 import Particles from 'react-particles-js';
-import EmployeeSideMenu from './JsPage/EmployeeSideMenu';
+import EmployeeSideMenu from './JsPage/Login/EmployeeSideMenu';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 class App extends React.Component {

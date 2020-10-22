@@ -1,11 +1,11 @@
 import 'antd/dist/antd.css';
 import { Table, Space, Button, Tag,Switch } from 'antd';
-import TemplateUpload from './TemplateUpload';
+import TemplateUpload from '../Add/TemplateUpload';
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import React from 'react';
-import './Column.css'
-import ContractTypeSearch from './ContractTypeSearch'
-import { createContractType, contractTypeInformation } from '../actions/ContractType'
+import "../Column.css"
+import ContractTypeSearch from '../Search/ContractTypeSearch'
+import { createContractType, contractTypeInformation } from '../../actions/ContractType'
 import { connect } from 'react-redux'
 import { UploadOutlined, FileOutlined, DeleteOutlined, UserOutlined, FileWordOutlined } from "@ant-design/icons"
 const { Column } = Table;
@@ -34,7 +34,7 @@ class ContractTable extends React.Component {
 
         contract_type: 'Hop dong lao dong',
         creator: "creator",
-        createDate: "date",
+        createDate: "12/11/2018",
         fileName: 'template1.dot',
         status: "active"
 
@@ -43,7 +43,7 @@ class ContractTable extends React.Component {
 
         contract_type: 'Hop dong lao dong',
         creator: "creator",
-        createDate: "date",
+        createDate: "12/12/2019",
         fileName: 'template1.dot',
         status: "deactive"
 
@@ -96,6 +96,8 @@ class ContractTable extends React.Component {
               )}
             />
             <Column title="Ngày tạo" dataIndex="createDate" key="createDate"
+            sorter={(a, b) => a.createDate.localeCompare(b.createDate)}
+            sortDirections={['descend', 'ascend']}
               render={(text, record) => (
 
                 <b>{text}</b>
@@ -103,6 +105,8 @@ class ContractTable extends React.Component {
               )}
             />
             <Column title="trạng thái" dataIndex="status" key="status"
+            sorter={(a, b) => a.status.localeCompare(b.status)}
+            sortDirections={['descend', 'ascend']}
               render={(text, record) => {
                 let color = 'pink'
                 if (text === 'deactive') {

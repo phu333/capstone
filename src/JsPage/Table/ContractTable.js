@@ -1,15 +1,15 @@
 import 'antd/dist/antd.css';
 import { Table, Button, Space, Tag } from 'antd';
-import ContractSearch from './ContractSearch'
-import './Column.css'
+import ContractSearch from '../Search/ContractSearch'
+import "../Column.css"
 import {
     EyeOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
     FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
 } from "@ant-design/icons"
-import ChooseContractTemplate from './ChooseContractTemplate'
-import ViewContractPage from './ViewContractPage'
+import ChooseContractTemplate from '../Add/ChooseContractTemplate'
+import ViewContractPage from '../Update/ViewContractPage'
 import React, { Component } from 'react';
-import { createContract, contractInformation } from '../actions/ContractAction'
+import { createContract, contractInformation } from '../../actions/ContractAction'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const { Column } = Table;
@@ -158,6 +158,8 @@ class ContractTable extends Component {
 
                             )} />
                         <Column title="Ngày hết hạn" dataIndex="deadline" key="deadline"
+                        sorter={(a, b) => a.deadline.localeCompare(b.deadline)}
+                        sortDirections={['descend', 'ascend']}
                             render={(text, record) => (
 
                                 <b>{text}</b>
@@ -170,6 +172,8 @@ class ContractTable extends Component {
 
                             )} />
                         <Column title="trạng thái" dataIndex="status" key="status"
+                        sorter={(a, b) => a.status.localeCompare(b.status)}
+                        sortDirections={['descend', 'ascend']}
                             render={(text, record) => {
                                 let color = 'pink'
                                 if (text === 'deactive') {

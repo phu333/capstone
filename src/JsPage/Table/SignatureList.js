@@ -1,14 +1,19 @@
 import 'antd/dist/antd.css';
 import { Table, Space, Button, Tag,Switch } from 'antd';
-import AddSignature from './AddSignature'
-import UpdateSignature from './UpdateSignature'
+import AddSignature from '../Add/AddSignature'
+import UpdateSignature from '../Update/UpdateSignature'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
-import SignatureSearch from './SignatureSearch'
-import { createSignature, signatureInformation } from '../actions/SignatureAction'
+import SignatureSearch from '../Search/SignatureSearch'
+import { createSignature, signatureInformation } from '../../actions/SignatureAction'
 import { connect } from 'react-redux'
+<<<<<<< HEAD:src/JsPage/SignatureList.js
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, EyeOutlined } from "@ant-design/icons"
+=======
+import "../Column.css"
+import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
+>>>>>>> origin/main:src/JsPage/Table/SignatureList.js
 const { Column, ColumnGroup } = Table;
 
 
@@ -47,21 +52,31 @@ class SignatureList extends React.Component {
 
         if (this.props.newSignature.length === 0) {
             const contract1 = {
+<<<<<<< HEAD:src/JsPage/SignatureList.js
                 serial: 123123123123123123,
                 name: 'Mike',
                 email: "some email",
+=======
+                serial:123123123123123123,
+                
+>>>>>>> origin/main:src/JsPage/Table/SignatureList.js
                 provider: 'Viettel',
                 status: "active",
-                expired: 2022
+                expired: "12/11/2022"
 
             }
             const contract2 = {
+<<<<<<< HEAD:src/JsPage/SignatureList.js
                 serial: 123123123123123123,
                 name: 'John',
                 email: "some email",
+=======
+                serial:123123123123123123,
+               
+>>>>>>> origin/main:src/JsPage/Table/SignatureList.js
                 provider: 'Fpt',
                 status: "deactive",
-                expired: 2022
+                expired: "12/12/2022"
 
             }
 
@@ -103,10 +118,18 @@ class SignatureList extends React.Component {
 
                        
 
-                        <Column title="Nhà cung cấp" dataIndex="provider" key="provider" />
+                        <Column title="Nhà cung cấp" dataIndex="provider"
+                         sorter={(a, b) => a.provider.localeCompare(b.provider)}
+                         sortDirections={['descend', 'ascend']}
+                         key="provider" />
 
-                        <Column title="Ngày hết hạn" dataIndex="expired" key="expired" />
+                        <Column title="Ngày hết hạn"
+                         sorter={(a, b) => a.expired.localeCompare(b.expired)}
+                         sortDirections={['descend', 'ascend']}
+                         dataIndex="expired" key="expired" />
                         <Column title="trạng thái" dataIndex="status" key="status"
+                         sorter={(a, b) => a.status.localeCompare(b.status)}
+                         sortDirections={['descend', 'ascend']}
                             render={(text, record) => {
                                 let color = 'pink'
                                 if (text === 'deactive') {

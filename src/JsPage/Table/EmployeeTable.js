@@ -1,12 +1,12 @@
 import 'antd/dist/antd.css';
 import { Table, Space, Tag, Button,Switch } from 'antd';
-import AddEmployee from './AddEmployee'
-import ViewEmployee from './ViewEmployee'
+import AddEmployee from '../Add/AddEmployee'
+import ViewEmployee from '../Update/ViewEmployee'
 import React from 'react';
-import './Column.css'
+import "../Column.css"
 import ReactDOM from 'react-dom';
-import EmployeeSearch from './EmployeeSearch'
-import { createEmployee, employeeInformation } from '../actions/EmployeeAction'
+import EmployeeSearch from '../Search/EmployeeSearch'
+import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
@@ -89,7 +89,10 @@ class EmployeeList extends React.Component {
           <Table dataSource={this.props.newEmployee}
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
 
-            <Column title="Tên" dataIndex="name" key="name" render={(text, record) => (
+            <Column title="Tên" dataIndex="name" key="name" 
+            sorter={(a, b) => a.name.localeCompare(b.name)}
+            sortDirections={['descend', 'ascend']}
+            render={(text, record) => (
 
               <a>{text}</a>
 
@@ -105,6 +108,8 @@ class EmployeeList extends React.Component {
 
             )} />
             <Column title="trạng thái" dataIndex="status" key="status"
+            sorter={(a, b) => a.status.localeCompare(b.status)}
+            sortDirections={['descend', 'ascend']}
               render={(text, record) => {
                 let color = 'pink'
                 if (text === 'deactive') {
@@ -123,7 +128,10 @@ class EmployeeList extends React.Component {
                 </Tag>);
               }}
             />
-            <Column title="chức vụ" dataIndex="role" key="role" />
+            <Column title="chức vụ" dataIndex="role" 
+            sorter={(a, b) => a.role.localeCompare(b.role)}
+            sortDirections={['descend', 'ascend']}
+            key="role" />
             <Column
               title="Xem chi tiết"
               key="action"

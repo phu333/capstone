@@ -7,18 +7,18 @@ import { Badge } from 'antd';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 
 import { UserOutlined, ToolOutlined, NotificationOutlined, LogoutOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import ContractTable from './ContractTable'
-import CustomerTable from './CustomerTable'
-import ContractTypeTable from './ContractTypeTable'
-import UpdateProfile from './UpdateProfile'
-import UpdateProfileCompany from './UpdateProfileCompany'
-import EmployeeTable from './EmployeeTable'
-import SignatureList from './SignatureList'
-import Header from './Header'
+import ContractTable from '../Table/ContractTable'
+import CustomerTable from '../Table/CustomerTable'
+import ContractTypeTable from '../Table/ContractTypeTable'
+import UpdateProfile from '../Update/UpdateProfile'
+import UpdateProfileCompany from '../Update/UpdateProfileCompany'
+import EmployeeTable from '../Table/EmployeeTable'
+import SignatureList from '../Table/SignatureList'
+import Header from '../Login/Header'
 import { createFromIconfontCN } from '@ant-design/icons';
 import { connect } from 'react-redux'
-import './Column.css'
-import LoginPage from './Login/LoginPage'
+import "../Column.css"
+
 const IconFont = createFromIconfontCN({
   scriptUrl: [
     '//at.alicdn.com/t/font_1788044_0dwu4guekcwr.js', // icon-javascript, icon-java, icon-shoppingcart (overrided)
