@@ -129,11 +129,11 @@ class EmployeeSearch extends React.Component {
                                 </Dropdown>
                                 {this.state.secondSearchValue === "SearchByName" ?
                                     <> <Input name="searchValue" />
-                                        <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} /></>
+                                        </>
                                     : null}
                                 {this.state.firstSearchValue === "SearchByPhone" ? <> <Input name="searchValue" />
-                                    <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} /></> : null}
-
+                                    </> : null}
+                                    <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} />
 
 
                             </Space>

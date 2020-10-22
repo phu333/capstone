@@ -138,15 +138,15 @@ class ContractTypeSearch extends React.Component {
 
                                 {this.state.firstSearchValue === "SearchByContractType" ?
                                     <> <Input name="searchValue" />
-                                        <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} /></>
+                                        </>
                                     : null}
                                 {this.state.firstSearchValue === "SearchByCreater" ? <> <Input name="searchValue" />
-                                    <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} /></> : null}
+                                    </> : null}
                                 {this.state.secondSearchValue === "SearchByCreateDate" ?
                                     <> <DatePicker showTime onChange={this.onChange} onOk={this.onOk} />
-                                        <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} /></>
+                                        </>
                                     : null}
-
+                                <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} />
 
                             </Space>
                         </Form>

@@ -131,12 +131,12 @@ class CustomerSearch extends React.Component {
                                
 
                                 {this.state.firstSearchValue === "SearchByCompanyName" ? <> <Input name="searchValue" />
-                                    <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} /></> : null}
+                                    </> : null}
                                 {this.state.firstSearchValue === "SearchByTaxCode" ?
                                     <> <Input name="searchValue" />
-                                        <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} /></>
+                                        </>
                                     : null}
-
+                                <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} />
 
 
                             </Space>

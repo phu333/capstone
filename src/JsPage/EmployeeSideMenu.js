@@ -103,14 +103,15 @@ class EmployeeSideMenu extends React.Component {
                     <Menu.Item key="profile">Thông tin cá nhân</Menu.Item>
                     {login.editCompanyInformationPermission === true ? <Menu.Item key="companyProfile">Thông tin công ty</Menu.Item> : null}
                   </SubMenu>
-                </Menu>
-                <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
+                  <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
                     {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
                   </Button>
+                </Menu>
+
               </Sider>
-              <Layout style={{ padding: "0 24px 24px", height: "100vh" }}>
+              <Layout style={{ padding: "0 24px 24px", height: "110vh" }}>
                 <Affix onChange={(affixed) => console.log(affixed)}>
-                 
+
                   <Header></Header>
                 </Affix>
 

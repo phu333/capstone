@@ -68,9 +68,7 @@ class UpdateProfile extends React.Component {
             return (
 
                 <React.Fragment>
-                    <br />
-                    <br/>
-                    <br/>
+
                     <h2 style={{ textAlign: 'center' }}>Thông tin cá nhân</h2>
                     <Space direction="horizontal" align="start"  >
 
@@ -78,7 +76,7 @@ class UpdateProfile extends React.Component {
                         <Card style={{ width: 400, height: 300 }}>
                             <Descriptions size="small" column={1}   >
 
-                                <Descriptions.Item><Avatar size={70} icon={<UserOutlined />} /> </Descriptions.Item>
+                                <Descriptions.Item><Avatar size={100} icon={<UserOutlined />} /> </Descriptions.Item>
 
 
 
@@ -97,6 +95,13 @@ class UpdateProfile extends React.Component {
                                     id="name"
                                     name="tên"
                                     label="tên"
+                                    fullWidth
+                                    autoComplete="shipping address-level2"
+                                />
+                                <TextField
+                                    id="id"
+                                    name="id"
+                                    label="cmnd/cmt"
                                     fullWidth
                                     autoComplete="shipping address-level2"
                                 />
@@ -160,24 +165,31 @@ class UpdateProfile extends React.Component {
                                     autoComplete="shipping address-line2"
                                 />
                             </Grid>
+                            <Grid item xs={12}>
+
+                            </Grid>
+                            <br />
+                            <br />
                             <Space size="large">
-                                <Popup trigger={<Button type="primary" >
+                                {/* <Popup trigger={<Button type="primary" >
                                     <CloudUploadOutlined />  Nộp
                             </Button>} position="right center">
-                                    <div>The sytem admin will contact you within 3 days</div>
+                                    <div>bạn c</div>
                                     <Button onClick={this.onFinish} type="primary" >
                                         Xác nhận
                             </Button>
-                                </Popup>
-
+                                </Popup> */}
+                                <Button type="primary" >
+                                    <CloudUploadOutlined />  Nộp
+                            </Button>
                                 <Button type="primary" style={{
                                     margin: '0 8px',
                                 }} htmlType="button">
                                     <ReloadOutlined />   Reset
                             </Button>
-                                <Button type="primary" value="cancel" onClick={this.Cancel}>
+                                {/* <Button type="primary" value="cancel" onClick={this.Cancel}>
                                     Trở về
-              </Button>
+              </Button> */}
                             </Space>
                         </Card>
 

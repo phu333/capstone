@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import { createCustomer, customerInformation } from '../actions/CustomerAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Row, Col } from 'antd';
+import { Form, Input, Button, Row, Col, Card } from 'antd';
 import CustomerTable from './CustomerTable'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -69,28 +69,19 @@ class UpdateProfileCompany extends React.Component {
     render() {
         if (this.state.finish) {
             return (<Router>
-                <Redirect push to={"/capstone/customerList"}  />
+                <Redirect push to={"/capstone/customerList"} />
                 <Route exact path="/capstone/customerList" component={CustomerTable} />
-              </Router>);
+            </Router>);
         } else {
 
 
             return (
-                <div style={{
-                    margin: "auto",
-                    width: "1000px",
-                    paddingLeft: "50px",
-                    border: "solid",
-                    backgroundColor:"white"
-                }
-                }>
-                    <br/>
-                    <Button type="primary" value="cancel" onClick={this.Cancel}>
-                        Trở về
-              </Button>
-                    <h2 style={{ textAlign: 'center' }}>Thông tin doanh nghiệp</h2>
-                    <React.Fragment>
-                        <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
+
+
+                <React.Fragment>
+                    <Card>
+                        <h2 style={{ textAlign: 'center' }}>Thông tin doanh nghiệp</h2>
+                        <Row type="flex" justify="center" align="middle" style={{ backgroundColor: "white", height: "100vh" }}>
                             <Col span={10} >
                                 <Grid container spacing={3}>
 
@@ -110,6 +101,36 @@ class UpdateProfileCompany extends React.Component {
                                             id="taxCode"
                                             name="Mã số thuế"
                                             label="Mã số thuế"
+                                            fullWidth
+                                            autoComplete="family-name"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            required
+                                            id="phone"
+                                            name="phone"
+                                            label="Số điện thoại"
+                                            fullWidth
+                                            autoComplete="family-name"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            required
+                                            id="certificate"
+                                            name="certificate"
+                                            label="Giấy phép kinh doanh"
+                                            fullWidth
+                                            autoComplete="family-name"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            required
+                                            id="bankname"
+                                            name="bankname"
+                                            label="Tên ngân hàng"
                                             fullWidth
                                             autoComplete="family-name"
                                         />
@@ -163,24 +184,34 @@ class UpdateProfileCompany extends React.Component {
                                             autoComplete="shipping country"
                                         />
                                     </Grid>
-
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            required
+                                            id="year"
+                                            name="year"
+                                            label="Năm sinh"
+                                            fullWidth
+                                            autoComplete="family-name"
+                                        />
+                                    </Grid>
                                 </Grid>
                                 <div></div><br />
                                 <Grid item xs={12} sm={6}>
                                     <Button type="primary" >
-                                    <CloudUploadOutlined />    Nộp
+                                        <CloudUploadOutlined />    Nộp
                             </Button>
                                     <Button type="primary" style={{
                                         margin: '0 8px',
                                     }} htmlType="button">
-                                    <ReloadOutlined />    Reset
+                                        <ReloadOutlined />    Reset
                             </Button>
                                 </Grid>
                             </Col>
                         </Row>
-                    </React.Fragment>
-                 
-                </div >
+                    </Card>
+                </React.Fragment>
+
+
             );
         }
     }
