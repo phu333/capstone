@@ -95,12 +95,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Tên doanh nghiệp"
                                 name="company"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập tên doanh nghiệp',
-                                    },
-                                ]}
+                                
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="HiSign" /> :
@@ -109,12 +104,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Mã số thuế"
                                 name="name"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Mã số thuế ',
-                                    },
-                                ]}
+                                
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="1231231" /> :
@@ -123,12 +113,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Điện thoại"
                                 name="phone"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập sdt',
-                                    },
-                                ]}
+                                
                             >
                                {this.state.isEdit === false ?
                                     <Input disabled defaultValue="123123123" /> :
@@ -137,12 +122,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Địa chỉ"
                                 name="address"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Địa chỉ',
-                                    },
-                                ]}
+                                
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="12/10/4/8" /> :
@@ -151,12 +131,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Email"
                                 name="Email"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Email',
-                                    },
-                                ]}
+                                
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="Email" /> :
@@ -165,12 +140,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Giấy phép kinh doanh"
                                 name="certificate"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Giấy phép kinh doanh ',
-                                    },
-                                ]}
+                                
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="34534534" /> :
@@ -179,12 +149,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Tài khoản ngân hàng"
                                 name="bankaccount"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Tài khoản ngân hàng ',
-                                    },
-                                ]}
+                                
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="34534534" /> :
@@ -193,12 +158,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Người đại diện"
                                 name="presentor"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập tên Người đại diện',
-                                    },
-                                ]}
+                                
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="Nguyen Van A" /> :
@@ -210,12 +170,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Chức vụ"
                                 name="role"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Chức vụ',
-                                    },
-                                ]}
+                                
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="Giám đốc" /> :

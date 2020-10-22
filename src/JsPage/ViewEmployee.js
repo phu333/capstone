@@ -104,12 +104,7 @@ class ViewEmployee extends React.Component {
                             label="Họ và tên"
 
                             name="name"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập tên ',
-                                },
-                            ]}
+                            
                         >
                             {this.state.isEdit === false ?
                                 <Input disabled defaultValue="Nguyen Van A" /> :
@@ -120,12 +115,7 @@ class ViewEmployee extends React.Component {
                         <Form.Item
                             label="Tên người dùng"
                             name="username"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập tên người dùng',
-                                },
-                            ]}
+                            
                         >
                             {this.state.isEdit === false ?
                                 <Input disabled defaultValue="Ak47" /> :
@@ -136,12 +126,7 @@ class ViewEmployee extends React.Component {
                         <Form.Item
                             label="Điện thoại"
                             name="phone"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập sdt',
-                                },
-                            ]}
+                            
                         >
                             {this.state.isEdit === false ?
                                 <Input disabled defaultValue="3242424" /> :
@@ -150,12 +135,7 @@ class ViewEmployee extends React.Component {
                         <Form.Item
                             label="Địa chỉ"
                             name="address"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập Địa chỉ',
-                                },
-                            ]}
+                            
                         >
                             {this.state.isEdit === false ?
                                 <Input disabled defaultValue="12/3/6/8" /> :
@@ -164,12 +144,7 @@ class ViewEmployee extends React.Component {
                         <Form.Item
                             label="Email"
                             name="Email"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập Mật khẩu',
-                                },
-                            ]}
+                            
                         >
                             {this.state.isEdit === false ?
                                 <Input disabled defaultValue="Some email" /> :
@@ -178,12 +153,7 @@ class ViewEmployee extends React.Component {
                         <Form.Item
                             label="Chức vụ"
                             name="role"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập Mật khẩu',
-                                },
-                            ]}
+                            
                         >
                             {this.state.isEdit === false ?
                                 <Input disabled defaultValue="Some email" /> :

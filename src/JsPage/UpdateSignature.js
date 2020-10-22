@@ -96,12 +96,7 @@ class UpdateSignature extends React.Component {
                             <Form.Item
                                 label="Số serial"
                                 name="name"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Số serial ',
-                                    },
-                                ]}
+                                
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="123123123123" /> :
@@ -110,12 +105,7 @@ class UpdateSignature extends React.Component {
                             <Form.Item
                                 label="Nhà cung cấp"
                                 name="name"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Nhà cung cấp ',
-                                    },
-                                ]}
+                                
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="viettel" /> :
@@ -124,12 +114,7 @@ class UpdateSignature extends React.Component {
                             <Form.Item
                                 label="Thời hạn"
                                 name="phone"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Thời hạn',
-                                    },
-                                ]}
+                                
                             >
                                 {this.state.isEdit === false ?
                                     <RangePicker

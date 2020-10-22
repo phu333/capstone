@@ -107,12 +107,7 @@ class UpdateProfile extends React.Component {
                                 <Form.Item
                                     label="Họ và tên"
                                     name="name"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập tên ',
-                                        },
-                                    ]}
+                                    
                                 >
                                     {this.state.isEdit === false ?
                                     <Input disabled defaultValue="Nguyen Van D" /> :
@@ -121,12 +116,7 @@ class UpdateProfile extends React.Component {
                                 <Form.Item
                                     label="cmnd/cmt"
                                     name="id"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập cmnd/cmt ',
-                                        },
-                                    ]}
+                                    
                                 >
                                     {this.state.isEdit === false ?
                                     <Input disabled defaultValue="324242342342" /> :
@@ -135,12 +125,7 @@ class UpdateProfile extends React.Component {
                                 <Form.Item
                                     label="Tên người dùng"
                                     name="username"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập tên người dùng',
-                                        },
-                                    ]}
+                                    
                                 >
                                     <Input disabled defaultValue="Ak95" />
                                 </Form.Item>
@@ -148,12 +133,7 @@ class UpdateProfile extends React.Component {
                                 <Form.Item
                                     label="Mật khẩu"
                                     name="password"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập Mật khẩu',
-                                        },
-                                    ]}
+                                    
                                 >
                                     {this.state.isEdit === false ?
                                     <Input.Password disabled defaultValue="123" /> :
@@ -163,12 +143,7 @@ class UpdateProfile extends React.Component {
                                 <Form.Item
                                     label="Điện thoại"
                                     name="phone"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập sdt',
-                                        },
-                                    ]}
+                                    
                                 >
                                     {this.state.isEdit === false ?
                                     <Input disabled defaultValue="123123" /> :
@@ -177,12 +152,7 @@ class UpdateProfile extends React.Component {
                                 <Form.Item
                                     label="Địa chỉ"
                                     name="address"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập Địa chỉ',
-                                        },
-                                    ]}
+                                    
                                 >
                                    {this.state.isEdit === false ?
                                     <Input disabled defaultValue="12/3/4" /> :
@@ -191,12 +161,7 @@ class UpdateProfile extends React.Component {
                                 <Form.Item
                                     label="Email"
                                     name="Email"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập Email',
-                                        },
-                                    ]}
+                                    
                                 >
                                     {this.state.isEdit === false ?
                                     <Input disabled defaultValue="Email" /> :
@@ -205,12 +170,7 @@ class UpdateProfile extends React.Component {
                                 <Form.Item
                                     label="Chức vụ"
                                     name="role"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập Chức vụ',
-                                        },
-                                    ]}
+                                    
                                 >
                                    <Input disabled defaultValue="Giám đốc" />
                                 </Form.Item>

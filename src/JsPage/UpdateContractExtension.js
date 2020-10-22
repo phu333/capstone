@@ -209,12 +209,7 @@ class UpdateContractExtension extends React.Component {
                                                 <Form.Item
 
                                                     name="value"
-                                                    rules={[
-                                                        {
-                                                            required: true,
-                                                            message: 'Vui lòng nhập Giá trị:',
-                                                        },
-                                                    ]}
+                                                    
                                                 >
                                                      {this.state.isEdit === false ?  <InputNumber
                                 defaultValue={1000} disabled

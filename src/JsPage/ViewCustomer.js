@@ -80,12 +80,7 @@ class ViewCustomer extends React.Component {
                     <Form.Item
                         label="Tên doanh nghiệp"
                         name="name"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng nhập tên doanh nghiệp',
-                            },
-                        ]}
+                        
                     >
                         {this.state.isEdit === false ?
                             <Input disabled defaultValue="Fsoft" /> :
@@ -94,12 +89,7 @@ class ViewCustomer extends React.Component {
                     <Form.Item
                         label="Mã số thuế"
                         name="taxcode"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng nhập tên mst',
-                            },
-                        ]}
+                        
                     >
                          {this.state.isEdit === false ?
                             <Input disabled defaultValue="12345" /> :
@@ -109,12 +99,7 @@ class ViewCustomer extends React.Component {
                     <Form.Item
                         label="Giấy phép kinh doanh"
                         name="certificate"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng nhập giấy phép',
-                            },
-                        ]}
+                        
                     >
                         {this.state.isEdit === false ?
                             <Input disabled defaultValue="4234234" /> :
@@ -123,12 +108,7 @@ class ViewCustomer extends React.Component {
                     <Form.Item
                         label="Điện thoại"
                         name="phone"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng nhập sdt',
-                            },
-                        ]}
+                        
                     >
                          {this.state.isEdit === false ?
                             <Input disabled defaultValue="12312322424" /> :
@@ -137,12 +117,7 @@ class ViewCustomer extends React.Component {
                     <Form.Item
                         label="Địa chỉ"
                         name="address"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng nhập Địa chỉ',
-                            },
-                        ]}
+                        
                     >
                         {this.state.isEdit === false ?
                             <Input disabled defaultValue="12/5/6/8" /> :
@@ -151,12 +126,7 @@ class ViewCustomer extends React.Component {
                     <Form.Item
                         label="Email"
                         name="Email"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng nhập Email',
-                            },
-                        ]}
+                        
                     >
                         {this.state.isEdit === false ?
                             <Input disabled defaultValue="Some email" /> :
@@ -165,12 +135,7 @@ class ViewCustomer extends React.Component {
                     <Form.Item
                         label="Số tài khoản"
                         name="bankaccount"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng nhập Số tài khoản',
-                            },
-                        ]}
+                        
                     >
                         {this.state.isEdit === false ?
                             <Input disabled defaultValue="34534534534534" /> :
@@ -179,12 +144,7 @@ class ViewCustomer extends React.Component {
                     <Form.Item
                         label="Người đại diện"
                         name="role"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng nhập Người đại diện',
-                            },
-                        ]}
+                        
                     >
                         {this.state.isEdit === false ?
                             <Input disabled defaultValue="Nguyen Van B" /> :
@@ -193,12 +153,7 @@ class ViewCustomer extends React.Component {
                     <Form.Item
                         label="Chức vụ"
                         name="role"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng nhập Chức vụ',
-                            },
-                        ]}
+                        
                     >
                         {this.state.isEdit === false ?
                             <Input disabled defaultValue="Giám đốc" /> :
