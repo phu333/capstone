@@ -83,10 +83,20 @@ class SendJoinRequest extends React.Component {
                                     <TextField
                                         required
                                         id="company"
-                                        name="Tên nhân viên"
-                                        label="Tên nhân viên"
+                                        name="Tên công ty"
+                                        label="Tên công ty"
                                         fullWidth
-                                        autoComplete="Tên nhân viên"
+                                        autoComplete="Tên công ty"
+                                    />
+                                </Grid>
+                                <Grid item xs={12} >
+                                    <TextField
+                                        required
+                                        id="user"
+                                        name="Tên người dùng"
+                                        label="Tên người dùng"
+                                        fullWidth
+                                        autoComplete="Tên người dùng"
                                     />
                                 </Grid>
 
