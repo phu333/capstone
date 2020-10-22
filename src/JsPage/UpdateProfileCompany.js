@@ -63,9 +63,7 @@ class UpdateProfileCompany extends React.Component {
             }
             }>
                 <React.Fragment>
-                    <Button type="primary" value="cancel" onClick={this.Cancel}>
-                        Trở về
-              </Button>
+                    
                     <h2 style={{ textAlign: 'center' }}>Thông tin doanh nghiệp</h2>
                     <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
                         <Col span={10} >
