@@ -99,7 +99,7 @@ class AddSignature extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input placeholder="Số serial" />
                                 </Form.Item>
                                 <Form.Item
                                     label="Nhà cung cấp"
@@ -111,7 +111,7 @@ class AddSignature extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input placeholder="Nhà cung cấp" />
                                 </Form.Item>
                                 <Form.Item
                                     label="Thời hạn"

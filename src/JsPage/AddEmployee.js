@@ -97,7 +97,7 @@ class AddEmployee extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input placeholder="Họ và tên" />
                                 </Form.Item>
                                 <Form.Item
                                     label="cmnd/cmt"
@@ -109,7 +109,7 @@ class AddEmployee extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input placeholder="cmnd/cmt" />
                                 </Form.Item>
                                 <Form.Item
                                     label="Tên người dùng"
@@ -121,21 +121,10 @@ class AddEmployee extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input placeholder="tên người dùng" />
                                 </Form.Item>
 
-                                {/* <Form.Item
-                                    label="Mật khẩu"
-                                    name="password"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập Mật khẩu',
-                                        },
-                                    ]}
-                                >
-                                    <Input.Password />
-                                </Form.Item> */}
+                               
                                 <Form.Item
                                     label="Điện thoại"
                                     name="phone"
@@ -146,7 +135,7 @@ class AddEmployee extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input placeholder="Điện thoại" />
                                 </Form.Item>
                                 <Form.Item
                                     label="Địa chỉ"
@@ -158,7 +147,7 @@ class AddEmployee extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input placeholder="Địa chỉ" />
                                 </Form.Item>
                                 <Form.Item
                                     label="Email"
@@ -170,7 +159,7 @@ class AddEmployee extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                   <Input placeholder="Email" />
                                 </Form.Item>
                                 <Form.Item
                                     label="Chức vụ"
@@ -182,7 +171,7 @@ class AddEmployee extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input placeholder="Chức vụ" />
                                 </Form.Item>
                                 <Form.Item {...middleLayout} name="signPermission" valuePropName="unchecked" >
                                     <Checkbox>Quyền ký</Checkbox>

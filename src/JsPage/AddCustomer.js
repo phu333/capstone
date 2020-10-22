@@ -98,7 +98,7 @@ class AddCustomer extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input placeholder="tên doanh nghiệp" />
                                 </Form.Item>
                                 <Form.Item
                                     label="Mã số thuế"
@@ -110,7 +110,7 @@ class AddCustomer extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input placeholder="Mã số thuế" />
                                 </Form.Item>
 
                                 <Form.Item
@@ -123,7 +123,7 @@ class AddCustomer extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input placeholder="Giấy phép kinh doanh" />
                                 </Form.Item>
                                 <Form.Item
                                     label="Điện thoại"
@@ -135,7 +135,7 @@ class AddCustomer extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                     <Input placeholder="Điện thoại" />
                                 </Form.Item>
                                 <Form.Item
                                     label="Địa chỉ"
@@ -147,7 +147,7 @@ class AddCustomer extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input placeholder="Địa chỉ" />
                                 </Form.Item>
                                 <Form.Item
                                     label="Email"
@@ -159,7 +159,7 @@ class AddCustomer extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input placeholder="Email" />
                                 </Form.Item>
                                 <Form.Item
                                     label="Số tài khoản"
@@ -171,7 +171,7 @@ class AddCustomer extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                   <Input placeholder="Số tài khoản" />
                                 </Form.Item>
                                 <Form.Item
                                     label="Người đại diện"
@@ -183,7 +183,7 @@ class AddCustomer extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input placeholder="Người đại diện" />
                                 </Form.Item>
                                 <Form.Item
                                     label="Chức vụ"
@@ -195,7 +195,7 @@ class AddCustomer extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input placeholder="Chức vụ" />
                                 </Form.Item>
                                 
 
@@ -209,9 +209,7 @@ class AddCustomer extends React.Component {
                                 <Button type="primary" htmlType="reset" className="login-form-button">
                                             Reset
                                 </Button>
-                                <Button type="primary"  className="login-form-button">
-                                            trở về
-                                </Button>
+                               
                                         
                                     </Space>
                                 </Form.Item>
