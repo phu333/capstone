@@ -47,7 +47,9 @@ class UpdateProfile extends React.Component {
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
-        console.log(values);
+        this.setState({
+            isEdit: false
+        })
 
 
 
