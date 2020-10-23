@@ -125,7 +125,9 @@ class AddContractExtension extends React.Component {
                                             format="YYYY-MM-DD HH:mm"
                                             onChange={this.onChange}
                                             onOk={this.onOk}
-                                        /></Card> 
+                                        />
+                                        <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                                        </Card> 
                                    
                                         <Card title="Hàng hóa">
                                             <Table dataSource={this.state.products}
@@ -193,14 +195,16 @@ class AddContractExtension extends React.Component {
                                             </Table>
                                         Giá cả trên chưa bao gồm thuế Giá  trị gia tăng.
 Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (Có Giấy chứng nhẫn hàng hoá cung cấp đạt tiêu chuẩn chất lượng của cơ quan Nhà nước có thẩm quyền)
-                                    </Card></> :null}   
+                                    </Card>
+                                    <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                                    </> :null}   
                                     {this.state.currntPage === 2 ? <><Card title="Tổng giá">
 
                                     <InputNumber
 
                                     formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                     parser={value => value.replace(/\$\s?|(,*)/g, '')}/>     
-
+                                    <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
 
                                     </Card> 
                                     <Card title="Thuế">
@@ -212,7 +216,7 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                             parser={value => value.replace('%', '')}
     
                                             />                  
-
+                                    <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
 
     </Card> </> :null} 
                                         {this.state.currntPage === 3 ? <> <Card title="Phương thức thanh toán">
@@ -224,33 +228,34 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                             />đồng/ lô hàng
 
                                         Giá trên chưa bao gồm thuế giá trị gia tăng.
+                                        <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
                                     </Card> 
 
                                         <Card title="Thời hạn và phương thức thanh toán">
                                             Phương thức thanh toán: Thanh toán bằng tiền mặt hoặc chuyển khoản.
                                             Khi Bên A thanh toán tiền hàng theo các lần thanh toán, Bên B có nghĩa vụ ghi hoá đơn, chứng từ chứng nhận việc đã thanh toán của Bên A theo qui định của pháp luật.
-
+                                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />                
 
                                    </Card> 
                                         <Card title="Thời điểm và địa điểm chuyển giao">
                                             Bên bán chuyển giao tài sản cho Bên mua tại<Input /> trong thời hạn <Input /> ngày kể từ ngày ký kết hợp đồng;
-
+                                        <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />                
 
                                     </Card>  </> :null} 
                                     {this.state.currntPage === 4? <> <Card title="Nghĩa vụ bên bán">
-                                            5.1.	Bên Bán chịu trách nhiệm về số lượng, chất lượng đối với toàn bộ các sản phẩm do Bên Bán cung cấp cho tới khi hàng đến <Input />
+                                        5.1.	Bên Bán chịu trách nhiệm về số lượng, chất lượng đối với toàn bộ các sản phẩm do Bên Bán cung cấp cho tới khi hàng đến <Input />
                                         5.2.	Bên Bán có nghĩa vụ giao hàng cho Bên mua tại<Input />.
                                         5.3.	Bên Bán có nghĩa vụ cung cấp mọi chỉ dẫn cần thiết đối với việc bảo quản, sử dụng hàng hoá theo quy định của Hợp đồng này cho Bên mua.F
-
+                                        <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />                
 
                                     </Card> 
                                         <Card title="Nghĩa vụ bên mua">
-                                            6.1.	Bên mua có nghĩa vụ thanh toán toàn bộ chi phí vận chuyển từ  kho xưởng của mình đến <Input />
+                                        6.1.	Bên mua có nghĩa vụ thanh toán toàn bộ chi phí vận chuyển từ  kho xưởng của mình đến <Input />
                                         6.2.	Tổ chức tiếp nhận nhanh, an toàn, dứt điểm cho từng lô hàng.
                                         6.3.	Thanh toán theo quy định tại Điều 7 Hợp đồng này.
                                         6.4.	Chịu chi phí bốc dỡ từ xe xuống khi Bên Bán vận chuyển hàng hoá đến
                                         <Input />
-
+                                        <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />               
                                         </Card> 
                                         <Card title="Giải quyết tranh chấp">
                                             Đối với Bên Bán:
@@ -259,7 +264,7 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                             Đối với bên mua:
                                             -	Nếu Bên mua không thực hiện đúng nghĩa vụ thanh toán theo qui định tại  Hợp đồng này thì sẽ bị phạt số tiền là 0,05% Tổng giá trị Hợp đồng cho 01 ngày vi phạm.
                                             -	Nếu Bên mua không thực hiện đúng nghĩa vụ tiếp nhận hàng theo qui định của Hợp đồng này thì sẽ bị phạt số tiền là 0,05% Tổng giá trị Hợp đồng cho 01 ngày vi phạm.
-                                            
+                                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
                                             
                                      </Card>  </> :null} 
                                      {this.state.currntPage === 5? <> <Card title="Các trường hợp chấm dứt hợp đồng">
@@ -272,12 +277,12 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                             -	Khi các Bên thực hiện xong các quyền và nghĩa vụ quy định trong Hợp đồng này.
                                             -	Khi một Bên vi phạm hợp đồng dẫn đến Hợp đồng không thể thực hiện được thì phía Bên kia có quyền đơn phương chấm dứt hợp đồng.
                                             -	 Hợp đồng có thể được chấm dứt do sự thỏa thuận của các Bên.
-                                            
+                                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
                                      </Card> 
                                         <Card title="Hiệu lực thi hành">
 
 
-
+                                        <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />           
                                         </Card>   </> :null} 
                                        
                                         
