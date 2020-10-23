@@ -5,7 +5,7 @@ import { Select, DatePicker, Descriptions, Space, Button, InputNumber, Form, Tab
 import ContractExtensionTable from '../Table/ContractExtensionTable'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import {
-    DeleteOutlined, IdcardOutlined, BankOutlined, PhoneOutlined, PrinterOutlined, HomeOutlined, MailOutlined
+    DeleteOutlined, FileOutlined, BankOutlined, PhoneOutlined, PrinterOutlined, HomeOutlined, MailOutlined
     , ContactsOutlined, CalendarOutlined, DollarOutlined, CloudDownloadOutlined, CloudUploadOutlined, AuditOutlined
 } from '@ant-design/icons';
 const { Option } = Select;
@@ -41,14 +41,15 @@ class AddContractExtension extends React.Component {
             NewContent: "",
             currntPage:1,
             finish: false,
+            chooseTemplate:false,
         };
         this.handleChange = this.handleChange.bind(this);
-        this.ChooseOption = this.ChooseOption.bind(this);
+    
 
     }
     handleChange(value) {
         this.setState({
-            NewContent: "NewContent"
+            chooseTemplate: true,
         })
     }
     Cancel = () => {
@@ -59,6 +60,27 @@ class AddContractExtension extends React.Component {
 
 
 
+    };
+    onChangeTemplate = (values) => {
+        this.setState({
+            chooseTemplate: false
+        })
+
+
+        
+
+    };
+    onFinish = (values) => {
+        this.setState({
+            finish: true
+        })
+
+
+        
+
+    };
+    onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
     };
     onPageChange = page => {
         console.log(page);
@@ -75,32 +97,49 @@ class AddContractExtension extends React.Component {
     onOk(value) {
         console.log('onOk: ', value);
     }
-    ChooseOption(value) {
-
-        this.setState({
-            option: value
-        })
-        if (value === "DeadLineExtend") {
-            this.setState({
-                NewContent: ""
-            })
-        }
-    }
+    
     render() {
         if (this.state.finish) {
             return (
                 <Router>
-                    <Redirect push to={"/capstone/viewContract/"+ this.props.contractId} />
-                    <Route exact path="/capstone/viewContract/:id" render={() =>   <ContractExtensionTable contractId={this.props.contractId} role={this.props.role} />
+                    <Redirect push to={"/capstone/viewContractExtension/"+ this.props.contractId} />
+                    <Route exact path="/capstone/viewContractExtension/:id" render={() =>   <ContractExtensionTable contractId={this.props.contractId} role={this.props.role} />
                     } /></Router>
             );
         } else {
+            if(this.state.chooseTemplate === false){
+
+                return(
+                    <>
+                    <Button type="primary" value="cancel" onClick={this.Cancel}>
+                        Trở về
+              </Button>
+                <Table dataSource={dataSource} >
+                    <Column title="loại hợp đồng" dataIndex="contract_type" key="contract_type" />
+                    <Column title="khóa" dataIndex="key" key="key" />
+                    <Column title="Tên file" dataIndex="fileName" key="fileName" />
+
+
+                    <Column
+                        title="Chọn hợp đồng"
+                        key="action"
+                        render={(text, record) => (
+                            <Space size="middle">
+                                <Button type="primary" icon={<FileOutlined />} onClick={this.handleChange}>Tạo hợp đồng với mẫu này</Button>
+                            </Space>
+                        )}
+                    />
+                </Table></>);
+                
+            }else{
             return (
                 <div style={{ border: "solid", backgroundColor: "white",height: "100vh" }} >
                     <Button type="primary" value="cancel" onClick={this.Cancel}>
                         Trở về
               </Button>
-
+              <Button type="primary" value="change" onClick={this.onChangeTemplate}>
+                        Đỗi mẫu
+              </Button>
                     <h2 style={{ textAlign: 'center' }}>phụ lục hợp đồng</h2>
                     <Space direction="vertical" align="start" >
                         
@@ -304,5 +343,6 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
             );
         }
     }
+}
 }
 export default AddContractExtension

@@ -70,7 +70,7 @@ class UpdateContractExtension extends React.Component {
     }
     onFinish = () => {
         this.setState({
-            finish: true
+            isEdit: false
         })
 
 
