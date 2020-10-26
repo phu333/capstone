@@ -70,7 +70,7 @@ class UpdateContractExtension extends React.Component {
     }
     onFinish = () => {
         this.setState({
-            finish: true
+            isEdit: false
         })
 
 
@@ -172,6 +172,10 @@ class UpdateContractExtension extends React.Component {
                                 onChange={this.onChange}
                                 onOk={this.onOk}
                             />      }  
+                            {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
+                            
                             </Card> 
                            
                                 <Card title="Hàng hóa">
@@ -236,6 +240,9 @@ class UpdateContractExtension extends React.Component {
                                     </Table>
                                 Giá cả trên chưa bao gồm thuế Giá  trị gia tăng.
 Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (Có Giấy chứng nhẫn hàng hoá cung cấp đạt tiêu chuẩn chất lượng của cơ quan Nhà nước có thẩm quyền)
+{this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
                             </Card></> :null}   
                             {this.state.currentPage === 2 ? <><Card title="Tổng giá">
                                
@@ -246,7 +253,10 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                 parser={value => value.replace(/\$\s?|(,*)/g, '')}/>      :  <InputNumber
                                 defaultValue={2000}        
                                 formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                parser={value => value.replace(/\$\s?|(,*)/g, '')}/>      }                   
+                                parser={value => value.replace(/\$\s?|(,*)/g, '')}/>      }    
+                                {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }               
                                 </Card> 
                                 <Card title="Thuế">
                                              
@@ -266,7 +276,9 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                 parser={value => value.replace('%', '')}
                                 
                                 />    }
-
+                                {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
                                 </Card> </> :null} 
                                 {this.state.currentPage === 3 ? <> <Card title="Phương thức thanh toán">
                                     Tổng số tiền Bên Mua phải Thanh toán cho Bên Bán là: 
@@ -290,19 +302,25 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                     Phương thức thanh toán: Thanh toán bằng tiền mặt hoặc chuyển khoản.
                                     Khi Bên A thanh toán tiền hàng theo các lần thanh toán, Bên B có nghĩa vụ ghi hoá đơn, chứng từ chứng nhận việc đã thanh toán của Bên A theo qui định của pháp luật.
 
-
+                                    {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }      
                            </Card> 
                                 <Card title="Thời điểm và địa điểm chuyển giao">
                                     Bên bán chuyển giao tài sản cho Bên mua tại{this.state.isEdit === false ? <Input disabled defaultValue="Sài gòn" /> : <Input defaultValue="Sài gòn" />} trong thời hạn {this.state.isEdit === false ? <Input disabled defaultValue="2 ngày" /> : <Input defaultValue="2 ngày" />} ngày kể từ ngày ký kết hợp đồng;
 
-
+                                    {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }   
                             </Card>  </> :null} 
                             {this.state.currentPage === 4? <> <Card title="Nghĩa vụ bên bán">
                                 5.1.	Bên Bán chịu trách nhiệm về số lượng, chất lượng đối với toàn bộ các sản phẩm do Bên Bán cung cấp cho tới khi hàng đến <Input />
                                 5.2.	Bên Bán có nghĩa vụ giao hàng cho Bên mua tại{this.state.isEdit === false ? <Input disabled defaultValue="Sài gòn" /> : <Input defaultValue="Sài gòn" />}.
                                 5.3.	Bên Bán có nghĩa vụ cung cấp mọi chỉ dẫn cần thiết đối với việc bảo quản, sử dụng hàng hoá theo quy định của Hợp đồng này cho Bên mua.F
 
-
+                                {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
                             </Card> 
                                 <Card title="Nghĩa vụ bên mua">
                                 6.1.	Bên mua có nghĩa vụ thanh toán toàn bộ chi phí vận chuyển từ  kho xưởng của mình đến 
@@ -312,7 +330,9 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                 6.3.	Thanh toán theo quy định tại Điều 7 Hợp đồng này.
                                 6.4.	Chịu chi phí bốc dỡ từ xe xuống khi Bên Bán vận chuyển hàng hoá đến
                                 {this.state.isEdit === false ? <Input disabled defaultValue="Sài gòn" /> : <Input defaultValue="Sài gòn" />}
-
+                                {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
                                 </Card> 
                                 <Card title="Giải quyết tranh chấp">
                                     Đối với Bên Bán:
@@ -321,7 +341,9 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                     Đối với bên mua:
                                     -	Nếu Bên mua không thực hiện đúng nghĩa vụ thanh toán theo qui định tại  Hợp đồng này thì sẽ bị phạt số tiền là 0,05% Tổng giá trị Hợp đồng cho 01 ngày vi phạm.
                                     -	Nếu Bên mua không thực hiện đúng nghĩa vụ tiếp nhận hàng theo qui định của Hợp đồng này thì sẽ bị phạt số tiền là 0,05% Tổng giá trị Hợp đồng cho 01 ngày vi phạm.
-                                    
+                                    {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
                                     
                              </Card>  </> :null} 
                              {this.state.currentPage === 5? <> <Card title="Các trường hợp chấm dứt hợp đồng">
@@ -334,12 +356,16 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                     -	Khi các Bên thực hiện xong các quyền và nghĩa vụ quy định trong Hợp đồng này.
                                     -	Khi một Bên vi phạm hợp đồng dẫn đến Hợp đồng không thể thực hiện được thì phía Bên kia có quyền đơn phương chấm dứt hợp đồng.
                                     -	 Hợp đồng có thể được chấm dứt do sự thỏa thuận của các Bên.
-                                    
+                                    {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
                              </Card> 
                                 <Card title="Hiệu lực thi hành">
 
 
-
+                                {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
                                 </Card>   </> :null} 
 
                         </Space>
@@ -432,6 +458,9 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                         onChange={this.onChange}
                                         onOk={this.onOk}
                                     />      }  
+                                     {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
                                     </Card> 
                                    
                                         <Card title="Hàng hóa">
@@ -501,6 +530,9 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                             </Table>
                                         Giá cả trên chưa bao gồm thuế Giá  trị gia tăng.
 Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (Có Giấy chứng nhẫn hàng hoá cung cấp đạt tiêu chuẩn chất lượng của cơ quan Nhà nước có thẩm quyền)
+{this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
                                     </Card></> :null}   
                                     {this.state.currentPage === 2 ? <><Card title="Tổng giá">
                                        
@@ -511,7 +543,10 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                         parser={value => value.replace(/\$\s?|(,*)/g, '')}/>      :  <InputNumber
                                         defaultValue={2000}        
                                         formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                        parser={value => value.replace(/\$\s?|(,*)/g, '')}/>      }                   
+                                        parser={value => value.replace(/\$\s?|(,*)/g, '')}/>      }    
+                                         {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }               
                                         </Card> 
                                         <Card title="Thuế">
                                                      
@@ -531,7 +566,9 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                         parser={value => value.replace('%', '')}
                                         
                                         />    }
-
+                                         {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
                                         </Card> </> :null} 
                                         {this.state.currentPage === 3 ? <> <Card title="Phương thức thanh toán">
                                             Tổng số tiền Bên Mua phải Thanh toán cho Bên Bán là: 
@@ -549,17 +586,24 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                             đồng/ lô hàng
 
                                         Giá trên chưa bao gồm thuế giá trị gia tăng.
+                                        {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
                                     </Card> 
 
                                         <Card title="Thời hạn và phương thức thanh toán">
                                             Phương thức thanh toán: Thanh toán bằng tiền mặt hoặc chuyển khoản.
                                             Khi Bên A thanh toán tiền hàng theo các lần thanh toán, Bên B có nghĩa vụ ghi hoá đơn, chứng từ chứng nhận việc đã thanh toán của Bên A theo qui định của pháp luật.
 
-
+                                            {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
                                    </Card> 
                                         <Card title="Thời điểm và địa điểm chuyển giao">
                                             Bên bán chuyển giao tài sản cho Bên mua tại{this.state.isEdit === false ? <Input disabled defaultValue="Sài gòn" /> : <Input defaultValue="Sài gòn" />} trong thời hạn {this.state.isEdit === false ? <Input disabled defaultValue="2 ngày" /> : <Input defaultValue="2 ngày" />} ngày kể từ ngày ký kết hợp đồng;
-
+                                            {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }   
 
                                     </Card>  </> :null} 
                                     {this.state.currentPage === 4? <> <Card title="Nghĩa vụ bên bán">
@@ -567,7 +611,9 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                         5.2.	Bên Bán có nghĩa vụ giao hàng cho Bên mua tại{this.state.isEdit === false ? <Input disabled defaultValue="Sài gòn" /> : <Input defaultValue="Sài gòn" />}.
                                         5.3.	Bên Bán có nghĩa vụ cung cấp mọi chỉ dẫn cần thiết đối với việc bảo quản, sử dụng hàng hoá theo quy định của Hợp đồng này cho Bên mua.F
 
-
+                                        {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
                                     </Card> 
                                         <Card title="Nghĩa vụ bên mua">
                                         6.1.	Bên mua có nghĩa vụ thanh toán toàn bộ chi phí vận chuyển từ  kho xưởng của mình đến 
@@ -577,7 +623,9 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                         6.3.	Thanh toán theo quy định tại Điều 7 Hợp đồng này.
                                         6.4.	Chịu chi phí bốc dỡ từ xe xuống khi Bên Bán vận chuyển hàng hoá đến
                                         {this.state.isEdit === false ? <Input disabled defaultValue="Sài gòn" /> : <Input defaultValue="Sài gòn" />}
-
+                                        {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }    
                                         </Card> 
                                         <Card title="Giải quyết tranh chấp">
                                             Đối với Bên Bán:
@@ -586,7 +634,9 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                             Đối với bên mua:
                                             -	Nếu Bên mua không thực hiện đúng nghĩa vụ thanh toán theo qui định tại  Hợp đồng này thì sẽ bị phạt số tiền là 0,05% Tổng giá trị Hợp đồng cho 01 ngày vi phạm.
                                             -	Nếu Bên mua không thực hiện đúng nghĩa vụ tiếp nhận hàng theo qui định của Hợp đồng này thì sẽ bị phạt số tiền là 0,05% Tổng giá trị Hợp đồng cho 01 ngày vi phạm.
-                                            
+                                            {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
                                             
                                      </Card>  </> :null} 
                                      {this.state.currentPage === 5? <> <Card title="Các trường hợp chấm dứt hợp đồng">
@@ -599,12 +649,16 @@ Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (C
                                             -	Khi các Bên thực hiện xong các quyền và nghĩa vụ quy định trong Hợp đồng này.
                                             -	Khi một Bên vi phạm hợp đồng dẫn đến Hợp đồng không thể thực hiện được thì phía Bên kia có quyền đơn phương chấm dứt hợp đồng.
                                             -	 Hợp đồng có thể được chấm dứt do sự thỏa thuận của các Bên.
-                                            
+                                            {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
                                      </Card> 
                                         <Card title="Hiệu lực thi hành">
 
 
-
+                                        {this.state.isEdit === false ?<Input placeholder="điểu khoản này sẽ điều chỉnh cho" /> :
+                            <Input placeholder="điểu khoản này sẽ điều chỉnh cho" />
+                            }
                                         </Card>   </> :null} 
 
                                 </Space>

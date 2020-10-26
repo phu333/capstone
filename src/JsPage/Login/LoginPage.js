@@ -239,10 +239,10 @@ class LoginPage extends React.Component {
                                             cookiePolicy={'single_host_origin'}
                                         />
 
-                                        <Button type="link" htmlType="button"
+                                        {/* <Button type="link" htmlType="button"
                                             onClick={this.SendJoinRequest}>
                                             Gửi yêu cầu đăng ký
-                                </Button>
+                                </Button> */}
                                     </Space>
                                 </Form.Item>
                                 <Form.Item>

@@ -1,7 +1,11 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import '../../index.css';
+<<<<<<< HEAD
 import Chart from '../Table/RevenueChart';
+=======
+import Chart from './RevenueChart';
+>>>>>>> origin/main
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined
