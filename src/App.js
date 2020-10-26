@@ -16,22 +16,6 @@ import { connect } from 'react-redux'
 class App extends React.Component {
 
   render() {
-<<<<<<< HEAD
-  /*  var information = JSON.parse(reactLocalStorage.get('login', true)).map((login, index) => {
-      return (<>
-        <Route exact path="/capstone/SideMenu" component={EmployeeSideMenu} />
-        <Route exact path="/capstone/customerList" component={CustomerTable} />
-        <Route exact path="/capstone/contract" render={() => <ContractTable role={login.signPermission} />
-        } />
-        <Route exact path="/capstone/contractType" component={ContractTypeTable} />
-        <Route exact path="/capstone/profile" component={UpdateProfile} />
-        <Route exact path="/capstone/employee" component={EmployeeTable} />
-        <Route exact path="/capstone/signatureList" component={SignatureList} />
-        <Route exact path="/capstone/companyProfile" component={UpdateProfileCompany} /></>);
-
-    })*/
-    console.log(JSON.parse(reactLocalStorage.get('login', true)))
-=======
     // var information = JSON.parse(reactLocalStorage.get('login', true)).map((login, index) => {
     //   return (<>
     //     <Route exact path="/capstone/SideMenu" component={EmployeeSideMenu} />
@@ -46,7 +30,6 @@ class App extends React.Component {
 
     // })
     // console.log(JSON.parse(reactLocalStorage.get('login', true)))
->>>>>>> origin/main
     return (
       <div >
         <Particles
