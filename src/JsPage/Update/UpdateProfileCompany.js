@@ -1,14 +1,16 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import '../../index.css';
+import Chart from '../Table/RevenueChart';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined
 } from '@ant-design/icons';
 import { createCustomer, customerInformation } from '../../actions/CustomerAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Row, Col, Card, Space } from 'antd';
+import { Form, Input, Button, Select, Col, Card, Space } from 'antd';
 import CustomerTable from '../Table/CustomerTable'
+
 
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const layout = {
@@ -20,6 +22,8 @@ const layout = {
         span: 14,
     },
 };
+const { Option } = Select;
+
 const tailLayout = {
     wrapperCol: {
         offset: 6,
@@ -38,6 +42,7 @@ class UpdateProfileCompany extends React.Component {
         this.state = {
             finish: false,
             isEdit: false,
+            value: 'date'
         };
         this.onFinish = this.onFinish.bind(this);
         this.onFinishFailed = this.onFinishFailed.bind(this);
@@ -61,23 +66,39 @@ class UpdateProfileCompany extends React.Component {
         })
 
 
-
-
-    };
-    onFinishFailed = (errorInfo) => {
+    };    onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
     render() {
-        
 
 
-            return (
+
+        return (
 
 
-                <React.Fragment>
-                    <Card>
-                        <h2 style={{ textAlign: 'center' }}>Thông tin doanh nghiệp</h2>
+            <React.Fragment>
+                <h2 style={{ textAlign: 'center' }}>Thông tin doanh nghiệp</h2>
+                <Space direction="horizontal" align="start"  >
+
+                    <Card style={{ width: 400 }}>
+                        <Select
+                            style={{ width: 200 }}
+                            placeholder="date"
+                            value={this.state.value}
+                            onChange={(event) => {
+                                this.setState({value: event});
+                              }} 
+                        >
+                            <Option value="date">Date</Option>
+                            <Option value="month">Month</Option>
+                            <Option value="year">Year</Option>
+                        </Select>
+                        <p></p>
+                        <Chart ChartType={this.state.value} />
+                    </Card>
+                    <Card style={{ width: 600, height: 600 }}>
+
                         <Form
                             {...layout}
                             name="basic"
@@ -90,7 +111,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Tên doanh nghiệp"
                                 name="company"
-                                
+
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="HiSign" /> :
@@ -99,7 +120,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Mã số thuế"
                                 name="name"
-                                
+
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="1231231" /> :
@@ -108,16 +129,16 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Điện thoại"
                                 name="phone"
-                                
+
                             >
-                               {this.state.isEdit === false ?
+                                {this.state.isEdit === false ?
                                     <Input disabled defaultValue="123123123" /> :
                                     <Input defaultValue="123123123" />}
                             </Form.Item>
                             <Form.Item
                                 label="Địa chỉ"
                                 name="address"
-                                
+
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="12/10/4/8" /> :
@@ -126,7 +147,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Email"
                                 name="Email"
-                                
+
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="Email" /> :
@@ -135,7 +156,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Giấy phép kinh doanh"
                                 name="certificate"
-                                
+
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="34534534" /> :
@@ -144,7 +165,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Tài khoản ngân hàng"
                                 name="bankaccount"
-                                
+
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="34534534" /> :
@@ -153,7 +174,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Người đại diện"
                                 name="presentor"
-                                
+
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="Nguyen Van A" /> :
@@ -165,7 +186,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Chức vụ"
                                 name="role"
-                                
+
                             >
                                 {this.state.isEdit === false ?
                                     <Input disabled defaultValue="Giám đốc" /> :
@@ -200,13 +221,13 @@ class UpdateProfileCompany extends React.Component {
 
                         </Form>
 
-                    </Card>
-                </React.Fragment>
+                    </Card></Space>
+            </React.Fragment>
 
 
-            );
-        }
+        );
     }
+}
 
 
 

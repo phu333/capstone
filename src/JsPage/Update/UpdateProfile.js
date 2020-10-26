@@ -196,7 +196,7 @@ class UpdateProfile extends React.Component {
                                         
                                     </Space>
                                 </Form.Item>
-                                <Form.Item>
+               -                 <Form.Item>
 
                                 </Form.Item>
 

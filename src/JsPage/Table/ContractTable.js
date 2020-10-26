@@ -1,9 +1,9 @@
 import 'antd/dist/antd.css';
-import { Table, Button, Space, Tag } from 'antd';
+import { Table, Button, Space, Tag,Popover } from 'antd';
 import ContractSearch from '../Search/ContractSearch'
 import "../Column.css"
 import {
-    EyeOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
+    EyeOutlined, FileExcelOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
     FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
 } from "@ant-design/icons"
 import ChooseContractTemplate from '../Add/ChooseContractTemplate'
@@ -109,7 +109,7 @@ class ContractTable extends Component {
     render() {
         const content = (
             <div style={{display:"inline-block"}}>
-                <Button
+               <span> <Button
                     title="Xem chi tiết"
                     key="action"
                     onClick={
@@ -118,19 +118,19 @@ class ContractTable extends Component {
                             showContract: true
                         })
                     }
-                >Xem chi tiết</Button>
-                <Button
+                ><EyeOutlined/> Xem chi tiết</Button></span>
+                <span><Button
                     title="Vô hiệu hóa"
                     key="action"
                     onClick={this.viewContract}
                     
-                >Vô hiệu hóa</Button>
-                 <Button
+                ><FileExcelOutlined /> Vô hiệu hóa</Button></span>
+                 <span><Button
                     title="Ký"
                     key="action"
                     onClick={this.viewContract}
-                >Ký</Button> 
-
+                ><FormOutlined /> Ký</Button> 
+</span>
             </div>
         );
 
