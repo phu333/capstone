@@ -3,7 +3,7 @@ import { Menu, Layout } from 'antd';
 import { PageHeader, Avatar, Descriptions, Space, Tag, Affix, Button } from 'antd';
 import React from 'react';
 import { Badge } from 'antd';
-
+import Chart from '../Update/RevenueChart';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 
 import { UserOutlined, ToolOutlined, NotificationOutlined, LogoutOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
@@ -32,7 +32,7 @@ class EmployeeSideMenu extends React.Component {
     super();
 
     this.state = {
-      showComponent: "",
+      showComponent: "Chart",
       collapsed: false,
     };
 
@@ -50,13 +50,13 @@ class EmployeeSideMenu extends React.Component {
     })
 
   };
-  componentDidMount() {
-    return (<Router>
-      <Redirect push to="/capstone/SideMenu" />
+  // componentDidMount() {
+  //   return (<Router>
+  //     <Redirect push to="/capstone/SideMenu" />
 
-      <Route exact path="/capstone/SideMenu" component={EmployeeSideMenu} />
-    </Router>);
-  }
+  //     <Route exact path="/capstone/SideMenu" component={EmployeeSideMenu} />
+  //   </Router>);
+  // }
   render() {
 
     if (this.props.myLoginReducer !== "logout") {
@@ -95,6 +95,7 @@ class EmployeeSideMenu extends React.Component {
                   inlineCollapsed={this.state.collapsed}
                 >
                   <SubMenu key="sub1" icon={<ToolOutlined />} title="Quản lý">
+                  <Menu.Item key="Chart">Xem doanh thu</Menu.Item>
                     {login.contractManagePermision === true ? <Menu.Item key="contract">danh sách hợp đồng</Menu.Item> : null}
                     {login.customerManagePermission === true ? <Menu.Item key="customerList">danh sách khách hàng</Menu.Item> : null}
                     {login.contractTypeManagePermission === true ? <Menu.Item key="contractType">danh sách loại hợp đồng</Menu.Item> : null}
@@ -134,7 +135,12 @@ class EmployeeSideMenu extends React.Component {
 
 
 
-
+                {this.state.showComponent === "Chart" ?
+                  <Router>
+                    <Redirect push to={"/capstone/" + this.state.showComponent} />
+                    <Route exact path="/capstone/Chart" component={Chart} />
+                  </Router>
+                  : null}
 
                 {this.state.showComponent === "customerList" ?
                   <Router>

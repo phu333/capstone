@@ -81,22 +81,7 @@ class UpdateProfileCompany extends React.Component {
                 <h2 style={{ textAlign: 'center' }}>Thông tin doanh nghiệp</h2>
                 <Space direction="horizontal" align="start"  >
 
-                    <Card style={{ width: 400 }}>
-                        <Select
-                            style={{ width: 200 }}
-                            placeholder="date"
-                            value={this.state.value}
-                            onChange={(event) => {
-                                this.setState({value: event});
-                              }} 
-                        >
-                            <Option value="date">Date</Option>
-                            <Option value="month">Month</Option>
-                            <Option value="year">Year</Option>
-                        </Select>
-                        <p></p>
-                        <Chart ChartType={this.state.value} />
-                    </Card>
+                   
                     <Card style={{ width: 600, height: 600 }}>
 
                         <Form

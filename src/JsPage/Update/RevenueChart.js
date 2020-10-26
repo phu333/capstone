@@ -1,5 +1,6 @@
 import React from 'react';
-import { Line } from '@ant-design/charts';
+import { Line,Pie,Column } from '@ant-design/charts';
+import { Space, Card } from 'antd';
 
 const Chart = (props) => {
   const date = [
@@ -44,7 +45,7 @@ const Chart = (props) => {
 
 
   const config = {
-    data,
+    data:date,
     height: 400,
     xField: 'Date',
     yField: 'Revenue',
@@ -58,6 +59,24 @@ const Chart = (props) => {
       },
     },
   };
-  return <Line {...config} />;
+  return (
+    <Space>
+      <Card style={{width:400}} >
+
+
+        <Line {...config} />
+      </Card>
+      <Card style={{width:400}} >
+
+
+        <Line {...config} />
+      </Card>
+      <Card style={{width:400}} >
+
+
+        <Line {...config} />
+      </Card>
+    </Space>
+  );
 };
 export default Chart;
