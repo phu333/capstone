@@ -109,11 +109,11 @@ class LoginPage extends React.Component {
             method: "POST",
             data: loginInformation
         })
-            .then( (response)=> {
-               
+            .then((response) => {
+
                 return response.data.data;
             })
-            .then( (data)=> {
+            .then((data) => {
                 console.log(data)
                 let loginInfo = {
                     username: "Tri",
@@ -128,7 +128,7 @@ class LoginPage extends React.Component {
                     editCompanyInformationPermission: true,
                     loginCode: true,
                 }
-    
+
                 this.props.onSubmit(loginInfo)
 
             })
@@ -136,10 +136,10 @@ class LoginPage extends React.Component {
                 console.log(error)
             });
 
-            
 
 
-            // this.props.onSubmit(loginInfo)
+
+        // this.props.onSubmit(loginInfo)
 
     };
 
@@ -232,11 +232,7 @@ class LoginPage extends React.Component {
                                 </Form.Item>
                                 <Form.Item {...middleLayout} name="remember" valuePropName="checked" >
                                     <Checkbox>Ghi nhớ</Checkbox>
-                                    <Button type="link" htmlType="button"
-                                        onClick={this.ForgetPassword}
-                                    >
-                                        Quên mật khẩu
-                                </Button>
+
                                 </Form.Item>
 
 
@@ -261,7 +257,11 @@ class LoginPage extends React.Component {
                                             onFailure={this.responseGoogle}
                                             cookiePolicy={'single_host_origin'}
                                         />
-
+                                        <Button type="link" htmlType="button"
+                                            onClick={this.ForgetPassword}
+                                        >
+                                            Quên mật khẩu
+                                </Button>
                                         {/* <Button type="link" htmlType="button"
                                             onClick={this.SendJoinRequest}>
                                             Gửi yêu cầu đăng ký

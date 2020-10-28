@@ -1,16 +1,16 @@
 import React from 'react';
-import Popup from 'reactjs-popup';
+// import Popup from 'reactjs-popup';
 import 'antd/dist/antd.css';
 import '../../index.css';
 import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
 import { Form, Input, Button, Checkbox, Space, Card } from 'antd';
-import {
-    IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-    , CloudUploadOutlined, RedoOutlined, ReloadOutlined
-} from '@ant-design/icons';
+// import {
+//     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
+//     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
+// } from '@ant-design/icons';
 import EmployeeTable from '../Table/EmployeeTable'
-
+import axios from 'axios'
 import "../Column.css"
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const layout = {
@@ -44,18 +44,38 @@ class AddEmployee extends React.Component {
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
-        const contract1 = {
-            name: 'Mike',
-            email: "some email",
-            address: '10 Downing Street',
-            status: "active",
-            role: "secretery"
-        }
-
-        this.props.onSubmit(contract1)
-        this.setState({
-            finish: true
+        console.log(values);
+        axios({
+            url: '/api/Account/register',
+            method: "POST",
+            data: values
         })
+            .then( (response)=> {
+               
+                return response.data.data;
+            })
+            .then( (data)=> {
+                console.log(data)
+                // let loginInfo = {
+                //     username: "Tri",
+                //     email: "triphan@gmail.com",
+                //     password: "123Pa$$word!",
+                //     signPermission: true,
+                //     contractManagePermision: true,
+                //     customerManagePermission: true,
+                //     contractTypeManagePermission: true,
+                //     employeeManagePermission: true,
+                //     signatureManagePermission: true,
+                //     editCompanyInformationPermission: true,
+                //     loginCode: true,
+                // }
+    
+                this.props.onSubmit(data)
+
+            })
+            .catch(error => {
+                console.log(error)
+            });
 
     };
     onFinishFailed = (errorInfo) => {
@@ -69,7 +89,7 @@ class AddEmployee extends React.Component {
     render() {
         if (this.state.finish) {
             return (<Router>
-                <Redirect push to={"/capstone/employee" } />
+                <Redirect push to={"/capstone/employee"} />
                 <Route exact path="/capstone/employee" component={EmployeeTable} /></Router>);
         } else {
 
@@ -177,23 +197,23 @@ class AddEmployee extends React.Component {
                         >
                             <Input placeholder="Chức vụ" />
                         </Form.Item>
-                        <Form.Item {...middleLayout} name="signPermission" valuePropName="unchecked" >
+                        <Form.Item {...middleLayout} name="signPermission" valuePropName="checked" >
                             <Checkbox>Quyền ký</Checkbox>
 
                         </Form.Item>
-                        <Form.Item {...middleLayout} name="employeePermission" valuePropName="unchecked" >
+                        <Form.Item {...middleLayout} name="employeePermission" valuePropName="checked" >
                             <Checkbox>Quyền quản lý nhân viên</Checkbox>
 
                         </Form.Item>
-                        <Form.Item {...middleLayout} name="contractPermission" valuePropName="unchecked" >
+                        <Form.Item {...middleLayout} name="contractPermission" valuePropName="checked" >
                             <Checkbox>Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox>
 
                         </Form.Item>
-                        <Form.Item {...middleLayout} name="customerPermission" valuePropName="unchecked" >
+                        <Form.Item {...middleLayout} name="customerPermission" valuePropName="checked" >
                             <Checkbox>Quyền quản lý khách hàng</Checkbox>
 
                         </Form.Item>
-                        <Form.Item {...middleLayout} name="companyInfoPermission" valuePropName="unchecked" >
+                        <Form.Item {...middleLayout} name="companyInfoPermission" valuePropName="checked" >
                             <Checkbox>Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox>
 
                         </Form.Item>
@@ -202,19 +222,17 @@ class AddEmployee extends React.Component {
 
                         <Form.Item {...tailLayout}>
                             <Space size="large">
-                                <Button type="primary" htmlType="submit" className="login-form-button">
+                                <Button type="primary" htmlType="submit" >
                                     Nộp
                                 </Button>
-                                <Button type="primary" htmlType="reset" className="login-form-button">
+                                <Button type="primary" htmlType="reset" >
                                     Reset
                                 </Button>
 
 
                             </Space>
                         </Form.Item>
-                        <Form.Item>
-
-                        </Form.Item>
+                       
 
 
 
