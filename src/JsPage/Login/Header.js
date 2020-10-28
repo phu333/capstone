@@ -63,6 +63,7 @@ class Header extends Component {
                 ]}
                 extra={[
                     <Space direction="horizontal" size="large" >
+                        <b>Thời hạn còn lại của tài khoản : 25 ngày</b>
                     <Dropdown overlay={notifications} placement="bottomCenter" trigger={['click']}>
                     <Badge count={1}><BellOutlined style={{ fontSize: '20px', color: '#08c' }} /></Badge>
                     </Dropdown>

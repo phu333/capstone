@@ -7,6 +7,7 @@ import { GoogleLogin } from 'react-google-login';
 import { Form, Input, Button, Checkbox } from 'antd';
 import EmployeeSideMenu from './EmployeeSideMenu';
 import { reactLocalStorage } from 'reactjs-localstorage';
+import axios from 'axios'
 
 import SendJoinRequest from '../Add/SendJoinRequest'
 import ForgetPassword from './ForgetPassword'
@@ -69,7 +70,9 @@ const userList = [
 const initialState = {
     role: "",
     othersPage: "",
-    user: ""
+    user: "",
+    password: "",
+    userInfo: {},
 }
 
 class LoginPage extends React.Component {
@@ -84,40 +87,60 @@ class LoginPage extends React.Component {
     }
 
     onFinish = (values) => {
-        console.log(this.state.role)
 
-        for (var i = 0; i < userList.length; i++) {
 
-            if (values.username === userList[i].username) {
-                if (values.password === userList[i].password) {
-                    this.setState({
 
-                        user: values.username,
-                    })
-                    
-                    break;
-                } else {
 
-                }
-            } else {
-
-            }
-        }
-        
         let loginInformation = {
-            username: this.state.user,
-            signPermission: true,
-            contractManagePermision: true,
-            customerManagePermission: true,
-            contractTypeManagePermission: true,
-            employeeManagePermission: true,
-            signatureManagePermission: true,
-            editCompanyInformationPermission: true,
+            email: "triphan@gmail.com",
+            password: "123Pa$$word!",
+            // signPermission: true,
+            // contractManagePermision: true,
+            // customerManagePermission: true,
+            // contractTypeManagePermission: true,
+            // employeeManagePermission: true,
+            // signatureManagePermission: true,
+            // editCompanyInformationPermission: true,
+            // loginCode:true,
         }
-        const loginArray = []
-        loginArray.push(loginInformation)
-        reactLocalStorage.setObject('login',loginArray);
-        this.props.onSubmit(loginInformation)
+
+        axios({
+            url: '/api/Account/authenticate',
+            method: "POST",
+            data: loginInformation
+        })
+            .then( (response)=> {
+               
+                return response.data.data;
+            })
+            .then( (data)=> {
+                console.log(data)
+                let loginInfo = {
+                    username: "Tri",
+                    email: "triphan@gmail.com",
+                    password: "123Pa$$word!",
+                    signPermission: true,
+                    contractManagePermision: true,
+                    customerManagePermission: true,
+                    contractTypeManagePermission: true,
+                    employeeManagePermission: true,
+                    signatureManagePermission: true,
+                    editCompanyInformationPermission: true,
+                    loginCode: true,
+                }
+    
+                this.props.onSubmit(loginInfo)
+
+            })
+            .catch(error => {
+                console.log(error)
+            });
+
+            
+
+
+            // this.props.onSubmit(loginInfo)
+
     };
 
     onFinishFailed = (errorInfo) => {
