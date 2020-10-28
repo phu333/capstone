@@ -105,7 +105,7 @@ class AddEmployee extends React.Component {
                         {...layout}
                         name="basic"
                         className="employee-form"
-
+                        
                         onFinish={this.onFinish}
                         onFinishFailed={this.onFinishFailed}
 
@@ -197,23 +197,24 @@ class AddEmployee extends React.Component {
                         >
                             <Input placeholder="Chức vụ" />
                         </Form.Item>
-                        <Form.Item {...middleLayout} name="signPermission" valuePropName="checked" >
-                            <Checkbox>Quyền ký</Checkbox>
+                        <Form.Item {...tailLayout} name="signPermission" valuePropName="checked" >
+                            
+                            <Checkbox checked={true} >Quyền ký</Checkbox>
 
                         </Form.Item>
-                        <Form.Item {...middleLayout} name="employeePermission" valuePropName="checked" >
+                        <Form.Item {...tailLayout} name="employeePermission" valuePropName="checked" >
                             <Checkbox>Quyền quản lý nhân viên</Checkbox>
 
                         </Form.Item>
-                        <Form.Item {...middleLayout} name="contractPermission" valuePropName="checked" >
+                        <Form.Item {...tailLayout} name="contractPermission" valuePropName="checked" >
                             <Checkbox>Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox>
 
                         </Form.Item>
-                        <Form.Item {...middleLayout} name="customerPermission" valuePropName="checked" >
+                        <Form.Item {...tailLayout} name="customerPermission" valuePropName="checked" >
                             <Checkbox>Quyền quản lý khách hàng</Checkbox>
 
                         </Form.Item>
-                        <Form.Item {...middleLayout} name="companyInfoPermission" valuePropName="checked" >
+                        <Form.Item {...tailLayout} name="companyInfoPermission" valuePropName="checked" >
                             <Checkbox>Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox>
 
                         </Form.Item>

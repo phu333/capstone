@@ -95,7 +95,7 @@ class EmployeeSideMenu extends React.Component {
                   inlineCollapsed={this.state.collapsed}
                 >
                   <SubMenu key="sub1" icon={<ToolOutlined />} title="Quản lý">
-                  <Menu.Item key="Chart">Xem doanh thu</Menu.Item>
+                  <Menu.Item active={true} key="Chart">Xem doanh thu</Menu.Item>
                     {login.contractManagePermision === true ? <Menu.Item key="contract">danh sách hợp đồng</Menu.Item> : null}
                     {login.customerManagePermission === true ? <Menu.Item key="customerList">danh sách khách hàng</Menu.Item> : null}
                     {login.contractTypeManagePermission === true ? <Menu.Item key="contractType">danh sách loại hợp đồng</Menu.Item> : null}
@@ -122,7 +122,7 @@ class EmployeeSideMenu extends React.Component {
 
               </Sider>
               <Layout style={{ padding: "0 24px 24px", height: "110vh" }}>
-                <Affix onChange={(affixed) => console.log(affixed)}>
+                <Affix >
 
                   <Header></Header>
                 </Affix>
