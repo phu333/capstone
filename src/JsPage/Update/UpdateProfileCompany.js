@@ -1,20 +1,11 @@
-import React from 'react';
+import {
+    QuestionCircleOutlined
+} from '@ant-design/icons';
+import { Button, Card, Col, Form, Input, Popover, Row, Space } from 'antd';
 import 'antd/dist/antd.css';
+import React from 'react';
 import '../../index.css';
-import Chart from './RevenueChart';
-import {
-    IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-    , CloudUploadOutlined, RedoOutlined
-} from '@ant-design/icons';
-import { createCustomer, customerInformation } from '../../actions/CustomerAction'
-import { connect } from 'react-redux'
-import { Form, Input, Button, Row,Popover, Col, Card, Space } from 'antd';
-import CustomerTable from '../Table/CustomerTable'
-import {
-    QuestionCircleOutlined, UserOutlined
-} from '@ant-design/icons';
 
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const layout = {
     labelCol: {
         span: 6,

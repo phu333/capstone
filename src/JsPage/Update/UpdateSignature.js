@@ -1,17 +1,11 @@
-import React from 'react';
-
+import { Button, Card, DatePicker, Form, Input, Space } from 'antd';
 import 'antd/dist/antd.css';
+import moment from 'moment';
+import React from 'react';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 import '../../index.css';
-import { createSignature, signatureInformation } from '../../actions/SignatureAction'
-import { connect } from 'react-redux'
-import { Form, Input, Button, Card, Space, DatePicker } from 'antd';
-import {
-    IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-    , CloudUploadOutlined, RedoOutlined
-} from '@ant-design/icons';
-import moment from 'moment'
-import SignatureList from '../Table/SignatureList'
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import SignatureList from '../Table/SignatureList';
+
 const dateFormat = 'YYYY-MM-DD';
 const { RangePicker } = DatePicker;
 const layout = {
