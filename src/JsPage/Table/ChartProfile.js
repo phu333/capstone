@@ -5,11 +5,11 @@ import 'antd/dist/antd.css';
 import TabsChart from './TabsChart';
 import 'ant-design-pro/dist/ant-design-pro.css';
 
-import { ChartCard, yuan, Field, MiniArea, MiniBar, MiniProgress } from 'ant-design-pro/lib/Charts';
+import { ChartCard,  Field, MiniArea, MiniBar, MiniProgress } from 'ant-design-pro/lib/Charts';
 import Trend from 'ant-design-pro/lib/Trend';
 import { Row, Col, Tooltip } from 'antd';
 import moment from 'moment';
-import { ExclamationCircleOutlined, UserOutlined } from '@ant-design/icons';
+import { ExclamationCircleOutlined,DollarOutlined, UserOutlined } from '@ant-design/icons';
 import numeral from 'numeral';
 
 const visitData = [];
@@ -33,7 +33,7 @@ class ChartProfile extends React.Component {
                             <ExclamationCircleOutlined />
                         </Tooltip>
                     }
-                    total={() => <span dangerouslySetInnerHTML={{ __html: yuan(126560) }} />}
+                    total={() =><span> <DollarOutlined/> <span dangerouslySetInnerHTML={{ __html: "126560 VNĐ" }} /></span>}
                     footer={<Field label="Doanh thu tháng này" value={numeral(12423).format('0,0')} />}
                 />
             </Col>
