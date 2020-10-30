@@ -88,8 +88,13 @@ class UpdateProfileCompany extends React.Component {
                 <h2 style={{ textAlign: 'center' }}>Thông tin doanh nghiệp</h2>
                 <Space direction="horizontal" align="start"  >
 
+<<<<<<< HEAD
 
                     <Card style={{ width: 800, minHeight: 600 }}>
+=======
+                   
+                    <Card style={{ width: 600, height: 600 }}>
+>>>>>>> origin/main
 
                         <Form
                             {...layout}

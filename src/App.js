@@ -10,29 +10,37 @@ import UpdateProfileCompany from './JsPage/Update/UpdateProfileCompany'
 import EmployeeTable from './JsPage/Table/EmployeeTable'
 import SignatureList from './JsPage/Table/SignatureList'
 import Particles from 'react-particles-js';
+import { Tabs, Result, Button } from 'antd';
 import EmployeeSideMenu from './JsPage/Login/EmployeeSideMenu';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+import SearchByCode from './JsPage/Login/SearchContract'
+import { Offline, Online } from "react-detect-offline";
+const { TabPane } = Tabs;
 class App extends React.Component {
+  state = {
+    currentTab: "Login",
+    showTab: true
+  }
+  changeTab = activeKey => {
+    console.log(activeKey);
+    this.setState({
+      currentTab: activeKey,
 
+    });
+  };
   render() {
-    // var information = JSON.parse(reactLocalStorage.get('login', true)).map((login, index) => {
-    //   return (<>
-    //     <Route exact path="/capstone/SideMenu" component={EmployeeSideMenu} />
-    //     <Route exact path="/capstone/customerList" component={CustomerTable} />
-    //     <Route exact path="/capstone/contract" render={() => <ContractTable role={login.signPermission} />
-    //     } />
-    //     <Route exact path="/capstone/contractType" component={ContractTypeTable} />
-    //     <Route exact path="/capstone/profile" component={UpdateProfile} />
-    //     <Route exact path="/capstone/employee" component={EmployeeTable} />
-    //     <Route exact path="/capstone/signatureList" component={SignatureList} />
-    //     <Route exact path="/capstone/companyProfile" component={UpdateProfileCompany} /></>);
+    console.log(this.props.myLoginReducer)
+    // var information = this.props.myLoginReducer.map((login, index) => {
+    //   this.setState({
+    //     showTab:false
+    //   })
 
     // })
     // console.log(JSON.parse(reactLocalStorage.get('login', true)))
     return (
       <div >
-        <Particles
+        <Online><Particles
           style={{ position: "absolute" }}
           height="95%"
           width="95%"
@@ -55,13 +63,36 @@ class App extends React.Component {
             }
           }}
         />
-        <Router>
+          <Router>
+            {this.props.myLoginReducer.length === 0 ?
+              <Tabs onTabClick={this.changeTab} defaultActiveKey="Login" centered>
+                <TabPane tab="Login" key="login">
+                  <Redirect push to={"/capstone/" + this.state.currentTab} />
 
-          <Redirect push to="/capstone/Login" />
+                  <Route exact path="/capstone/Login" component={LoginPage} />
+                </TabPane>
+                <TabPane tab=" Search contract" key="SearchContract">
+                  <Redirect push to={"/capstone/" + this.state.currentTab} />
 
-          <Route exact path="/capstone/Login" component={LoginPage} />
-          {/* {information} */}
-        </Router>
+                  <Route exact path="/capstone/SearchContract" component={SearchByCode} />
+                </TabPane>
+
+              </Tabs> : <Router>
+                <Redirect push to={"/capstone/" + this.state.currentTab} />
+
+                <Route exact path="/capstone/Login" component={LoginPage} />
+              </Router>}
+
+
+            {/* {information} */}
+          </Router></Online>
+        <Offline><Result
+          status="404"
+          title="404"
+          subTitle="Sorry, the page you visited does not exist."
+          extra={<Button type="primary">Back Home</Button>}
+        /></Offline>
+
 
 
 
@@ -71,7 +102,7 @@ class App extends React.Component {
   }
 }
 var mapStateToProps = state => {
-  console.log(state.myLoginReducer)
+
   return {
     myLoginReducer: state.myLoginReducer
   }

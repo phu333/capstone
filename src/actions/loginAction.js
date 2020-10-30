@@ -6,7 +6,8 @@ export const loginInformation = () => {
   export const addLogin = (login) => {
     return {
       type: 'ADD_login',
-      login
+      login,
+      
     }
   }
   export const logout = () => {
