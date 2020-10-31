@@ -10,6 +10,7 @@ import AddCompany from './AddCompany';
 const { Step } = Steps;
 
 class AddCompany extends React.Component {
+    state = { current: 0 };
     render() {
         const { current } = this.state;
         let regis;
@@ -22,7 +23,7 @@ class AddCompany extends React.Component {
             <div>
 
 
-                <Steps direction="vertical" current={current}>
+                <Steps  current={current}>
                     <Step title="Đăng ký công ty" icon={<UserOutlined />} status={
                         current === 0 ? 'current' : current > 0 ? 'finish' : 'process'
                     } />

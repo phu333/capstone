@@ -96,9 +96,7 @@ class AddEmployee extends React.Component {
             return (
                 <Card>
                     <br />
-                    <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
-                        Trở về
-              </Button>
+
                     <h2 style={{ textAlign: 'center' }}>Tạo nhân viên</h2>
 
                     <Form
