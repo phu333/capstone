@@ -1,14 +1,10 @@
 import React from 'react';
-// import Popup from 'reactjs-popup';
 import 'antd/dist/antd.css';
 import '../../index.css';
 import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
 import { Form, Input, Button, Checkbox, Space, Card } from 'antd';
-// import {
-//     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-//     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
-// } from '@ant-design/icons';
+
 import EmployeeTable from '../Table/EmployeeTable'
 import axios from 'axios'
 import "../Column.css"
@@ -34,7 +30,7 @@ const middleLayout = {
         span: 10,
     },
 };
-class AddEmployee extends React.Component {
+class AddUserAdmin extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -135,8 +131,19 @@ class AddEmployee extends React.Component {
                         >
                             <Input placeholder="cmnd/cmt" />
                         </Form.Item>
-                        
-                        
+                        <Form.Item
+                            label="Tên người dùng"
+                            name="username"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập tên người dùng',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="tên người dùng" />
+                        </Form.Item>
+
 
                         <Form.Item
                             label="Điện thoại"
@@ -213,7 +220,7 @@ class AddEmployee extends React.Component {
                         <Form.Item {...tailLayout}>
                             <Space size="large">
                                 <Button type="primary" htmlType="submit" >
-                                    Kiểm tra
+                                    Nộp
                                 </Button>
                                 <Button type="primary" htmlType="reset" >
                                     Reset
@@ -244,4 +251,4 @@ var mapDispatchToProps = (dispatch, props) => {
         }
     }
 }
-export default connect(null, mapDispatchToProps)(AddEmployee);
+export default connect(null, mapDispatchToProps)(AddUserAdmin);
