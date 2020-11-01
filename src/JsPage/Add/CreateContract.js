@@ -8,6 +8,9 @@ import {
     DeleteOutlined, IdcardOutlined, BankOutlined, PhoneOutlined, PrinterOutlined, HomeOutlined, MailOutlined
     , ContactsOutlined, CalendarOutlined, DollarOutlined, CloudDownloadOutlined, CloudUploadOutlined, AuditOutlined
 } from '@ant-design/icons';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { EditorState, ContentState, convertFromHTML } from 'draft-js'
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { Column, ColumnGroup } = Table;
@@ -19,7 +22,55 @@ class CreateContract extends React.Component {
         super();
 
         this.state = {
-
+            editorState: EditorState.createWithContent(
+                ContentState.createFromBlockArray(
+                  convertFromHTML('<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;"><strong>Điều 1. Đối tượng của hợp đồng:</strong></span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Theo yêu cầu của bên A về việc thực hiện hoạt động môi giới thương mại … (ghi rõ các nội dung hoạt động môi giới thương mại, như: làm trung gian cho các bên mua bán hàng hoá, cung ứng dịch vụ trong việc đàm phán, giao kết hợp đồng mua bán hàng hoá, dịch vụ, …), bên B đảm nhận và thực hiện …</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">(Đối tượng của hợp đồng môi giới thương mại là công việc có thể thực hiện được, không vi phạm điều cấm của luật, không trái đạo đức xã hội).</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;"><strong>Điều 2. Thời hạn thực hiện hợp đồng:</strong></span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Hợp đồng này được thực hiện kể từ ngày … / …/ …</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Thời gian dự kiến hoàn thành: là … ngày, kể từ ngày …/ …/ … đến hết ngày ngày …/ …/ …</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">(Bên A và bên B thoả thuận thời hạn cụ thể và ghi vào trong hợp đồng này).</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;"><strong>Điều 3. Nghĩa vụ và quyền của bên A:</strong></span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;"><strong>1. Nghĩa vụ của bên A:</strong></span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">a) Cung cấp các thông tin, tài liệu, phương tiện cần thiết liên quan đến hàng hoá, dịch vụ;</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">b) Trả thù lao môi giới và các chi phí hợp lý khác cho bên môi giới.</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">(Bên A và bên B thoả thuận các nghĩa vụ cụ thể khác và ghi vào trong hợp đồng này).</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;"><strong>2. Quyền của bên A:</strong></span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Yêu cầu bên B thực hiện hoạt động môi giới thương mại theo đúng các nội dung đã thỏa thuận tại Điều 1 của hợp đồng này.</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Trường hợp bên B vi phạm nghiêm trọng nghĩa vụ hoặc quy định tại hợp đồng này, thì bên A có quyền đơn phương chấm dứt thực hiện hợp đồng và yêu cầu bồi thường thiệt hại.</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">(Bên A và bên B thoả thuận các quyền cụ thể khác và ghi vào trong hợp đồng này).</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;"><strong>Điều 4. Nghĩa vụ và quyền của bên B:</strong></span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;"><strong>1. Nghĩa vụ của bên B:</strong></span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Bảo quản các mẫu hàng hoá, tài liệu được giao để thực hiện việc môi giới và phải hoàn trả cho bên được môi giới sau khi hoàn thành việc môi giới;</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Không được tiết lộ, cung cấp thông tin làm phương hại đến lợi ích của bên được môi giới;</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Chịu trách nhiệm về tư cách pháp lý của các bên được môi giới, nhưng không chịu trách nhiệm về khả năng thanh toán của họ;</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Không được tham gia thực hiện hợp đồng giữa các bên được môi giới, trừ trường hợp có uỷ quyền của bên được môi giới.</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">(Bên A và bên B thoả thuận các nghĩa vụ cụ thể khác và ghi vào trong hợp đồng này).</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;"><strong>2. Quyền của bên B:</strong></span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Yêu cầu bên A cung cấp thông tin, tài liệu và phương tiện để thực hiện công việc.</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Được tiến hành các nghiệp vụ trung gian môi giới thương mai, như: … (tuỳ theo từng nội dung hoạt động môi giới thương mại quy định tại Điều 1 của hợp đồng này).</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Yêu cầu bên A trả tiền thù lao môi giới theo quy định tại Điều 5 của hợp đồng này.</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">(Bên A và bên B thoả thuận các quyền cụ thể khác và ghi vào trong hợp đồng này).</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;"><strong>Điều 5. Tiền thù lao môi giới và phương thức thanh toán:</strong></span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">1. Tiền thù lao môi giới: Thực hiện công việc tại Điều 1 là: … đồng (Bằng chữ: …), đã bao gồm … % tiền thuế giá trị gia tăng.</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">2. Phương thức thanh toán: …</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">(Bên A và bên B thoả thuận cụ thể về phương thức thanh toán và ghi vào trong hợp đồng này).</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;"><strong>Điều 6. Chi phí khác:</strong></span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Bên A phải thanh toán các chi phí phát sinh hợp lý liên quan đến việc môi giới, kể cả khi việc môi giới không mang lại kết quả cho bên A.</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Chi phí khác hai bên thỏa thuận bổ sung nếu xét thấy cần thiết và đúng quy định của pháp luật.</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;"><strong>Điều 7. Đơn phương chấm dứt thực hiện hợp đồng:</strong></span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">1. Trường hợp việc tiếp tục thực hiện hoạt động môi giới thương mại hoặc công việc không có lợi cho bên A thì bên A có quyền đơn phương chấm dứt thực hiện hợp đồng, nhưng phải báo cho bên B biết trước … ngày. Bên A phải trả tiền thù lao môi giới theo phần hoạt động môi giới thương mại hoặc công việc mà bên B đã thực hiện và bồi thường thiệt hại (theo thoả thuận nếu có).</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">2. Trường hợp bên A vi phạm nghiêm trọng nghĩa vụ hoặc quy định tại hợp đồng này thì bên B có quyền đơn phương chấm dứt thực hiện hợp đồng và yêu cầu bồi thường thiệt hại.</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;"><strong>Điều 8. Phương thực giải quyết tranh chấp:</strong></span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Trong quá trình thực hiện hợp đồng, nếu có vấn đề phát sinh cần giải quyết, thì hai bên tiến hành thỏa thuận và thống nhất giải quyết kịp thời, hợp tình và hợp lý. Trường hợp không thỏa thuận được thì một trong các bên có quyền khởi kiện tại tòa án có thẩm quyền giải quyết vụ việc theo quy định của pháp luật.</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;"><strong>Điều 9. Các thoả thuận khác:</strong></span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Bên A và bên B đồng ý đã hiểu rõ quyền, nghĩa vụ, lợi ích hợp pháp của mình và hậu quả pháp lý của việc giao kết hợp đồng này.</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Bên A và bên B đồng ý thực hiện theo đúng các điều khoản trong hợp đồng này và không nêu thêm điều kiện gì khác.</span></p>'
+                  +'<p style="text-align:justify;"><span style="color: rgb(0,0,0);background-color: rgb(255,255,255);font-size: 16px;font-family: Arial, Helvetica, sans-serif;">Hợp đồng này được lập thành … bản, mỗi bản gồm … trang, có giá trị pháp lý như nhau và được giao cho bên A … bản, bên B … bản./.</span>&nbsp;</p>'
+                  )
+                )
+              ),
             TheChooseOne: {
                 Name: "",
                 MST: "",
@@ -27,7 +78,7 @@ class CreateContract extends React.Component {
                 Email: "",
                 Owner: "",
             },
-            currntPage:1,
+            currntPage: 1,
             products: [
                 {
                     key: 1,
@@ -48,8 +99,15 @@ class CreateContract extends React.Component {
             showContent: "customer"
         };
         this.handleChange = this.handleChange.bind(this);
+        this.onEditorStateChange = this.onEditorStateChange.bind(this);
 
     }
+    onEditorStateChange(editorState) {
+        console.log(editorState)
+        this.setState({
+            editorState: editorState,
+        });
+    };
     onFinish = (values) => {
         this.setState({
             finish: true
@@ -112,7 +170,7 @@ class CreateContract extends React.Component {
         this.setState({
             currntPage: page,
         });
-      };
+    };
     onOk(value) {
         console.log('onOk: ', value);
     }
@@ -130,14 +188,21 @@ class CreateContract extends React.Component {
 
             return (
 
-                <div >
+                <div style={{ fontSize: 14 }} >
                     <Button type="primary" value="cancel" onClick={this.Cancel}>
                         Trở về
               </Button>
 
-                    <h2 style={{ textAlign: 'center' }}>Hợp đồng <Input></Input></h2>
-                    <Space direction="vertical" align="start" >
-                        <Space direction="vertical" align="start" style={{ backgroundColor:"white" }} >
+                    <Space direction="vertical" align="center" >
+
+                        <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
+                            <Card>
+                                <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>
+                                <h6 style={{ textAlign: 'center', fontSize: 14 }}>Độc lập-tự do-hạnh phúc</h6>
+                                <br />
+                                <br />
+                                <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}>Hợp đồng </h2>
+                            </Card>
                             <Card>
                                 <Descriptions size="small" column={2} title={"Thông tin bên A"}  >
                                     <Descriptions.Item label={(<b><IdcardOutlined />{"Công ty/Tổ chức:"}</b>)}>HiSign</Descriptions.Item>
@@ -150,27 +215,27 @@ class CreateContract extends React.Component {
                                     <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item>
                                     <Descriptions.Item label={(<b><ContactsOutlined />{"Do ông(bà):"}</b>)} span={2}>Usada Pekora</Descriptions.Item>
                                     <Descriptions.Item label={(<b><ContactsOutlined />{"Năm sinh:"}</b>)} span={2}>
-                                       1998
+                                        1998
                         </Descriptions.Item>
                                     <Descriptions.Item label={(<b><ContactsOutlined />{"Chức vụ"}</b>)} span={2}>
                                         Giám đốc
                         </Descriptions.Item>
-                        <Descriptions.Item label={(<h><ContactsOutlined />{"làm đại diện"}</h>)} span={2}>
-                                        
-                        </Descriptions.Item>
+                                    <Descriptions.Item label={(<h><ContactsOutlined />{"làm đại diện"}</h>)} span={2}>
+
+                                    </Descriptions.Item>
 
                                 </Descriptions>
-                            
+
 
                                 <Descriptions title="" size="small" column={2} title="Thông tin bên B"
-                                extra={[<Select defaultValue="NO" onChange={this.handleChange}>
-                                <Option value="NO">Please select your customer</Option>
-                                <Option value="PR001">Usada construction</Option>
-                                <Option value="PR002">Anukin corp</Option>
-                                <Option value="PR003">The circus</Option>
-                            </Select>]}
+                                    extra={[<Select defaultValue="NO" onChange={this.handleChange}>
+                                        <Option value="NO">Please select your customer</Option>
+                                        <Option value="PR001">Usada construction</Option>
+                                        <Option value="PR002">Anukin corp</Option>
+                                        <Option value="PR003">The circus</Option>
+                                    </Select>]}
                                 >
-                                    
+
                                     <Descriptions.Item label={(<b><IdcardOutlined />{"Công ty/Tổ chức:"}</b>)}>HiSign</Descriptions.Item>
                                     <Descriptions.Item label={(<b><HomeOutlined />{"Địa chỉ:"}</b>)}>asdasdasd</Descriptions.Item>
                                     <Descriptions.Item label={(<b><PhoneOutlined />{"Điện thoại:"}</b>)}>123123123123</Descriptions.Item>
@@ -181,206 +246,28 @@ class CreateContract extends React.Component {
                                     <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item>
                                     <Descriptions.Item label={(<b><ContactsOutlined />{"Do ông(bà):"}</b>)} span={2}>Usada Pekora</Descriptions.Item>
                                     <Descriptions.Item label={(<b><ContactsOutlined />{"Năm sinh:"}</b>)} span={2}>
-                                       1998
+                                        1998
                         </Descriptions.Item>
                                     <Descriptions.Item label={(<b><ContactsOutlined />{"Chức vụ"}</b>)} span={2}>
                                         Giám đốc
                         </Descriptions.Item>
-                        <Descriptions.Item label={(<h><ContactsOutlined />{"làm đại diện"}</h>)} span={2}>
-                                        
-                                        </Descriptions.Item>
+                                    <Descriptions.Item label={(<h><ContactsOutlined />{"làm đại diện"}</h>)} span={2}>
+
+                                    </Descriptions.Item>
 
                                 </Descriptions>
                             </Card>
                         </Space>
 
-
-                        <Card>
-
-                            <Form
-
-                                name="basic"
-                                className="lcontract-form"
-
-                                onFinish={this.onFinish}
-                                onFinishFailed={this.onFinishFailed}
-
-                            >
-                                <Space title="Nội dung hợp đồng" direction="vertical" style={{width:"100%"}}   >
-                                    
-                                     {this.state.currntPage === 1 ? <>
-                                     <Card title="thời hạn hợp đồng"> <RangePicker
-                                            showTime={{ format: 'HH:mm' }}
-                                            format="YYYY-MM-DD HH:mm"
-                                            onChange={this.onChange}
-                                            onOk={this.onOk}
-                                        /></Card> 
-                                   
-                                        <Card title="Hàng hóa">
-                                            <Table dataSource={this.state.products}
-                                                rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}>
-                                                <Column title="stt" dataIndex="key" key="key"
-                                                    render={(text, record) => (
-
-                                                        <a>{text}</a>
-
-                                                    )}
-                                                />
-
-                                                <Column title="tên hàng hóa" dataIndex="product_name" key="product_name"
-                                                    render={(text, record) => (
-
-                                                        <b>{text}</b>
-
-                                                    )} />
-                                                <Column title="đơn vị" dataIndex="unit" key="unit"
-                                                    render={(text, record) => (
-
-                                                        <b>{text}</b>
-
-                                                    )} />
-                                                <Column title="số lượng" dataIndex="quantitve" key="quantitve"
-                                                    render={(text, record) => (
-
-                                                        <b>{text}</b>
-
-                                                    )} />
-                                                <Column title="Giá" dataIndex="price" key="price"
-                                                    render={(text, record) => (
-
-                                                        <Form.Item
-
-                                                            name="value"
-                                                            rules={[
-                                                                {
-                                                                    required: true,
-                                                                    message: 'Vui lòng nhập Giá trị:',
-                                                                },
-                                                            ]}
-                                                        >
-                                                            <InputNumber
-
-                                                                formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                                                parser={value => value.replace(/\$\s?|(,*)/g, '')}
-
-                                                            />
-                                                        </Form.Item>
-
-                                                    )} />
-
-                                                <Column
-                                                    title="Xóa"
-                                                    key="action"
-                                                    render={(text, record) => (
-
-                                                        <DeleteOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.viewContract} />
-
-                                                    )}
-                                                />
-
-
-                                            </Table>
-                                        Giá cả trên chưa bao gồm thuế Giá  trị gia tăng.
-Hàng hoá do Bên Bán cung cấp phải đảm bảo đúng chất lượng (Có Giấy chứng nhẫn hàng hoá cung cấp đạt tiêu chuẩn chất lượng của cơ quan Nhà nước có thẩm quyền)
-                                    </Card></> :null}   
-                                    {this.state.currntPage === 2 ? <><Card title="Tổng giá">
-
-                                    <InputNumber
-
-                                    formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                    parser={value => value.replace(/\$\s?|(,*)/g, '')}/>     
-
-
-                                    </Card> 
-                                    <Card title="Thuế">
-                                    <InputNumber
-                                    defaultValue={100}
-                                            min={0}
-                                        max={100}
-                                    formatter={value => `${value}%`}
-                                            parser={value => value.replace('%', '')}
-    
-                                            />                  
-
-
-    </Card> </> :null} 
-                                        {this.state.currntPage === 3 ? <> <Card title="Phương thức thanh toán">
-                                            Tổng số tiền Bên Mua phải Thanh toán cho Bên Bán là: <InputNumber
-
-                                                formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                                parser={value => value.replace(/\$\s?|(,*)/g, '')}
-
-                                            />đồng/ lô hàng
-
-                                        Giá trên chưa bao gồm thuế giá trị gia tăng.
-                                    </Card> 
-
-                                        <Card title="Thời hạn và phương thức thanh toán">
-                                            Phương thức thanh toán: Thanh toán bằng tiền mặt hoặc chuyển khoản.
-                                            Khi Bên A thanh toán tiền hàng theo các lần thanh toán, Bên B có nghĩa vụ ghi hoá đơn, chứng từ chứng nhận việc đã thanh toán của Bên A theo qui định của pháp luật.
-
-
-                                   </Card> 
-                                        <Card title="Thời điểm và địa điểm chuyển giao">
-                                            Bên bán chuyển giao tài sản cho Bên mua tại<Input /> trong thời hạn <Input /> ngày kể từ ngày ký kết hợp đồng;
-
-
-                                    </Card>  </> :null} 
-                                    {this.state.currntPage === 4? <> <Card title="Nghĩa vụ bên bán">
-                                            5.1.	Bên Bán chịu trách nhiệm về số lượng, chất lượng đối với toàn bộ các sản phẩm do Bên Bán cung cấp cho tới khi hàng đến <Input />
-                                        5.2.	Bên Bán có nghĩa vụ giao hàng cho Bên mua tại<Input />.
-                                        5.3.	Bên Bán có nghĩa vụ cung cấp mọi chỉ dẫn cần thiết đối với việc bảo quản, sử dụng hàng hoá theo quy định của Hợp đồng này cho Bên mua.F
-
-
-                                    </Card> 
-                                        <Card title="Nghĩa vụ bên mua">
-                                            6.1.	Bên mua có nghĩa vụ thanh toán toàn bộ chi phí vận chuyển từ  kho xưởng của mình đến <Input />
-                                        6.2.	Tổ chức tiếp nhận nhanh, an toàn, dứt điểm cho từng lô hàng.
-                                        6.3.	Thanh toán theo quy định tại Điều 7 Hợp đồng này.
-                                        6.4.	Chịu chi phí bốc dỡ từ xe xuống khi Bên Bán vận chuyển hàng hoá đến
-                                        <Input />
-
-                                        </Card> 
-                                        <Card title="Giải quyết tranh chấp">
-                                            Đối với Bên Bán:
-                                            -	Nếu Bên Bán không giao hàng đúng thời hạn quy định tại Hợp đồng này thì sẽ bị phạt số tiền là 0,05% Tổng giá trị Hợp đồng cho 01 ngày vi phạm.
-                                            -	Nếu Bên Bán không giao đủ hàng đúng số lượng và chất lượng theo quy định tại Hợp đồng này thì sẽ phải cung cấp tiếp hàng hoá theo đúng quy định và bị phạt số tiền là 0,05% Tổng giá trị hàng hoá bị vi phạm cho 01 ngày chậm.
-                                            Đối với bên mua:
-                                            -	Nếu Bên mua không thực hiện đúng nghĩa vụ thanh toán theo qui định tại  Hợp đồng này thì sẽ bị phạt số tiền là 0,05% Tổng giá trị Hợp đồng cho 01 ngày vi phạm.
-                                            -	Nếu Bên mua không thực hiện đúng nghĩa vụ tiếp nhận hàng theo qui định của Hợp đồng này thì sẽ bị phạt số tiền là 0,05% Tổng giá trị Hợp đồng cho 01 ngày vi phạm.
-                                            
-                                            
-                                     </Card>  </> :null} 
-                                     {this.state.currntPage === 5? <> <Card title="Các trường hợp chấm dứt hợp đồng">
-                                            Trong qúa trình thực hiện Hợp đồng này nếu xảy ra bất kỳ sự bất đồng nào,
-                                            Bên nảy sinh bất đồng sẽ thông báo cho bên kia bằng văn bản.
-                                            Hai bên sẽ thương lượng để giải quyết các bất đồng đó.
-                                            Trường hợp các bên không tự thương lượng được thì
-                                            sự việc sẽ được đưa ra giải quyết theo qui định của pháp luật.
-                                            Hợp đồng này sẽ được chấm dứt trong các trường hợp sau:
-                                            -	Khi các Bên thực hiện xong các quyền và nghĩa vụ quy định trong Hợp đồng này.
-                                            -	Khi một Bên vi phạm hợp đồng dẫn đến Hợp đồng không thể thực hiện được thì phía Bên kia có quyền đơn phương chấm dứt hợp đồng.
-                                            -	 Hợp đồng có thể được chấm dứt do sự thỏa thuận của các Bên.
-                                            
-                                     </Card> 
-                                        <Card title="Hiệu lực thi hành">
-
-
-
-                                        </Card>   </> :null} 
-                                       
-                                        
-
-                                </Space>
-                                
-                                <Space size="large">
-                                    <Button type="primary" value="submit" htmlType="submit">
-                                        Nộp
-                  </Button>
-                                </Space>
-                            </Form>
-                            <Pagination onChange={this.onPageChange} defaultCurrent={this.state.currntPage} total={50} />
-                        </Card>
+                        <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
+                             
+                            <Editor
+                                editorState={this.state.editorState}
+                                wrapperClassName="demo-wrapper"
+                                editorClassName="demo-editor"
+                                onEditorStateChange={this.onEditorStateChange}
+                            />
+                        </Space>
 
                     </Space>
                 </div>

@@ -4,15 +4,15 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 
-import { Space, Card, Button, Descriptions, Avatar,Form,Input } from 'antd';
+import { Space, Card, Button, Descriptions, Avatar, Form, Input, Popover, Row, Col, Tooltip } from 'antd';
 import {
-    IdcardOutlined, BankOutlined, HomeOutlined, UserOutlined
-    , CloudUploadOutlined, RedoOutlined, ReloadOutlined
+    QuestionCircleOutlined, UserOutlined
 } from '@ant-design/icons';
 import { connect } from 'react-redux'
 
 import "../Column.css"
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+
 const layout = {
     labelCol: {
         span: 6,
@@ -34,7 +34,11 @@ const middleLayout = {
         span: 10,
     },
 };
+const name = (
 
+    <p>Nên để họ tên thật</p>
+
+);
 class UpdateProfile extends React.Component {
     constructor() {
         super();
@@ -70,7 +74,7 @@ class UpdateProfile extends React.Component {
 
 
     render() {
-       
+
         var information = this.props.myLoginReducer.map((login, index) => {
             return (
 
@@ -80,7 +84,7 @@ class UpdateProfile extends React.Component {
                     <Space direction="horizontal" align="start"  >
 
 
-                        <Card style={{ width: 400, height: 300 }}>
+                        <Card style={{ width: 400, minHeight: 300 }}>
                             <Descriptions size="small" column={1}   >
 
                                 <Descriptions.Item><Avatar size={100} icon={<UserOutlined />} /> </Descriptions.Item>
@@ -96,107 +100,139 @@ class UpdateProfile extends React.Component {
                             </Descriptions>
                         </Card>
                         <Card style={{ width: 600, height: 600 }}>
-                        <Form
+                            <Form
                                 {...layout}
                                 name="basic"
                                 className="employee-form"
-                                
+
                                 onFinish={this.onFinish}
                                 onFinishFailed={this.onFinishFailed}
 
                             >
-                                
+
                                 <Form.Item
                                     label="Họ và tên"
                                     name="name"
-                                    
+
                                 >
                                     {this.state.isEdit === false ?
-                                    <Input disabled defaultValue="Nguyen Van D" /> :
-                                    <Input defaultValue="Nguyen Van D" />}
+                                        <Row gutter={8}> <Col span={10}><Input disabled defaultValue="Nguyen " /></Col><Col span={10}> <Input disabled defaultValue="Van A" /></Col>
+
+                                            <Col span={4}>    <Popover content={name} trigger="hover">
+                                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                            </Popover></Col></Row> :
+                                        <Row gutter={8}> <Col span={10}><Input defaultValue="Nguyen " /></Col><Col span={10}> <Input defaultValue="Van A" /></Col>
+
+                                            <Col span={4}>    <Popover content={name} trigger="hover">
+                                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                            </Popover></Col></Row>}
                                 </Form.Item>
                                 <Form.Item
                                     label="cmnd/cmt"
                                     name="id"
-                                    
+                                    required
                                 >
                                     {this.state.isEdit === false ?
-                                    <Input disabled defaultValue="324242342342" /> :
-                                    <Input defaultValue="324242342342" />}
+                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue="320202342342" /></Col>    <Popover content={name} trigger="hover">
+                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row> :
+                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue="320202342342" /></Col>    <Popover content={name} trigger="hover">
+                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row>}
                                 </Form.Item>
                                 <Form.Item
                                     label="Tên người dùng"
                                     name="username"
-                                    
-                                >
-                                    <Input disabled defaultValue="Ak95" />
+                                    required
+                                ><Row gutter={8}> <Col span={20}><Input disabled defaultValue="Ak95" /></Col>    <Popover content={name} trigger="hover">
+                                    <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                </Popover></Row>
                                 </Form.Item>
 
                                 <Form.Item
                                     label="Mật khẩu"
                                     name="password"
-                                    
+                                    required
                                 >
                                     {this.state.isEdit === false ?
-                                    <Input.Password disabled defaultValue="123" /> :
-                                    <Input.Password defaultValue="123" />}
-                                   
+                                        <Row gutter={8}> <Col span={20}>  <Input.Password disabled defaultValue="123" /> </Col>    <Popover content={name} trigger="hover">
+                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row> :
+                                        <Row gutter={8}> <Col span={20}>  <Input.Password defaultValue="123" /></Col>    <Popover content={name} trigger="hover">
+                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row>}
+
                                 </Form.Item>
                                 <Form.Item
                                     label="Điện thoại"
                                     name="phone"
-                                    
+
                                 >
                                     {this.state.isEdit === false ?
-                                    <Input disabled defaultValue="123123" /> :
-                                    <Input defaultValue="123123" />}
+                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue="123123" /></Col>    <Popover content={name} trigger="hover">
+                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row> :
+                                        <Row gutter={8}> <Col span={20}><Input defaultValue="123123" /></Col>    <Popover content={name} trigger="hover">
+                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row>}
                                 </Form.Item>
+
+
                                 <Form.Item
                                     label="Địa chỉ"
                                     name="address"
-                                    
+
                                 >
-                                   {this.state.isEdit === false ?
-                                    <Input disabled defaultValue="12/3/4" /> :
-                                    <Input defaultValue="12/3/4" />}
+                                    {this.state.isEdit === false ?
+                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue="12/3/4" /></Col>    <Popover content={name} trigger="hover">
+                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row> :
+                                        <Row gutter={8}> <Col span={20}><Input defaultValue="12/3/4" /></Col>    <Popover content={name} trigger="hover">
+                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row>}
                                 </Form.Item>
                                 <Form.Item
                                     label="Email"
                                     name="Email"
-                                    
+
                                 >
                                     {this.state.isEdit === false ?
-                                    <Input disabled defaultValue="Email" /> :
-                                    <Input defaultValue="Email" />}
+                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Email" /></Col>    <Popover content={name} trigger="hover">
+                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row> :
+                                        <Row gutter={8}> <Col span={20}><Input defaultValue="Email" /></Col>    <Popover content={name} trigger="hover">
+                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row>}
                                 </Form.Item>
                                 <Form.Item
                                     label="Chức vụ"
                                     name="role"
-                                    
+                                    required
                                 >
-                                   <Input disabled defaultValue="Giám đốc" />
+                                    <Row gutter={8}> <Col span={20}> <Input disabled defaultValue="Giám đốc" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>
                                 </Form.Item>
-                               
 
 
 
                                 <Form.Item {...tailLayout}>
                                     <Space size="large">
-                                    {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
-                                        Nộp
+                                        {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
+                                            Nộp
                             </Button> : null}
-                                    {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
-                                        Reset
+                                        {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
+                                            Reset
                             </Button> : null}
 
-                                    {this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
-                                        Sửa
+                                        {this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
+                                            Sửa
                             </Button> : null}
-                               
-                                        
+
+
                                     </Space>
                                 </Form.Item>
-                                <Form.Item>
+               -                 <Form.Item>
 
                                 </Form.Item>
 
@@ -204,7 +240,7 @@ class UpdateProfile extends React.Component {
 
 
                             </Form>
-                            
+
                         </Card>
 
 

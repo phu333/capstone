@@ -38,17 +38,34 @@ class AddEmployee extends React.Component {
     constructor() {
         super();
         this.state = {
-            finish: false
+            finish: false,
+            signPermission:false,
+            employeePermission:false,
+            contractPermission:false,
+            customerPermission:false,
+            companyInfoPermission:false,
         };
         this.onFinish = this.onFinish.bind(this);
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
-        console.log(values);
+        
+        let employeeInfo = {
+            firstname:values.name,
+            lastname :values.name,
+            email:values.Email,
+            signPermission:this.state.signPermission,
+            employeePermission:this.state.employeePermission,
+            contractPermission:this.state.contractPermission,
+            customerPermission:this.state.customerPermission,
+            companyInfoPermission:this.state.companyInfoPermission,
+            password:"123",
+            confirmPassword:"123"
+        }
         axios({
             url: '/api/Account/register',
             method: "POST",
-            data: values
+            data: employeeInfo
         })
             .then( (response)=> {
                
@@ -70,7 +87,7 @@ class AddEmployee extends React.Component {
                 //     loginCode: true,
                 // }
     
-                this.props.onSubmit(data)
+                // this.props.onSubmit(data)
 
             })
             .catch(error => {
@@ -199,23 +216,51 @@ class AddEmployee extends React.Component {
                         </Form.Item>
                         <Form.Item {...tailLayout} name="signPermission" valuePropName="checked" >
                             
-                            <Checkbox checked={true} >Quyền ký</Checkbox>
+                            <Checkbox onChange={()=>{
+                                this.setState({
+                                    signPermission:!this.state.signPermission
+                                })
+                            }} >Quyền ký</Checkbox>
 
                         </Form.Item>
                         <Form.Item {...tailLayout} name="employeePermission" valuePropName="checked" >
-                            <Checkbox>Quyền quản lý nhân viên</Checkbox>
+                            <Checkbox
+                            onChange={()=>{
+                                this.setState({
+                                    employeePermission:!this.state.employeePermission
+                                })
+                            }}
+                            >Quyền quản lý nhân viên</Checkbox>
 
                         </Form.Item>
                         <Form.Item {...tailLayout} name="contractPermission" valuePropName="checked" >
-                            <Checkbox>Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox>
+                        <Checkbox
+                            onChange={()=>{
+                                this.setState({
+                                    contractPermission:!this.state.contractPermission
+                                })
+                            }}
+                            >Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox>
 
                         </Form.Item>
                         <Form.Item {...tailLayout} name="customerPermission" valuePropName="checked" >
-                            <Checkbox>Quyền quản lý khách hàng</Checkbox>
+                        <Checkbox
+                            onChange={()=>{
+                                this.setState({
+                                    customerPermission:!this.state.customerPermission
+                                })
+                            }}
+                            >Quyền quản lý khách hàng</Checkbox>
 
                         </Form.Item>
                         <Form.Item {...tailLayout} name="companyInfoPermission" valuePropName="checked" >
-                            <Checkbox>Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox>
+                        <Checkbox
+                            onChange={()=>{
+                                this.setState({
+                                    companyInfoPermission:!this.state.companyInfoPermission
+                                })
+                            }}
+                            >Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox>
 
                         </Form.Item>
 

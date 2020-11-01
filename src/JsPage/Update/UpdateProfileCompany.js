@@ -1,18 +1,23 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import '../../index.css';
-import Chart from './RevenueChart';
+
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined
 } from '@ant-design/icons';
-import { createCustomer, customerInformation } from '../../actions/CustomerAction'
-import { connect } from 'react-redux'
-import { Form, Input, Button, Select, Col, Card, Space } from 'antd';
-import CustomerTable from '../Table/CustomerTable'
 
+import { Form, Input, Button, Row,Popover, Col, Card, Space } from 'antd';
+
+import {
+    QuestionCircleOutlined, UserOutlined
+} from '@ant-design/icons';
 
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+
+
+
+
 const layout = {
     labelCol: {
         span: 6,
@@ -22,7 +27,7 @@ const layout = {
         span: 14,
     },
 };
-const { Option } = Select;
+
 
 const tailLayout = {
     wrapperCol: {
@@ -66,12 +71,12 @@ class UpdateProfileCompany extends React.Component {
         })
 
 
-    };    onFinishFailed = (errorInfo) => {
+    }; onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
     render() {
-
+        const name="hello"
 
 
         return (
@@ -81,8 +86,8 @@ class UpdateProfileCompany extends React.Component {
                 <h2 style={{ textAlign: 'center' }}>Thông tin doanh nghiệp</h2>
                 <Space direction="horizontal" align="start"  >
 
-                   
-                    <Card style={{ width: 600, height: 600 }}>
+
+                    <Card style={{ width: 800, minHeight: 600 }}>
 
                         <Form
                             {...layout}
@@ -99,8 +104,12 @@ class UpdateProfileCompany extends React.Component {
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Input disabled defaultValue="HiSign" /> :
-                                    <Input defaultValue="HiSign" />}
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="HiSign" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row> :
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="HiSign" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>}
                             </Form.Item>
                             <Form.Item
                                 label="Mã số thuế"
@@ -108,8 +117,12 @@ class UpdateProfileCompany extends React.Component {
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Input disabled defaultValue="1231231" /> :
-                                    <Input defaultValue="1231231" />}
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row> :
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>}
                             </Form.Item>
                             <Form.Item
                                 label="Điện thoại"
@@ -117,8 +130,12 @@ class UpdateProfileCompany extends React.Component {
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Input disabled defaultValue="123123123" /> :
-                                    <Input defaultValue="123123123" />}
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row> :
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>}
                             </Form.Item>
                             <Form.Item
                                 label="Địa chỉ"
@@ -126,8 +143,12 @@ class UpdateProfileCompany extends React.Component {
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Input disabled defaultValue="12/10/4/8" /> :
-                                    <Input defaultValue="12/10/4/8" />}
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="12/10/4/8" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row> :
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="12/10/4/8" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>}
                             </Form.Item>
                             <Form.Item
                                 label="Email"
@@ -135,8 +156,12 @@ class UpdateProfileCompany extends React.Component {
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Input disabled defaultValue="Email" /> :
-                                    <Input defaultValue="Email" />}
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Email" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row> :
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="Email" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>}
                             </Form.Item>
                             <Form.Item
                                 label="Giấy phép kinh doanh"
@@ -144,8 +169,12 @@ class UpdateProfileCompany extends React.Component {
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Input disabled defaultValue="34534534" /> :
-                                    <Input defaultValue="34534534" />}
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row> :
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>}
                             </Form.Item>
                             <Form.Item
                                 label="Tài khoản ngân hàng"
@@ -153,8 +182,12 @@ class UpdateProfileCompany extends React.Component {
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Input disabled defaultValue="34534534" /> :
-                                    <Input defaultValue="34534534" />}
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row> :
+                                    <Row gutter={8}> <Col span={20}><Input  defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>}
                             </Form.Item>
                             <Form.Item
                                 label="Người đại diện"
@@ -162,8 +195,12 @@ class UpdateProfileCompany extends React.Component {
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Input disabled defaultValue="Nguyen Van A" /> :
-                                    <Input defaultValue="Nguyen Van A" />}
+                                   <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Nguyen Van A" /></Col>    <Popover content={name} trigger="hover">
+                                   <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                               </Popover></Row>  :
+                                   <Row gutter={8}> <Col span={20}><Input  defaultValue="Nguyen Van A" /></Col>    <Popover content={name} trigger="hover">
+                                   <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                               </Popover></Row> }
                             </Form.Item>
 
 
@@ -174,8 +211,12 @@ class UpdateProfileCompany extends React.Component {
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Input disabled defaultValue="Giám đốc" /> :
-                                    <Input defaultValue="Giám đốc" />}
+                                   <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Giám đốc" /></Col>    <Popover content={name} trigger="hover">
+                                   <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                               </Popover></Row> :
+                                   <Row gutter={8}> <Col span={20}><Input  defaultValue="Giám đốc" /></Col>    <Popover content={name} trigger="hover">
+                                   <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                               </Popover></Row>}
                             </Form.Item>
 
 
