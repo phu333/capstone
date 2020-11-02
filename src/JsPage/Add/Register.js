@@ -24,10 +24,10 @@ class AddCompany extends React.Component {
 
 
                 <Steps  current={current}>
-                    <Step title="Đăng ký công ty" icon={<UserOutlined />} status={
+                    <Step title="Đăng ký công ty" icon={<SolutionOutlined />} status={
                         current === 0 ? 'current' : current > 0 ? 'finish' : 'process'
                     } />
-                    <Step title="Đăng ký Account chủ" icon={<SolutionOutlined />} />
+                    <Step title="Đăng ký Account chủ" icon={<UserOutlined />} />
                     <Step title="Done" icon={<SmileOutlined />} />
 
                 </Steps>
