@@ -218,12 +218,7 @@ class ContractView extends React.Component {
                 } else {
                     return (
 
-<<<<<<< HEAD
-                        <div style={{ height: "100vh" }}>
-                            <br/>
-=======
                         <div style={{ height: "100vh", fontSize: 14 }}>
->>>>>>> origin/main
                             <Button type="primary" value="cancel" onClick={this.Cancel}>
                                 Trở về
                             </Button>

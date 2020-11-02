@@ -1,20 +1,7 @@
-<<<<<<< HEAD
-=======
 import React from 'react';
 import 'antd/dist/antd.css';
 import '../../index.css';
 
->>>>>>> origin/main
-import {
-    QuestionCircleOutlined
-} from '@ant-design/icons';
-<<<<<<< HEAD
-import { Button, Card, Col, Form, Input, Popover, Row, Space } from 'antd';
-import 'antd/dist/antd.css';
-import React from 'react';
-import '../../index.css';
-
-=======
 
 import { Form, Input, Button, Row,Popover, Col, Card, Space } from 'antd';
 
@@ -27,7 +14,6 @@ import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 're
 
 
 
->>>>>>> origin/main
 const layout = {
     labelCol: {
         span: 6,
@@ -38,14 +24,6 @@ const layout = {
     },
 };
 
-<<<<<<< HEAD
-const name = (
-
-    <p>Nên để họ tên thật</p>
-
-);
-=======
->>>>>>> origin/main
 
 const tailLayout = {
     wrapperCol: {
