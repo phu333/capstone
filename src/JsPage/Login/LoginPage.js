@@ -4,12 +4,12 @@ import 'antd/dist/antd.css';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { PageHeader, Space, Row, Col } from 'antd';
 import { GoogleLogin } from 'react-google-login';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox,message } from 'antd';
 import EmployeeSideMenu from './EmployeeSideMenu';
-import { reactLocalStorage } from 'reactjs-localstorage';
+
 import axios from 'axios'
 
-import SendJoinRequest from '../Add/SendJoinRequest'
+import AddUserAdmin from '../Login/AddUserAdmin'
 import ForgetPassword from './ForgetPassword'
 import { GoogleOutlined } from "@ant-design/icons"
 import { createFromIconfontCN } from '@ant-design/icons';
@@ -73,6 +73,7 @@ const initialState = {
     user: "",
     password: "",
     userInfo: {},
+    remember: false,
 }
 
 class LoginPage extends React.Component {
@@ -111,14 +112,18 @@ class LoginPage extends React.Component {
         })
             .then((response) => {
 
-                return response.data.data;
+                return response.data;
             })
             .then((data) => {
-                console.log(data)
+                
                 let loginInfo = {
-                    username: "Tri",
+                    id:data.data.id,
+                    username: data.data.userName,
                     email: "triphan@gmail.com",
                     password: "123Pa$$word!",
+                    companyId:"001",
+                    companyName:"HiSign",
+                    role: data.data.roles[0],
                     signPermission: true,
                     contractManagePermision: true,
                     customerManagePermission: true,
@@ -126,6 +131,8 @@ class LoginPage extends React.Component {
                     employeeManagePermission: true,
                     signatureManagePermission: true,
                     editCompanyInformationPermission: true,
+                    isVerified:data.data.isVerified,
+                    jwToken:data.data.jwToken,
                     loginCode: true,
                 }
 
@@ -133,7 +140,13 @@ class LoginPage extends React.Component {
 
             })
             .catch(error => {
-                console.log(error)
+                
+                if(error.response.status === 500){
+                    message.error(error.response.status + ' Server under maintainence');
+                }else if(error.response.status === 404){
+                    message.error(error.response.status + ' Server not found');
+                }
+                
             });
 
 
@@ -153,7 +166,7 @@ class LoginPage extends React.Component {
     };
     SendJoinRequest = () => {
         this.setState({
-            othersPage: "SendJoinRequest"
+            othersPage: "AddUserAdmin"
         })
     };
 
@@ -181,9 +194,9 @@ class LoginPage extends React.Component {
                 return (
                     <ForgetPassword />);
 
-            } else if (this.state.othersPage === "SendJoinRequest") {
+            } else if (this.state.othersPage === "AddUserAdmin") {
                 return (
-                    <SendJoinRequest />);
+                    <AddUserAdmin />);
             } else {
                 return (
                     <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
@@ -230,9 +243,19 @@ class LoginPage extends React.Component {
                                 >
                                     <Input.Password />
                                 </Form.Item>
-                                <Form.Item {...middleLayout} name="remember" valuePropName="checked" >
-                                    <Checkbox>Ghi nhớ</Checkbox>
-
+                                <Form.Item {...middleLayout} name="remember" valuePropName="unchecked" >
+                                    <Checkbox
+                                        onChange={() => {
+                                            this.setState({
+                                                remember: !this.state.remember
+                                            })
+                                        }}
+                                    >Ghi nhớ</Checkbox>
+                                    <Button type="link" htmlType="button"
+                                        onClick={this.ForgetPassword}
+                                    >
+                                        Quên mật khẩu
+                                </Button>
                                 </Form.Item>
 
 
@@ -257,15 +280,11 @@ class LoginPage extends React.Component {
                                             onFailure={this.responseGoogle}
                                             cookiePolicy={'single_host_origin'}
                                         />
+
                                         <Button type="link" htmlType="button"
-                                            onClick={this.ForgetPassword}
-                                        >
-                                            Quên mật khẩu
-                                </Button>
-                                        {/* <Button type="link" htmlType="button"
                                             onClick={this.SendJoinRequest}>
                                             Gửi yêu cầu đăng ký
-                                </Button> */}
+                                </Button>
                                     </Space>
                                 </Form.Item>
                                 <Form.Item>

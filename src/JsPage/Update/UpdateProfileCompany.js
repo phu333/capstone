@@ -1,11 +1,33 @@
+<<<<<<< HEAD
+=======
+import React from 'react';
+import 'antd/dist/antd.css';
+import '../../index.css';
+
+>>>>>>> origin/main
 import {
     QuestionCircleOutlined
 } from '@ant-design/icons';
+<<<<<<< HEAD
 import { Button, Card, Col, Form, Input, Popover, Row, Space } from 'antd';
 import 'antd/dist/antd.css';
 import React from 'react';
 import '../../index.css';
 
+=======
+
+import { Form, Input, Button, Row,Popover, Col, Card, Space } from 'antd';
+
+import {
+    QuestionCircleOutlined, UserOutlined
+} from '@ant-design/icons';
+
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+
+
+
+
+>>>>>>> origin/main
 const layout = {
     labelCol: {
         span: 6,
@@ -16,11 +38,14 @@ const layout = {
     },
 };
 
+<<<<<<< HEAD
 const name = (
 
     <p>Nên để họ tên thật</p>
 
 );
+=======
+>>>>>>> origin/main
 
 const tailLayout = {
     wrapperCol: {
@@ -69,7 +94,7 @@ class UpdateProfileCompany extends React.Component {
     };
 
     render() {
-
+        const name="hello"
 
 
         return (
@@ -79,8 +104,8 @@ class UpdateProfileCompany extends React.Component {
                 <h2 style={{ textAlign: 'center' }}>Thông tin doanh nghiệp</h2>
                 <Space direction="horizontal" align="start"  >
 
-                   
-                    <Card style={{ width: 600, height: 600 }}>
+
+                    <Card style={{ width: 800, minHeight: 600 }}>
 
                         <Form
                             {...layout}

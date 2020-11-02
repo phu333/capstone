@@ -40,32 +40,11 @@ class App extends React.Component {
     // console.log(JSON.parse(reactLocalStorage.get('login', true)))
     return (
       <div >
-        <Online><Particles
-          style={{ position: "absolute" }}
-          height="95%"
-          width="95%"
-          params={{
-            particles: {
-              color: {
-                value: "#000000"
-              },
-              line_linked: {
-                color: {
-                  value: "#000000"
-                }
-              },
-              number: {
-                value: 50
-              },
-              size: {
-                value: 3
-              }
-            }
-          }}
-        />
+        <Online>
+         
           <Router>
             {this.props.myLoginReducer.length === 0 ?
-              <Tabs onTabClick={this.changeTab} defaultActiveKey="Login" centered>
+              <Tabs onTabClick={this.changeTab} defaultActiveKey="Login" centered >
                 <TabPane tab="Login" key="login">
                   <Redirect push to={"/capstone/" + this.state.currentTab} />
 
@@ -78,7 +57,7 @@ class App extends React.Component {
                 </TabPane>
 
               </Tabs> : <Router>
-                <Redirect push to={"/capstone/" + this.state.currentTab} />
+                <Redirect push to={"/capstone/Login" } />
 
                 <Route exact path="/capstone/Login" component={LoginPage} />
               </Router>}
@@ -90,7 +69,7 @@ class App extends React.Component {
           status="404"
           title="404"
           subTitle="Sorry, the page you visited does not exist."
-          extra={<Button type="primary">Back Home</Button>}
+          
         /></Offline>
 
 

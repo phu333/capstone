@@ -4,7 +4,7 @@ import myContractReducer from'./contracts'
 import myContractExtensionReducer from './contractExtensions'
 import myCustomerReducer from'./customers'
 import myContractTypeReducer from './contractTypes'
-import myUserReducer from './users'
+
 import mySignatureReducer from'./signatures'
 import myEmployeeReducer from './employees'
 const myReducers  = combineReducers({
@@ -13,7 +13,7 @@ const myReducers  = combineReducers({
     myContractExtensionReducer,
     myCustomerReducer,
     myContractTypeReducer,
-    myUserReducer,
+    
     mySignatureReducer,
     myEmployeeReducer,
 });

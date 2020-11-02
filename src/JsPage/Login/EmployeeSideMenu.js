@@ -1,11 +1,11 @@
 import 'antd/dist/antd.css';
 import { Menu, Layout } from 'antd';
-import { PageHeader, Avatar, Descriptions, Space, Tag, Affix, Button } from 'antd';
+import { Breadcrumb, Avatar, Descriptions, Space, Tag, Affix, Button } from 'antd';
 import React from 'react';
 import { Badge } from 'antd';
-import Chart from '../Update/RevenueChart';
+import AddCompany from './AddCompany'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
-
+import Chart from './ChartProfile'
 import { UserOutlined, ToolOutlined, NotificationOutlined, LogoutOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import ContractTable from '../Table/ContractTable'
 import CustomerTable from '../Table/CustomerTable'
@@ -69,18 +69,18 @@ class EmployeeSideMenu extends React.Component {
             <Layout style={{ height: "100vh" }}>
 
               <Sider width={250} className="site-layout-background"
-              collapsible
-              collapsed={this.state.collapsed}
-              onCollapse={() => this.setState({
-                collapsed : !this.state.collapsed
-              })}
-              style={{
-                overflow: "auto",
-                height: "100vh",
-                position: "sticky",
-                top: 0,
-                left: 0
-              }}
+                collapsible
+                collapsed={this.state.collapsed}
+                onCollapse={() => this.setState({
+                  collapsed: !this.state.collapsed
+                })}
+                style={{
+                  overflow: "auto",
+                  height: "100vh",
+                  position: "sticky",
+                  top: 0,
+                  left: 0
+                }}
               >
 
                 <IconFont type="icon-javascript" style={{ fontSize: '60px', color: '#08c', marginLeft: "40%" }} />
@@ -95,12 +95,14 @@ class EmployeeSideMenu extends React.Component {
                   inlineCollapsed={this.state.collapsed}
                 >
                   <SubMenu key="sub1" icon={<ToolOutlined />} title="Quản lý">
-                  <Menu.Item active={true} key="Chart">Xem doanh thu</Menu.Item>
-                    {login.contractManagePermision === true ? <Menu.Item key="contract">danh sách hợp đồng</Menu.Item> : null}
-                    {login.customerManagePermission === true ? <Menu.Item key="customerList">danh sách khách hàng</Menu.Item> : null}
-                    {login.contractTypeManagePermission === true ? <Menu.Item key="contractType">danh sách loại hợp đồng</Menu.Item> : null}
-                    {login.employeeManagePermission === true ? <Menu.Item key="employee">Nhân viên</Menu.Item> : null}
-                    {login.signatureManagePermission === true ? <Menu.Item key="signatureList">Danh sách chữ ký</Menu.Item> : null}
+                    {login.companyId !== null ? <>
+                      <Menu.Item active={true} key="Chart">Xem doanh thu</Menu.Item>
+                      {login.contractManagePermision === true ? <Menu.Item key="contract">danh sách hợp đồng</Menu.Item> : null}
+                      {login.customerManagePermission === true ? <Menu.Item key="customerList">danh sách khách hàng</Menu.Item> : null}
+                      {login.contractTypeManagePermission === true ? <Menu.Item key="contractType">danh sách loại hợp đồng</Menu.Item> : null}
+                      {login.employeeManagePermission === true ? <Menu.Item key="employee">Nhân viên</Menu.Item> : null}
+                      {login.signatureManagePermission === true ? <Menu.Item key="signatureList">Danh sách chữ ký</Menu.Item> : null} </> : <Menu.Item key="addCompany">Tạo doanh nghiệp</Menu.Item>}
+
 
 
 
@@ -111,9 +113,10 @@ class EmployeeSideMenu extends React.Component {
                   </SubMenu>
                   <SubMenu key="sub2" icon={<UserOutlined />} title="Thông tin cá nhân">
 
-
+                    {login.companyId !== null ? <>
+                      {login.editCompanyInformationPermission === true ? <Menu.Item key="companyProfile">Thông tin công ty</Menu.Item> : null} </> : null}
                     <Menu.Item key="profile">Thông tin cá nhân</Menu.Item>
-                    {login.editCompanyInformationPermission === true ? <Menu.Item key="companyProfile">Thông tin công ty</Menu.Item> : null}
+
                   </SubMenu>
                   {/* <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
                     {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
@@ -128,53 +131,73 @@ class EmployeeSideMenu extends React.Component {
                 </Affix>
 
 
+                <Breadcrumb style={{ margin: '16px 0' }}>
+                  <Breadcrumb.Item>Home</Breadcrumb.Item>
+                  <Breadcrumb.Item>{this.state.showComponent}</Breadcrumb.Item>
+
+                </Breadcrumb>
 
 
 
 
 
+                <Content style={{
+                  padding: 24,
+                  margin: 0,
+                  minHeight: "100vh",
+                  backgroundColor: "white",
+                }}>
+                  {login.companyId !== null ? <>
+                    {this.state.showComponent === "Chart" ?
+                      <Router>
+                        <Redirect push to={"/capstone/" + this.state.showComponent} />
+                        <Route exact path="/capstone/Chart" component={Chart} />
+                      </Router>
+                      : null}
+                    {this.state.showComponent === "customerList" ?
+                      <Router>
+                        <Redirect push to={"/capstone/" + this.state.showComponent} />
+                        <Route exact path="/capstone/customerList" component={CustomerTable} />
+                      </Router>
+                      : null}
+                    {this.state.showComponent === "contract" ?
+                      <Router>
+                        <Redirect push to={"/capstone/" + this.state.showComponent} />
+                        <Route exact path="/capstone/contract" render={() => <ContractTable role={login.signPermission} />
+                        } /></Router> : null}
+                    {this.state.showComponent === "contractType" ?
+                      <Router>
+                        <Redirect push to={"/capstone/" + this.state.showComponent} />
+                        <Route exact path="/capstone/contractType" component={ContractTypeTable} /></Router> : null}
+                    {this.state.showComponent === "employee" ?
+                      <Router>
+                        <Redirect push to={"/capstone/" + this.state.showComponent} />
+                        <Route exact path="/capstone/employee" component={EmployeeTable} /></Router> : null}
+                    {this.state.showComponent === "signatureList" ?
+                      <Router>
+                        <Redirect push to={"/capstone/" + this.state.showComponent} />
+                        <Route exact path="/capstone/signatureList" component={SignatureList} /></Router> : null}
+                    {this.state.showComponent === "companyProfile" ?
+                      <Router>
+                        <Redirect push to={"/capstone/" + this.state.showComponent} />
+                        <Route exact path="/capstone/companyProfile" component={UpdateProfileCompany} /></Router> : null}
+                  </> : <Router>
+                      <Redirect push to={"/capstone/addCompany"} />
+                      <Route exact path="/capstone/companyProfile" component={AddCompany} /></Router>}
 
 
-                {this.state.showComponent === "Chart" ?
-                  <Router>
-                    <Redirect push to={"/capstone/" + this.state.showComponent} />
-                    <Route exact path="/capstone/Chart" component={Chart} />
-                  </Router>
-                  : null}
 
-                {this.state.showComponent === "customerList" ?
-                  <Router>
-                    <Redirect push to={"/capstone/" + this.state.showComponent} />
-                    <Route exact path="/capstone/customerList" component={CustomerTable} />
-                  </Router>
-                  : null}
-                {this.state.showComponent === "contract" ?
-                  <Router>
-                    <Redirect push to={"/capstone/" + this.state.showComponent} />
-                    <Route exact path="/capstone/contract" render={() => <ContractTable role={login.signPermission} />
-                    } /></Router> : null}
-                {this.state.showComponent === "contractType" ?
-                  <Router>
-                    <Redirect push to={"/capstone/" + this.state.showComponent} />
-                    <Route exact path="/capstone/contractType" component={ContractTypeTable} /></Router> : null}
-                {this.state.showComponent === "profile" ?
-                  <Router>
-                    <Redirect push to={"/capstone/" + this.state.showComponent} />
-                    <Route exact path="/capstone/profile" component={UpdateProfile} /></Router> : null}
-                {this.state.showComponent === "employee" ?
-                  <Router>
-                    <Redirect push to={"/capstone/" + this.state.showComponent} />
-                    <Route exact path="/capstone/employee" component={EmployeeTable} /></Router> : null}
-                {this.state.showComponent === "signatureList" ?
-                  <Router>
-                    <Redirect push to={"/capstone/" + this.state.showComponent} />
-                    <Route exact path="/capstone/signatureList" component={SignatureList} /></Router> : null}
 
-                {this.state.showComponent === "companyProfile" ?
-                  <Router>
-                    <Redirect push to={"/capstone/" + this.state.showComponent} />
-                    <Route exact path="/capstone/companyProfile" component={UpdateProfileCompany} /></Router> : null}
 
+                  {this.state.showComponent === "profile" ?
+                    <Router>
+                      <Redirect push to={"/capstone/" + this.state.showComponent} />
+                      <Route exact path="/capstone/profile" component={UpdateProfile} /></Router> : null}
+
+
+
+
+                </Content>
 
 
               </Layout>
