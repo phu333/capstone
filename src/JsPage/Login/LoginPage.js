@@ -121,6 +121,8 @@ class LoginPage extends React.Component {
                     username: data.data.userName,
                     email: "triphan@gmail.com",
                     password: "123Pa$$word!",
+                    companyId:"001",
+                    companyName:"HiSign",
                     role: data.data.roles[0],
                     signPermission: true,
                     contractManagePermision: true,

@@ -4,6 +4,7 @@ import TemplateUpload from '../Add/TemplateUpload';
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import React from 'react';
 import "../Column.css"
+import ViewTemplate from '../Update/TemplateView'
 import ContractTypeSearch from '../Search/ContractTypeSearch'
 import { createContractType, contractTypeInformation } from '../../actions/ContractType'
 import { connect } from 'react-redux'
@@ -17,14 +18,15 @@ class ContractTable extends React.Component {
     super();
 
     this.state = {
-      showTemplateCreate: false
+      showTemplateCreate: false,
+      viewTemplate:false,
     };
     this.handleChange = this.handleChange.bind(this);
 
   }
   handleChange() {
     this.setState({
-      showTemplateCreate: true,
+      showTemplateCreate: !this.state.showTemplateCreate,
     })
   }
   componentDidMount() {
@@ -63,7 +65,15 @@ class ContractTable extends React.Component {
         <Route exact path="/capstone/uploadTemplate" component={TemplateUpload} /></Router>
        
       );
-    } else {
+    }else if (this.state.showTemplateCreate) {
+      return (
+        <Router>
+        <Redirect push to={"/capstone/viewTemplate" } />
+        <Route exact path="/capstone/viewTemplate" component={ViewTemplate} /></Router>
+       
+      );
+    } 
+    else {
       return (
         <div style={{ height: "100vh" }}><Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tải lên mẫu mới</Button>
           <ContractTypeSearch />
@@ -127,7 +137,11 @@ class ContractTable extends React.Component {
               key="Update"
               render={(text, record) => (
                 <Space size="middle">
-                  <UploadOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.handleChange}>Chọn file khác</UploadOutlined>
+                  <UploadOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={()=>{
+                    this.setState({
+                      viewTemplate : !this.state.viewTemplate
+                    })
+                  }}>Chọn file khác</UploadOutlined>
                 </Space>
               )}
             />

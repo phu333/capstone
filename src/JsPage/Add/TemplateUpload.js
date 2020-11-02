@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-
+import { connect } from 'react-redux'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Avatar, Button, Skeleton, Checkbox, Dropdown, Select, Form, Input } from 'antd';
+import { Avatar, Button, Space, Checkbox, Dropdown, Select, Form, Input } from 'antd';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { FormBuilder } from 'react-formio';
 import EditorJs from 'react-editor-js';
@@ -24,8 +24,11 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
-// import Quote from '@editorjs/quote'
-// import Marker from '@editorjs/marker'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import JoditEditor from "jodit-react";
+
+
 const layout = {
     labelCol: {
         span: 8,
@@ -44,29 +47,61 @@ const { Option } = Select;
 class TemplateUpload extends React.Component {
     constructor() {
         super();
+        this.modules = {
+            toolbar: [
+                [{ 'font': [] }],
+                [{ 'size': ['small', false, 'large', 'huge'] }],
+                ['bold', 'italic', 'underline'],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                [{ 'align': [] }],
+                [{ 'color': [] }, { 'background': [] }],
+                ['clean']
+            ]
+        };
 
+        this.formats = [
+            'font',
+            'size',
+            'bold', 'italic', 'underline',
+            'list', 'bullet',
+            'align',
+            'color', 'background'
+        ];
         this.state = {
-            editorState: EditorState.createEmpty(),
+            contractContent: ""
 
         };
         // this.handleChange = this.handleChange.bind(this);
-        this.onEditorStateChange = this.onEditorStateChange.bind(this);
-
+        // this.onEditorStateChange = this.onEditorStateChange.bind(this);
+        this.rteChange = this.rteChange.bind(this);
 
     }
     // handleEditorChange(e) {
     //     console.log('Content was updated:', e.target.getContent());
     //     this.setState({ content: e.target.getContent() });
     // }
-    onEditorStateChange(editorState) {
-        console.log(editorState)
-        console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())))
+    // onEditorStateChange(editorState) {
+    //     console.log(editorState)
+    //     console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())))
+    //     this.setState({
+    //         editorState: editorState,
+    //     });
+    // };
+    rteChange = (value) => {
+        console.log(value); // HTML/rich text
         this.setState({
-            editorState: editorState,
-        });
-    };
+            contractContent: value
+        })
 
+    }
+    onFinish = (values) => {
+
+
+    };
     render() {
+        const config = {
+            readonly: false // all options from https://xdsoft.net/jodit/doc/
+        }
         // const content = <p>This is the initial content of the editor</p>;
 
         // const EDITOR_JS_TOOLS = {
@@ -88,6 +123,10 @@ class TemplateUpload extends React.Component {
 
         return (
             <div style={{ backgroundColor: "white" }}>
+                 <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
+                        Trở về
+              </Button>
+                    <h2 style={{ textAlign: 'center' }}>Tạo Mẫu hợp đồng</h2>
                 {/* <Form>
                     <Editor
                         initialValue={content}
@@ -101,12 +140,62 @@ class TemplateUpload extends React.Component {
                         <Button className="btn btn-block btn-primary btn-lg" type="submit">Lưu</Button>
                     </div>
                 </Form> */}
-                <Editor
+                {/* <Editor
                     editorState={this.state.editorState}
                     wrapperClassName="demo-wrapper"
                     editorClassName="demo-editor"
                     onEditorStateChange={this.onEditorStateChange}
-                />
+                /> */}
+                {/* <ReactQuill modules={this.modules}
+                    formats={this.formats}
+                    onChange={this.rteChange}
+                    value={this.state.contractContent} >
+
+                </ReactQuill> */}
+                <Form
+
+                    name="basic"
+                    className="lcontract-form"
+
+                    onFinish={this.onFinish}
+                    onFinishFailed={this.onFinishFailed}
+
+                >
+                    <Form.Item
+                        label="Tên mẫu"
+                        name="templateName"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng nhập Tên mẫu',
+                            },
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>
+                Nội dung mẫu
+                <JoditEditor
+
+                        value={this.state.contractContent}
+                        config={config}
+                        tabIndex={1} // tabIndex of textarea
+
+                        onChange={this.rteChange}
+                    />
+
+
+
+                    <Space size="large">
+
+                        <Button type="primary" htmlType="submit" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
+                        nộp
+                </Button>
+
+
+
+
+                    </Space>
+                </Form>
                 {/* <EditorJs
                     autofocus={true}
                     tools={EDITOR_JS_TOOLS}
@@ -122,4 +211,10 @@ class TemplateUpload extends React.Component {
     }
 }
 
-export default TemplateUpload
+var mapStateToProps = state => {
+    console.log(state.myLoginReducer)
+    return {
+        myLoginReducer: state.myLoginReducer
+    }
+}
+export default connect(mapStateToProps, null)(TemplateUpload)
