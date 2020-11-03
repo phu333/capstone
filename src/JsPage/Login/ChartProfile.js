@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import TabsChart from './TabsChart';
-
+import 'ant-design-pro/dist/ant-design-pro.css';
 
 import { ChartCard, yuan, Field, MiniArea, MiniBar, MiniProgress } from 'ant-design-pro/lib/Charts';
 import Trend from 'ant-design-pro/lib/Trend';
