@@ -1,6 +1,6 @@
 import React from 'react';
 import { createContract, contractInformation, } from '../../actions/ContractAction'
-import { Select, DatePicker, Descriptions, Space, Button, InputNumber, Form, Table, Input, Col, Card, Pagination } from 'antd';
+import { Select, DatePicker, Descriptions, Space, Button, InputNumber, Form, Table, Input, Col, Card, AutoComplete } from 'antd';
 import { connect } from 'react-redux'
 import ContractTable from '../Table/ContractTable'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
@@ -17,7 +17,17 @@ import JoditEditor from "jodit-react";
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { Column, ColumnGroup } = Table;
-
+const options = [
+    {
+        value: 'Công ty tnhh Microsoft',
+    },
+    {
+        value: 'Công ty tnvh google',
+    },
+    {
+        value: 'Công ty cổ phần amazon',
+    },
+];
 
 
 class CreateContract extends React.Component {
@@ -48,9 +58,14 @@ class CreateContract extends React.Component {
             TheChooseOne: {
                 Name: "",
                 MST: "",
+                Phone: "",
                 Address: "",
                 Email: "",
-                Owner: "",
+                Representative: "",
+                Position: "",
+                BusinessLicensce: "",
+                YoB: "",
+                BankAccount: "",
             },
             currntPage: 1,
             products: [
@@ -129,11 +144,16 @@ class CreateContract extends React.Component {
     handleChange(value) {
         this.setState({
             TheChooseOne: {
-                Name: "Company name here",
-                MST: "Tax code here",
-                Address: "address here",
-                Email: "email here",
-                Owner: "owner here",
+                Name: value,
+                MST: "mst",
+                Phone: "điện thoại",
+                Address: "địa chỉ",
+                Email: "email",
+                Representative: "người đại diện",
+                Position: "Chức vụ",
+                BusinessLicensce: "Giấy phép kinh doanh",
+                YoB: "năm sinh",
+                BankAccount: "tài khoản ngân hàng",
             },
         })
     }
@@ -167,79 +187,88 @@ class CreateContract extends React.Component {
 
             return (
 
-                <div style={{ fontSize: 14 }} >
+                <div style={{ fontSize: 14, height: "100vh" }} >
                     <Button type="primary" value="cancel" onClick={this.Cancel}>
                         Trở về
               </Button>
 
-                    <Space direction="vertical" align="center" >
+                    <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
 
-                        <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
-                            <Card>
+                        <Space direction="vertical" align="center" style={{ backgroundColor: "white" }}  >
+                            <Card bordered={false} >
                                 <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>
                                 <h6 style={{ textAlign: 'center', fontSize: 14 }}>Độc lập-tự do-hạnh phúc</h6>
                                 <br />
-                                <br />
-                                <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}>Hợp đồng </h2>
+                                <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}>Hợp đồng mua bán</h2>
+                                <h6 style={{ textAlign: 'center', fontSize: 14 }}>Số.../...</h6>
+                                <h6 style={{ fontSize: 14 }}>Hôm nay, ngày 3 tháng 11 năm 2020,
+                                tại........, chúng tôi gồm
+                            </h6>
                             </Card>
-                            <Card>
+                            <Card bordered={false}>
                                 <Descriptions size="small" column={2} title={"Thông tin bên A"}  >
-                                    <Descriptions.Item label={(<b><IdcardOutlined />{"Công ty/Tổ chức:"}</b>)}>HiSign</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><HomeOutlined />{"Địa chỉ:"}</b>)}>asdasdasd</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><PhoneOutlined />{"Điện thoại:"}</b>)}>123123123123</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><MailOutlined />{"Địa chỉ Email:"}</b>)}>sfds@gmail.com</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><BankOutlined />{"Giấy phép kinh doanh:"}</b>)}>123123123123</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><BankOutlined />{"Mã số thuế:"}</b>)}>123123123123</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><BankOutlined />{"Tài khoản số:"}</b>)}>123123123123</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><ContactsOutlined />{"Do ông(bà):"}</b>)} span={2}>Usada Pekora</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><ContactsOutlined />{"Năm sinh:"}</b>)} span={2}>
+                                    <Descriptions.Item label={(<><b>{"Công ty/Tổ chức:"}</b></>)}>Công ty cổ phần HiSign
+                                        </Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Địa chỉ:"}</b></>)}>asdasdasd</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Điện thoại:"}</b></>)}>123123123123</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Địa chỉ Email:"}</b></>)}>sfds@gmail.com</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Giấy phép kinh doanh:"}</b></>)}>123123123123</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Mã số thuế:"}</b></>)}>123123123123</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Tài khoản số:"}</b></>)}>123123123123</Descriptions.Item>
+                                    {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
+                                    <Descriptions.Item label={(<><b>{"Do ông(bà):"}</b></>)} span={2}>Usada Pekora</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Năm sinh:"}</b></>)} span={2}>
                                         1998
                         </Descriptions.Item>
-                                    <Descriptions.Item label={(<b><ContactsOutlined />{"Chức vụ"}</b>)} span={2}>
-                                        Giám đốc
+                                    <Descriptions.Item label={(<><b>{"Chức vụ"}</b></>)} span={2}>
+                                        Giám đốc làm đại diện
                         </Descriptions.Item>
-                                    <Descriptions.Item label={(<h><ContactsOutlined />{"làm đại diện"}</h>)} span={2}>
 
-                                    </Descriptions.Item>
 
                                 </Descriptions>
 
 
                                 <Descriptions title="" size="small" column={2} title="Thông tin bên B"
-                                    extra={[<Select defaultValue="NO" onChange={this.handleChange}>
-                                        <Option value="NO">Please select your customer</Option>
-                                        <Option value="PR001">Usada construction</Option>
-                                        <Option value="PR002">Anukin corp</Option>
-                                        <Option value="PR003">The circus</Option>
-                                    </Select>]}
+                                // extra={[<Select defaultValue="NO" onChange={this.handleChange}>
+                                //     <Option value="NO">Please select your customer</Option>
+                                //     <Option value="PR001">Usada construction</Option>
+                                //     <Option value="PR002">Anukin corp</Option>
+                                //     <Option value="PR003">The circus</Option>
+                                // </Select>]}
                                 >
 
-                                    <Descriptions.Item label={(<b><IdcardOutlined />{"Công ty/Tổ chức:"}</b>)}>HiSign</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><HomeOutlined />{"Địa chỉ:"}</b>)}>asdasdasd</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><PhoneOutlined />{"Điện thoại:"}</b>)}>123123123123</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><MailOutlined />{"Địa chỉ Email:"}</b>)}>sfds@gmail.com</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><BankOutlined />{"Giấy phép kinh doanh:"}</b>)}>123123123123</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><BankOutlined />{"Mã số thuế:"}</b>)}>123123123123</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><BankOutlined />{"Tài khoản số:"}</b>)}>123123123123</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><ContactsOutlined />{"Do ông(bà):"}</b>)} span={2}>Usada Pekora</Descriptions.Item>
-                                    <Descriptions.Item label={(<b><ContactsOutlined />{"Năm sinh:"}</b>)} span={2}>
-                                        1998
-                        </Descriptions.Item>
-                                    <Descriptions.Item label={(<b><ContactsOutlined />{"Chức vụ"}</b>)} span={2}>
-                                        Giám đốc
-                        </Descriptions.Item>
-                                    <Descriptions.Item label={(<h><ContactsOutlined />{"làm đại diện"}</h>)} span={2}>
-
+                                    <Descriptions.Item label={(<><b>{"Công ty/Tổ chức:"}</b></>)}>
+                                        <AutoComplete
+                                            style={{
+                                                width: 200,
+                                            }}
+                                            options={options}
+                                        >
+                                            <Input onClick={this.handleChange} size="small" placeholder="nhập tên doanh nghiệp" enterButton />
+                                        </AutoComplete></Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Địa chỉ:"}</b></>)}>{this.state.TheChooseOne.Address}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Điện thoại:"}</b></>)}>{this.state.TheChooseOne.Phone}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Địa chỉ Email:"}</b></>)}>{this.state.TheChooseOne.Email}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Giấy phép kinh doanh:"}</b></>)}>{this.state.TheChooseOne.BusinessLicensce}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Mã số thuế:"}</b></>)}>{this.state.TheChooseOne.MST}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Tài khoản số:"}</b></>)}>{this.state.TheChooseOne.BankAccount}</Descriptions.Item>
+                                    {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
+                                    <Descriptions.Item label={(<><b>{"Do ông(bà):"}</b></>)} span={2}>{this.state.TheChooseOne.Representative}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Năm sinh:"}</b></>)} span={2}>
+                                        {this.state.TheChooseOne.YoB}
                                     </Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Chức vụ"}</b></>)} span={2}>
+                                        {this.state.TheChooseOne.Position} làm đại diện
+                        </Descriptions.Item>
+
 
                                 </Descriptions>
                             </Card>
                         </Space>
 
-                        <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
-
+                        <Space direction="vertical" style={{ backgroundColor: "white" }} >
+                            <h6 style={{ fontSize: 16 }}>Chúng tôi thỏa thuận với các điều khoản sau
+                            </h6>
                             <JoditEditor
 
                                 value={this.state.contractContent}
@@ -248,37 +277,40 @@ class CreateContract extends React.Component {
 
                                 onChange={this.rteChange}
                             />
-                        </Space>
-                        <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
-                            <Card>
+                            <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
+                                <Card bordered={false}>
 
-                                <Form
+                                    <Form
 
-                                    name="basic"
-                                    className="lcontract-form"
+                                        name="basic"
+                                        className="lcontract-form"
 
-                                    onFinish={this.onFinish}
-                                    onFinishFailed={this.onFinishFailed}
+                                        onFinish={this.onFinish}
+                                        onFinishFailed={this.onFinishFailed}
 
-                                >
+                                    >
 
+                                        <h6 style={{ fontSize: 14 }}>Hợp đồng có hiệu lực kể từ ngày 3 tháng 11 năm 2020 đến
+                                        ngày ... tháng ... năm ....
+                            </h6>
+                                        <Space size="large">
 
-                                    <Space size="large">
-
-                                        <Button type="primary" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
+                                            <Button type="primary" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
                                                             nộp
                                                     </Button>
 
-                                        <Button type="primary" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
+                                            <Button type="primary" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
                                                             Lưu
                                                     </Button>
 
 
-                                    </Space>
-                                </Form>
+                                        </Space>
+                                    </Form>
 
-                            </Card>
+                                </Card>
+                            </Space>
                         </Space>
+
                     </Space>
                 </div>
 

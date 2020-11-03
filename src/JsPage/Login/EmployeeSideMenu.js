@@ -145,7 +145,8 @@ class EmployeeSideMenu extends React.Component {
                   padding: 24,
                   margin: 0,
                   minHeight: "100vh",
-                  backgroundColor: "white",
+                  maxHeight:"100%",
+                  
                 }}>
                   {login.companyId !== null ? <>
                     {this.state.showComponent === "Chart" ?

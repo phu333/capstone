@@ -130,7 +130,7 @@ class ContractTable extends Component {
         else {
 
             return (
-                <div style={{ height: "100vh" }}>
+                <div >
                     <Space size="large">
                         <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContract}>Tạo hợp đồng</Button>
                         <Button type="primary" icon={<UploadOutlined />} >Tải lên hợp đồng</Button>
