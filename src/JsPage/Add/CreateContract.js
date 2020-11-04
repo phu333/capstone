@@ -4,14 +4,10 @@ import { Select, DatePicker, Descriptions, Space, Button, InputNumber, Form, Tab
 import { connect } from 'react-redux'
 import ContractTable from '../Table/ContractTable'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
-import {
-    DeleteOutlined, IdcardOutlined, BankOutlined, PhoneOutlined, PrinterOutlined, HomeOutlined, MailOutlined
-    , ContactsOutlined, CalendarOutlined, DollarOutlined, CloudDownloadOutlined, CloudUploadOutlined, AuditOutlined
-} from '@ant-design/icons';
-import { Editor } from 'react-draft-wysiwyg';
+
+
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { EditorState, ContentState, convertFromHTML } from 'draft-js'
-import ReactQuill from 'react-quill';
+import axios from 'axios'
 import 'react-quill/dist/quill.snow.css';
 import JoditEditor from "jodit-react";
 const { Option } = Select;
@@ -84,7 +80,9 @@ class CreateContract extends React.Component {
             contractValue:0,
            
             finish: false,
-            showContent: "customer"
+            contractTitle:"",
+            contractPlace:"",
+            contractExpiredDate:"",
         };
         this.handleChange = this.handleChange.bind(this);
        
@@ -95,6 +93,41 @@ class CreateContract extends React.Component {
         console.log(value); // HTML/rich text
     }
     onFinish = (values) => {
+        contract={
+            contractTitle:this.state.contractTitle,
+            contractNum:this.state.contractNum,
+            contractName:this.state.contractName,
+            contractPlace:this.state.contractPlace,
+            contractCreateDate:"",
+            contractExpiredDate:this.state.contractExpiredDate,
+            ASide:this.state.ASide,
+            BSide:this.state.BSide,
+            contractValue:this.state.contractValue,
+            contractContent:this.state.contractContent,
+        }
+        axios({
+            url: '',
+            method: "POST",
+            data: contract
+        })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+
+                
+
+            })
+            .catch(error => {
+
+                if (error.response.status === 500) {
+                    message.error(error.response.status + ' Server under maintainence');
+                } else if (error.response.status === 404) {
+                    message.error(error.response.status + ' Server not found');
+                }
+
+            });
         this.setState({
             finish: true
         })

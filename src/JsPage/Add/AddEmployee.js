@@ -12,6 +12,7 @@ import { Form, Input, Button, Checkbox, Space, Card } from 'antd';
 import EmployeeTable from '../Table/EmployeeTable'
 import axios from 'axios'
 import "../Column.css"
+
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const layout = {
     labelCol: {

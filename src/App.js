@@ -1,17 +1,10 @@
 import React from 'react';
-import { reactLocalStorage } from 'reactjs-localstorage';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import './App.css';
 import LoginPage from './JsPage/Login/LoginPage'
-import ContractTable from './JsPage/Table/ContractTable'
-import CustomerTable from './JsPage/Table/CustomerTable'
-import ContractTypeTable from './JsPage/Table/ContractTypeTable'
-import UpdateProfile from './JsPage/Update/UpdateProfile'
-import UpdateProfileCompany from './JsPage/Update/UpdateProfileCompany'
-import EmployeeTable from './JsPage/Table/EmployeeTable'
-import SignatureList from './JsPage/Table/SignatureList'
-import Particles from 'react-particles-js';
+
 import { Tabs, Result, Button } from 'antd';
-import EmployeeSideMenu from './JsPage/Login/EmployeeSideMenu';
+
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import SearchByCode from './JsPage/Login/SearchContract'
@@ -30,49 +23,46 @@ class App extends React.Component {
     });
   };
   render() {
-    console.log(this.props.myLoginReducer)
-    // var information = this.props.myLoginReducer.map((login, index) => {
-    //   this.setState({
-    //     showTab:false
-    //   })
 
-    // })
-    // console.log(JSON.parse(reactLocalStorage.get('login', true)))
+
     return (
       <div >
-        <Online>
-         
-          <Router>
-            {this.props.myLoginReducer.length === 0 ?
-              <Tabs onTabClick={this.changeTab} defaultActiveKey="Login" centered >
-                <TabPane tab="Login" key="login">
-                  <Redirect push to={"/capstone/" + this.state.currentTab} />
+        <ReactCSSTransitionGroup transitionName="example"
+          transitionAppear={true} transitionAppearTimeout={500}
+        >
+          <Online>
+
+            <Router>
+              {this.props.myLoginReducer.length === 0 ?
+                <Tabs onTabClick={this.changeTab} defaultActiveKey="Login" centered >
+                  <TabPane tab="Login" key="login">
+                    <Redirect push to={"/capstone/" + this.state.currentTab} />
+
+                    <Route exact path="/capstone/Login" component={LoginPage} />
+                  </TabPane>
+                  <TabPane tab=" Search contract" key="SearchContract">
+                    <Redirect push to={"/capstone/" + this.state.currentTab} />
+
+                    <Route exact path="/capstone/SearchContract" component={SearchByCode} />
+                  </TabPane>
+
+                </Tabs> : <Router>
+                  <Redirect push to={"/capstone/Login"} />
 
                   <Route exact path="/capstone/Login" component={LoginPage} />
-                </TabPane>
-                <TabPane tab=" Search contract" key="SearchContract">
-                  <Redirect push to={"/capstone/" + this.state.currentTab} />
-
-                  <Route exact path="/capstone/SearchContract" component={SearchByCode} />
-                </TabPane>
-
-              </Tabs> : <Router>
-                <Redirect push to={"/capstone/Login" } />
-
-                <Route exact path="/capstone/Login" component={LoginPage} />
-              </Router>}
+                </Router>}
 
 
-            {/* {information} */}
-          </Router></Online>
-        <Offline><Result
-          status="404"
-          title="404"
-          subTitle="Sorry, the page you visited does not exist."
-          
-        /></Offline>
+              {/* {information} */}
+            </Router></Online>
+          <Offline><Result
+            status="404"
+            title="404"
+            subTitle="Sorry, the page you visited does not exist."
 
+          /></Offline>
 
+        </ReactCSSTransitionGroup>
 
 
 

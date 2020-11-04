@@ -9,7 +9,7 @@ import { createCustomer, customerInformation } from '../../actions/CustomerActio
 import { connect } from 'react-redux'
 import { Form, Input, Button, Checkbox,Space,Card } from 'antd';
 import CustomerTable from '../Table/CustomerTable'
-
+import axios from 'axios'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const layout = {
     labelCol: {
@@ -35,7 +35,29 @@ class AddCustomer extends React.Component {
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
+        axios({
+            url: '',
+            method: "POST",
+            data: values
+        })
+            .then((response) => {
 
+                return response.data;
+            })
+            .then((data) => {
+
+                
+
+            })
+            .catch(error => {
+
+                if (error.response.status === 500) {
+                    message.error(error.response.status + ' Server under maintainence');
+                } else if (error.response.status === 404) {
+                    message.error(error.response.status + ' Server not found');
+                }
+
+            });
         
         this.setState({
             finish: true

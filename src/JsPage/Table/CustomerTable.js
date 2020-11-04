@@ -9,6 +9,7 @@ import { createCustomer, customerInformation } from '../../actions/CustomerActio
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, EyeOutlined } from "@ant-design/icons"
+import axios from 'axios'
 const { Column } = Table;
 
 
@@ -28,6 +29,29 @@ class CustomerList extends React.Component {
   componentDidMount() {
 
     if (this.props.newCustomer.length === 0) {
+      axios({
+        url: '',
+        method: "GET",
+        
+    })
+        .then((response) => {
+
+            return response.data;
+        })
+        .then((data) => {
+
+            
+
+        })
+        .catch(error => {
+
+            if (error.response.status === 500) {
+                message.error(error.response.status + ' Server under maintainence');
+            } else if (error.response.status === 404) {
+                message.error(error.response.status + ' Server not found');
+            }
+
+        });
       const contract1 = {
 
         name: 'John',

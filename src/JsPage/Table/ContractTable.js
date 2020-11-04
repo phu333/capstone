@@ -2,6 +2,7 @@ import 'antd/dist/antd.css';
 import { Table, Button, Space, Tag } from 'antd';
 import ContractSearch from '../Search/ContractSearch'
 import "../Column.css"
+import axios from 'axios'
 import {
     EyeOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
     FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
@@ -36,6 +37,29 @@ class ContractTable extends Component {
     componentDidMount() {
 
         if (this.props.newContract.length === 0) {
+            axios({
+                url: '',
+                method: "GET",
+                
+            })
+                .then((response) => {
+        
+                    return response.data;
+                })
+                .then((data) => {
+        
+                    
+        
+                })
+                .catch(error => {
+        
+                    if (error.response.status === 500) {
+                        message.error(error.response.status + ' Server under maintainence');
+                    } else if (error.response.status === 404) {
+                        message.error(error.response.status + ' Server not found');
+                    }
+        
+                });
             const contract1 = {
                 id: 1,
                 contract_name: 'Hop dong lao dong',

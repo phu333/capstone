@@ -10,6 +10,7 @@ import { createEmployee, employeeInformation } from '../../actions/EmployeeActio
 import { connect } from 'react-redux'
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, EyeOutlined } from "@ant-design/icons"
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
+import axios from 'axios'
 const { Column, ColumnGroup } = Table;
 
 
@@ -29,6 +30,29 @@ class EmployeeList extends React.Component {
   componentDidMount() {
 
     if (this.props.newEmployee.length === 0) {
+      axios({
+        url: '',
+        method: "GET",
+        
+    })
+        .then((response) => {
+
+            return response.data;
+        })
+        .then((data) => {
+
+            
+
+        })
+        .catch(error => {
+
+            if (error.response.status === 500) {
+                message.error(error.response.status + ' Server under maintainence');
+            } else if (error.response.status === 404) {
+                message.error(error.response.status + ' Server not found');
+            }
+
+        });
       const contract1 = {
 
         name: 'Mike',

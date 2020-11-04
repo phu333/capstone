@@ -50,13 +50,7 @@ class EmployeeSideMenu extends React.Component {
     })
 
   };
-  // componentDidMount() {
-  //   return (<Router>
-  //     <Redirect push to="/capstone/SideMenu" />
-
-  //     <Route exact path="/capstone/SideMenu" component={EmployeeSideMenu} />
-  //   </Router>);
-  // }
+  
   render() {
 
     if (this.props.myLoginReducer !== "logout") {

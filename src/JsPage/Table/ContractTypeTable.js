@@ -9,6 +9,7 @@ import ContractTypeSearch from '../Search/ContractTypeSearch'
 import { createContractType, contractTypeInformation } from '../../actions/ContractType'
 import { connect } from 'react-redux'
 import { UploadOutlined, EyeOutlined, DeleteOutlined, UserOutlined, FileWordOutlined } from "@ant-design/icons"
+import axios from 'axios'
 const { Column } = Table;
 
 
@@ -32,6 +33,29 @@ class ContractTable extends React.Component {
   componentDidMount() {
 
     if (this.props.newContractType.length === 0) {
+      axios({
+        url: '',
+        method: "GET",
+        
+    })
+        .then((response) => {
+
+            return response.data;
+        })
+        .then((data) => {
+
+            
+
+        })
+        .catch(error => {
+
+            if (error.response.status === 500) {
+                message.error(error.response.status + ' Server under maintainence');
+            } else if (error.response.status === 404) {
+                message.error(error.response.status + ' Server not found');
+            }
+
+        });
       const contract1 = {
 
         contract_type: 'Hop dong lao dong',

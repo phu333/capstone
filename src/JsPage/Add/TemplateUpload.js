@@ -7,7 +7,7 @@ import { MailOutlined, PrinterOutlined, IdcardOutlined, HomeOutlined, PhoneOutli
 import { Card, Button, Space, Checkbox, Descriptions, Select, Form, Input } from 'antd';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { FormBuilder } from 'react-formio';
-
+import axios from 'axios'
 import 'reactjs-popup/dist/index.css';
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -56,15 +56,15 @@ class TemplateUpload extends React.Component {
         ];
         this.state = {
             contractContent: "",
-            templateName:"",
-            contractName:"",
+            templateName: "",
+            contractName: "",
 
         };
-        
+
         this.rteChange = this.rteChange.bind(this);
 
     }
-    
+
     rteChange = (value) => {
         console.log(value); // HTML/rich text
         this.setState({
@@ -73,14 +73,41 @@ class TemplateUpload extends React.Component {
 
     }
     onFinish = (values) => {
+        template ={
+            contractContent: this.state.contractContent,
+            templateName: this.state.templateName,
+            contractName: this.state.contractName,
+        }
+        axios({
+            url: '',
+            method: "POST",
+            data: template
+        })
+            .then((response) => {
 
+                return response.data;
+            })
+            .then((data) => {
+
+                
+
+            })
+            .catch(error => {
+
+                if (error.response.status === 500) {
+                    message.error(error.response.status + ' Server under maintainence');
+                } else if (error.response.status === 404) {
+                    message.error(error.response.status + ' Server not found');
+                }
+
+            });
 
     };
     render() {
         const config = {
             readonly: false // all options from https://xdsoft.net/jodit/doc/
         }
-        
+
 
         return (
             <div style={{ fontSize: 14 }} >
@@ -95,7 +122,7 @@ class TemplateUpload extends React.Component {
                             <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>
                             <h6 style={{ textAlign: 'center', fontSize: 14 }}>Độc lập-tự do-hạnh phúc</h6>
                             <br />
-                            <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}><Input style={{width:"100px"}}  size="small" /></h2>
+                            <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}><Input style={{ width: "100px" }} size="small" /></h2>
                             <h6 style={{ textAlign: 'center', fontSize: 14, fontWeight: "bold" }}>Số.../...</h6>
                             <h6 style={{ fontSize: 14, fontWeight: "bold" }}>Hôm nay, ngày...tháng...năm....,
                             tại........, chúng tôi gồm
