@@ -173,10 +173,18 @@ class AddEmployee extends React.Component {
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập sdt',
+                                    min: 10,
+                                    max: 10,
+                                },
+                                {
+                                    
+                                    message: 'Vui lòng nhập 10 ký tự',
+                                    min: 10,
+                                    max: 10,
                                 },
                             ]}
                         >
-                            <Input placeholder="Điện thoại" />
+                            <Input prefix="+84" placeholder="số điện thoại" />
                         </Form.Item>
                         <Form.Item
                             label="Địa chỉ"
@@ -194,6 +202,10 @@ class AddEmployee extends React.Component {
                             label="Email"
                             name="Email"
                             rules={[
+                                {
+                                    type: 'email',
+                                    message: 'The input is not valid E-mail!',
+                                },
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập Email',

@@ -108,6 +108,12 @@ class AddCustomer extends React.Component {
                                             required: true,
                                             message: 'Vui lòng nhập tên mst',
                                         },
+                                        {
+                                
+                                            message: 'Vui lòng nhập 10 ký tự',
+                                            min: 10,
+                                            max: 10,
+                                        },
                                     ]}
                                 >
                                     <Input placeholder="Mã số thuế" />
@@ -133,9 +139,15 @@ class AddCustomer extends React.Component {
                                             required: true,
                                             message: 'Vui lòng nhập sdt',
                                         },
+                                        {
+                                    
+                                            message: 'Vui lòng nhập 10 ký tự',
+                                            min: 10,
+                                            max: 10,
+                                        },
                                     ]}
                                 >
-                                     <Input placeholder="Điện thoại" />
+                                     <Input prefix="+84" placeholder="Điện thoại" />
                                 </Form.Item>
                                 <Form.Item
                                     label="Địa chỉ"
@@ -153,6 +165,10 @@ class AddCustomer extends React.Component {
                                     label="Email"
                                     name="Email"
                                     rules={[
+                                        {
+                                            type: 'email',
+                                            message: 'The input is not valid E-mail!',
+                                        },
                                         {
                                             required: true,
                                             message: 'Vui lòng nhập Email',

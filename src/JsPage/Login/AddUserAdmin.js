@@ -37,21 +37,21 @@ class AddUserAdmin extends React.Component {
             finish: false
         };
         this.onFinish = this.onFinish.bind(this);
-        
+
     }
     onFinish = (values) => {
-        console.log( values);
+        console.log(values);
         axios({
             url: '/api/Account/register',
             method: "POST",
             data: values
         })
-            .then( (response)=> {
+            .then((response) => {
 
                 return response.data.data;
             })
-            .then( (data)=> {
-      
+            .then((data) => {
+
 
 
 
@@ -115,9 +115,12 @@ class AddUserAdmin extends React.Component {
                         label="cmnd/cmt"
                         name="userId"
                         rules={[
+
                             {
                                 required: true,
                                 message: 'Vui lòng nhập cmnd/cmt ',
+                                min: 10,
+                                max: 10,
                             },
                         ]}
                     >
@@ -130,6 +133,7 @@ class AddUserAdmin extends React.Component {
                             {
                                 required: true,
                                 message: 'Vui lòng nhập tên người dùng',
+                                min: 6,
                             },
                         ]}
                     >
@@ -138,10 +142,17 @@ class AddUserAdmin extends React.Component {
                     <Form.Item
                         label="Mật khẩu"
                         name="password"
+                        hasFeedback
                         rules={[
                             {
                                 required: true,
                                 message: 'Vui lòng nhập Mật khẩu',
+                                
+                            },
+                            {
+                                
+                                message: 'Vui lòng nhập 6 kí tự',
+                                min: 6,
                             },
                         ]}
                     >
@@ -150,11 +161,22 @@ class AddUserAdmin extends React.Component {
                     <Form.Item
                         label="xác nhận mật khẩu"
                         name="confirmPassword"
+                        dependencies={['password']}
+                        hasFeedback
                         rules={[
                             {
                                 required: true,
                                 message: 'Vui lòng nhập Mật khẩu',
                             },
+                            ({ getFieldValue }) => ({
+                                validator(rule, value) {
+                                    if (!value || getFieldValue('password') === value) {
+                                        return Promise.resolve();
+                                    }
+
+                                    return Promise.reject('Vui lòng nhập lại Mật khẩu');
+                                },
+                            }),
                         ]}
                     >
                         <Input.Password />
@@ -166,10 +188,12 @@ class AddUserAdmin extends React.Component {
                             {
                                 required: true,
                                 message: 'Vui lòng nhập sdt',
+                                min: 10,
+                                max: 10,
                             },
                         ]}
                     >
-                        <Input placeholder="Điện thoại" />
+                        <Input prefix="+84" placeholder="Điện thoại" />
                     </Form.Item>
                     <Form.Item
                         label="Địa chỉ"
@@ -187,6 +211,10 @@ class AddUserAdmin extends React.Component {
                         label="Email"
                         name="email"
                         rules={[
+                            {
+                                type: 'email',
+                                message: 'The input is not valid E-mail!',
+                            },
                             {
                                 required: true,
                                 message: 'Vui lòng nhập Email',

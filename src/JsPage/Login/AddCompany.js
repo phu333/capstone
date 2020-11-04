@@ -39,25 +39,25 @@ class AddCompany extends React.Component {
         super();
         this.state = {
             finish: false,
-            
+
         };
         this.onFinish = this.onFinish.bind(this);
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
-    
+
     onFinish = (values) => {
-        console.log( values);
+        console.log(values);
         axios({
             url: '/api/v1/company',
             method: "POST",
             data: values
         })
-            .then( (response)=> {
+            .then((response) => {
 
                 return response.data.data;
             })
-            .then( (data)=> {
-      
+            .then((data) => {
+
 
 
 
@@ -71,7 +71,7 @@ class AddCompany extends React.Component {
     onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-    
+
 
     render() {
 
@@ -81,12 +81,12 @@ class AddCompany extends React.Component {
 
 
             <Card>
-                    <br />
+                <br />
                 <h2 style={{ textAlign: 'center' }}>Thông tin doanh nghiệp</h2>
-                
 
 
-                  
+
+
                 <Form
                     {...layout}
                     name="basic"
@@ -96,117 +96,156 @@ class AddCompany extends React.Component {
                     onFinishFailed={this.onFinishFailed}
 
                 >
-                        
-                            <Form.Item
-                                label="Tên doanh nghiệp"
-                                name="name"
-                                required
-                            >
-                                <Row gutter={8}> <Col span={20}><Input   defaultValue="HiSign" /></Col>    <Popover content={name} trigger="hover">
-                                    <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                                </Popover></Row>
-                            </Form.Item>
-                            <Form.Item
-                                label="Mã số thuế"
-                                name="taxCode"
-                                required
-                            >
-                                    <Row gutter={8}> <Col span={20}><Input   defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                                    </Popover></Row> 
-                            </Form.Item>
-                            <Form.Item
-                                label="Điện thoại"
-                                name="phoneNumber"
 
-                            >
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                                    </Popover></Row>
-                            </Form.Item>
-                            <Form.Item
-                                label="Địa chỉ"
-                                name="address"
-                                required
-                            >
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="12/10/4/8" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                                    </Popover></Row>
-                            </Form.Item>
-                            <Form.Item
-                                label="Email"
-                                name="email"
+                    <Form.Item
+                        label="Tên doanh nghiệp"
+                        name="name"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng nhập tên ',
+                            },
+                        ]}
+                    >
+                        <Row gutter={8}> <Col span={20}><Input /></Col>
+                            <Popover content={name} trigger="hover">
+                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
+                    </Form.Item>
+                    <Form.Item
+                        label="Mã số thuế"
+                        name="taxCode"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng nhập mst ',
+                                
+                            },
+                            {
+                                
+                                message: 'Vui lòng nhập 10 ký tự',
+                                min: 10,
+                                max: 10,
+                            },
+                        ]}
+                    >
+                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={name} trigger="hover">
+                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                        </Popover></Row>
+                    </Form.Item>
+                    <Form.Item
+                        label="Điện thoại"
+                        name="phoneNumber"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng nhập sdt',
+                                
+                            },
+                            {
+                                
+                                message: 'Vui lòng nhập 10 ký tự',
+                                min: 10,
+                                max: 10,
+                            },
+                        ]}
+                    >
+                        <Row gutter={8}> <Col span={20}><Input prefix="+84" /></Col>    <Popover content={name} trigger="hover">
+                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                        </Popover></Row>
+                    </Form.Item>
+                    <Form.Item
+                        label="Địa chỉ"
+                        name="address"
+                        required
+                    >
+                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={name} trigger="hover">
+                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                        </Popover></Row>
+                    </Form.Item>
+                    <Form.Item
+                        label="Email"
+                        name="email"
+                        rules={[
+                            {
+                                type: 'email',
+                                message: 'The input is not valid E-mail!',
+                            },
+                            {
+                                required: true,
+                                message: 'Vui lòng nhập Email',
+                            },
+                        ]}
+                    >
+                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={name} trigger="hover">
+                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                        </Popover></Row>
+                    </Form.Item>
+                    <Form.Item
+                        label="Giấy phép kinh doanh"
+                        name="businessLicense"
+                        required
+                    >
+                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={name} trigger="hover">
+                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                        </Popover></Row>
+                    </Form.Item>
+                    <Form.Item
+                        label="Tài khoản ngân hàng"
+                        name="bankAccount"
 
-                            >
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="Email" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                                    </Popover></Row>
-                            </Form.Item>
-                            <Form.Item
-                                label="Giấy phép kinh doanh"
-                                name="businessLicense"
-                                required
-                            >
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                                    </Popover></Row>
-                            </Form.Item>
-                            <Form.Item
-                                label="Tài khoản ngân hàng"
-                                name="bankAccount"
-
-                            >
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                                    </Popover></Row>
-                            </Form.Item>
-                            <Form.Item
-                                label="Người đại diện"
-                                name="comRepresentative"
-                                required
-                            >
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="Nguyen Van A" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                                    </Popover></Row>
-                            </Form.Item>
+                    >
+                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={name} trigger="hover">
+                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                        </Popover></Row>
+                    </Form.Item>
+                    <Form.Item
+                        label="Người đại diện"
+                        name="comRepresentative"
+                        required
+                    >
+                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={name} trigger="hover">
+                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                        </Popover></Row>
+                    </Form.Item>
 
 
 
-                            <Form.Item
-                                label="Chức vụ"
-                                name="comRepresentativeRole"
-                                required
-                            >
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="Giám đốc" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                                    </Popover></Row>
-                            </Form.Item>
+                    <Form.Item
+                        label="Chức vụ"
+                        name="comRepresentativeRole"
+                        required
+                    >
+                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={name} trigger="hover">
+                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                        </Popover></Row>
+                    </Form.Item>
 
 
 
 
-                            <Form.Item {...tailLayout}>
-                            <Space size="large">
-                                <Button type="primary" htmlType="submit" >
-                                    Nộp
+                    <Form.Item {...tailLayout}>
+                        <Space size="large">
+                            <Button type="primary" htmlType="submit" >
+                                Nộp
                                 </Button>
-                                <Button type="primary" htmlType="reset" >
-                                    Reset
+                            <Button type="primary" htmlType="reset" >
+                                Reset
                                 </Button>
 
 
-                            </Space>
-                        </Form.Item>
-                            <Form.Item>
+                        </Space>
+                    </Form.Item>
+                    <Form.Item>
 
-                            </Form.Item>
-
-
+                    </Form.Item>
 
 
-                       
 
-                   </Form>
+
+
+
+                </Form>
             </Card>
 
 
