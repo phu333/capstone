@@ -119,7 +119,7 @@ class CustomerList extends React.Component {
               <b>{text}</b>
 
             )} />
-            <Column title="Số fax" dataIndex="faxCode" key="faxCode" render={(text, record) => (
+            <Column title="Số giấy phép kinh doanh" dataIndex="taxCode" key="taxCode" render={(text, record) => (
 
               <b>{text}</b>
 

@@ -8,7 +8,7 @@ import ViewTemplate from '../Update/TemplateView'
 import ContractTypeSearch from '../Search/ContractTypeSearch'
 import { createContractType, contractTypeInformation } from '../../actions/ContractType'
 import { connect } from 'react-redux'
-import { UploadOutlined, FileOutlined, DeleteOutlined, UserOutlined, FileWordOutlined } from "@ant-design/icons"
+import { UploadOutlined, EyeOutlined, DeleteOutlined, UserOutlined, FileWordOutlined } from "@ant-design/icons"
 const { Column } = Table;
 
 
@@ -35,7 +35,7 @@ class ContractTable extends React.Component {
       const contract1 = {
 
         contract_type: 'Hop dong lao dong',
-        creator: "creator",
+        link: "creator",
         createDate: "12/11/2018",
         fileName: 'template1.dot',
         status: "active"
@@ -44,7 +44,7 @@ class ContractTable extends React.Component {
       const contract2 = {
 
         contract_type: 'Hop dong lao dong',
-        creator: "creator",
+        link: "creator",
         createDate: "12/12/2019",
         fileName: 'template1.dot',
         status: "deactive"
@@ -79,30 +79,8 @@ class ContractTable extends React.Component {
           <ContractTypeSearch />
           <Table dataSource={this.props.newContractType}
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}  >
-            <Column title="Loại hợp đồng" dataIndex="contract_type" key="contract_type"
-              render={(text, record) => (
-
-                <a><FileOutlined />{text}</a>
-
-              )}
-            />
-
-            <Column title="Tên file" dataIndex="fileName" key="fileName"
-              render={(text, record) => (
-
-                <b><FileWordOutlined />{text}</b>
-
-              )}
-            />
-            <Column title="Người tạo" dataIndex="creator" key="creator"
-              render={(text, record) => (
-
-                <b>{text}</b>
-
-              )}
-            />
-            <Column title="Ngày tạo" dataIndex="createDate" key="createDate"
-            sorter={(a, b) => a.createDate.localeCompare(b.createDate)}
+           <Column title="Tên mẫu" dataIndex="contract_type" key="contract_type"
+            sorter={(a, b) => a.contract_type.localeCompare(b.contract_type)}
             sortDirections={['descend', 'ascend']}
               render={(text, record) => (
 
@@ -110,6 +88,16 @@ class ContractTable extends React.Component {
 
               )}
             />
+
+            <Column title="link" dataIndex="link" key="link"
+              render={(text, record) => (
+
+                <b>{text}</b>
+
+              )}
+            />
+            
+            
             <Column title="trạng thái" dataIndex="status" key="status"
             sorter={(a, b) => a.status.localeCompare(b.status)}
             sortDirections={['descend', 'ascend']}
@@ -137,11 +125,11 @@ class ContractTable extends React.Component {
               key="Update"
               render={(text, record) => (
                 <Space size="middle">
-                  <UploadOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={()=>{
+                  <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={()=>{
                     this.setState({
                       viewTemplate : !this.state.viewTemplate
                     })
-                  }}>Chọn file khác</UploadOutlined>
+                  }}></EyeOutlined>
                 </Space>
               )}
             />

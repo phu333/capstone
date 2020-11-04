@@ -128,7 +128,7 @@ class LoginPage extends React.Component {
                     contractManagePermision: true,
                     customerManagePermission: true,
                     contractTypeManagePermission: true,
-                    employeeManagePermission: false,
+                    employeeManagePermission: true,
                     signatureManagePermission: true,
                     editCompanyInformationPermission: true,
                     isVerified:data.data.isVerified,

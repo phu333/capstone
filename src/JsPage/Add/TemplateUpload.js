@@ -55,25 +55,16 @@ class TemplateUpload extends React.Component {
             'color', 'background'
         ];
         this.state = {
-            contractContent: ""
+            contractContent: "",
+            templateName:"",
+            contractName:"",
 
         };
-        // this.handleChange = this.handleChange.bind(this);
-        // this.onEditorStateChange = this.onEditorStateChange.bind(this);
+        
         this.rteChange = this.rteChange.bind(this);
 
     }
-    // handleEditorChange(e) {
-    //     console.log('Content was updated:', e.target.getContent());
-    //     this.setState({ content: e.target.getContent() });
-    // }
-    // onEditorStateChange(editorState) {
-    //     console.log(editorState)
-    //     console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())))
-    //     this.setState({
-    //         editorState: editorState,
-    //     });
-    // };
+    
     rteChange = (value) => {
         console.log(value); // HTML/rich text
         this.setState({
@@ -89,24 +80,7 @@ class TemplateUpload extends React.Component {
         const config = {
             readonly: false // all options from https://xdsoft.net/jodit/doc/
         }
-        // const content = <p>This is the initial content of the editor</p>;
-
-        // const EDITOR_JS_TOOLS = {
-        //     embed: Embed,
-        //     table: Table,
-
-        //     list: List,
-        //     warning: Warning,
-        //     Paragraph: Paragraph,
-        //     linkTool: LinkTool,
-
-
-        //     header: Header,
-
-
-
-        // };
-
+        
 
         return (
             <div style={{ fontSize: 14 }} >
@@ -121,7 +95,7 @@ class TemplateUpload extends React.Component {
                             <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>
                             <h6 style={{ textAlign: 'center', fontSize: 14 }}>Độc lập-tự do-hạnh phúc</h6>
                             <br />
-                            <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}>Hợp đồng.......</h2>
+                            <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}><Input style={{width:"100px"}}  size="small" /></h2>
                             <h6 style={{ textAlign: 'center', fontSize: 14, fontWeight: "bold" }}>Số.../...</h6>
                             <h6 style={{ fontSize: 14, fontWeight: "bold" }}>Hôm nay, ngày...tháng...năm....,
                             tại........, chúng tôi gồm
@@ -175,7 +149,7 @@ class TemplateUpload extends React.Component {
                     </Space>
 
                     <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
-
+                        Giá trị hợp đồng:........
                         <JoditEditor
 
                             value={this.state.contractContent}

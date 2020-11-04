@@ -29,24 +29,14 @@ class AddCustomer extends React.Component {
     constructor() {
         super();
         this.state = {
-            finish: false
+            finish: false,
         };
         this.onFinish = this.onFinish.bind(this);
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
 
-        const contract1 = {
-
-            name: 'John',
-            company: "cty 369",
-            address: '10 Downing Street',
-            status: "active",
-
-        }
-
-
-        this.props.onSubmit(contract1)
+        
         this.setState({
             finish: true
         })
