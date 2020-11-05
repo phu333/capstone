@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import { createCustomer, customerInformation } from '../../actions/CustomerAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Checkbox,Space,Card } from 'antd';
+import { Form, Input, Button, Checkbox,Space,Card,message } from 'antd';
 import CustomerTable from '../Table/CustomerTable'
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'

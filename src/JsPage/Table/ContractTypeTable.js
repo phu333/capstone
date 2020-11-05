@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import { Table, Space, Button, Tag,Switch } from 'antd';
+import { Table, Space, Button, Tag,Switch,message } from 'antd';
 import TemplateUpload from '../Add/TemplateUpload';
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import React from 'react';

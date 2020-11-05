@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import '../index.css';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
-import { Form, Checkbox, Button, Row, Col } from 'antd';
+import { Form, Checkbox, Button, Row, Col,message } from 'antd';
 import { CloudUploadOutlined,ReloadOutlined } from "@ant-design/icons"
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';

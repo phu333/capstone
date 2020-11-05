@@ -1,6 +1,6 @@
 import React from 'react';
 import { createContract, contractInformation, } from '../../actions/ContractAction'
-import { Select, DatePicker, Descriptions, Space, Button, InputNumber, Form, Table, Input, Col, Card, AutoComplete } from 'antd';
+import { Select, DatePicker, Descriptions, Space, Button, InputNumber, Form, Table, Input, Col, Card, AutoComplete,message } from 'antd';
 import { connect } from 'react-redux'
 import ContractTable from '../Table/ContractTable'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
@@ -93,7 +93,7 @@ class CreateContract extends React.Component {
         console.log(value); // HTML/rich text
     }
     onFinish = (values) => {
-        contract={
+        const contract={
             contractTitle:this.state.contractTitle,
             contractNum:this.state.contractNum,
             contractName:this.state.contractName,

@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import { connect } from 'react-redux'
 
 import { MailOutlined, PrinterOutlined, IdcardOutlined, HomeOutlined, PhoneOutlined, BankOutlined, ContactsOutlined } from '@ant-design/icons';
-import { Card, Button, Space, Checkbox, Descriptions, Select, Form, Input } from 'antd';
+import { Card, Button, Space, Checkbox, Descriptions, Select, Form, Input,message } from 'antd';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { FormBuilder } from 'react-formio';
 import axios from 'axios'
@@ -73,7 +73,7 @@ class TemplateUpload extends React.Component {
 
     }
     onFinish = (values) => {
-        template ={
+        const template ={
             contractContent: this.state.contractContent,
             templateName: this.state.templateName,
             contractName: this.state.contractName,

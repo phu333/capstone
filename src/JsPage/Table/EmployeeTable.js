@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import { Table, Space, Tag, Button, Switch } from 'antd';
+import { Table, Space, Tag, Button, Switch,message } from 'antd';
 import AddEmployee from '../Add/AddEmployee'
 import ViewEmployee from '../Update/ViewEmployee'
 import React from 'react';

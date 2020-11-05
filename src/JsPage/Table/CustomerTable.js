@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import { Table, Space, Button, Tag, Switch } from 'antd';
+import { Table, Space, Button, Tag, Switch,message } from 'antd';
 import AddCustomer from '../Add/AddCustomer'
 import ViewCustomer from '../Update/ViewCustomer'
 import React from 'react';

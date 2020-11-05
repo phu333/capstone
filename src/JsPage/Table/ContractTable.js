@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import { Table, Button, Space, Tag } from 'antd';
+import { Table, Button, Space, Tag,message } from 'antd';
 import ContractSearch from '../Search/ContractSearch'
 import "../Column.css"
 import axios from 'axios'

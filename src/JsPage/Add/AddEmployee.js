@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Checkbox, Space, Card } from 'antd';
+import { Form, Input, Button, Checkbox, Space, Card,message } from 'antd';
 // import {
 //     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
 //     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
