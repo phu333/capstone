@@ -1,21 +1,14 @@
-import React from 'react';
-import 'antd/dist/antd.css';
-import '../index.css';
-import {
-    IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-    , CloudUploadOutlined, RedoOutlined
-} from '@ant-design/icons';
-import { createCustomer, customerInformation } from '../actions/CustomerAction'
-import { connect } from 'react-redux'
-import { Form, Input, Button, Row, Col } from 'antd';
-import CustomerTable from './CustomerTable'
+import { CloudUploadOutlined, QuestionCircleOutlined, ReloadOutlined } from '@ant-design/icons';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import { ReloadOutlined } from "@ant-design/icons"
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { Button, Col, Popover, Row } from 'antd';
+import 'antd/dist/antd.css';
+import React from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import { createCustomer } from '../actions/CustomerAction';
+import '../index.css';
+import CustomerTable from './CustomerTable';
 const layout = {
     labelCol: {
         span: 4,
@@ -30,6 +23,11 @@ const tailLayout = {
         span: 10,
     },
 };
+const Validation = (
+
+    <p>Nên để họ tên thật</p>
+
+);
 class AddCustomer extends React.Component {
     constructor() {
         super();
@@ -91,9 +89,9 @@ class AddCustomer extends React.Component {
                     <React.Fragment>
                         <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
                             <Col span={10} >
-                                <Grid container spacing={3}>
+                                <Grid container  spacing={3}>
 
-                                    <Grid item xs={12} sm={6}>
+                                    <Grid item style={{ display: 'inline-flex' }} xs={12} sm={6}>
                                         <TextField
                                             required
                                             id="company"
@@ -101,9 +99,11 @@ class AddCustomer extends React.Component {
                                             label="Tên doanh nghiệp"
                                             fullWidth
                                             autoComplete="Tên doanh nghiệp"
-                                        />
+                                        /><Popover content={Validation} trigger="hover">
+                                        <Button size="small" shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover>
                                     </Grid>
-                                    <Grid item xs={12} sm={6}>
+                                    <Grid item style={{ display: 'inline-flex' }} xs={12} sm={6}>
                                         <TextField
                                             required
                                             id="taxCode"
@@ -111,9 +111,11 @@ class AddCustomer extends React.Component {
                                             label="Mã số thuế"
                                             fullWidth
                                             autoComplete="family-name"
-                                        />
+                                        /><Popover content={Validation} trigger="hover">
+                                        <Button size="small" shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover>
                                     </Grid>
-                                    <Grid item xs={12}>
+                                    <Grid item style={{ display: 'inline-flex' }} xs={12}>
                                         <TextField
 
                                             id="faxCode"
@@ -121,7 +123,9 @@ class AddCustomer extends React.Component {
                                             label="số fax"
                                             fullWidth
                                             autoComplete="shipping address-line1"
-                                        />
+                                        /><Popover content={Validation} trigger="hover">
+                                        <Button size="small" shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover>
                                         <TextField
                                             required
                                             id="email"
@@ -129,20 +133,24 @@ class AddCustomer extends React.Component {
                                             label="địa chỉ mail"
                                             fullWidth
                                             autoComplete="shipping address-level2"
-                                        />
+                                        /><Popover content={Validation} trigger="hover">
+                                        <Button size="small" shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover>
                                     </Grid>
-                                    <Grid item xs={12}>
+                                    <Grid item style={{ display: 'inline-flex' }} xs={12}>
                                         <TextField
                                             id="address"
                                             name="địa chỉ"
                                             label="địa chỉ"
                                             fullWidth
                                             autoComplete="shipping address-line2"
-                                        />
+                                        /><Popover content={Validation} trigger="hover">
+                                        <Button size="small" shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover>
                                     </Grid>
 
 
-                                    <Grid item xs={12} sm={6}>
+                                    <Grid item style={{ display: 'inline-flex' }} xs={12} sm={6}>
                                         <TextField
                                             required
                                             id="presentor"
@@ -150,9 +158,11 @@ class AddCustomer extends React.Component {
                                             label="Người đại diện"
                                             fullWidth
                                             autoComplete="shipping postal-code"
-                                        />
+                                        /><Popover content={Validation} trigger="hover">
+                                        <Button size="small" shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover>
                                     </Grid>
-                                    <Grid item xs={12} sm={6}>
+                                    <Grid item style={{ display: 'inline-flex' }} xs={12} sm={6}>
                                         <TextField
                                             required
                                             id="role"
@@ -160,7 +170,9 @@ class AddCustomer extends React.Component {
                                             label="chức vụ"
                                             fullWidth
                                             autoComplete="shipping country"
-                                        />
+                                        /><Popover content={Validation} trigger="hover">
+                                        <Button size="small" shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover>
                                     </Grid>
 
                                 </Grid>
@@ -178,7 +190,7 @@ class AddCustomer extends React.Component {
                             </Col>
                         </Row>
                     </React.Fragment>
-                    {/* <Form
+                                        {/* <Form
                         {...layout}
                         name="basic"
                         initialValues={{

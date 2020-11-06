@@ -3,7 +3,10 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Checkbox, Space, Card } from 'antd';
+import { Form, Input, Button, Checkbox, Space, Card, Popover,Row,Col } from 'antd';
+import {
+    QuestionCircleOutlined
+} from '@ant-design/icons';
 
 import EmployeeTable from '../Table/EmployeeTable'
 import axios from 'axios'
@@ -30,6 +33,11 @@ const middleLayout = {
         span: 10,
     },
 };
+const Validation = (
+
+    <p>Nên để họ tên thật</p>
+
+);
 class AddUserAdmin extends React.Component {
     constructor() {
         super();
@@ -46,11 +54,11 @@ class AddUserAdmin extends React.Component {
             method: "POST",
             data: values
         })
-            .then( (response)=> {
-               
+            .then((response) => {
+
                 return response.data.data;
             })
-            .then( (data)=> {
+            .then((data) => {
                 console.log(data)
                 // let loginInfo = {
                 //     username: "Tri",
@@ -65,7 +73,7 @@ class AddUserAdmin extends React.Component {
                 //     editCompanyInformationPermission: true,
                 //     loginCode: true,
                 // }
-    
+
                 this.props.onSubmit(data)
 
             })
@@ -94,14 +102,14 @@ class AddUserAdmin extends React.Component {
                     <br />
                     <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
                         Trở về
-              </Button>
+                  </Button>
                     <h2 style={{ textAlign: 'center' }}>Tạo nhân viên</h2>
 
                     <Form
                         {...layout}
                         name="basic"
                         className="employee-form"
-                        
+                        hideRequiredMark
                         onFinish={this.onFinish}
                         onFinishFailed={this.onFinishFailed}
 
@@ -117,7 +125,9 @@ class AddUserAdmin extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="Họ và tên" />
+                            <Row gutter={8}><Col span={22}> <Input placeholder="Họ và tên" /></Col><Popover content={Validation} trigger="hover">
+                                <Button style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="cmnd/cmt"
@@ -129,7 +139,9 @@ class AddUserAdmin extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="cmnd/cmt" />
+                            <Row gutter={8}>   <Col span={22}> <Input placeholder="cmnd/cmt" /></Col><Popover content={Validation} trigger="hover">
+                                <Button style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Tên người dùng"
@@ -141,7 +153,9 @@ class AddUserAdmin extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="tên người dùng" />
+                            <Row gutter={8}>   <Col span={22}> <Input placeholder="tên người dùng" /></Col><Popover content={Validation} trigger="hover">
+                                <Button style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
 
 
@@ -155,7 +169,9 @@ class AddUserAdmin extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="Điện thoại" />
+                            <Row gutter={8}>      <Col span={22}> <Input placeholder="Điện thoại" /></Col><Popover content={Validation} trigger="hover">
+                                <Button style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Địa chỉ"
@@ -167,7 +183,9 @@ class AddUserAdmin extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="Địa chỉ" />
+                            <Row gutter={8}>     <Col span={22}> <Input placeholder="Địa chỉ" /></Col><Popover content={Validation} trigger="hover">
+                                <Button style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Email"
@@ -179,7 +197,9 @@ class AddUserAdmin extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="Email" />
+                            <Row gutter={8}>   <Col span={22}> <Input placeholder="Email" /></Col><Popover content={Validation} trigger="hover">
+                                <Button style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Chức vụ"
@@ -191,10 +211,12 @@ class AddUserAdmin extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="Chức vụ" />
+                            <Row gutter={8}>    <Col span={22}> <Input placeholder="Chức vụ" /></Col><Popover content={Validation} trigger="hover">
+                                <Button style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item {...tailLayout} name="signPermission" valuePropName="checked" >
-                            
+
                             <Checkbox checked={true} >Quyền ký</Checkbox>
 
                         </Form.Item>
@@ -221,15 +243,15 @@ class AddUserAdmin extends React.Component {
                             <Space size="large">
                                 <Button type="primary" htmlType="submit" >
                                     Nộp
-                                </Button>
+                                    </Button>
                                 <Button type="primary" htmlType="reset" >
                                     Reset
-                                </Button>
+                                    </Button>
 
 
                             </Space>
                         </Form.Item>
-                       
+
 
 
 
@@ -239,8 +261,7 @@ class AddUserAdmin extends React.Component {
 
 
 
-                </Card >
-            );
+                </Card >);
         }
     }
 }
