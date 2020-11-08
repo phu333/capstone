@@ -1,7 +1,7 @@
 
 import { Table, Button,Tag } from 'antd';
 import ContractSearch from '../Search/ContractSearch'
-import { EyeOutlined,DeleteOutlined, FormOutlined, FileAddOutlined,ContainerOutlined } from "@ant-design/icons"
+import { FolderViewOutlined,DeleteOutlined, FormOutlined, FileAddOutlined,ContainerOutlined } from "@ant-design/icons"
 import AddContractExtension from '../Add/AddContractExtension'
 import UpdateContractExtension from '../Update/UpdateContractExtension'
 import React from 'react';
@@ -162,7 +162,7 @@ class ContractExtensionTable extends React.Component {
                             key="action"
                             render={(text, record) => (
 
-                                <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                                <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
                                     () => this.setState({
                                         contract: text,
                                         showContractExtension: true

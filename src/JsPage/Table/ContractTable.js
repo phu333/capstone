@@ -3,7 +3,7 @@ import { Table, Button, Space, Tag,Popover } from 'antd';
 import ContractSearch from '../Search/ContractSearch'
 import "../Column.css"
 import {
-    EyeOutlined, FileExcelOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
+    FolderViewOutlined, FileExcelOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
     FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
 } from "@ant-design/icons"
 import ChooseContractTemplate from '../Add/ChooseContractTemplate'
@@ -118,7 +118,7 @@ class ContractTable extends Component {
                             showContract: true
                         })
                     }
-                ><EyeOutlined/> Xem chi tiết</Button></span>
+                ><FolderViewOutlined/> Xem chi tiết</Button></span>
                 <span><Button
                     title="Vô hiệu hóa"
                     key="action"

@@ -1,12 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
-import { PageHeader, Space, Row, Col, Table } from 'antd';
-import { Input } from 'antd';
 import {
-    EyeOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
-    FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
-} from "@ant-design/icons"
+    ContainerOutlined,
+    FileProtectOutlined, FolderViewOutlined
+} from "@ant-design/icons";
+import { Col, Input, Row, Table } from 'antd';
+import 'antd/dist/antd.css';
+import React from 'react';
 const { Search } = Input;
 const { Column } = Table;
 const layout = {
@@ -72,7 +70,7 @@ class SearchContractByCode extends React.Component {
                             key="action"
                             render={(text, record) => (
 
-                                <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                                <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
                                     () => this.setState({
                                         contract: text,
                                         showContract: true

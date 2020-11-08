@@ -84,27 +84,23 @@ class UpdateProfile extends React.Component {
                     <Space direction="horizontal" align="start"  >
 
 
-                        <Card style={{ width: 400, minHeight: 300 }}>
-                            <Descriptions size="small" column={1}   >
+                        <Card style={{ width: 400, minHeight: 100 }}>
+                            <Row gutter={8}>
+                                <Col flex={2}> <Avatar size={100} icon={<UserOutlined />} /> </Col>
+                                <Col flex={3}>  <br />
+                                    <b >User: {login.username}</b><br />
 
-                                <Descriptions.Item><Avatar size={100} icon={<UserOutlined />} /> </Descriptions.Item>
-
-
-
-                                <Descriptions.Item><br />
-                                    <b >{login.username}</b><br />
-
-                                    <b >Company ABC</b>
-                                </Descriptions.Item>
-
-                            </Descriptions>
+                                    <b >Company: Company ABC</b><br />
+                                    <b>Email:</b>
+                                </Col>
+                            </Row>
                         </Card>
                         <Card style={{ width: 600, height: 600 }}>
                             <Form
                                 {...layout}
                                 name="basic"
                                 className="employee-form"
-
+                                hideRequiredMark
                                 onFinish={this.onFinish}
                                 onFinishFailed={this.onFinishFailed}
 
@@ -119,12 +115,12 @@ class UpdateProfile extends React.Component {
                                         <Row gutter={8}> <Col span={10}><Input disabled defaultValue="Nguyen " /></Col><Col span={10}> <Input disabled defaultValue="Van A" /></Col>
 
                                             <Col span={4}>    <Popover content={name} trigger="hover">
-                                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                                <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                             </Popover></Col></Row> :
                                         <Row gutter={8}> <Col span={10}><Input defaultValue="Nguyen " /></Col><Col span={10}> <Input defaultValue="Van A" /></Col>
 
                                             <Col span={4}>    <Popover content={name} trigger="hover">
-                                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                                <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                             </Popover></Col></Row>}
                                 </Form.Item>
                                 <Form.Item
@@ -134,10 +130,10 @@ class UpdateProfile extends React.Component {
                                 >
                                     {this.state.isEdit === false ?
                                         <Row gutter={8}> <Col span={20}><Input disabled defaultValue="320202342342" /></Col>    <Popover content={name} trigger="hover">
-                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                            <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                         </Popover></Row> :
                                         <Row gutter={8}> <Col span={20}><Input disabled defaultValue="320202342342" /></Col>    <Popover content={name} trigger="hover">
-                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                            <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                         </Popover></Row>}
                                 </Form.Item>
                                 <Form.Item
@@ -145,7 +141,7 @@ class UpdateProfile extends React.Component {
                                     name="username"
                                     required
                                 ><Row gutter={8}> <Col span={20}><Input disabled defaultValue="Ak95" /></Col>    <Popover content={name} trigger="hover">
-                                    <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                 </Popover></Row>
                                 </Form.Item>
 
@@ -156,10 +152,10 @@ class UpdateProfile extends React.Component {
                                 >
                                     {this.state.isEdit === false ?
                                         <Row gutter={8}> <Col span={20}>  <Input.Password disabled defaultValue="123" /> </Col>    <Popover content={name} trigger="hover">
-                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                            <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                         </Popover></Row> :
                                         <Row gutter={8}> <Col span={20}>  <Input.Password defaultValue="123" /></Col>    <Popover content={name} trigger="hover">
-                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                            <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                         </Popover></Row>}
 
                                 </Form.Item>
@@ -170,10 +166,10 @@ class UpdateProfile extends React.Component {
                                 >
                                     {this.state.isEdit === false ?
                                         <Row gutter={8}> <Col span={20}><Input disabled defaultValue="123123" /></Col>    <Popover content={name} trigger="hover">
-                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                            <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                         </Popover></Row> :
                                         <Row gutter={8}> <Col span={20}><Input defaultValue="123123" /></Col>    <Popover content={name} trigger="hover">
-                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                            <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                         </Popover></Row>}
                                 </Form.Item>
 
@@ -185,23 +181,23 @@ class UpdateProfile extends React.Component {
                                 >
                                     {this.state.isEdit === false ?
                                         <Row gutter={8}> <Col span={20}><Input disabled defaultValue="12/3/4" /></Col>    <Popover content={name} trigger="hover">
-                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                            <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                         </Popover></Row> :
                                         <Row gutter={8}> <Col span={20}><Input defaultValue="12/3/4" /></Col>    <Popover content={name} trigger="hover">
-                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                            <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                         </Popover></Row>}
                                 </Form.Item>
                                 <Form.Item
                                     label="Email"
                                     name="Email"
-
+                                    required
                                 >
                                     {this.state.isEdit === false ?
                                         <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Email" /></Col>    <Popover content={name} trigger="hover">
-                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                            <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                         </Popover></Row> :
                                         <Row gutter={8}> <Col span={20}><Input defaultValue="Email" /></Col>    <Popover content={name} trigger="hover">
-                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                            <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                         </Popover></Row>}
                                 </Form.Item>
                                 <Form.Item
@@ -210,7 +206,7 @@ class UpdateProfile extends React.Component {
                                     required
                                 >
                                     <Row gutter={8}> <Col span={20}> <Input disabled defaultValue="Giám đốc" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                                 </Form.Item>
 

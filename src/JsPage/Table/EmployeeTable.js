@@ -1,15 +1,14 @@
+import { FolderViewOutlined, UserAddOutlined } from "@ant-design/icons";
+import { Button, Space, Switch, Table, Tag } from 'antd';
 import 'antd/dist/antd.css';
-import { Table, Space, Tag, Button,Switch } from 'antd';
-import AddEmployee from '../Add/AddEmployee'
-import ViewEmployee from '../Update/ViewEmployee'
 import React from 'react';
-import "../Column.css"
-import ReactDOM from 'react-dom';
-import EmployeeSearch from '../Search/EmployeeSearch'
-import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
-import { connect } from 'react-redux'
-import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
-import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import { createEmployee } from '../../actions/EmployeeAction';
+import AddEmployee from '../Add/AddEmployee';
+import "../Column.css";
+import EmployeeSearch from '../Search/EmployeeSearch';
+import ViewEmployee from '../Update/ViewEmployee';
 const { Column, ColumnGroup } = Table;
 
 
@@ -137,7 +136,7 @@ class EmployeeList extends React.Component {
               key="action"
               render={(text, record) => (
                 <Space size="middle">
-                  <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                  <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
                     () => this.setState({
                       employee: text,
                       openEmployee: "openViewEmployee",

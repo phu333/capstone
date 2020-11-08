@@ -8,7 +8,7 @@ import CustomerSearch from '../Search/CustomerSearch'
 import { createCustomer, customerInformation } from '../../actions/CustomerAction'
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, EyeOutlined } from "@ant-design/icons"
+import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, FolderViewOutlined } from "@ant-design/icons"
 const { Column } = Table;
 
 
@@ -123,49 +123,41 @@ class CustomerList extends React.Component {
 
               )} />*/}
 
-            <Column title="Người đại diện" dataIndex="name" key="name"
-              sorter={(a, b) => a.name.localeCompare(b.name)}
-              sortDirections={['descend', 'ascend']}
-              render={(text, record) => (
-
-                <b>{text}</b>
-
-              )} />
-            <Column title="Địa chỉ" dataIndex="address" key="address"
+            {/* <Column title="Địa chỉ" dataIndex="address" key="address"
               sorter={(a, b) => a.address.localeCompare(b.address)}
               sortDirections={['descend', 'ascend']}
               render={(text, record) => (
 
                 <b>{text}</b>
 
-              )} />
+              )} /> */}
             <Column title="Mã số thuế" dataIndex="taxCode" key="taxCode" render={(text, record) => (
 
               <b>{text}</b>
 
             )} />
-            <Column title="Số fax" dataIndex="faxCode" key="faxCode" render={(text, record) => (
+            {/* <Column title="Số fax" dataIndex="faxCode" key="faxCode" render={(text, record) => (
 
               <b>{text}</b>
 
-            )} />
+            )} /> */}
             <Column title="Số điện thoại" dataIndex="phone" key="phone" render={(text, record) => (
 
               <b>{text}</b>
 
             )} />
-            <Column title="email" dataIndex="email" key="email" render={(text, record) => (
+            {/* <Column title="email" dataIndex="email" key="email" render={(text, record) => (
 
               <a>{text}</a>
 
-            )} />
-
+            )} /> */}
+{/* 
             <Column title="trạng thái" dataIndex="status" key="status"
               sorter={(a, b) => a.status.localeCompare(b.status)}
               sortDirections={['descend', 'ascend']}
               render={(text, record) => {
                 let color = 'pink'
-                if (text === 'deactive') {
+                if (text === 'inactive') {
                   color = 'red'
                 } else if (text === 'active') {
                   color = 'green'
@@ -180,13 +172,13 @@ class CustomerList extends React.Component {
                   {text.toUpperCase()}
                 </Tag>);
               }}
-            />
+            /> */}
             <Column
               title="Xem thông tin"
               key="action"
               render={(text, record) => (
                 <Space size="middle">
-                  <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                  <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
                     () => this.setState({
                       customer: text,
                       openCustomer: "openViewCustomer",

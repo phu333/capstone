@@ -1,16 +1,15 @@
-import React from 'react';
-
-import 'antd/dist/antd.css';
-import '../../index.css';
-import { createSignature, signatureInformation } from '../../actions/SignatureAction'
-import { connect } from 'react-redux'
-import { Form, Input, Button, Card, Space, DatePicker } from 'antd';
 import {
-    IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-    , CloudUploadOutlined, RedoOutlined
+    QuestionCircleOutlined
 } from '@ant-design/icons';
-import SignatureList from '../Table/SignatureList'
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { Button, Card, DatePicker, Form, Input, Popover, Space,Row,Col } from 'antd';
+import 'antd/dist/antd.css';
+import React from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import { createSignature } from '../../actions/SignatureAction';
+import '../../index.css';
+import SignatureList from '../Table/SignatureList';
+
 const { RangePicker } = DatePicker;
 const layout = {
     labelCol: {
@@ -69,10 +68,14 @@ class AddSignature extends React.Component {
         })
     }
     render() {
+        const Validation = (
 
+            <p>Nên để họ tên thật</p>
+        
+        );
         if (this.state.finish) {
             return (<Router>
-                <Redirect push to={"/capstone/signatureList" } />
+                <Redirect push to={"/capstone/signatureList"} />
                 <Route exact path="/capstone/signatureList" component={SignatureList} /></Router>);
         } else {
             return (
@@ -87,7 +90,7 @@ class AddSignature extends React.Component {
                             {...layout}
                             name="basic"
                             className="employee-form"
-
+                            hideRequiredMark
                             onFinish={this.onFinish}
                             onFinishFailed={this.onFinishFailed}
 
@@ -103,7 +106,9 @@ class AddSignature extends React.Component {
                                     },
                                 ]}
                             >
-                                <Input placeholder="Số serial" />
+                                <Row gutter={8}> <Col span={20}> <Input placeholder="Số serial" /></Col><Popover content={Validation} trigger="hover">
+                                    <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                                </Popover></Row>
                             </Form.Item>
                             <Form.Item
                                 label="Nhà cung cấp"
@@ -115,7 +120,9 @@ class AddSignature extends React.Component {
                                     },
                                 ]}
                             >
-                                <Input placeholder="Nhà cung cấp" />
+                                <Row gutter={8}> <Col span={20}> <Input placeholder="Nhà cung cấp" /></Col><Popover  content={Validation} trigger="hover">
+                                    <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                                </Popover></Row>
                             </Form.Item>
                             <Form.Item
                                 label="Thời hạn"
@@ -132,7 +139,9 @@ class AddSignature extends React.Component {
                                     format="YYYY-MM-DD HH:mm"
                                     onChange={this.onChange}
                                     onOk={this.onOk}
-                                />
+                                /><Popover  content={Validation} trigger="hover">
+                                <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                            </Popover>
                             </Form.Item>
 
 

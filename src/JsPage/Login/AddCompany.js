@@ -91,7 +91,7 @@ class AddCompany extends React.Component {
                     {...layout}
                     name="basic"
                     className="employee-form"
-
+                    hideRequiredMark
                     onFinish={this.onFinish}
                     onFinishFailed={this.onFinishFailed}
 
@@ -103,7 +103,7 @@ class AddCompany extends React.Component {
                                 required
                             >
                                 <Row gutter={8}> <Col span={20}><Input   defaultValue="HiSign" /></Col>    <Popover content={name} trigger="hover">
-                                    <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    <Button  size="small" shape="circle"  style={{ border: "none" }}  icon={<QuestionCircleOutlined />} />
                                 </Popover></Row>
                             </Form.Item>
                             <Form.Item
@@ -111,18 +111,18 @@ class AddCompany extends React.Component {
                                 name="taxCode"
                                 required
                             >
-                                    <Row gutter={8}> <Col span={20}><Input   defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                                    </Popover></Row> 
+                                <Row gutter={8}> <Col span={20}><Input   defaultValue="HiSign" /></Col>    <Popover content={name} trigger="hover">
+                                    <Button  size="small" shape="circle"  style={{ border: "none" }}  icon={<QuestionCircleOutlined />} />
+                                </Popover></Row>
                             </Form.Item>
                             <Form.Item
                                 label="Điện thoại"
                                 name="phoneNumber"
 
                             >
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                                    </Popover></Row>
+                                <Row gutter={8}> <Col span={20}><Input   defaultValue="HiSign" /></Col>    <Popover content={name} trigger="hover">
+                                    <Button  size="small" shape="circle"  style={{ border: "none" }}  icon={<QuestionCircleOutlined />} />
+                                </Popover></Row>
                             </Form.Item>
                             <Form.Item
                                 label="Địa chỉ"
@@ -130,7 +130,7 @@ class AddCompany extends React.Component {
                                 required
                             >
                                     <Row gutter={8}> <Col span={20}><Input defaultValue="12/10/4/8" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button  size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                             </Form.Item>
                             <Form.Item
@@ -139,7 +139,7 @@ class AddCompany extends React.Component {
 
                             >
                                     <Row gutter={8}> <Col span={20}><Input defaultValue="Email" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button  size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                             </Form.Item>
                             <Form.Item
@@ -148,7 +148,7 @@ class AddCompany extends React.Component {
                                 required
                             >
                                     <Row gutter={8}> <Col span={20}><Input defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button  size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                             </Form.Item>
                             <Form.Item
@@ -157,7 +157,7 @@ class AddCompany extends React.Component {
 
                             >
                                     <Row gutter={8}> <Col span={20}><Input defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button  size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                             </Form.Item>
                             <Form.Item
@@ -166,7 +166,7 @@ class AddCompany extends React.Component {
                                 required
                             >
                                     <Row gutter={8}> <Col span={20}><Input defaultValue="Nguyen Van A" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button  size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                             </Form.Item>
 
@@ -178,7 +178,7 @@ class AddCompany extends React.Component {
                                 required
                             >
                                     <Row gutter={8}> <Col span={20}><Input defaultValue="Giám đốc" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button  size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                             </Form.Item>
 

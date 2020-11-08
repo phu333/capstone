@@ -1,15 +1,14 @@
-import React from 'react';
+import {
+    QuestionCircleOutlined
+} from '@ant-design/icons';
+import { Button, Card, Col, Form, Input, Popover, Row, Space } from 'antd';
 import 'antd/dist/antd.css';
+import React from 'react';
 import '../../index.css';
 
 
-import { Form, Input, Button, Row,Popover, Col, Card, Space } from 'antd';
 
-import {
-    QuestionCircleOutlined, UserOutlined
-} from '@ant-design/icons';
 
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 
 
 
@@ -72,7 +71,7 @@ class UpdateProfileCompany extends React.Component {
     };
 
     render() {
-        const name="hello"
+        const name = "hello"
 
 
         return (
@@ -80,16 +79,16 @@ class UpdateProfileCompany extends React.Component {
 
             <React.Fragment>
                 <h2 style={{ textAlign: 'center' }}>Thông tin doanh nghiệp</h2>
-                <Space direction="horizontal" align="start"  >
+                <Space direction="horizontal" align="center"  >
 
 
-                    <Card style={{ width: 800, minHeight: 600 }}>
+                    <Card   style={{ width: 1000, minHeight: 600 }}>
 
                         <Form
                             {...layout}
                             name="basic"
                             className="employee-form"
-
+                            hideRequiredMark
                             onFinish={this.onFinish}
                             onFinishFailed={this.onFinishFailed}
 
@@ -97,14 +96,14 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Tên doanh nghiệp"
                                 name="company"
-required
+                                required
                             >
                                 {this.state.isEdit === false ?
                                     <Row gutter={8}> <Col span={20}><Input disabled defaultValue="HiSign" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
                                     <Row gutter={8}> <Col span={20}><Input defaultValue="HiSign" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
                             <Form.Item
@@ -114,10 +113,10 @@ required
                             >
                                 {this.state.isEdit === false ?
                                     <Row gutter={8}> <Col span={20}><Input disabled defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
                                     <Row gutter={8}> <Col span={20}><Input defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
                             <Form.Item
@@ -127,10 +126,10 @@ required
                             >
                                 {this.state.isEdit === false ?
                                     <Row gutter={8}> <Col span={20}><Input disabled defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
                                     <Row gutter={8}> <Col span={20}><Input defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
                             <Form.Item
@@ -140,10 +139,10 @@ required
                             >
                                 {this.state.isEdit === false ?
                                     <Row gutter={8}> <Col span={20}><Input disabled defaultValue="12/10/4/8" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
                                     <Row gutter={8}> <Col span={20}><Input defaultValue="12/10/4/8" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
                             <Form.Item
@@ -153,10 +152,10 @@ required
                             >
                                 {this.state.isEdit === false ?
                                     <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Email" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
                                     <Row gutter={8}> <Col span={20}><Input defaultValue="Email" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
                             <Form.Item
@@ -166,10 +165,10 @@ required
                             >
                                 {this.state.isEdit === false ?
                                     <Row gutter={8}> <Col span={20}><Input disabled defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
                                     <Row gutter={8}> <Col span={20}><Input defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
                             <Form.Item
@@ -179,10 +178,10 @@ required
                             >
                                 {this.state.isEdit === false ?
                                     <Row gutter={8}> <Col span={20}><Input disabled defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
-                                    <Row gutter={8}> <Col span={20}><Input  defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
-                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
                             <Form.Item
@@ -191,12 +190,12 @@ required
                                 required
                             >
                                 {this.state.isEdit === false ?
-                                   <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Nguyen Van A" /></Col>    <Popover content={name} trigger="hover">
-                                   <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                               </Popover></Row>  :
-                                   <Row gutter={8}> <Col span={20}><Input  defaultValue="Nguyen Van A" /></Col>    <Popover content={name} trigger="hover">
-                                   <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                               </Popover></Row> }
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Nguyen Van A" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row> :
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="Nguyen Van A" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>}
                             </Form.Item>
 
 
@@ -207,12 +206,12 @@ required
                                 required
                             >
                                 {this.state.isEdit === false ?
-                                   <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Giám đốc" /></Col>    <Popover content={name} trigger="hover">
-                                   <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                               </Popover></Row> :
-                                   <Row gutter={8}> <Col span={20}><Input  defaultValue="Giám đốc" /></Col>    <Popover content={name} trigger="hover">
-                                   <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                               </Popover></Row>}
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Giám đốc" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row> :
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="Giám đốc" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>}
                             </Form.Item>
 
 
