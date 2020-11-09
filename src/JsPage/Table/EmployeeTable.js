@@ -1,7 +1,8 @@
 import 'antd/dist/antd.css';
-import { Table, Space, Tag, Button, Switch,message } from 'antd';
+import { Table, Space, Tag, Button, Switch, message } from 'antd';
 import AddEmployee from '../Add/AddEmployee'
 import ViewEmployee from '../Update/ViewEmployee'
+import EmployeeDetail from '../Update/EmployeeDetail'
 import React from 'react';
 import "../Column.css"
 import ReactDOM from 'react-dom';
@@ -33,43 +34,61 @@ class EmployeeList extends React.Component {
       axios({
         url: '',
         method: "GET",
-        
-    })
+
+      })
         .then((response) => {
 
-            return response.data;
+          return response.data;
         })
         .then((data) => {
 
-            
+
 
         })
         .catch(error => {
 
-            if (error.response.status === 500) {
-                message.error(error.response.status + ' Server under maintainence');
-            } else if (error.response.status === 404) {
-                message.error(error.response.status + ' Server not found');
-            }
+          if (error.response.status === 500) {
+            message.error(error.response.status + ' Server under maintainence');
+          } else if (error.response.status === 404) {
+            message.error(error.response.status + ' Server not found');
+          }
 
         });
       const contract1 = {
-
-        name: 'Mike',
+        id: "A1",
+        name: 'Mike wasdzxczxc',
         email: "some email",
         address: '10 Downing Street',
         status: "active",
-        role: "director"
-
+        role: "director",
+        phone: 123123123,
+        permissionList: [
+          "signPermission",
+          "contractManagePermision",
+          "customerManagePermission",
+          "contractTypeManagePermission",
+          "employeeManagePermission",
+          "signatureManagePermission",
+          "editCompanyInformationPermission",
+        ]
       }
       const contract2 = {
-
-        name: 'John',
+        id: "A2",
+        name: 'John wasdzxczxc',
         email: "some email",
         address: '10 Downing Street',
         status: "deactive",
-        role: "secrectery"
+        role: "secrectery",
+        phone: 123123123,
+        permissionList: [
 
+          "contractManagePermision",
+          "customerManagePermission",
+          "contractTypeManagePermission",
+          "employeeManagePermission",
+          "signatureManagePermission",
+
+        ]
       }
 
       this.props.onSubmit(contract1)
@@ -103,6 +122,14 @@ class EmployeeList extends React.Component {
 
         </Router>
       );
+    }else if (this.state.openEmployee === "employeeDetail") {
+      return (
+        <Router>
+          <Redirect push to={"/capstone/employeeDetail/" + this.state.employee.name} />
+          <Route exact path="/capstone/employeeDetail/:id" render={() => <EmployeeDetail employee={this.state.employee} />} />
+
+        </Router>
+      );
     }
     else {
       return (
@@ -119,7 +146,11 @@ class EmployeeList extends React.Component {
                 <b>{text}</b>
 
               )} />
-            <Column title="điện thoại" dataIndex="phone" key="phone" render={(text, record) => (
+            <Column title="chức vụ" dataIndex="role"
+              sorter={(a, b) => a.role.localeCompare(b.role)}
+              sortDirections={['descend', 'ascend']}
+              key="role" />
+            {/* <Column title="điện thoại" dataIndex="phone" key="phone" render={(text, record) => (
 
               <a>{text}</a>
 
@@ -129,17 +160,14 @@ class EmployeeList extends React.Component {
               <a>{text}</a>
 
             )} />
-           
+
             <Column title="Địa chỉ" dataIndex="address" key="address" render={(text, record) => (
 
               <b>{text}</b>
 
-            )} />
-            <Column title="chức vụ" dataIndex="role"
-              sorter={(a, b) => a.role.localeCompare(b.role)}
-              sortDirections={['descend', 'ascend']}
-              key="role" />
-            <Column title="trạng thái" dataIndex="status" key="status"
+            )} /> */}
+
+            {/* <Column title="trạng thái" dataIndex="status" key="status"
               sorter={(a, b) => a.status.localeCompare(b.status)}
               sortDirections={['descend', 'ascend']}
               render={(text, record) => {
@@ -159,14 +187,27 @@ class EmployeeList extends React.Component {
                   {text.toUpperCase()}
                 </Tag>);
               }}
-            />
-
+            /> */}
             <Column
-              title="Xem chi tiết"
+              title="Thông tin cá nhân"
               key="action"
               render={(text, record) => (
                 <Space size="middle">
-                  <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                  <EyeOutlined style={{ fontSize: '30px', color: '#08c', alignContent: "center", textAlign: "center" }} theme="outlined" onClick={
+                    () => this.setState({
+                      employee: text,
+                      openEmployee: "employeeDetail",
+                    })
+                  } />
+                </Space>
+              )}
+            />
+            <Column
+              title="Quyền hạn"
+              key="action"
+              render={(text, record) => (
+                <Space size="middle">
+                  <EyeOutlined style={{ fontSize: '30px', color: '#08c', alignContent: "center", textAlign: "center" }} theme="outlined" onClick={
                     () => this.setState({
                       employee: text,
                       openEmployee: "openViewEmployee",
@@ -176,7 +217,7 @@ class EmployeeList extends React.Component {
               )}
             />
             <Column
-              title="Chức năng"
+              title="Trạng thái"
               dataIndex="status"
               key="status"
               render={(text, record) => (

@@ -152,7 +152,7 @@ class EmployeeSideMenu extends React.Component {
                     {this.state.showComponent === "customerList" ?
                       <Router>
                         <Redirect push to={"/capstone/" + this.state.showComponent} />
-                        <Route exact path="/capstone/customerList" component={CustomerTable} />
+                        <Route exact path="/capstone/customerList" render={() => <CustomerTable token={login.jwToken} role={login.role} />} />
                       </Router>
                       : null}
                     {this.state.showComponent === "contract" ?
