@@ -1,17 +1,18 @@
-import 'antd/dist/antd.css';
-import { Table, Button, Space, Tag,Popover } from 'antd';
-import ContractSearch from '../Search/ContractSearch'
-import "../Column.css"
 import {
-    FolderViewOutlined, FileExcelOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
-    FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
-} from "@ant-design/icons"
-import ChooseContractTemplate from '../Add/ChooseContractTemplate'
-import ViewContractPage from '../Update/ViewContractPage'
+    ContainerOutlined, FileAddOutlined, FileExcelOutlined,
+    FileProtectOutlined, FolderViewOutlined, FormOutlined, UploadOutlined
+} from "@ant-design/icons";
+import { Button, message, Popover, Space, Table, Tag } from 'antd';
+import 'antd/dist/antd.css';
+import axios from 'axios';
 import React, { Component } from 'react';
-import { createContract, contractInformation } from '../../actions/ContractAction'
-import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import { createContract } from '../../actions/ContractAction';
+import ChooseContractTemplate from '../Add/ChooseContractTemplate';
+import "../Column.css";
+import ContractSearch from '../Search/ContractSearch';
+import ViewContractPage from '../Update/ViewContractPage';
 const { Column } = Table;
 
 
@@ -36,6 +37,29 @@ class ContractTable extends Component {
     componentDidMount() {
 
         if (this.props.newContract.length === 0) {
+            axios({
+                url: '',
+                method: "GET",
+                
+            })
+                .then((response) => {
+        
+                    return response.data;
+                })
+                .then((data) => {
+        
+                    
+        
+                })
+                .catch(error => {
+        
+                    if (error.response.status === 500) {
+                        message.error(error.response.status + ' Server under maintainence');
+                    } else if (error.response.status === 404) {
+                        message.error(error.response.status + ' Server not found');
+                    }
+        
+                });
             const contract1 = {
                 id: 'se123',
                 contract_name: 'Hop dong lao dong',
@@ -44,7 +68,7 @@ class ContractTable extends Component {
                 ben_tham_gia: 'cty 369',
                 nguoi_tao_hd: "Nguyen Ngoc Phu",
                 deadline: "12/12/2022",
-
+                contractValue:1000000,
             }
             const contract2 = {
                 id: 'se456',
@@ -54,7 +78,7 @@ class ContractTable extends Component {
                 ben_tham_gia: 'cty 369',
                 nguoi_tao_hd: "Nguyen Ngoc Phu",
                 deadline: "12/12/2022",
-
+                contractValue:1000000,
             }
             const contract3 = {
                 id: 'se789',
@@ -64,7 +88,7 @@ class ContractTable extends Component {
                 ben_tham_gia: 'cty 369',
                 nguoi_tao_hd: "Nguyen Ngoc Phu",
                 deadline: "12/12/2022",
-
+                contractValue:1000000,
             }
             const contract4 = {
                 id: 'sb123',
@@ -74,7 +98,7 @@ class ContractTable extends Component {
                 ben_tham_gia: 'cty 369',
                 nguoi_tao_hd: "Nguyen Ngoc Phu",
                 deadline: "12/12/2022",
-
+                contractValue:1000000,
             }
             const contract5 = {
                 id: 'sb456',
@@ -84,7 +108,7 @@ class ContractTable extends Component {
                 ben_tham_gia: 'HiSign',
                 nguoi_tao_hd: "AAA",
                 deadline: "12/12/2022",
-
+                contractValue:1000000,
             }
             this.props.onSubmit(contract1)
             this.props.onSubmit(contract2)
@@ -155,7 +179,7 @@ class ContractTable extends Component {
         else {
 
             return (
-                <div style={{ height: "100vh" }}>
+                <div >
                     <Space size="large">
                         <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContract}>Tạo hợp đồng</Button>
                         <Button type="primary" icon={<UploadOutlined />} >Tải lên hợp đồng</Button>
@@ -183,8 +207,8 @@ class ContractTable extends Component {
 
                             )} />
                         <Column title="Ngày hết hạn" dataIndex="deadline" key="deadline"
-                        sorter={(a, b) => a.deadline.localeCompare(b.deadline)}
-                        sortDirections={['descend', 'ascend']}
+                            sorter={(a, b) => a.deadline.localeCompare(b.deadline)}
+                            sortDirections={['descend', 'ascend']}
                             render={(text, record) => (
 
                                 <b>{text}</b>
@@ -196,9 +220,15 @@ class ContractTable extends Component {
                                 <b>{text}</b>
 
                             )} />
+                        <Column title="giá trị hợp đồng" dataIndex="contractValue" key="contractValue"
+                            render={(text, record) => (
+
+                                <b>{text}</b>
+
+                            )} />
                         <Column title="trạng thái" dataIndex="status" key="status"
-                        sorter={(a, b) => a.status.localeCompare(b.status)}
-                        sortDirections={['descend', 'ascend']}
+                            sorter={(a, b) => a.status.localeCompare(b.status)}
+                            sortDirections={['descend', 'ascend']}
                             render={(text, record) => {
                                 let color = 'pink'
                                 if (text === 'deactive') {

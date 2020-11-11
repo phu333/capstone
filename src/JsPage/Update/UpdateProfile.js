@@ -136,14 +136,14 @@ class UpdateProfile extends React.Component {
                                             <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                         </Popover></Row>}
                                 </Form.Item>
-                                <Form.Item
+                                {/* <Form.Item
                                     label="Tên người dùng"
                                     name="username"
                                     required
                                 ><Row gutter={8}> <Col span={20}><Input disabled defaultValue="Ak95" /></Col>    <Popover content={name} trigger="hover">
                                     <Button size="small" shape="circle" style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                 </Popover></Row>
-                                </Form.Item>
+                                </Form.Item> */}
 
                                 <Form.Item
                                     label="Mật khẩu"

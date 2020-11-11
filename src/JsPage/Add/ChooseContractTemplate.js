@@ -1,5 +1,5 @@
 
-import { Table, Space, Button, PageHeader } from 'antd';
+import { Table, Space, Button, message } from 'antd';
 import CreateContract from '../Add/CreateContract';
 import React from 'react';
 import ContractTypeSearch from '../Search/ContractTypeSearch'

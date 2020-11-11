@@ -31,27 +31,44 @@ class AddCustomer extends React.Component {
     constructor() {
         super();
         this.state = {
-            finish: false
+            finish: false,
         };
         this.onFinish = this.onFinish.bind(this);
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
+        values.companyId = 3
+        axios({
+            url: '/api/v1/Customer',
+            method: "POST",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
 
-        const contract1 = {
-
-            name: 'John',
-            company: "cty 369",
-            address: '10 Downing Street',
-            status: "active",
-
-        }
-
-
-        this.props.onSubmit(contract1)
-        this.setState({
-            finish: true
+            },
+            data: values
         })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+
+
+
+            })
+            .catch(error => {
+
+                if (error.response.status === 500) {
+                    message.error(error.response.status + ' Server under maintainence');
+                } else if (error.response.status === 404) {
+                    message.error(error.response.status + ' Server not found');
+                }
+
+            });
+
+        // this.setState({
+        //     finish: true
+        // })
 
     };
     Cancel = () => {
@@ -89,7 +106,6 @@ class AddCustomer extends React.Component {
                         onFinishFailed={this.onFinishFailed}
 
                     >
-
                         <Form.Item
                             label="Tên doanh nghiệp"
                             name="name"
@@ -121,7 +137,7 @@ class AddCustomer extends React.Component {
 
                         <Form.Item
                             label="Giấy phép kinh doanh"
-                            name="certificate"
+                            name="businessLicense"
                             rules={[
                                 {
                                     required: true,
@@ -129,23 +145,29 @@ class AddCustomer extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}> <Input placeholder="Giấy phép kinh doanh" /></Col> <Popover content={Validation} trigger="hover">
+<Row gutter={8}> <Col span={20}> <Input placeholder="Giấy phép kinh doanh" /></Col> <Popover content={Validation} trigger="hover">
                                 <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Điện thoại"
-                            name="phone"
+                            name="phoneNumber"
                             rules={[
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập sdt',
                                 },
+                                {
+
+                                    message: 'Vui lòng nhập 10 ký tự',
+                                    min: 10,
+                                    max: 10,
+                                },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}> <Input placeholder="Điện thoại" /></Col> <Popover content={Validation} trigger="hover">
+                            <Row gutter={8}> <Col span={20}> <Input prefix="+84" placeholder="Điện thoại" /></Col> <Popover content={Validation} trigger="hover">
                                 <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
-                            </Popover></Row>
+                            </Popover></Row>                            
                         </Form.Item>
                         <Form.Item
                             label="Địa chỉ"
@@ -165,6 +187,10 @@ class AddCustomer extends React.Component {
                             label="Email"
                             name="Email"
                             rules={[
+                                {
+                                    type: 'email',
+                                    message: 'The input is not valid E-mail!',
+                                },
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập Email',
@@ -191,7 +217,7 @@ class AddCustomer extends React.Component {
                         </Form.Item>
                         <Form.Item
                             label="Người đại diện"
-                            name="role"
+                            name="representative"
                             rules={[
                                 {
                                     required: true,

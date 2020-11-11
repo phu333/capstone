@@ -50,13 +50,7 @@ class EmployeeSideMenu extends React.Component {
     })
 
   };
-  // componentDidMount() {
-  //   return (<Router>
-  //     <Redirect push to="/capstone/SideMenu" />
-
-  //     <Route exact path="/capstone/SideMenu" component={EmployeeSideMenu} />
-  //   </Router>);
-  // }
+  
   render() {
 
     if (this.props.myLoginReducer !== "logout") {
@@ -145,7 +139,8 @@ class EmployeeSideMenu extends React.Component {
                   padding: 24,
                   margin: 0,
                   minHeight: "100vh",
-                  backgroundColor: "white",
+                  maxHeight:"100%",
+                  
                 }}>
                   {login.companyId !== null ? <>
                     {this.state.showComponent === "Chart" ?
@@ -157,7 +152,7 @@ class EmployeeSideMenu extends React.Component {
                     {this.state.showComponent === "customerList" ?
                       <Router>
                         <Redirect push to={"/capstone/" + this.state.showComponent} />
-                        <Route exact path="/capstone/customerList" component={CustomerTable} />
+                        <Route exact path="/capstone/customerList" render={() => <CustomerTable token={login.jwToken} role={login.role} />} />
                       </Router>
                       : null}
                     {this.state.showComponent === "contract" ?

@@ -10,7 +10,18 @@ import { connect } from 'react-redux';
 import Popup from 'reactjs-popup';
 import { createEmployee } from '../../actions/EmployeeAction';
 import '../../index.css';
-import "../Column.css";
+import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
+import { connect } from 'react-redux'
+import { Form, Input, Button, Checkbox, Space, Card,message } from 'antd';
+// import {
+//     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
+//     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
+// } from '@ant-design/icons';
+import EmployeeTable from '../Table/EmployeeTable'
+import axios from 'axios'
+import "../Column.css"
+
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const layout = {
     labelCol: {
         span: 4,

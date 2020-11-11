@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import TabsChart from './TabsChart';
 import 'ant-design-pro/dist/ant-design-pro.css';
-
+import axios from 'axios'
 import { ChartCard, yuan, Field, MiniArea, MiniBar, MiniProgress } from 'ant-design-pro/lib/Charts';
 import Trend from 'ant-design-pro/lib/Trend';
-import { Row, Col, Tooltip } from 'antd';
+import { Row, Col, Tooltip,message } from 'antd';
 import moment from 'moment';
 import { ExclamationCircleOutlined, UserOutlined } from '@ant-design/icons';
 import numeral from 'numeral';
@@ -21,6 +21,31 @@ for (let i = 0; i < 20; i += 1) {
     });
 }
 class ChartProfile extends React.Component {
+    componentDidMount(){
+        axios({
+            url: '',
+            method: "GET",
+            
+        })
+            .then((response) => {
+    
+                return response.data;
+            })
+            .then((data) => {
+    
+                
+    
+            })
+            .catch(error => {
+    
+                if (error.response.status === 500) {
+                    message.error(error.response.status + ' Server under maintainence');
+                } else if (error.response.status === 404) {
+                    message.error(error.response.status + ' Server not found');
+                }
+    
+            });
+    }
     render() {return(
         <Row>
             <Col span={8} style={{ marginTop: 24 }}>

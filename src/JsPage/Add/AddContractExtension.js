@@ -1,7 +1,7 @@
 import React from 'react';
+import axios from 'axios'
 
-
-import { Select, DatePicker, Descriptions, Space, Button, InputNumber, Form, Table, Input, Col, Card, Pagination } from 'antd';
+import { Select, DatePicker, message, Space, Button, InputNumber, Form, Table, Input, Col, Card, Pagination } from 'antd';
 import ContractExtensionTable from '../Table/ContractExtensionTable'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import {
@@ -76,6 +76,29 @@ class AddContractExtension extends React.Component {
 
     };
     onFinish = (values) => {
+        axios({
+            url: '',
+            method: "POST",
+            data: values
+        })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+
+                
+
+            })
+            .catch(error => {
+
+                if (error.response.status === 500) {
+                    message.error(error.response.status + ' Server under maintainence');
+                } else if (error.response.status === 404) {
+                    message.error(error.response.status + ' Server not found');
+                }
+
+            });
         this.setState({
             finish: true
         })

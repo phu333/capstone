@@ -1,11 +1,9 @@
+import { Avatar, Button, Card, Comment, DatePicker, Form, Input, List, Select, Space, Table } from 'antd';
+import JoditEditor from "jodit-react";
+import moment from 'moment';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { DeleteOutlined, SearchOutlined, FileOutlined } from "@ant-design/icons"
-import ContractExtensionTable from '../Table/ContractExtensionTable'
-import { Select, DatePicker, Input, Space, Button, List, Col, Table, InputNumber, Form, Comment, Card, Avatar, Pagination } from 'antd';
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
-import moment from 'moment'
-import JoditEditor from "jodit-react"
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import ContractExtensionTable from '../Table/ContractExtensionTable';
 const { Column } = Table;
 const { Option } = Select;
 const { RangePicker } = DatePicker;

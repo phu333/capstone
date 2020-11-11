@@ -109,7 +109,15 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Mã số thuế"
                                 name="name"
-                                required
+                                rules={[
+                                    
+                                    {
+                                        
+                                        message: 'Vui lòng nhập 10 ký tự',
+                                        min: 10,
+                                        max: 10,
+                                    },
+                                ]}   
                             >
                                 {this.state.isEdit === false ?
                                     <Row gutter={8}> <Col span={20}><Input disabled defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
@@ -122,7 +130,15 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Điện thoại"
                                 name="phone"
-
+                                rules={[
+                                   
+                                    {
+                                        
+                                        message: 'Vui lòng nhập 10 ký tự',
+                                        min: 10,
+                                        max: 10,
+                                    },
+                                ]}    
                             >
                                 {this.state.isEdit === false ?
                                     <Row gutter={8}> <Col span={20}><Input disabled defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">

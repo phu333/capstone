@@ -93,7 +93,7 @@ class LoginPage extends React.Component {
 
 
         let loginInformation = {
-            email: "triphan@gmail.com",
+            email: values.username,
             password: "123Pa$$word!",
             // signPermission: true,
             // contractManagePermision: true,
@@ -121,7 +121,7 @@ class LoginPage extends React.Component {
                     username: data.data.userName,
                     email: "triphan@gmail.com",
                     password: "123Pa$$word!",
-                    companyId:"001",
+                    companyId:3,
                     companyName:"HiSign",
                     role: data.data.roles[0],
                     signPermission: true,
@@ -137,7 +137,7 @@ class LoginPage extends React.Component {
                 }
 
                 this.props.onSubmit(loginInfo)
-
+                message.success("welcome "+ data.data.userName);
             })
             .catch(error => {
                 
