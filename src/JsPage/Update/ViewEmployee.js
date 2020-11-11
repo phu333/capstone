@@ -125,7 +125,7 @@ class ViewEmployee extends React.Component {
                         <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />
                     }
 
-                    <Button type="primary" onClick={() => {
+                    {/* <Button type="primary" onClick={() => {
                         this.setState({
                             currentPermission: [...this.state.currentPermission, permisssion.name]
                         })
@@ -142,7 +142,7 @@ class ViewEmployee extends React.Component {
                         this.props.onSubmit(contract2)
                     }} className="employee-form">
                         {permisssion.lable}
-                    </Button>
+                    </Button> */}
 
                 </Form.Item>)
         })
