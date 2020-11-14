@@ -1,17 +1,17 @@
-import React from 'react';
-import 'antd/dist/antd.css';
-import '../../index.css';
-import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
-import { connect } from 'react-redux'
-import { Form, Input, Button, Checkbox, Space, Card, Popover,Row,Col } from 'antd';
 import {
     QuestionCircleOutlined
 } from '@ant-design/icons';
+import { Button, Card, Checkbox, Col, Form, Input, Popover, Row, Space } from 'antd';
+import 'antd/dist/antd.css';
+import axios from 'axios';
+import React from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import { createEmployee } from '../../actions/EmployeeAction';
+import '../../index.css';
+import "../Column.css";
+import EmployeeTable from '../Table/EmployeeTable';
 
-import EmployeeTable from '../Table/EmployeeTable'
-import axios from 'axios'
-import "../Column.css"
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const layout = {
     labelCol: {
         span: 6,
@@ -33,9 +33,34 @@ const middleLayout = {
         span: 10,
     },
 };
-const Validation = (
+const ValidationName = (
 
-    <p>Nên để họ tên thật</p>
+    <p>Nên để họ tên thật và dưới 50 ký tự</p>
+
+);
+const ValidationAdd = (
+
+    <p>Số địa chỉ thường trú</p>
+
+);const ValidationUser = (
+
+    <p>có thể để trống</p>
+
+);const ValidationCMT = (
+
+    <p>Số chứng minh thư do nhà nước cấp</p>
+
+);const ValidationEmail = (
+
+    <p>Địa chỉ email của google</p>
+
+);const ValidationPhone = (
+
+    <p>Số điện thoại của nhà mạng việt nam có thể để trống</p>
+
+);const ValidationRole = (
+
+    <p>Chức vụ trong công ty có thể để trống</p>
 
 );
 class AddUserAdmin extends React.Component {
@@ -125,7 +150,7 @@ class AddUserAdmin extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}><Col span={22}> <Input placeholder="Họ và tên" /></Col><Popover content={Validation} trigger="hover">
+                            <Row gutter={8}><Col span={22}> <Input placeholder="Họ và tên" /></Col><Popover content={ValidationName} trigger="hover">
                                 <Button style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                         </Form.Item>
@@ -139,7 +164,7 @@ class AddUserAdmin extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}>   <Col span={22}> <Input placeholder="cmnd/cmt" /></Col><Popover content={Validation} trigger="hover">
+                            <Row gutter={8}>   <Col span={22}> <Input placeholder="cmnd/cmt" /></Col><Popover content={ValidationCMT} trigger="hover">
                                 <Button style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                         </Form.Item>
@@ -153,7 +178,7 @@ class AddUserAdmin extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}>   <Col span={22}> <Input placeholder="tên người dùng" /></Col><Popover content={Validation} trigger="hover">
+                            <Row gutter={8}>   <Col span={22}> <Input placeholder="tên người dùng" /></Col><Popover content={ValidationUser} trigger="hover">
                                 <Button style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                         </Form.Item>
@@ -169,7 +194,7 @@ class AddUserAdmin extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}>      <Col span={22}> <Input placeholder="Điện thoại" /></Col><Popover content={Validation} trigger="hover">
+                            <Row gutter={8}>      <Col span={22}> <Input placeholder="Điện thoại" /></Col><Popover content={ValidationPhone} trigger="hover">
                                 <Button style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                         </Form.Item>
@@ -183,7 +208,7 @@ class AddUserAdmin extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}>     <Col span={22}> <Input placeholder="Địa chỉ" /></Col><Popover content={Validation} trigger="hover">
+                            <Row gutter={8}>     <Col span={22}> <Input placeholder="Địa chỉ" /></Col><Popover content={ValidationAdd} trigger="hover">
                                 <Button style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                         </Form.Item>
@@ -197,7 +222,7 @@ class AddUserAdmin extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}>   <Col span={22}> <Input placeholder="Email" /></Col><Popover content={Validation} trigger="hover">
+                            <Row gutter={8}>   <Col span={22}> <Input placeholder="Email" /></Col><Popover content={ValidationEmail} trigger="hover">
                                 <Button style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                         </Form.Item>
@@ -211,7 +236,7 @@ class AddUserAdmin extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}>    <Col span={22}> <Input placeholder="Chức vụ" /></Col><Popover content={Validation} trigger="hover">
+                            <Row gutter={8}>    <Col span={22}> <Input placeholder="Chức vụ" /></Col><Popover content={ValidationRole} trigger="hover">
                                 <Button style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                         </Form.Item>

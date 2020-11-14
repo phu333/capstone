@@ -23,12 +23,36 @@ const tailLayout = {
         span: 10,
     },
 };
-const Validation = (
+const ValidationCompany = (
 
-    <p>Nên để họ tên thật</p>
+    <p>Tên công ty đối tác nên để tên dưới 250 ký tự</p>
 
 );
-class AddCustomer extends React.Component {
+const ValidationAdd = (
+
+    <p>Số địa chỉ công ty</p>
+
+);const ValidationPresentor = (
+
+    <p>Người đại diện cho công ty khách</p>
+
+);const ValidationFax = (
+
+    <p>Số fax của công ty khách có thể để trống</p>
+
+);const ValidationEmail = (
+
+    <p>Địa chỉ email của google</p>
+
+);const ValidationTax = (
+
+    <p>Mã số thuế của công ty khách hàng</p>
+
+);const ValidationRole = (
+
+    <p>Chức vụ trong công ty có thể để trống</p>
+
+);class AddCustomer extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -99,7 +123,7 @@ class AddCustomer extends React.Component {
                                             label="Tên doanh nghiệp"
                                             fullWidth
                                             autoComplete="Tên doanh nghiệp"
-                                        /><Popover content={Validation} trigger="hover">
+                                        /><Popover content={ValidationCompany} trigger="hover">
                                         <Button size="small" shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover>
                                     </Grid>
@@ -111,7 +135,7 @@ class AddCustomer extends React.Component {
                                             label="Mã số thuế"
                                             fullWidth
                                             autoComplete="family-name"
-                                        /><Popover content={Validation} trigger="hover">
+                                        /><Popover content={ValidationTax} trigger="hover">
                                         <Button size="small" shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover>
                                     </Grid>
@@ -123,7 +147,7 @@ class AddCustomer extends React.Component {
                                             label="số fax"
                                             fullWidth
                                             autoComplete="shipping address-line1"
-                                        /><Popover content={Validation} trigger="hover">
+                                        /><Popover content={ValidationFax} trigger="hover">
                                         <Button size="small" shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover>
                                         <TextField
@@ -133,7 +157,7 @@ class AddCustomer extends React.Component {
                                             label="địa chỉ mail"
                                             fullWidth
                                             autoComplete="shipping address-level2"
-                                        /><Popover content={Validation} trigger="hover">
+                                        /><Popover content={ValidationEmail} trigger="hover">
                                         <Button size="small" shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover>
                                     </Grid>
@@ -144,7 +168,7 @@ class AddCustomer extends React.Component {
                                             label="địa chỉ"
                                             fullWidth
                                             autoComplete="shipping address-line2"
-                                        /><Popover content={Validation} trigger="hover">
+                                        /><Popover content={ValidationAdd} trigger="hover">
                                         <Button size="small" shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover>
                                     </Grid>
@@ -158,7 +182,7 @@ class AddCustomer extends React.Component {
                                             label="Người đại diện"
                                             fullWidth
                                             autoComplete="shipping postal-code"
-                                        /><Popover content={Validation} trigger="hover">
+                                        /><Popover content={ValidationPresentor} trigger="hover">
                                         <Button size="small" shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover>
                                     </Grid>
@@ -170,7 +194,7 @@ class AddCustomer extends React.Component {
                                             label="chức vụ"
                                             fullWidth
                                             autoComplete="shipping country"
-                                        /><Popover content={Validation} trigger="hover">
+                                        /><Popover content={ValidationRole} trigger="hover">
                                         <Button size="small" shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover>
                                     </Grid>

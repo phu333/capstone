@@ -16,12 +16,44 @@ const layout = {
     },
 };
 
-const Validation = (
+const ValidationCompany = (
 
-    <p>Nên để họ tên thật</p>
+    <p>Tên công ty khách hàng nên để tên dưới 250 ký tự</p>
 
 );
+const ValidationAdd = (
 
+    <p>Số địa chỉ công ty</p>
+
+);const ValidationPresentor = (
+
+    <p>Người đại diện cho công ty khách</p>
+
+);const ValidationCertificate = (
+
+    <p>Mã giấy phép kinh doanh do nhà nước cấp</p>
+
+);const ValidationEmail = (
+
+    <p>Địa chỉ email của google</p>
+
+);const ValidationTax = (
+
+    <p>Mã số thuế của công ty </p>
+
+);const ValidationRole = (
+
+    <p>Chức vụ trong công ty có thể để trống</p>
+
+);const ValidationPhone = (
+
+    <p>Số điện thoại công ty</p>
+
+);const ValidationBank = (
+
+    <p>Mã số Ngân hàng của công ty có thể để trắng</p>
+
+);
 const tailLayout = {
     wrapperCol: {
         offset: 6,
@@ -95,7 +127,7 @@ class AddCompany extends React.Component {
                                 name="company"
                                 required
                             >
-                                <Row gutter={8}> <Col span={20}><Input   defaultValue="HiSign" /></Col>    <Popover content={Validation} trigger="hover">
+                                <Row gutter={8}> <Col span={20}><Input   defaultValue="HiSign" /></Col>    <Popover content={ValidationCompany} trigger="hover">
                                     <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                 </Popover></Row>
                             </Form.Item>
@@ -104,7 +136,7 @@ class AddCompany extends React.Component {
                                 name="name"
                                 required
                             >
-                                    <Row gutter={8}> <Col span={20}><Input   defaultValue="1231231" /></Col>    <Popover content={Validation} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input   defaultValue="1231231" /></Col>    <Popover content={ValidationTax} trigger="hover">
                                         <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> 
                             </Form.Item>
@@ -113,7 +145,7 @@ class AddCompany extends React.Component {
                                 name="phone"
 
                             >
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="1231231" /></Col>    <Popover content={Validation} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="1231231" /></Col>    <Popover content={ValidationPhone} trigger="hover">
                                         <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                             </Form.Item>
@@ -122,7 +154,7 @@ class AddCompany extends React.Component {
                                 name="address"
                                 required
                             >
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="12/10/4/8" /></Col>    <Popover content={Validation} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="12/10/4/8" /></Col>    <Popover content={ValidationAdd} trigger="hover">
                                         <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                             </Form.Item>
@@ -131,7 +163,7 @@ class AddCompany extends React.Component {
                                 name="Email"
 
                             >
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="Email" /></Col>    <Popover content={Validation} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="Email" /></Col>    <Popover content={ValidationEmail} trigger="hover">
                                         <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                             </Form.Item>
@@ -140,7 +172,7 @@ class AddCompany extends React.Component {
                                 name="certificate"
                                 required
                             >
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="34534534" /></Col>    <Popover content={Validation} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="34534534" /></Col>    <Popover content={ValidationCertificate} trigger="hover">
                                         <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                             </Form.Item>
@@ -149,7 +181,7 @@ class AddCompany extends React.Component {
                                 name="bankaccount"
 
                             >
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="34534534" /></Col>    <Popover content={Validation} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="34534534" /></Col>    <Popover content={ValidationBank} trigger="hover">
                                         <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                             </Form.Item>
@@ -158,7 +190,7 @@ class AddCompany extends React.Component {
                                 name="presentor"
                                 required
                             >
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="Nguyen Van A" /></Col>    <Popover content={Validation} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="Nguyen Van A" /></Col>    <Popover content={ValidationPresentor} trigger="hover">
                                         <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                             </Form.Item>
@@ -170,7 +202,7 @@ class AddCompany extends React.Component {
                                 name="role"
                                 required
                             >
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="Giám đốc" /></Col>    <Popover content={Validation} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="Giám đốc" /></Col>    <Popover content={ValidationRole} trigger="hover">
                                         <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                             </Form.Item>

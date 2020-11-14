@@ -10,18 +10,8 @@ import { connect } from 'react-redux';
 import Popup from 'reactjs-popup';
 import { createEmployee } from '../../actions/EmployeeAction';
 import '../../index.css';
-import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
-import { connect } from 'react-redux'
-import { Form, Input, Button, Checkbox, Space, Card,message } from 'antd';
-// import {
-//     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-//     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
-// } from '@ant-design/icons';
-import EmployeeTable from '../Table/EmployeeTable'
-import axios from 'axios'
-import "../Column.css"
+import "../Column.css";
 
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 const layout = {
     labelCol: {
         span: 4,
@@ -36,9 +26,35 @@ const tailLayout = {
         span: 10,
     },
 };
-const Validation = (
+const ValidationFName = (
 
-    <p>Nên để họ tên thật</p>
+    <p>Họ nhân viên</p>
+
+);
+const ValidationLName = (
+
+    <p>Tên nhân viên</p>
+
+);
+const ValidationAdd = (
+
+    <p>Số địa chỉ công ty</p>
+
+);const ValidationPhone = (
+
+    <p>Số điện thoại </p>
+
+);const ValidationEmail = (
+
+    <p>Địa chỉ email của google</p>
+
+);const ValidationTax = (
+
+    <p>Mã số thuế của công ty khách hàng</p>
+
+);const ValidationRole = (
+
+    <p>Chức vụ trong công ty có thể để trống</p>
 
 );
 class AddEmployee extends React.Component {
@@ -99,7 +115,7 @@ class AddEmployee extends React.Component {
                                     name="Họ"
                                     label="Họ"
                                     autoComplete="Họ nhân viên"
-                                /><Popover  content={Validation} trigger="hover">
+                                /><Popover  content={ValidationFName} trigger="hover">
                                     <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                 </Popover>
                             </Grid>
@@ -111,7 +127,7 @@ class AddEmployee extends React.Component {
                                     label="Tên"
                                     fullWidth
                                     autoComplete="Tên nhân viên"
-                                /><Popover content={Validation} trigger="hover">
+                                /><Popover content={ValidationLName} trigger="hover">
                                     <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                 </Popover>
                             </Grid>
@@ -123,7 +139,7 @@ class AddEmployee extends React.Component {
                                     label="Mã số thuế"
                                     fullWidth
                                     autoComplete="family-name"
-                                /><Popover content={Validation} trigger="hover">
+                                /><Popover content={ValidationTax} trigger="hover">
                                     <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                 </Popover>
                             </Grid>
@@ -135,7 +151,7 @@ class AddEmployee extends React.Component {
                                     label="Điện thoại"
                                     fullWidth
                                     autoComplete="shipping address-line1"
-                                /><Popover content={Validation} trigger="hover">
+                                /><Popover content={ValidationPhone} trigger="hover">
                                     <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                 </Popover>
                             </Grid>
@@ -147,7 +163,7 @@ class AddEmployee extends React.Component {
                                     label="Địa chỉ mail"
                                     fullWidth
                                     autoComplete="shipping address-level2"
-                                /><Popover content={Validation} trigger="hover">
+                                /><Popover content={ValidationEmail} trigger="hover">
                                     <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                 </Popover>
                             </Grid>
@@ -158,7 +174,7 @@ class AddEmployee extends React.Component {
                                     label="Địa chỉ"
                                     fullWidth
                                     autoComplete="shipping address-line2"
-                                /><Popover content={Validation} trigger="hover">
+                                /><Popover content={ValidationAdd} trigger="hover">
                                     <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                 </Popover>
                             </Grid>
@@ -171,7 +187,7 @@ class AddEmployee extends React.Component {
                                     label="Chức vụ"
                                     fullWidth
                                     autoComplete="shipping postal-code"
-                                /><Popover content={Validation} trigger="hover">
+                                /><Popover content={ValidationRole} trigger="hover">
                                     <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
                                 </Popover>
                             </Grid>
