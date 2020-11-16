@@ -175,7 +175,7 @@ class ContractView extends React.Component {
     render() {
         const config = {
             readonly: true, // all options from https://xdsoft.net/jodit/doc/
-            toolbar:false
+            toolbar: false
         }
         const { comments, submitting, value } = this.state;
         const Editor = ({ onChange, onSubmit, submitting, value }) => (
@@ -198,298 +198,173 @@ class ContractView extends React.Component {
                 </Form.Item>
             </Form>
         );
-        if (this.props.role === true) {
 
-            if (this.state.openExtension) {
+
+        if (this.state.openExtension) {
+            return (
+                <Router>
+                    <Redirect push to={"/capstone/viewContract/" + this.props.contract.id + "/viewExtension"} />
+                    <Route exact path="/capstone/viewContract/:id/viewExtension" render={() => <ContractExtensionTable contractId={this.props.contract.id} role={this.props.role} />
+                    } /></Router>
+            );
+        } else {
+            if (this.state.finish) {
                 return (
                     <Router>
-                        <Redirect push to={"/capstone/viewContract/" + this.props.contract.id + "/viewExtension"} />
-                        <Route exact path="/capstone/viewContract/:id/viewExtension" render={() => <ContractExtensionTable contractId={this.props.contract.id} role={this.props.role} />
+                        <Redirect push to={"/capstone/" + this.state.showComponent} />
+                        <Route exact path="/capstone/contract" render={() => <ContractTable role={this.props.role} />
                         } /></Router>
                 );
             } else {
-                if (this.state.finish) {
-                    return (
-                        <Router>
-                            <Redirect push to={"/capstone/" + this.state.showComponent} />
-                            <Route exact path="/capstone/contract" render={() => <ContractTable role={this.props.role} />
-                            } /></Router>
-                    );
-                } else {
-                    return (
+                return (
 
-                        <div style={{ height: "100vh", fontSize: 14 }}>
-                            <Button type="primary" value="cancel" onClick={this.Cancel}>
-                                Trở về
+                    <div style={{ height: "100vh", fontSize: 14 }}>
+                        <Button type="primary" value="cancel" onClick={this.Cancel}>
+                            Trở về
                             </Button>
 
-                            <Space direction="vertical" align="center" >
+                        <Space direction="vertical" align="center" >
 
-                                <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
-                                    <Card>
-                                        <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>
-                                        <h6 style={{ textAlign: 'center', fontSize: 14 }}>Độc lập-tự do-hạnh phúc</h6>
-                                        <br />
-                                        <br />
-                                        <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}>Hợp đồng </h2>
-                                    </Card>
-                                    <Card>
-                                        <Descriptions size="small" column={2} title={"Thông tin bên A"}  >
-                                            <Descriptions.Item label={(<b><IdcardOutlined />{"Công ty/Tổ chức:"}</b>)}>HiSign</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><HomeOutlined />{"Địa chỉ:"}</b>)}>asdasdasd</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><PhoneOutlined />{"Điện thoại:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><MailOutlined />{"Địa chỉ Email:"}</b>)}>sfds@gmail.com</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><BankOutlined />{"Giấy phép kinh doanh:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><BankOutlined />{"Mã số thuế:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><BankOutlined />{"Tài khoản số:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><ContactsOutlined />{"Do ông(bà):"}</b>)} span={2}>Usada Pekora</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><ContactsOutlined />{"Năm sinh:"}</b>)} span={2}>
-                                                1998
+                            <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
+                                <Card bordered={false} >
+                                    <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>
+                                    <h6 style={{ textAlign: 'center', fontSize: 14 }}>Độc lập-tự do-hạnh phúc</h6>
+                                    <br />
+                                    <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}>Hợp đồng mua bán</h2>
+                                    <h6 style={{ textAlign: 'center', fontSize: 14 }}>Số.../...</h6>
+                                    <h6 style={{ fontSize: 14 }}>Hôm nay, ngày 3 tháng 11 năm 2020,
+                                    tại........, chúng tôi gồm
+                            </h6>
+                                </Card>
+                                <Card>
+                                    <Descriptions size="small" column={2} title={"Thông tin bên A"}  >
+                                        <Descriptions.Item label={(<b><IdcardOutlined />{"Công ty/Tổ chức:"}</b>)}>HiSign</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><HomeOutlined />{"Địa chỉ:"}</b>)}>asdasdasd</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><PhoneOutlined />{"Điện thoại:"}</b>)}>123123123123</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><MailOutlined />{"Địa chỉ Email:"}</b>)}>sfds@gmail.com</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><BankOutlined />{"Giấy phép kinh doanh:"}</b>)}>123123123123</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><BankOutlined />{"Mã số thuế:"}</b>)}>123123123123</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><BankOutlined />{"Tài khoản số:"}</b>)}>123123123123</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><ContactsOutlined />{"Do ông(bà):"}</b>)} span={2}>Usada Pekora</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><ContactsOutlined />{"Năm sinh:"}</b>)} span={2}>
+                                            1998
                         </Descriptions.Item>
-                                            <Descriptions.Item label={(<b><ContactsOutlined />{"Chức vụ"}</b>)} span={2}>
-                                                Giám đốc
+                                        <Descriptions.Item label={(<b><ContactsOutlined />{"Chức vụ"}</b>)} span={2}>
+                                            Giám đốc
                         </Descriptions.Item>
-                                            <Descriptions.Item label={(<h><ContactsOutlined />{"làm đại diện"}</h>)} span={2}>
+                                        <Descriptions.Item label={(<h><ContactsOutlined />{"làm đại diện"}</h>)} span={2}>
 
-                                            </Descriptions.Item>
+                                        </Descriptions.Item>
 
-                                        </Descriptions>
+                                    </Descriptions>
 
 
-                                        <Descriptions title="" size="small" column={2} title="Thông tin bên B"
+                                    <Descriptions title="" size="small" column={2} title="Thông tin bên B"
 
-                                        >
+                                    >
 
-                                            <Descriptions.Item label={(<b><IdcardOutlined />{"Công ty/Tổ chức:"}</b>)}>HiSign</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><HomeOutlined />{"Địa chỉ:"}</b>)}>asdasdasd</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><PhoneOutlined />{"Điện thoại:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><MailOutlined />{"Địa chỉ Email:"}</b>)}>sfds@gmail.com</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><BankOutlined />{"Giấy phép kinh doanh:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><BankOutlined />{"Mã số thuế:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><BankOutlined />{"Tài khoản số:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><ContactsOutlined />{"Do ông(bà):"}</b>)} span={2}>Usada Pekora</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><ContactsOutlined />{"Năm sinh:"}</b>)} span={2}>
-                                                1998
+                                        <Descriptions.Item label={(<b><IdcardOutlined />{"Công ty/Tổ chức:"}</b>)}>HiSign</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><HomeOutlined />{"Địa chỉ:"}</b>)}>asdasdasd</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><PhoneOutlined />{"Điện thoại:"}</b>)}>123123123123</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><MailOutlined />{"Địa chỉ Email:"}</b>)}>sfds@gmail.com</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><BankOutlined />{"Giấy phép kinh doanh:"}</b>)}>123123123123</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><BankOutlined />{"Mã số thuế:"}</b>)}>123123123123</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><BankOutlined />{"Tài khoản số:"}</b>)}>123123123123</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><ContactsOutlined />{"Do ông(bà):"}</b>)} span={2}>Usada Pekora</Descriptions.Item>
+                                        <Descriptions.Item label={(<b><ContactsOutlined />{"Năm sinh:"}</b>)} span={2}>
+                                            1998
                         </Descriptions.Item>
-                                            <Descriptions.Item label={(<b><ContactsOutlined />{"Chức vụ"}</b>)} span={2}>
-                                                Giám đốc
+                                        <Descriptions.Item label={(<b><ContactsOutlined />{"Chức vụ"}</b>)} span={2}>
+                                            Giám đốc
                         </Descriptions.Item>
-                                            <Descriptions.Item label={(<h><ContactsOutlined />{"làm đại diện"}</h>)} span={2}>
+                                        <Descriptions.Item label={(<h><ContactsOutlined />{"làm đại diện"}</h>)} span={2}>
 
-                                            </Descriptions.Item>
+                                        </Descriptions.Item>
 
-                                        </Descriptions>
-                                    </Card>
-                                </Space>
-                                <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
+                                    </Descriptions>
+                                </Card>
+                            </Space>
+                            <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
 
-                                    <JoditEditor
+                                <JoditEditor
 
-                                        value={this.state.contractContent}
-                                        config={config}
-                                        tabIndex={1} // tabIndex of textarea
+                                    value={this.state.contractContent}
+                                    config={config}
+                                    tabIndex={1} // tabIndex of textarea
 
 
-                                    />
-                                </Space>
-                                <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
-                                    <Card>
+                                />
+                            </Space>
+                            <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
+                                <Card>
 
-                                        <Form
+                                    <Form
 
-                                            name="basic"
-                                            className="lcontract-form"
+                                        name="basic"
+                                        className="lcontract-form"
 
-                                            onFinish={this.onFinish}
-                                            onFinishFailed={this.onFinishFailed}
+                                        onFinish={this.onFinish}
+                                        onFinishFailed={this.onFinishFailed}
 
-                                        >
+                                    >
 
-                                            <Space size="large">
-                                                {comments.length > 0 && <CommentList comments={comments} />}
-                                                {this.props.contract.status == "pending" && this.state.isEdit === false ? <Button type="primary" value="Sign" onClick={this.onFinish}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
+                                        <Space size="large">
+                                            {comments.length > 0 && <CommentList comments={comments} />}
+
+                                            {this.props.contract.status == "pending" && this.state.isEdit === false && this.props.role === true ? <Button type="primary" value="Sign" onClick={this.onFinish}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
                                                         Kí
-                                                    </Button> : this.props.contract.status == "waiting for sign" ? <Button type="primary" value="Sign" onClick={this.onFinish}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
+                                                    </Button> : this.props.contract.status == "waiting for sign" && this.props.role === true ? <Button type="primary" value="Sign" onClick={this.onFinish}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
                                                         Kí
                                                     </Button> : null}
-                                                {this.props.contract.status == "pending" ? <Comment
-                                                    avatar={
-                                                        <Avatar
-                                                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                                                            alt="Han Solo"
-                                                        />
-                                                    }
-                                                    content={
-                                                        <Editor
-                                                            onChange={this.handleChange}
-                                                            onSubmit={this.handleSubmit}
-                                                            submitting={submitting}
-                                                            value={value}
-                                                        />
-                                                    }
-                                                /> : null}
-                                                {this.props.contract.status == "pending" && this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
+                                            {this.props.contract.status == "pending" && this.props.role === true ? <Comment
+                                                avatar={
+                                                    <Avatar
+                                                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                                                        alt="Han Solo"
+                                                    />
+                                                }
+                                                content={
+                                                    <Editor
+                                                        onChange={this.handleChange}
+                                                        onSubmit={this.handleSubmit}
+                                                        submitting={submitting}
+                                                        value={value}
+                                                    />
+                                                }
+                                            /> : null}
+                                            {this.props.contract.status == "pending" && this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
                                                             Sửa
                                                     </Button> : null}
-                                                {this.props.contract.status == "pending" && this.state.isEdit === true ? <Button type="primary" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
+                                            {this.props.contract.status == "pending" && this.state.isEdit === true ? <Button type="primary" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
                                                             nộp
                                                     </Button> : null}
-                                                {this.props.contract.status == "active" ? <Button type="primary" onClick={this.OpenExtension} value="ViewExtension">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
+                                            {this.props.contract.status == "active" ? <Button type="primary" onClick={this.OpenExtension} value="ViewExtension">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
                                                             Xem phụ lục
                                                     </Button> : null}
-                                                {this.props.contract.status == "deactive" ? <Button type="primary" onClick={this.OpenExtension} value="ViewExtension">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
+                                            {this.props.contract.status == "deactive" ? <Button type="primary" onClick={this.OpenExtension} value="ViewExtension">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
                                                             Xem phụ lục
                                                         </Button> : null}
-                                                {this.props.contract.status == "waiting for sign" ? <Button type="primary" value="reject">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
+                                            {this.props.contract.status == "waiting for sign" && this.props.role === true ? <Button type="primary" value="reject">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
                                                             Reject
                                                         </Button> : null}
-                                            </Space>
-                                        </Form>
-                                        
-                                    </Card>
-                                </Space>
+                                        </Space>
+                                    </Form>
+
+                                </Card>
                             </Space>
-                        </div>
+                        </Space>
+                    </div>
 
-                    );
-                }
-            }
-
-        } else {
-
-
-
-            if (this.state.openExtension) {
-                return (
-                    <Router>
-                        <Redirect push to={"/capstone/viewContract/" + this.props.contract.id + "/viewExtension"} />
-                        <Route exact path="/capstone/viewContract/:id/viewExtension" render={() => <ContractExtensionTable contractId={this.props.contract.id} role={this.props.role} />
-                        } /></Router>
                 );
-            } else {
-                if (this.state.finish) {
-                    return (
-                        <Router>
-                            <Redirect push to={"/capstone/" + this.state.showComponent} />
-                            <Route exact path="/capstone/contract" render={() => <ContractTable role={this.props.role} />
-                            } /></Router>
-                    );
-                } else {
-                    return (
-                        <div style={{ height: "100vh" }}>
-                            <Button type="primary" value="cancel" onClick={this.Cancel}>
-                                Trở về
-              </Button>
-                            <h2 style={{ textAlign: 'center' }}>Hợp đồng </h2>
-                            <Space direction="vertical" align="start" >
-                                <Space direction="vertical" align="start" style={{ backgroundColor: "white" }} >
-                                    <Card>
-                                        <Descriptions size="small" column={2} title={"Thông tin bên A"}  >
-                                            <Descriptions.Item label={(<b><IdcardOutlined />{"Công ty/Tổ chức:"}</b>)}>HiSign</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><HomeOutlined />{"Địa chỉ:"}</b>)}>asdasdasd</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><PhoneOutlined />{"Điện thoại:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><MailOutlined />{"Địa chỉ Email:"}</b>)}>sfds@gmail.com</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><BankOutlined />{"Giấy phép kinh doanh:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><BankOutlined />{"Mã số thuế:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><BankOutlined />{"Tài khoản số:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><ContactsOutlined />{"Do ông(bà):"}</b>)} span={2}>Usada Pekora</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><ContactsOutlined />{"Năm sinh:"}</b>)} span={2}>
-                                                1998
-                        </Descriptions.Item>
-                                            <Descriptions.Item label={(<b><ContactsOutlined />{"Chức vụ"}</b>)} span={2}>
-                                                Giám đốc
-                        </Descriptions.Item>
-                                            <Descriptions.Item label={(<h><ContactsOutlined />{"làm đại diện"}</h>)} span={2}>
-
-                                            </Descriptions.Item>
-
-                                        </Descriptions>
-
-
-                                        <Descriptions title="" size="small" column={2} title="Thông tin bên B"
-
-                                        >
-
-                                            <Descriptions.Item label={(<b><IdcardOutlined />{"Công ty/Tổ chức:"}</b>)}>HiSign</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><HomeOutlined />{"Địa chỉ:"}</b>)}>asdasdasd</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><PhoneOutlined />{"Điện thoại:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><MailOutlined />{"Địa chỉ Email:"}</b>)}>sfds@gmail.com</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><BankOutlined />{"Giấy phép kinh doanh:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><BankOutlined />{"Mã số thuế:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><BankOutlined />{"Tài khoản số:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><ContactsOutlined />{"Do ông(bà):"}</b>)} span={2}>Usada Pekora</Descriptions.Item>
-                                            <Descriptions.Item label={(<b><ContactsOutlined />{"Năm sinh:"}</b>)} span={2}>
-                                                1998
-                        </Descriptions.Item>
-                                            <Descriptions.Item label={(<b><ContactsOutlined />{"Chức vụ"}</b>)} span={2}>
-                                                Giám đốc
-                        </Descriptions.Item>
-                                            <Descriptions.Item label={(<h><ContactsOutlined />{"làm đại diện"}</h>)} span={2}>
-
-                                            </Descriptions.Item>
-
-                                        </Descriptions>
-                                    </Card>
-                                </Space>
-                                <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
-
-                                    <JoditEditor
-
-                                        value={this.state.contractContent}
-                                        config={config}
-                                        tabIndex={1} // tabIndex of textarea
-
-
-                                    />
-                                </Space>
-                                <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
-                                    <Card>
-
-                                        <Form
-
-                                            name="basic"
-                                            className="lcontract-form"
-
-                                            onFinish={this.onFinish}
-                                            onFinishFailed={this.onFinishFailed}
-
-                                        >
-
-
-                                            <Space size="large">
-                                                {comments.length > 0 && <CommentList comments={comments} />}
-                                                {this.props.contract.status == "pending" && this.state.isEdit === true ? <Button type="primary" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
-                                                            nộp
-                                                    </Button> : null}
-
-                                                {this.props.contract.status == "pending" && this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
-                                                            Sửa
-                                                    </Button> : null}
-                                                {this.props.contract.status == "active" ? <Button type="primary" onClick={this.OpenExtension} value="ViewExtension">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
-                                                            Xem phụ lục
-                                                    </Button> : null}
-                                                {this.props.contract.status == "deactive" ? <Button type="primary" onClick={this.OpenExtension} value="ViewExtension">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
-                                                            Xem phụ lục
-                                                        </Button> : null}
-
-                                            </Space>
-                                        </Form>
-                                        
-                                    </Card>
-                                </Space>
-                            </Space>
-
-
-                        </div>
-
-                    );
-                }
             }
         }
+
+
+
+
     }
 }
+
 export default ContractView

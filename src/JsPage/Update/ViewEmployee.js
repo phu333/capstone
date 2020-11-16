@@ -2,16 +2,18 @@ import React from 'react';
 import Popup from 'reactjs-popup';
 import 'antd/dist/antd.css';
 import '../../index.css';
-import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
+import { createEmployee, employeeInformation, updateEmployee } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
-import { Space, Card, Button, Form, Input, Checkbox } from 'antd';
+import { Space, Card, Button, Form, List, Switch } from 'antd';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
 } from '@ant-design/icons';
 import EmployeeTable from '../Table/EmployeeTable'
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import "../Column.css"
+
+
 const layout = {
     labelCol: {
         span: 4,
@@ -33,22 +35,55 @@ const middleLayout = {
     },
 };
 class ViewEmployee extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             isEdit: false,
             finish: false,
+            currentPermission: this.props.employee.permissionList,
+            permissions: [
+                {
+                    name: "signPermission",
+                    lable: "Quyền ký",
+                },
+                {
+                    name: "contractManagePermision",
+                    lable: "Quyền quản lý hợp đồng",
+                },
+                {
+                    name: "customerManagePermission",
+                    lable: "Quyền quản lý khách hàng",
+                },
+                {
+                    name: "contractTypeManagePermission",
+                    lable: "Quyền quản lý loại hợp đổng",
+                },
+                {
+                    name: "employeeManagePermission",
+                    lable: "Quyền quản lý nhân viên",
+                },
+                {
+                    name: "signatureManagePermission",
+                    lable: "Quyền quản lý chữ ký",
+                },
+                {
+                    name: "editCompanyInformationPermission",
+                    lable: "Quyền chỉnh sửa thông tin doanh nghiệp",
+                },
+
+            ]
         };
+
 
         this.onFinish = this.onFinish.bind(this);
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
         console.log(values);
-        this.setState({
-            isEdit: false
-        })
+        // this.setState({
+        //     isEdit: false
+        // })
 
 
 
@@ -76,6 +111,41 @@ class ViewEmployee extends React.Component {
     };
 
     render() {
+        // var currentPermissions = this.props.employee.permissionList.map((permisssion) => {
+        //     return (
+        //         <List.Item>{permisssion}</List.Item>
+        //     )
+        // })
+        var permissions = this.state.permissions.map((permisssion) => {
+            return (
+                <Form.Item {...middleLayout} label={permisssion.lable} name={permisssion.name} >
+                    {this.props.employee.permissionList.some(item => permisssion.name === item) ?
+                        <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked />
+                        :
+                        <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />
+                    }
+
+                    {/* <Button type="primary" onClick={() => {
+                        this.setState({
+                            currentPermission: [...this.state.currentPermission, permisssion.name]
+                        })
+                        const contract2 = {
+                            id: "A2",
+                            name: 'John wasdzxczxc',
+                            email: "some email",
+                            address: '10 Downing Street',
+                            status: "deactive",
+                            role: "secrectery",
+                            phone: 123123123,
+                            permissionList: this.state.currentPermission,
+                        }
+                        this.props.onSubmit(contract2)
+                    }} className="employee-form">
+                        {permisssion.lable}
+                    </Button> */}
+
+                </Form.Item>)
+        })
         if (this.state.finish) {
             return (<Router>
                 <Redirect push to={"/capstone/employee"} />
@@ -88,109 +158,29 @@ class ViewEmployee extends React.Component {
                     <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
                         Trở về
           </Button>
-                    <h2 style={{ textAlign: 'center' }}>Thông tin nhân viên</h2>
+                    <h2 style={{ textAlign: 'center' }}> Quyền hạn của nhân viên</h2>
 
                     <Form
                         {...layout}
                         name="basic"
                         className="employee-form"
-
+                        
                         onFinish={this.onFinish}
                         onFinishFailed={this.onFinishFailed}
 
                     >
-
-                        <Form.Item
-                            label="Họ và tên"
-
-                            name="name"
-                            
-                        >
-                            {this.state.isEdit === false ?
-                                <Input disabled defaultValue="Nguyen Van A" /> :
-                                <Input defaultValue="Nguyen Van A" />}
-
-
-                        </Form.Item>
-                        <Form.Item
-                            label="Tên người dùng"
-                            name="username"
-                            
-                        >
-                            {this.state.isEdit === false ?
-                                <Input disabled defaultValue="Ak47" /> :
-                                <Input defaultValue="Ak47" />}
-                        </Form.Item>
-
-
-                        <Form.Item
-                            label="Điện thoại"
-                            name="phone"
-                            
-                        >
-                            {this.state.isEdit === false ?
-                                <Input disabled defaultValue="3242424" /> :
-                                <Input defaultValue="3242424" />}
-                        </Form.Item>
-                        <Form.Item
-                            label="Địa chỉ"
-                            name="address"
-                            
-                        >
-                            {this.state.isEdit === false ?
-                                <Input disabled defaultValue="12/3/6/8" /> :
-                                <Input defaultValue="12/3/6/8" />}
-                        </Form.Item>
-                        <Form.Item
-                            label="Email"
-                            name="Email"
-                            
-                        >
-                            {this.state.isEdit === false ?
-                                <Input disabled defaultValue="Some email" /> :
-                                <Input defaultValue="Some email" />}
-                        </Form.Item>
-                        <Form.Item
-                            label="Chức vụ"
-                            name="role"
-                            
-                        >
-                            {this.state.isEdit === false ?
-                                <Input disabled defaultValue="Some email" /> :
-                                <Input defaultValue="Some email" />}
-                        </Form.Item>
-                        <Form.Item {...middleLayout} name="signPermission" valuePropName="unchecked" >
-                            {this.state.isEdit === false ? <Checkbox disabled>Quyền ký</Checkbox> : <Checkbox >Quyền ký</Checkbox>}
-
-
-                        </Form.Item>
-                        <Form.Item {...middleLayout} name="employeePermission" valuePropName="checked" >
-
-                            {this.state.isEdit === false ? <Checkbox disabled >Quyền quản lý nhân viên</Checkbox> : <Checkbox>Quyền quản lý nhân viên</Checkbox>}
-                        </Form.Item>
-                        <Form.Item {...middleLayout} name="contractPermission" valuePropName="checked" >
-
-                            {this.state.isEdit === false ? <Checkbox disabled >Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox> : <Checkbox>Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox>}
-                        </Form.Item>
-                        <Form.Item {...middleLayout} name="customerPermission" valuePropName="checked" >
-
-                            {this.state.isEdit === false ? <Checkbox disabled >Quyền quản lý khách hàng</Checkbox> : <Checkbox>Quyền quản lý khách hàng</Checkbox>}
-                        </Form.Item>
-                        <Form.Item {...middleLayout} name="companyInfoPermission" valuePropName="unchecked" >
-
-                            {this.state.isEdit === false ? <Checkbox disabled >Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox> : <Checkbox>Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox>}
-                        </Form.Item>
-
+                        {/* <List
+                            size="large"
+                            header={<div>danh sách quyền hiện tại</div>}
+                            footer={<div></div>}
+                            bordered
+                        >{currentPermissions}</List> */}
+                        {permissions}
 
 
                         <Form.Item {...tailLayout}>
                             <Space size="large">
-                                {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
-                                    Nộp
-                            </Button> : null}
-                                {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
-                                    Reset
-                            </Button> : null}
+
 
                                 {this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
                                     Sửa
@@ -217,5 +207,12 @@ class ViewEmployee extends React.Component {
 
     }
 }
+var mapDispatchToProps = (dispatch, props) => {
+    return {
+        onSubmit: (employee) => {
+            dispatch(updateEmployee(employee))
+        }
+    }
+}
 
-export default ViewEmployee;
+export default connect(null, mapDispatchToProps)(ViewEmployee);

@@ -1,10 +1,10 @@
 import React from 'react';
-
+import axios from 'axios'
 import 'antd/dist/antd.css';
 import '../../index.css';
 import { createSignature, signatureInformation } from '../../actions/SignatureAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Card, Space, DatePicker } from 'antd';
+import { Form, Input, Button, Card, Space, DatePicker,message } from 'antd';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined
@@ -39,20 +39,34 @@ class AddSignature extends React.Component {
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
-        const contract1 = {
-
-            name: 'Mike',
-            email: "some email",
-            provider: 'Viettel',
-            status: "active",
-            expired: 2022
-
-        }
+        
         this.setState({
             finish: true
         })
 
-        this.props.onSubmit(contract1)
+        axios({
+            url: '',
+            method: "POST",
+            data: values
+        })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+
+                
+
+            })
+            .catch(error => {
+
+                if (error.response.status === 500) {
+                    message.error(error.response.status + ' Server under maintainence');
+                } else if (error.response.status === 404) {
+                    message.error(error.response.status + ' Server not found');
+                }
+
+            });
 
 
 

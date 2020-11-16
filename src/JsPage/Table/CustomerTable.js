@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import { Table, Space, Button, Tag, Switch } from 'antd';
+import { Table, Space, Button, Tag, Switch, message } from 'antd';
 import AddCustomer from '../Add/AddCustomer'
 import ViewCustomer from '../Update/ViewCustomer'
 import React from 'react';
@@ -9,6 +9,7 @@ import { createCustomer, customerInformation } from '../../actions/CustomerActio
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, EyeOutlined } from "@ant-design/icons"
+import axios from 'axios'
 const { Column } = Table;
 
 
@@ -19,6 +20,7 @@ class CustomerList extends React.Component {
     this.state = {
       openCustomer: "",
       customer: {},
+      customers:[],
     };
 
     this.OpenAddCustomer = this.OpenAddCustomer.bind(this);
@@ -27,36 +29,42 @@ class CustomerList extends React.Component {
   }
   componentDidMount() {
 
-    if (this.props.newCustomer.length === 0) {
-      const contract1 = {
-
-        name: 'John',
-        company: "cty 369",
-        address: '10 Downing Street',
-        taxCode: "2342342424",
-        faxCode: "686786776978979",
-        phone: "456456456",
-        email: "email",
-        status: "deactive",
+    axios({
+      url: '/api/v1/Customer',
+      method: "GET",
+      headers: {
+        Authorization: 'Bearer ' + this.props.token,
 
       }
-      const contract2 = {
+    })
+      .then((response) => {
 
-        name: 'Mike',
-        company: "cty 370",
-        address: '10 asdasd Street',
-        taxCode: "464646456456",
-        faxCode: "4564564564564564",
-        phone: "123123123",
-        email: "email",
-        status: "active",
+        return response.data;
+      })
+      .then((data) => {
+        
+        this.setState({
+          customers:data.data,
+        })
+        
 
-      }
 
-      this.props.onSubmit(contract1)
-      this.props.onSubmit(contract2)
+      })
+      .catch(error => {
+        console.log(error)
+        if (error.response.status === 500) {
+            message.error(error.response.status + ' Server under maintainence');
+        } else if (error.response.status === 404) {
+            message.error(error.response.status + ' Server not found');
+        }
 
-    }
+      });
+      
+     
+     
+      
+
+    
 
   }
   OpenAddCustomer() {
@@ -71,7 +79,7 @@ class CustomerList extends React.Component {
       return (
         <Router>
           <Redirect push to={"/capstone/addCustomer"} />
-          <Route exact path="/capstone/addCustomer" render={() => <AddCustomer />
+          <Route exact path="/capstone/addCustomer" render={() => <AddCustomer token={this.props.token} />
           } /></Router>
 
       );
@@ -86,7 +94,7 @@ class CustomerList extends React.Component {
       return (
         <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddCustomer} icon={<UserAddOutlined />}>Tạo khách hàng mới</Button>
           <CustomerSearch />
-          <Table dataSource={this.props.newCustomer}
+          <Table dataSource={this.state.customers}
 
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
             <Column title="Tên doanh nghiệp" dataIndex="company" key="company"
@@ -119,12 +127,12 @@ class CustomerList extends React.Component {
               <b>{text}</b>
 
             )} />
-            <Column title="Số fax" dataIndex="faxCode" key="faxCode" render={(text, record) => (
+            <Column title="Số giấy phép kinh doanh" dataIndex="businessLicense" key="businessLicense" render={(text, record) => (
 
               <b>{text}</b>
 
             )} />
-            <Column title="Số điện thoại" dataIndex="phone" key="phone" render={(text, record) => (
+            <Column title="Số điện thoại" dataIndex="phoneNumber" key="phoneNumber" render={(text, record) => (
 
               <b>{text}</b>
 
@@ -135,7 +143,7 @@ class CustomerList extends React.Component {
 
             )} />
 
-            <Column title="trạng thái" dataIndex="status" key="status"
+            {/* <Column title="trạng thái" dataIndex="status" key="status"
               sorter={(a, b) => a.status.localeCompare(b.status)}
               sortDirections={['descend', 'ascend']}
               render={(text, record) => {
@@ -155,7 +163,7 @@ class CustomerList extends React.Component {
                   {text.toUpperCase()}
                 </Tag>);
               }}
-            />
+            /> */}
             <Column
               title="Xem thông tin"
               key="action"
@@ -191,8 +199,8 @@ class CustomerList extends React.Component {
 }
 var mapDispatchToProps = (dispatch, props) => {
   return {
-    onSubmit: (customer) => {
-      dispatch(createCustomer(customer))
+    onSubmit: (token) => {
+      dispatch(createCustomer(token))
     }
   }
 }
@@ -200,7 +208,8 @@ var mapStateToProps = state => {
 
 
   return {
-    newCustomer: state.myCustomerReducer
+    newCustomer: state.myCustomerReducer,
+    myLoginReducer: state.myLoginReducer
   }
 
 

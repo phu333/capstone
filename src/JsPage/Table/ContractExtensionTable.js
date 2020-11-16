@@ -1,7 +1,7 @@
-
-import { Table, Button,Tag } from 'antd';
+import axios from 'axios'
+import { Table, Button, Tag,message } from 'antd';
 import ContractSearch from '../Search/ContractSearch'
-import { EyeOutlined,DeleteOutlined, FormOutlined, FileAddOutlined,ContainerOutlined } from "@ant-design/icons"
+import { EyeOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, ContainerOutlined } from "@ant-design/icons"
 import AddContractExtension from '../Add/AddContractExtension'
 import UpdateContractExtension from '../Update/UpdateContractExtension'
 import React from 'react';
@@ -19,8 +19,8 @@ class ContractExtensionTable extends React.Component {
         this.state = {
             showCreateContractExtension: false,
             showContractExtension: false,
-            contract :{},
-            
+            contract: {},
+
         };
 
         this.onOpenCreateContractExtension = this.onOpenCreateContractExtension.bind(this);
@@ -29,44 +29,67 @@ class ContractExtensionTable extends React.Component {
     componentDidMount() {
 
         if (this.props.newContractExtension.length === 0) {
+            axios({
+                url: '',
+                method: "GET",
+
+            })
+                .then((response) => {
+
+                    return response.data;
+                })
+                .then((data) => {
+
+
+
+                })
+                .catch(error => {
+
+                    if (error.response.status === 500) {
+                        message.error(error.response.status + ' Server under maintainence');
+                    } else if (error.response.status === 404) {
+                        message.error(error.response.status + ' Server not found');
+                    }
+
+                });
             const contract1 = {
 
                 contract_type: 'Hop dong lao dong',
-                    status: "active",
-                    ben_tao_hd: 'HiSign',
-                    ben_tham_gia: 'cty 369',
-                    nguoi_tao_hd: "Nguyen Ngoc Phu",
-                    deadline: "12/12/2022",
+                status: "active",
+                ben_tao_hd: 'HiSign',
+                ben_tham_gia: 'cty 369',
+                nguoi_tao_hd: "Nguyen Ngoc Phu",
+                deadline: "12/12/2022",
 
             }
             const contract2 = {
 
                 contract_type: 'Hop dong lao dong',
-                    status: "deactive",
-                    ben_tao_hd: 'HiSign',
-                    ben_tham_gia: 'cty 369',
-                    nguoi_tao_hd: "Nguyen Ngoc Phu",
-                    deadline: "12/12/2022",
+                status: "deactive",
+                ben_tao_hd: 'HiSign',
+                ben_tham_gia: 'cty 369',
+                nguoi_tao_hd: "Nguyen Ngoc Phu",
+                deadline: "12/12/2022",
 
             }
             const contract3 = {
 
                 contract_type: 'Hop dong lao dong',
-                    status: "pending",
-                    ben_tao_hd: 'HiSign',
-                    ben_tham_gia: 'cty 369',
-                    nguoi_tao_hd: "Nguyen Ngoc Phu",
-                    deadline: "12/12/2022",
+                status: "pending",
+                ben_tao_hd: 'HiSign',
+                ben_tham_gia: 'cty 369',
+                nguoi_tao_hd: "Nguyen Ngoc Phu",
+                deadline: "12/12/2022",
 
             }
             const contract4 = {
 
                 contract_type: 'Hop dong lao dong',
-                    status: "waiting for customer",
-                    ben_tao_hd: 'HiSign',
-                    ben_tham_gia: 'cty 369',
-                    nguoi_tao_hd: "Nguyen Ngoc Phu",
-                    deadline: "12/12/2022",
+                status: "waiting for customer",
+                ben_tao_hd: 'HiSign',
+                ben_tham_gia: 'cty 369',
+                nguoi_tao_hd: "Nguyen Ngoc Phu",
+                deadline: "12/12/2022",
 
             }
             this.props.onSubmit(contract1)
@@ -91,24 +114,24 @@ class ContractExtensionTable extends React.Component {
         if (this.state.showCreateContractExtension) {
             return (
                 <Router>
-                    <Redirect push to={"/capstone/viewContract/"+ this.props.contractId+"/createExtension"} />
-                    <Route exact path="/capstone/viewContract/:id/createExtension" render={() =>   <AddContractExtension contractId={this.props.contractId} role={this.props.role} />
+                    <Redirect push to={"/capstone/viewContract/" + this.props.contractId + "/createExtension"} />
+                    <Route exact path="/capstone/viewContract/:id/createExtension" render={() => <AddContractExtension contractId={this.props.contractId} role={this.props.role} />
                     } /></Router>
-                
+
 
             );
         } else if (this.state.showContractExtension) {
             return (
-                
+
                 <Router>
-                    <Redirect push to={"/capstone/viewContract/"+ this.props.contractId+"/updateExtension"} />
-                    <Route exact path="/capstone/viewContract/:id/updateExtension" render={() =>   <UpdateContractExtension contractId={this.props.contractId} contract={this.state.contract} role={this.props.role} />
+                    <Redirect push to={"/capstone/viewContract/" + this.props.contractId + "/updateExtension"} />
+                    <Route exact path="/capstone/viewContract/:id/updateExtension" render={() => <UpdateContractExtension contractId={this.props.contractId} contract={this.state.contract} role={this.props.role} />
                     } /></Router>
             );
         }
         else {
             return (
-                <div style={{height: "100vh"}}><Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContractExtension}>Tạo phụ lục</Button>
+                <div style={{ height: "100vh" }}><Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContractExtension}>Tạo phụ lục</Button>
                     <ContractSearch />
                     <Table dataSource={this.props.newContractExtension}
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}>
@@ -121,23 +144,23 @@ class ContractExtensionTable extends React.Component {
                         />
 
                         <Column title="bên đối tác" dataIndex="ben_tham_gia" key="ben_tham_gia"
-                        render={(text, record) => (
+                            render={(text, record) => (
 
-                            <b>{text}</b>
+                                <b>{text}</b>
 
-                        )} />
+                            )} />
                         <Column title="bên tạo " dataIndex="ben_tao_hd" key="ben_tao_hd"
-                        render={(text, record) => (
+                            render={(text, record) => (
 
-                            <b>{text}</b>
+                                <b>{text}</b>
 
-                        )} />
+                            )} />
                         <Column title="người tạo " dataIndex="nguoi_tao_hd" key="nguoi_tao_hd"
-                        render={(text, record) => (
+                            render={(text, record) => (
 
-                            <b>{text}</b>
+                                <b>{text}</b>
 
-                        )} />
+                            )} />
                         <Column title="trạng thái" dataIndex="status" key="status"
                             render={(text, record) => {
                                 let color = 'pink'
@@ -214,4 +237,4 @@ var mapStateToProps = state => {
 
 
 }
-export default connect(mapStateToProps, mapDispatchToProps) (ContractExtensionTable)
+export default connect(mapStateToProps, mapDispatchToProps)(ContractExtensionTable)

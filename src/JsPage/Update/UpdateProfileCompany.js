@@ -7,7 +7,7 @@ import {
     , CloudUploadOutlined, RedoOutlined
 } from '@ant-design/icons';
 
-import { Form, Input, Button, Row,Popover, Col, Card, Space } from 'antd';
+import { Form, Input, Button, Row, Popover, Col, Card, Space } from 'antd';
 
 import {
     QuestionCircleOutlined, UserOutlined
@@ -76,7 +76,7 @@ class UpdateProfileCompany extends React.Component {
     };
 
     render() {
-        const name="hello"
+        const name = "hello"
 
 
         return (
@@ -114,7 +114,15 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Mã số thuế"
                                 name="name"
-
+                                rules={[
+                                    
+                                    {
+                                        
+                                        message: 'Vui lòng nhập 10 ký tự',
+                                        min: 10,
+                                        max: 10,
+                                    },
+                                ]}   
                             >
                                 {this.state.isEdit === false ?
                                     <Row gutter={8}> <Col span={20}><Input disabled defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
@@ -127,7 +135,15 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item
                                 label="Điện thoại"
                                 name="phone"
-
+                                rules={[
+                                   
+                                    {
+                                        
+                                        message: 'Vui lòng nhập 10 ký tự',
+                                        min: 10,
+                                        max: 10,
+                                    },
+                                ]}    
                             >
                                 {this.state.isEdit === false ?
                                     <Row gutter={8}> <Col span={20}><Input disabled defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
@@ -185,7 +201,7 @@ class UpdateProfileCompany extends React.Component {
                                     <Row gutter={8}> <Col span={20}><Input disabled defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
-                                    <Row gutter={8}> <Col span={20}><Input  defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
@@ -195,12 +211,12 @@ class UpdateProfileCompany extends React.Component {
 
                             >
                                 {this.state.isEdit === false ?
-                                   <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Nguyen Van A" /></Col>    <Popover content={name} trigger="hover">
-                                   <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                               </Popover></Row>  :
-                                   <Row gutter={8}> <Col span={20}><Input  defaultValue="Nguyen Van A" /></Col>    <Popover content={name} trigger="hover">
-                                   <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                               </Popover></Row> }
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Nguyen Van A" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row> :
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="Nguyen Van A" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>}
                             </Form.Item>
 
 
@@ -211,12 +227,12 @@ class UpdateProfileCompany extends React.Component {
 
                             >
                                 {this.state.isEdit === false ?
-                                   <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Giám đốc" /></Col>    <Popover content={name} trigger="hover">
-                                   <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                               </Popover></Row> :
-                                   <Row gutter={8}> <Col span={20}><Input  defaultValue="Giám đốc" /></Col>    <Popover content={name} trigger="hover">
-                                   <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                               </Popover></Row>}
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Giám đốc" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row> :
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue="Giám đốc" /></Col>    <Popover content={name} trigger="hover">
+                                        <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>}
                             </Form.Item>
 
 

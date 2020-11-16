@@ -1,5 +1,6 @@
 import 'antd/dist/antd.css';
-import { Table, Space, Button, Tag,Switch } from 'antd';
+import axios from 'axios'
+import { Table, Space, Button, Tag,Switch,message } from 'antd';
 import AddSignature from '../Add/AddSignature'
 import UpdateSignature from '../Update/UpdateSignature'
 import React from 'react';
@@ -47,6 +48,29 @@ class SignatureList extends React.Component {
     componentDidMount() {
 
         if (this.props.newSignature.length === 0) {
+            axios({
+                url: '',
+                method: "GET",
+                
+            })
+                .then((response) => {
+        
+                    return response.data;
+                })
+                .then((data) => {
+        
+                    
+        
+                })
+                .catch(error => {
+        
+                    if (error.response.status === 500) {
+                        message.error(error.response.status + ' Server under maintainence');
+                    } else if (error.response.status === 404) {
+                        message.error(error.response.status + ' Server not found');
+                    }
+        
+                });
             const contract1 = {
                 serial:123123123123123123,
                 

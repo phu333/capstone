@@ -1,7 +1,8 @@
 import 'antd/dist/antd.css';
-import { Table, Button, Space, Tag } from 'antd';
+import { Table, Button, Space, Tag,message } from 'antd';
 import ContractSearch from '../Search/ContractSearch'
 import "../Column.css"
+import axios from 'axios'
 import {
     EyeOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
     FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
@@ -36,6 +37,29 @@ class ContractTable extends Component {
     componentDidMount() {
 
         if (this.props.newContract.length === 0) {
+            axios({
+                url: '',
+                method: "GET",
+                
+            })
+                .then((response) => {
+        
+                    return response.data;
+                })
+                .then((data) => {
+        
+                    
+        
+                })
+                .catch(error => {
+        
+                    if (error.response.status === 500) {
+                        message.error(error.response.status + ' Server under maintainence');
+                    } else if (error.response.status === 404) {
+                        message.error(error.response.status + ' Server not found');
+                    }
+        
+                });
             const contract1 = {
                 id: 1,
                 contract_name: 'Hop dong lao dong',
@@ -44,7 +68,7 @@ class ContractTable extends Component {
                 ben_tham_gia: 'cty 369',
                 nguoi_tao_hd: "Nguyen Ngoc Phu",
                 deadline: "12/12/2022",
-
+                contractValue:1000000,
             }
             const contract2 = {
                 id: 2,
@@ -54,7 +78,7 @@ class ContractTable extends Component {
                 ben_tham_gia: 'cty 369',
                 nguoi_tao_hd: "Nguyen Ngoc Phu",
                 deadline: "12/12/2022",
-
+                contractValue:1000000,
             }
             const contract3 = {
                 id: 3,
@@ -64,7 +88,7 @@ class ContractTable extends Component {
                 ben_tham_gia: 'cty 369',
                 nguoi_tao_hd: "Nguyen Ngoc Phu",
                 deadline: "12/12/2022",
-
+                contractValue:1000000,
             }
             const contract4 = {
                 id: 4,
@@ -74,7 +98,7 @@ class ContractTable extends Component {
                 ben_tham_gia: 'cty 369',
                 nguoi_tao_hd: "Nguyen Ngoc Phu",
                 deadline: "12/12/2022",
-
+                contractValue:1000000,
             }
             const contract5 = {
                 id: 5,
@@ -84,7 +108,7 @@ class ContractTable extends Component {
                 ben_tham_gia: 'HiSign',
                 nguoi_tao_hd: "AAA",
                 deadline: "12/12/2022",
-
+                contractValue:1000000,
             }
             this.props.onSubmit(contract1)
             this.props.onSubmit(contract2)
@@ -130,7 +154,7 @@ class ContractTable extends Component {
         else {
 
             return (
-                <div style={{ height: "100vh" }}>
+                <div >
                     <Space size="large">
                         <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContract}>Tạo hợp đồng</Button>
                         <Button type="primary" icon={<UploadOutlined />} >Tải lên hợp đồng</Button>
@@ -158,8 +182,8 @@ class ContractTable extends Component {
 
                             )} />
                         <Column title="Ngày hết hạn" dataIndex="deadline" key="deadline"
-                        sorter={(a, b) => a.deadline.localeCompare(b.deadline)}
-                        sortDirections={['descend', 'ascend']}
+                            sorter={(a, b) => a.deadline.localeCompare(b.deadline)}
+                            sortDirections={['descend', 'ascend']}
                             render={(text, record) => (
 
                                 <b>{text}</b>
@@ -171,9 +195,15 @@ class ContractTable extends Component {
                                 <b>{text}</b>
 
                             )} />
+                        <Column title="giá trị hợp đồng" dataIndex="contractValue" key="contractValue"
+                            render={(text, record) => (
+
+                                <b>{text}</b>
+
+                            )} />
                         <Column title="trạng thái" dataIndex="status" key="status"
-                        sorter={(a, b) => a.status.localeCompare(b.status)}
-                        sortDirections={['descend', 'ascend']}
+                            sorter={(a, b) => a.status.localeCompare(b.status)}
+                            sortDirections={['descend', 'ascend']}
                             render={(text, record) => {
                                 let color = 'pink'
                                 if (text === 'deactive') {

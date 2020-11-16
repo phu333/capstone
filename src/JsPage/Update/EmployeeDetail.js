@@ -2,7 +2,7 @@ import React from 'react';
 // import Popup from 'reactjs-popup';
 import 'antd/dist/antd.css';
 import '../../index.css';
-import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
+import { updateEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
 import { Form, Input, Button, Checkbox, Space, Card,message } from 'antd';
 // import {
@@ -35,7 +35,7 @@ const middleLayout = {
         span: 10,
     },
 };
-class AddEmployee extends React.Component {
+class EmployeeDetail extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -117,7 +117,7 @@ class AddEmployee extends React.Component {
                     <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
                         Trở về
               </Button>
-                    <h2 style={{ textAlign: 'center' }}>Tạo nhân viên</h2>
+                    <h2 style={{ textAlign: 'center' }}>Thông tin nhân viên</h2>
 
                     <Form
                         {...layout}
@@ -227,7 +227,7 @@ class AddEmployee extends React.Component {
                         >
                             <Input placeholder="Chức vụ" />
                         </Form.Item>
-                        <Form.Item {...tailLayout} name="signPermission" valuePropName="checked" >
+                        {/* <Form.Item {...tailLayout} name="signPermission" valuePropName="checked" >
                             
                             <Checkbox onChange={()=>{
                                 this.setState({
@@ -275,7 +275,7 @@ class AddEmployee extends React.Component {
                             }}
                             >Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox>
 
-                        </Form.Item>
+                        </Form.Item> */}
 
 
 
@@ -309,8 +309,8 @@ class AddEmployee extends React.Component {
 var mapDispatchToProps = (dispatch, props) => {
     return {
         onSubmit: (employee) => {
-            dispatch(createEmployee(employee))
+            dispatch(updateEmployee(employee))
         }
     }
 }
-export default connect(null, mapDispatchToProps)(AddEmployee);
+export default connect(null, mapDispatchToProps)(EmployeeDetail);
