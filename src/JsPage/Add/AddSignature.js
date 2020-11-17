@@ -5,7 +5,7 @@ import '../../index.css';
 import { createSignature, signatureInformation } from '../../actions/SignatureAction'
 import { connect } from 'react-redux'
 import {
-    QuestionCircleOutlined,FolderViewOutlined
+    QuestionCircleOutlined
 } from '@ant-design/icons';
 import { Button, Card, DatePicker, Form, Input,message, Popover, Space,Row,Col } from 'antd';
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
