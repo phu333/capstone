@@ -4,16 +4,11 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { createSignature, signatureInformation } from '../../actions/SignatureAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Card, Space, DatePicker,message } from 'antd';
 import {
-    QuestionCircleOutlined
+    QuestionCircleOutlined,FolderViewOutlined
 } from '@ant-design/icons';
-import { Button, Card, DatePicker, Form, Input, Popover, Space,Row,Col } from 'antd';
-import 'antd/dist/antd.css';
-import React from 'react';
-import { connect } from 'react-redux';
+import { Button, Card, DatePicker, Form, Input,message, Popover, Space,Row,Col } from 'antd';
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
-import { createSignature } from '../../actions/SignatureAction';
 import '../../index.css';
 import SignatureList from '../Table/SignatureList';
 

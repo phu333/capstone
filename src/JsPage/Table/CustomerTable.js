@@ -8,7 +8,7 @@ import CustomerSearch from '../Search/CustomerSearch'
 import { createCustomer, customerInformation } from '../../actions/CustomerAction'
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, EyeOutlined } from "@ant-design/icons"
+import { UserAddOutlined, FolderViewOutlined} from "@ant-design/icons"
 import axios from 'axios'
 const { Column } = Table;
 

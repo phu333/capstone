@@ -1,5 +1,5 @@
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import { Button, Card, Form, Input, Space,Popover,Row,Col } from 'antd';
+import { Button, Card, Form, Input, Space,Popover,Row,Col,message } from 'antd';
 import 'antd/dist/antd.css';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 import { createCustomer } from '../../actions/CustomerAction';
 import '../../index.css';
 import CustomerTable from '../Table/CustomerTable';
-
+import axios from'axios'
 const layout = {
     labelCol: {
         span: 4,
