@@ -4,7 +4,10 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Checkbox, Space, Card,message } from 'antd';
+import { Form, Input, Button, Switch, Space, Card,Popover,Col,Row } from 'antd';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Grid from '@material-ui/core/Grid';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 // import {
 //     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
 //     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
@@ -13,7 +16,7 @@ import EmployeeTable from '../Table/EmployeeTable'
 import axios from 'axios'
 import "../Column.css"
 
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 const layout = {
     labelCol: {
         span: 6,
@@ -105,6 +108,12 @@ class AddEmployee extends React.Component {
         })
     }
     render() {
+        var i = 0;
+        function onChange(e) {
+            if (e.target == "checked") { i--; }
+            else { i++ }
+            console.log('checked = ${e.target.checked}');
+        }
         if (this.state.finish) {
             return (<Router>
                 <Redirect push to={"/capstone/employee"} />
@@ -227,55 +236,57 @@ class AddEmployee extends React.Component {
                         >
                             <Input placeholder="Chức vụ" />
                         </Form.Item>
-                        <Form.Item {...tailLayout} name="signPermission" valuePropName="checked" >
-                            
-                            <Checkbox onChange={()=>{
-                                this.setState({
-                                    signPermission:!this.state.signPermission
-                                })
-                            }} >Quyền ký</Checkbox>
+                        <Grid item xs={12}>
+                                <b>Quyền Hạn</b>
+                                <br />
+                                <Row>
+                                    <Col span={8}>
+                                        <FormControlLabel
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                            label="Ký"
+                                        />
+                                        <p></p>
+                                    </Col>
+                                    <Col span={8}>
+                                        <FormControlLabel
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                            label="Quản lý hợp đồng"
+                                        />
+                                        <p></p>
+                                    </Col>
 
-                        </Form.Item>
-                        <Form.Item {...tailLayout} name="employeePermission" valuePropName="checked" >
-                            <Checkbox
-                            onChange={()=>{
-                                this.setState({
-                                    employeePermission:!this.state.employeePermission
-                                })
-                            }}
-                            >Quyền quản lý nhân viên</Checkbox>
+                                    <Col span={8}>
+                                        <FormControlLabel
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                            label="Quản lý nhân viên"
+                                        />
 
-                        </Form.Item>
-                        <Form.Item {...tailLayout} name="contractPermission" valuePropName="checked" >
-                        <Checkbox
-                            onChange={()=>{
-                                this.setState({
-                                    contractPermission:!this.state.contractPermission
-                                })
-                            }}
-                            >Quyền quản lý hợp đồng(Bao gồm quyền quản lý loại hợp đồng)</Checkbox>
+                                        <p></p>
+                                    </Col>
+                                    <Col span={8}>
+                                        <FormControlLabel
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                            label="Quản lý loại hợp đồng"
+                                        />
 
-                        </Form.Item>
-                        <Form.Item {...tailLayout} name="customerPermission" valuePropName="checked" >
-                        <Checkbox
-                            onChange={()=>{
-                                this.setState({
-                                    customerPermission:!this.state.customerPermission
-                                })
-                            }}
-                            >Quyền quản lý khách hàng</Checkbox>
-
-                        </Form.Item>
-                        <Form.Item {...tailLayout} name="companyInfoPermission" valuePropName="checked" >
-                        <Checkbox
-                            onChange={()=>{
-                                this.setState({
-                                    companyInfoPermission:!this.state.companyInfoPermission
-                                })
-                            }}
-                            >Quyền chỉnh sửa thông tin doanh nghiệp</Checkbox>
-
-                        </Form.Item>
+                                        <p></p>
+                                    </Col>
+                                    <Col span={8}>
+                                        <FormControlLabel
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                            label="Quản lý chữ ký"
+                                        />
+                                        <p></p>
+                                    </Col>
+                                    <Col span={8}>
+                                        <FormControlLabel
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                            label="Quản lý khách hàng"
+                                        />
+                                        <p></p>
+                                    </Col>
+                                </Row>
+                            </Grid>
 
 
 
