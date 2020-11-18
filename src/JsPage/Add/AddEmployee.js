@@ -3,7 +3,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import { Button, Col, Popover, Row } from 'antd';
+import { Button, Col, Popover, Row, Switch } from 'antd';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -40,19 +41,19 @@ const ValidationAdd = (
 
     <p>Số địa chỉ công ty</p>
 
-);const ValidationPhone = (
+); const ValidationPhone = (
 
     <p>Số điện thoại </p>
 
-);const ValidationEmail = (
+); const ValidationEmail = (
 
     <p>Địa chỉ email của google</p>
 
-);const ValidationTax = (
+); const ValidationTax = (
 
     <p>Mã số thuế của công ty khách hàng</p>
 
-);const ValidationRole = (
+); const ValidationRole = (
 
     <p>Chức vụ trong công ty có thể để trống</p>
 
@@ -115,8 +116,9 @@ class AddEmployee extends React.Component {
                                     name="Họ"
                                     label="Họ"
                                     autoComplete="Họ nhân viên"
-                                /><Popover  content={ValidationFName} trigger="hover">
-                                    <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                                /><Popover content={ValidationFName} trigger="hover">
+                                    <Button size="small" shape="circle" style={{ border: "none",backgroundColor:"inherit" }} icon={<QuestionCircleOutlined />} />
+
                                 </Popover>
                             </Grid>
                             <Grid item style={{ display: 'inline-flex' }} xs={12} sm={6}>
@@ -128,7 +130,7 @@ class AddEmployee extends React.Component {
                                     fullWidth
                                     autoComplete="Tên nhân viên"
                                 /><Popover content={ValidationLName} trigger="hover">
-                                    <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                                    <Button size="small" shape="circle" style={{ border: "none",backgroundColor:"inherit" }} icon={<QuestionCircleOutlined />} />
                                 </Popover>
                             </Grid>
                             <Grid item style={{ display: 'inline-flex' }} xs={12} sm={6}>
@@ -140,7 +142,7 @@ class AddEmployee extends React.Component {
                                     fullWidth
                                     autoComplete="family-name"
                                 /><Popover content={ValidationTax} trigger="hover">
-                                    <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                                    <Button size="small" shape="circle" style={{ border: "none",backgroundColor:"inherit" }} icon={<QuestionCircleOutlined />} />
                                 </Popover>
                             </Grid>
                             <Grid item style={{ display: 'inline-flex' }} xs={12} sm={6}>
@@ -152,7 +154,7 @@ class AddEmployee extends React.Component {
                                     fullWidth
                                     autoComplete="shipping address-line1"
                                 /><Popover content={ValidationPhone} trigger="hover">
-                                    <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                                    <Button size="small" shape="circle" style={{ border: "none",backgroundColor:"inherit" }} icon={<QuestionCircleOutlined />} />
                                 </Popover>
                             </Grid>
                             <Grid item style={{ display: 'inline-flex' }} xs={12} sm={6}>
@@ -164,7 +166,7 @@ class AddEmployee extends React.Component {
                                     fullWidth
                                     autoComplete="shipping address-level2"
                                 /><Popover content={ValidationEmail} trigger="hover">
-                                    <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                                    <Button size="small" shape="circle" style={{ border: "none",backgroundColor:"inherit" }} icon={<QuestionCircleOutlined />} />
                                 </Popover>
                             </Grid>
                             <Grid item style={{ display: 'inline-flex' }} xs={12} sm={6}>
@@ -175,7 +177,7 @@ class AddEmployee extends React.Component {
                                     fullWidth
                                     autoComplete="shipping address-line2"
                                 /><Popover content={ValidationAdd} trigger="hover">
-                                    <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                                    <Button size="small" shape="circle" style={{ border: "none",backgroundColor:"inherit" }} icon={<QuestionCircleOutlined />} />
                                 </Popover>
                             </Grid>
 
@@ -188,7 +190,7 @@ class AddEmployee extends React.Component {
                                     fullWidth
                                     autoComplete="shipping postal-code"
                                 /><Popover content={ValidationRole} trigger="hover">
-                                    <Button size="small" shape="circle"  style={{ border: "none" }} icon={<QuestionCircleOutlined />} />
+                                    <Button size="small" shape="circle" style={{ border: "none",backgroundColor:"inherit" }} icon={<QuestionCircleOutlined />} />
                                 </Popover>
                             </Grid>
                             <Grid item xs={12}>
@@ -197,14 +199,14 @@ class AddEmployee extends React.Component {
                                 <Row>
                                     <Col span={8}>
                                         <FormControlLabel
-                                            control={<Checkbox onChange={onChange} ></Checkbox>}
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                             label="Ký"
                                         />
                                         <p></p>
                                     </Col>
                                     <Col span={8}>
                                         <FormControlLabel
-                                            control={<Checkbox onChange={onChange} ></Checkbox>}
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                             label="Quản lý hợp đồng"
                                         />
                                         <p></p>
@@ -212,7 +214,7 @@ class AddEmployee extends React.Component {
 
                                     <Col span={8}>
                                         <FormControlLabel
-                                            control={<Checkbox onChange={onChange} >Quản lý nhân viên</Checkbox>}
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                             label="Quản lý nhân viên"
                                         />
 
@@ -220,7 +222,7 @@ class AddEmployee extends React.Component {
                                     </Col>
                                     <Col span={8}>
                                         <FormControlLabel
-                                            control={<Checkbox onChange={onChange} ></Checkbox>}
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                             label="Quản lý loại hợp đồng"
                                         />
 
@@ -228,14 +230,14 @@ class AddEmployee extends React.Component {
                                     </Col>
                                     <Col span={8}>
                                         <FormControlLabel
-                                            control={<Checkbox onChange={onChange} ></Checkbox>}
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                             label="Quản lý chữ ký"
                                         />
                                         <p></p>
                                     </Col>
                                     <Col span={8}>
                                         <FormControlLabel
-                                            control={<Checkbox onChange={onChange} ></Checkbox>}
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                             label="Quản lý khách hàng"
                                         />
                                         <p></p>
