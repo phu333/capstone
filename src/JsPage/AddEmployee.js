@@ -1,21 +1,16 @@
-import React from 'react';
-import Popup from 'reactjs-popup';
-import 'antd/dist/antd.css';
-import '../index.css';
-import { createEmployee, employeeInformation } from '../actions/EmployeeAction'
-import { connect } from 'react-redux'
-import { Form, Input, Button, Row, Col,Popover } from 'antd';
-import {
-    IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-    , CloudUploadOutlined, RedoOutlined, ReloadOutlined,QuestionCircleOutlined
-} from '@ant-design/icons';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { CloudUploadOutlined, QuestionCircleOutlined, ReloadOutlined } from '@ant-design/icons';
 import Checkbox from '@material-ui/core/Checkbox';
-import "./Column.css"
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import { Button, Col, Popover, Row } from 'antd';
+import 'antd/dist/antd.css';
+import React from 'react';
+import { connect } from 'react-redux';
+import Popup from 'reactjs-popup';
+import { createEmployee } from '../actions/EmployeeAction';
+import '../index.css';
+import "./Column.css";
 const layout = {
     labelCol: {
         span: 4,
@@ -50,7 +45,7 @@ const ValidationAdd = (
 
 );const ValidationEmail = (
 
-    <p>Địa chỉ email của google</p>
+    <p>Địa chỉ email</p>
 
 );const ValidationTax = (
 

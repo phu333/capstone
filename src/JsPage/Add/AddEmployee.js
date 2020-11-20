@@ -47,7 +47,7 @@ const ValidationAdd = (
 
 ); const ValidationEmail = (
 
-    <p>Địa chỉ email của google</p>
+    <p>Địa chỉ email</p>
 
 ); const ValidationTax = (
 
