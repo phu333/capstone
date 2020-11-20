@@ -198,7 +198,7 @@ class AddEmployee extends React.Component {
                             <Grid item xs={12}>
                                 <b>Quyền Hạn</b>
                                 <br />
-                                <Row>
+                                <Row gutter={2}>
                                     <Col span={8}>
                                         <FormControlLabel
                                             control={<Checkbox onChange={onChange} ></Checkbox>}
@@ -209,15 +209,43 @@ class AddEmployee extends React.Component {
                                     <Col span={8}>
                                         <FormControlLabel
                                             control={<Checkbox onChange={onChange} ></Checkbox>}
-                                            label="Quản lý hợp đồng"
+                                            label="Thêm hợp đồng"
+                                        />
+                                        <p></p>
+                                    </Col>
+                                    <Col span={8}>
+                                        <FormControlLabel
+                                            control={<Checkbox onChange={onChange} ></Checkbox>}
+                                            label="Sửa trạng thái hợp đồng"
+                                        />
+                                        <p></p>
+                                    </Col>
+                                    <Col span={8}>
+                                        <FormControlLabel
+                                            control={<Checkbox onChange={onChange} ></Checkbox>}
+                                            label="Coi nội dung hợp đồng"
+                                        />
+                                        <p></p>
+                                    </Col>
+                                    <Col span={8}>
+                                        <FormControlLabel
+                                            control={<Checkbox onChange={onChange} >Quản lý nhân viên</Checkbox>}
+                                            label="Thêm nhân viên"
+                                        />
+                                        <p></p>
+                                    </Col>
+                                    <Col span={8}>
+                                        <FormControlLabel
+                                            control={<Checkbox onChange={onChange} >Quản lý nhân viên</Checkbox>}
+                                            label="Chỉnh sửa quyền nhân viên"
                                         />
                                         <p></p>
                                     </Col>
 
                                     <Col span={8}>
                                         <FormControlLabel
-                                            control={<Checkbox onChange={onChange} >Quản lý nhân viên</Checkbox>}
-                                            label="Quản lý nhân viên"
+                                            control={<Checkbox onChange={onChange} ></Checkbox>}
+                                            label="Coi loại hợp đồng"
                                         />
 
                                         <p></p>
@@ -233,7 +261,21 @@ class AddEmployee extends React.Component {
                                     <Col span={8}>
                                         <FormControlLabel
                                             control={<Checkbox onChange={onChange} ></Checkbox>}
+                                            label="Coi chữ ký"
+                                        />
+                                        <p></p>
+                                    </Col>
+                                    <Col span={8}>
+                                        <FormControlLabel
+                                            control={<Checkbox onChange={onChange} ></Checkbox>}
                                             label="Quản lý chữ ký"
+                                        />
+                                        <p></p>
+                                    </Col>
+                                    <Col span={8}>
+                                        <FormControlLabel
+                                            control={<Checkbox onChange={onChange} ></Checkbox>}
+                                            label="Coi khách hàng"
                                         />
                                         <p></p>
                                     </Col>
