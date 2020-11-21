@@ -42,14 +42,16 @@ class CustomerList extends React.Component {
         return response.data;
       })
       .then((data) => {
-        
+        console.log(data)
         this.setState({
           customers:data.data,
         })
         
 
 
-      })
+      },
+      
+      )
       .catch(error => {
         console.log(error)
         if (error.response.status === 500) {

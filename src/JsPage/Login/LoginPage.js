@@ -9,7 +9,7 @@ import EmployeeSideMenu from './EmployeeSideMenu';
 
 import axios from 'axios'
 
-import AddUserAdmin from '../Login/AddUserAdmin'
+import AddComAd from '../Login/AddComAd'
 import ForgetPassword from './ForgetPassword'
 import { GoogleOutlined } from "@ant-design/icons"
 import { createFromIconfontCN } from '@ant-design/icons';
@@ -44,29 +44,7 @@ const middleLayout = {
     },
 };
 
-const userList = [
-    {
-        username: "phu111",
-        password: "123",
 
-    },
-    {
-        username: "phu222",
-        password: "123",
-
-    },
-    {
-        username: "phu333",
-        password: "123",
-
-    },
-    {
-        username: "phu444",
-        password: "123",
-
-    },
-
-]
 const initialState = {
     role: "",
     othersPage: "",
@@ -89,7 +67,7 @@ class LoginPage extends React.Component {
 
     onFinish = (values) => {
 
-
+       
 
 
         let loginInformation = {
@@ -135,6 +113,7 @@ class LoginPage extends React.Component {
                     jwToken:data.data.jwToken,
                     loginCode: true,
                 }
+                console.log(data.data.jwToken)
 
                 this.props.onSubmit(loginInfo)
                 message.success("welcome "+ data.data.userName);
@@ -166,7 +145,7 @@ class LoginPage extends React.Component {
     };
     SendJoinRequest = () => {
         this.setState({
-            othersPage: "AddUserAdmin"
+            othersPage: "AddComAd"
         })
     };
 
@@ -194,9 +173,9 @@ class LoginPage extends React.Component {
                 return (
                     <ForgetPassword />);
 
-            } else if (this.state.othersPage === "AddUserAdmin") {
+            } else if (this.state.othersPage === "AddComAd") {
                 return (
-                    <AddUserAdmin />);
+                    <AddComAd />);
             } else {
                 return (
                     <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
