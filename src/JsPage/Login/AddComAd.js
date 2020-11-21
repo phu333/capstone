@@ -36,11 +36,11 @@ const ValidationAddR = (
 
     <p>Số địa chỉ nhà riêng</p>
 
-);const ValidationPhone = (
+); const ValidationPhone = (
 
     <p>Số điện thoại </p>
 
-);const ValidationEmail = (
+); const ValidationEmail = (
 
     <p>Địa chỉ email không được để trống</p>
 
@@ -63,7 +63,7 @@ const ValidationAdd = (
     <p>Mã giấy phép kinh doanh do nhà nước cấp</p>
 
 );
- const ValidationTax = (
+const ValidationTax = (
 
     <p>Mã số thuế của công ty nhập dưới 10 ký tự</p>
 
@@ -71,13 +71,13 @@ const ValidationAdd = (
 
     <p>Chức vụ trong công ty có thể để trống</p>
 
-); 
+);
 
- const ValidationBank = (
+const ValidationBank = (
 
     <p>Mã số Ngân hàng của công ty có thể để trắng</p>
 
-);const ValidationCmnd = (
+); const ValidationCmnd = (
 
     <p>Mã số chứng minh nhân dân với 10 chữ số</p>
 
@@ -103,7 +103,7 @@ class AddComAd extends React.Component {
                 return response.data.data;
             })
             .then((data) => {
-                
+
 
 
 
@@ -133,7 +133,7 @@ class AddComAd extends React.Component {
                     {...layout}
                     name="basic"
                     className="employee-form"
-
+                    hideRequiredMark
                     onFinish={this.onFinish}
                     onFinishFailed={this.onFinishFailed}
 
@@ -151,7 +151,7 @@ class AddComAd extends React.Component {
                     >
                         <Row gutter={8}> <Col span={20}><Input placeholder="Họ" /></Col>
                             <Popover content={ValidationName} trigger="hover">
-                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                <Button shape="circle" size="small" style={{border:'none'}}  icon={<QuestionCircleOutlined />} />
                             </Popover></Row>                    </Form.Item>
                     <Form.Item
                         label="Họ "
@@ -165,7 +165,7 @@ class AddComAd extends React.Component {
                     >
                         <Row gutter={8}> <Col span={20}><Input placeholder="Tên" /></Col>
                             <Popover content={ValidationCompany} trigger="hover">
-                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                <Button shape="circle" size="small" style={{border:'none'}} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                     </Form.Item>
                     <Form.Item
@@ -183,7 +183,7 @@ class AddComAd extends React.Component {
                     >
                         <Row gutter={8}> <Col span={20}><Input placeholder="Chứng minh nhân dân" /></Col>
                             <Popover content={ValidationCmnd} trigger="hover">
-                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                <Button shape="circle" size="small" style={{border:'none'}} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                     </Form.Item>
                     <Form.Item
@@ -203,9 +203,9 @@ class AddComAd extends React.Component {
                             },
                         ]}
                     >
-                        <Row gutter={8}> <Col span={20}><Input.Password /></Col>
+                        <Row gutter={8}> <Col span={20}><Input.Password placeholder="Password"/></Col>
                             <Popover content={ValidationCompany} trigger="hover">
-                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                <Button shape="circle" size="small" style={{border:'none'}} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                     </Form.Item>
                     <Form.Item
@@ -231,7 +231,7 @@ class AddComAd extends React.Component {
                     >
                         <Row gutter={8}> <Col span={20}><Input.Password /></Col>
                             <Popover content={ValidationCompany} trigger="hover">
-                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                <Button shape="circle" size="small" style={{border:'none'}} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                     </Form.Item>
                     <Form.Item
@@ -248,7 +248,7 @@ class AddComAd extends React.Component {
                     >
                         <Row gutter={8}> <Col span={20}><Input prefix="+84" placeholder="Điện thoại" /></Col>
                             <Popover content={ValidationPhone} trigger="hover">
-                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                <Button shape="circle" size="small" style={{border:'none'}} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                     </Form.Item>
                     <Form.Item
@@ -263,7 +263,7 @@ class AddComAd extends React.Component {
                     >
                         <Row gutter={8}> <Col span={20}><Input placeholder="Địa chỉ  công ty" /></Col>
                             <Popover content={ValidationAddR} trigger="hover">
-                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                <Button shape="circle" size="small" style={{border:'none'}} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
 
                     </Form.Item>
@@ -283,7 +283,7 @@ class AddComAd extends React.Component {
                     >
                         <Row gutter={8}> <Col span={20}><Input placeholder="Email" /></Col>
                             <Popover content={ValidationEmail} trigger="hover">
-                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                <Button shape="circle" size="small" style={{border:'none'}} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                     </Form.Item>
                     <Form.Item
@@ -298,7 +298,7 @@ class AddComAd extends React.Component {
                     >
                         <Row gutter={8}> <Col span={20}><Input placeholder="Chức vụ" /></Col>
                             <Popover content={ValidationRole} trigger="hover">
-                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                <Button shape="circle" size="small" style={{border:'none'}} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
 
                     </Form.Item>
@@ -327,7 +327,7 @@ class AddComAd extends React.Component {
                     >
                         <Row gutter={8}> <Col span={20}><Input /></Col>
                             <Popover content={ValidationCompany} trigger="hover">
-                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                <Button shape="circle" size="small" style={{border:'none'}} icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                     </Form.Item>
                     <Form.Item
@@ -348,7 +348,7 @@ class AddComAd extends React.Component {
                         ]}
                     >
                         <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={ValidationTax} trigger="hover">
-                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                            <Button shape="circle" size="small" style={{border:'none'}} icon={<QuestionCircleOutlined />} />
                         </Popover></Row>
                     </Form.Item>
                     <Form.Item
@@ -369,7 +369,7 @@ class AddComAd extends React.Component {
                         ]}
                     >
                         <Row gutter={8}> <Col span={20}><Input prefix="+84" /></Col>    <Popover content={ValidationPhone} trigger="hover">
-                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                            <Button shape="circle" size="small" style={{border:'none'}} icon={<QuestionCircleOutlined />} />
                         </Popover></Row>
                     </Form.Item>
                     <Form.Item
@@ -378,7 +378,7 @@ class AddComAd extends React.Component {
                         required
                     >
                         <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={ValidationAdd} trigger="hover">
-                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                            <Button shape="circle" size="small" style={{border:'none'}} icon={<QuestionCircleOutlined />} />
                         </Popover></Row>
                     </Form.Item>
                     <Form.Item
@@ -396,7 +396,7 @@ class AddComAd extends React.Component {
                         ]}
                     >
                         <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={ValidationEmail} trigger="hover">
-                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                            <Button shape="circle" size="small" style={{border:'none'}} icon={<QuestionCircleOutlined />} />
                         </Popover></Row>
                     </Form.Item>
                     <Form.Item
@@ -405,7 +405,7 @@ class AddComAd extends React.Component {
                         required
                     >
                         <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={ValidationCertificate} trigger="hover">
-                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                            <Button shape="circle" size="small" style={{border:'none'}} icon={<QuestionCircleOutlined />} />
                         </Popover></Row>
                     </Form.Item>
                     <Form.Item
@@ -414,28 +414,7 @@ class AddComAd extends React.Component {
 
                     >
                         <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={ValidationBank} trigger="hover">
-                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                        </Popover></Row>
-                    </Form.Item>
-                    <Form.Item
-                        label="Người đại diện"
-                        name="comRepresentative"
-                        required
-                    >
-                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={ValidationPresentor} trigger="hover">
-                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                        </Popover></Row>
-                    </Form.Item>
-
-
-
-                    <Form.Item
-                        label="Chức vụ"
-                        name="comRepresentativeRole"
-                        required
-                    >
-                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={ValidationRole} trigger="hover">
-                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                            <Button shape="circle" size="small" style={{border:'none'}} icon={<QuestionCircleOutlined />} />
                         </Popover></Row>
                     </Form.Item>
 
