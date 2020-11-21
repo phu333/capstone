@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import { connect } from 'react-redux'
 
 import { MailOutlined, PrinterOutlined, IdcardOutlined, HomeOutlined, PhoneOutlined, BankOutlined, ContactsOutlined } from '@ant-design/icons';
-import { Card, Button, Space, Checkbox, Descriptions, Select, Form, Input,message } from 'antd';
+import { Card, Button, Space, Checkbox, Descriptions, Select, Form, Input, message } from 'antd';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { FormBuilder } from 'react-formio';
 import axios from 'axios'
@@ -73,14 +73,18 @@ class TemplateUpload extends React.Component {
 
     }
     onFinish = (values) => {
-        const template ={
-            contractContent: this.state.contractContent,
-            templateName: this.state.templateName,
-            contractName: this.state.contractName,
+        console.log(this.state.contractName)
+        const template = {
+            name: "tên",
+            content: JSON.stringify(this.state.contractContent)
         }
         axios({
-            url: '',
+            url: '/api/v1/ContractType',
             method: "POST",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
+
+            },
             data: template
         })
             .then((response) => {
@@ -89,16 +93,12 @@ class TemplateUpload extends React.Component {
             })
             .then((data) => {
 
-                
+
 
             })
             .catch(error => {
 
-                if (error.response.status === 500) {
-                    message.error(error.response.status + ' Server under maintainence');
-                } else if (error.response.status === 404) {
-                    message.error(error.response.status + ' Server not found');
-                }
+
 
             });
 
@@ -116,13 +116,20 @@ class TemplateUpload extends React.Component {
       </Button>
 
                 <Space direction="vertical" align="center" >
-                    <Input placeholder="tên template" />
+
                     <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
                         <Card bordered={false}>
                             <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>
                             <h6 style={{ textAlign: 'center', fontSize: 14 }}>Độc lập-tự do-hạnh phúc</h6>
                             <br />
-                            <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}><Input style={{ width: "100px" }} size="small" /></h2>
+                            <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}>
+                                <Input onChange={(value) => {
+                                 console.log(value)
+                                this.setState({
+                                    contractName: value
+                                })
+                                console.log(this.state.contractName)
+                            }} style={{ width: "100px" }} size="small" /></h2>
                             <h6 style={{ textAlign: 'center', fontSize: 14, fontWeight: "bold" }}>Số.../...</h6>
                             <h6 style={{ fontSize: 14, fontWeight: "bold" }}>Hôm nay, ngày...tháng...năm....,
                             tại........, chúng tôi gồm
@@ -139,11 +146,9 @@ class TemplateUpload extends React.Component {
                                 <Descriptions.Item label={(<b>{"Giấy phép kinh doanh:"}</b>)}>....</Descriptions.Item>
                                 <Descriptions.Item label={(<b>{"Mã số thuế:"}</b>)}>....</Descriptions.Item>
                                 <Descriptions.Item label={(<b>{"Tài khoản số:"}</b>)}>....</Descriptions.Item>
-                                <Descriptions.Item label={(<b>{"Số Fax:"}</b>)}>....</Descriptions.Item>
+
                                 <Descriptions.Item label={(<b>{"Do ông(bà):"}</b>)} span={2}>....</Descriptions.Item>
-                                <Descriptions.Item label={(<b>{"Năm sinh:"}</b>)} span={2}>
-                                    ....
-                                </Descriptions.Item>
+
                                 <Descriptions.Item label={(<b>{"Chức vụ"}</b>)} span={2}>
                                     ........làm đại diện
                                 </Descriptions.Item>
@@ -161,11 +166,9 @@ class TemplateUpload extends React.Component {
                                 <Descriptions.Item label={(<b>{"Giấy phép kinh doanh:"}</b>)}>....</Descriptions.Item>
                                 <Descriptions.Item label={(<b>{"Mã số thuế:"}</b>)}>....</Descriptions.Item>
                                 <Descriptions.Item label={(<b>{"Tài khoản số:"}</b>)}>....</Descriptions.Item>
-                                <Descriptions.Item label={(<b>{"Số Fax:"}</b>)}>....</Descriptions.Item>
+
                                 <Descriptions.Item label={(<b>{"Do ông(bà):"}</b>)} span={2}>....</Descriptions.Item>
-                                <Descriptions.Item label={(<b>{"Năm sinh:"}</b>)} span={2}>
-                                    ....
-                                </Descriptions.Item>
+
                                 <Descriptions.Item label={(<b>{"Chức vụ"}</b>)} span={2}>
                                     ........làm đại diện
                 </Descriptions.Item>
@@ -179,7 +182,7 @@ class TemplateUpload extends React.Component {
                         Giá trị hợp đồng:........
                         <JoditEditor
 
-                            value={this.state.contractContent}
+
                             config={config}
                             tabIndex={1} // tabIndex of textarea
 
@@ -203,7 +206,7 @@ class TemplateUpload extends React.Component {
                             </h6>
                                     <Space size="large">
 
-                                        <Button type="primary" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
+                                        <Button type="primary" htmlType="submit" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
                                                             nộp
                                                     </Button>
 

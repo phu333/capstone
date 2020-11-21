@@ -48,6 +48,7 @@ class AddEmployee extends React.Component {
             contractPermission:false,
             customerPermission:false,
             companyInfoPermission:false,
+            permission:[],
         };
         this.onFinish = this.onFinish.bind(this);
         this.onFinishFailed = this.onFinishFailed.bind(this);
@@ -142,6 +143,7 @@ class AddEmployee extends React.Component {
                             label="Họ và tên"
                             name="name"
                             rules={[
+               
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập tên ',
@@ -250,11 +252,17 @@ class AddEmployee extends React.Component {
                                     <Col span={8}>
                                         <FormControlLabel
                                             control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
-                                            label="Quản lý hợp đồng"
+                                            label="Thêm hợp đồng"
                                         />
                                         <p></p>
                                     </Col>
-
+                                    <Col span={8}>
+                                        <FormControlLabel
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                            label="Sửa hợp đồng"
+                                        />
+                                        <p></p>
+                                    </Col>
                                     <Col span={8}>
                                         <FormControlLabel
                                             control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
