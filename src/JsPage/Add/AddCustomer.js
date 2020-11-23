@@ -71,7 +71,7 @@ class AddCustomer extends React.Component {
     }
     onFinish = (values) => {
         console.log(values)
-        values.companyId = 3
+        
         axios({
             url: '/api/v1/Customer',
             method: "POST",
@@ -219,7 +219,7 @@ class AddCustomer extends React.Component {
                         </Form.Item>
                         <Form.Item
                             label="Email"
-                            name="Email"
+                            name="email"
                             rules={[
                                 {
                                     type: 'email',
@@ -237,7 +237,7 @@ class AddCustomer extends React.Component {
                         </Form.Item>
                         <Form.Item
                             label="Số tài khoản"
-                            name="bankaccount"
+                            name="bankAccount"
                             rules={[
                                 {
                                     required: true,
