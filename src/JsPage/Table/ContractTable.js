@@ -138,7 +138,7 @@ class ContractTable extends Component {
             return (
                 <Router>
                     <Redirect push to={"/capstone/chooseTemplate"} />
-                    <Route exact path="/capstone/chooseTemplate" render={() => <ChooseContractTemplate role={this.props.role} />
+                    <Route exact path="/capstone/chooseTemplate" render={() => <ChooseContractTemplate token={this.props.token} role={this.props.role} />
                     } /></Router>
 
             );
@@ -146,7 +146,7 @@ class ContractTable extends Component {
             return (
                 <Router>
                     <Redirect push to={"/capstone/viewContract/" + this.state.contract.id} />
-                    <Route exact path="/capstone/viewContract/:id" render={() => <ViewContractPage contract={this.state.contract} role={this.props.role} />
+                    <Route exact path="/capstone/viewContract/:id" render={() => <ViewContractPage token={this.props.token} role={this.props.role} />
                     } /></Router>
 
             );

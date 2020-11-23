@@ -188,7 +188,7 @@ class EmployeeList extends React.Component {
                 </Tag>);
               }}
             /> */}
-            <Column
+            {/* <Column
               title="Thông tin cá nhân"
               key="action"
               render={(text, record) => (
@@ -201,7 +201,7 @@ class EmployeeList extends React.Component {
                   } />
                 </Space>
               )}
-            />
+            /> */}
             <Column
               title="Quyền hạn"
               key="action"
