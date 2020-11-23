@@ -14,6 +14,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 import 'react-quill/dist/quill.snow.css';
 import JoditEditor from "jodit-react";
+import e from 'cors';
 
 
 const layout = {
@@ -62,20 +63,27 @@ class TemplateUpload extends React.Component {
         };
 
         this.rteChange = this.rteChange.bind(this);
-
+        this.nameChange = this.nameChange.bind(this);
     }
 
     rteChange = (value) => {
-        console.log(value); // HTML/rich text
+        
         this.setState({
             contractContent: value
         })
 
     }
+    nameChange = (value) => {
+        
+        this.setState({
+            contractName: value
+        })
+        console.log(this.state.contractName)
+    }
     onFinish = (values) => {
         console.log(this.state.contractName)
         const template = {
-            name: "tên",
+            name: this.state.contractName,
             content: JSON.stringify(this.state.contractContent)
         }
         axios({
@@ -122,14 +130,9 @@ class TemplateUpload extends React.Component {
                             <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>
                             <h6 style={{ textAlign: 'center', fontSize: 14 }}>Độc lập-tự do-hạnh phúc</h6>
                             <br />
-                            <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}>
-                                <Input onChange={(value) => {
-                                 console.log(value)
-                                this.setState({
-                                    contractName: value
-                                })
-                                console.log(this.state.contractName)
-                            }} style={{ width: "100px" }} size="small" /></h2>
+                            
+                            <h1 style={{ textAlign: 'center', fontSize: 14 }}><Input 
+                            onChange={(e)=>{this.nameChange(e.target.value)}} style={{ width: "100px" }} size="small" /></h1>
                             <h6 style={{ textAlign: 'center', fontSize: 14, fontWeight: "bold" }}>Số.../...</h6>
                             <h6 style={{ fontSize: 14, fontWeight: "bold" }}>Hôm nay, ngày...tháng...năm....,
                             tại........, chúng tôi gồm
@@ -184,7 +187,7 @@ class TemplateUpload extends React.Component {
 
 
                             config={config}
-                            tabIndex={1} // tabIndex of textarea
+                            
 
                             onChange={this.rteChange}
                         />
