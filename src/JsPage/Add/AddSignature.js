@@ -142,7 +142,7 @@ class AddSignature extends React.Component {
                             </Form.Item>
                             <Form.Item
                                 label="Thời hạn"
-                                name="phone"
+                                name="Date"
                                 rules={[
                                     {
                                         required: true,

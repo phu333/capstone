@@ -3,8 +3,10 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Checkbox, Space, Card } from 'antd';
-
+import { Form, Input, Button, Row, Space, Card, Popover,Col } from 'antd';
+import {
+    QuestionCircleOutlined
+} from '@ant-design/icons';
 import EmployeeTable from '../Table/EmployeeTable'
 import axios from 'axios'
 import "../Column.css"
@@ -30,6 +32,12 @@ const middleLayout = {
         span: 10,
     },
 };
+const name = (
+
+    <p>Nên để họ tên thật</p>
+
+);
+
 class AddUserAdmin extends React.Component {
     constructor() {
         super();
@@ -91,7 +99,7 @@ class AddUserAdmin extends React.Component {
                     onFinishFailed={this.onFinishFailed}
 
                 >
-
+                   
                     <Form.Item
                         label=" tên"
                         name="firstName"
@@ -115,6 +123,22 @@ class AddUserAdmin extends React.Component {
                         ]}
                     >
                         <Input placeholder="Họ và tên" />
+                    </Form.Item>
+                    <Form.Item
+                        label="Email"
+                        name="email"
+                        rules={[
+                            {
+                                type: 'email',
+                                message: 'The input is not valid E-mail!',
+                            },
+                            {
+                                required: true,
+                                message: 'Vui lòng nhập Email',
+                            },
+                        ]}
+                    >
+                        <Input placeholder="Email" />
                     </Form.Item>
                     <Form.Item
                         label="cmnd/cmt"
@@ -152,10 +176,10 @@ class AddUserAdmin extends React.Component {
                             {
                                 required: true,
                                 message: 'Vui lòng nhập Mật khẩu',
-                                
+
                             },
                             {
-                                
+
                                 message: 'Vui lòng nhập 6 kí tự',
                                 min: 6,
                             },
@@ -187,8 +211,62 @@ class AddUserAdmin extends React.Component {
                         <Input.Password />
                     </Form.Item>
                     <Form.Item
+                        label="Tên doanh nghiệp"
+                        name="companyName"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng nhập tên ',
+                            },
+                        ]}
+                    >
+                        <Row gutter={8}> <Col span={20}><Input /></Col>
+                            <Popover content={name} trigger="hover">
+                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
+                    </Form.Item>
+                    <Form.Item
+                        label="Mã số thuế"
+                        name="taxCode"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng nhập mst ',
+
+                            },
+                            {
+
+                                message: 'Vui lòng nhập 10 ký tự',
+                                min: 10,
+                                max: 10,
+                            },
+                        ]}
+                    >
+                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={name} trigger="hover">
+                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                        </Popover></Row>
+                    </Form.Item>
+                    <Form.Item
+                        label="Giấy phép kinh doanh"
+                        name="businessLicense"
+                        required
+                    >
+                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={name} trigger="hover">
+                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                        </Popover></Row>
+                    </Form.Item>
+                    <Form.Item
+                        label="Tài khoản ngân hàng"
+                        name="bankAccount"
+
+                    >
+                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={name} trigger="hover">
+                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                        </Popover></Row>
+                    </Form.Item>
+                    <Form.Item
                         label="Điện thoại"
-                        name="userPhone"
+                        name="phoneNumber"
                         rules={[
                             {
                                 required: true,
@@ -202,7 +280,7 @@ class AddUserAdmin extends React.Component {
                     </Form.Item>
                     <Form.Item
                         label="Địa chỉ"
-                        name="userAddress"
+                        name="address"
                         rules={[
                             {
                                 required: true,
@@ -212,22 +290,7 @@ class AddUserAdmin extends React.Component {
                     >
                         <Input placeholder="Địa chỉ" />
                     </Form.Item>
-                    <Form.Item
-                        label="Email"
-                        name="email"
-                        rules={[
-                            {
-                                type: 'email',
-                                message: 'The input is not valid E-mail!',
-                            },
-                            {
-                                required: true,
-                                message: 'Vui lòng nhập Email',
-                            },
-                        ]}
-                    >
-                        <Input placeholder="Email" />
-                    </Form.Item>
+                    
                     <Form.Item
                         label="Chức vụ"
                         name="userRole"

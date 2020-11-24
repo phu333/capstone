@@ -1,15 +1,15 @@
+import { EyeOutlined, UploadOutlined } from "@ant-design/icons";
+import { Button, Space, Table } from 'antd';
 import 'antd/dist/antd.css';
-import { Table, Space, Button, Tag,Switch,message } from 'antd';
-import TemplateUpload from '../Add/TemplateUpload';
-import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
+import axios from 'axios';
 import React from 'react';
-import "../Column.css"
-import ViewTemplate from '../Update/TemplateView'
-import ContractTypeSearch from '../Search/ContractTypeSearch'
-import { createContractType, contractTypeInformation } from '../../actions/ContractType'
-import { connect } from 'react-redux'
-import { UploadOutlined, EyeOutlined, DeleteOutlined, UserOutlined, FileWordOutlined } from "@ant-design/icons"
-import axios from 'axios'
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import { createContractType } from '../../actions/ContractType';
+import TemplateUpload from '../Add/TemplateUpload';
+import "../Column.css";
+import ContractTypeSearch from '../Search/ContractTypeSearch';
+import ViewTemplate from '../Update/TemplateView';
 const { Column } = Table;
 
 
@@ -21,6 +21,7 @@ class ContractTable extends React.Component {
     this.state = {
       showTemplateCreate: false,
       viewTemplate:false,
+      templateList:[],
     };
     this.handleChange = this.handleChange.bind(this);
 
@@ -32,11 +33,14 @@ class ContractTable extends React.Component {
   }
   componentDidMount() {
 
-    if (this.props.newContractType.length === 0) {
+   
       axios({
-        url: '',
+        url: '/api/v1/ContractType',
         method: "GET",
-        
+        headers: {
+          Authorization: 'Bearer ' + this.props.token,
+  
+        }
     })
         .then((response) => {
 
@@ -44,56 +48,32 @@ class ContractTable extends React.Component {
         })
         .then((data) => {
 
-            
+            this.setState({
+              templateList:data.data
+            })
 
         })
         .catch(error => {
 
-            if (error.response.status === 500) {
-                message.error(error.response.status + ' Server under maintainence');
-            } else if (error.response.status === 404) {
-                message.error(error.response.status + ' Server not found');
-            }
-
+           
         });
-      const contract1 = {
-
-        contract_type: 'Hop dong lao dong',
-        link: "creator",
-        createDate: "12/11/2018",
-        fileName: 'template1.dot',
-        status: "active"
-
-      }
-      const contract2 = {
-
-        contract_type: 'Hop dong lao dong',
-        link: "creator",
-        createDate: "12/12/2019",
-        fileName: 'template1.dot',
-        status: "deactive"
-
-      }
-
-      this.props.onSubmit(contract1)
-      this.props.onSubmit(contract2)
-
-    }
+      
+    
 
   }
   render() {
     if (this.state.showTemplateCreate) {
       return (
         <Router>
-          <Redirect push to={"/capstone/uploadTemplate"} />
-          <Route exact path="/capstone/uploadTemplate" component={TemplateUpload} /></Router>
-
+        <Redirect push to={"/capstone/uploadTemplate" } />
+        <Route exact path="/capstone/uploadTemplate" render={() => <TemplateUpload token={this.props.token} role={this.props.role} />} /></Router>
+       
       );
     }else if (this.state.showTemplateCreate) {
       return (
         <Router>
         <Redirect push to={"/capstone/viewTemplate" } />
-        <Route exact path="/capstone/viewTemplate" component={ViewTemplate} /></Router>
+        <Route exact path="/capstone/viewTemplate" render={() => <ViewTemplate token={this.props.token} role={this.props.role} />} /></Router>
        
       );
     } 
@@ -105,9 +85,9 @@ class ContractTable extends React.Component {
         <Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tải lên mẫu mới</Button>
 
           <ContractTypeSearch />
-          <Table dataSource={this.props.newContractType}
+          <Table dataSource={this.state.templateList}
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}  >
-           <Column title="Tên mẫu" dataIndex="contract_type" key="contract_type"
+           <Column title="mã" dataIndex="id" key="id"
             sorter={(a, b) => a.contract_type.localeCompare(b.contract_type)}
             sortDirections={['descend', 'ascend']}
               render={(text, record) => (
@@ -117,7 +97,7 @@ class ContractTable extends React.Component {
               )}
             />
 
-            <Column title="link" dataIndex="link" key="link"
+            <Column title="tên" dataIndex="name" key="name"
               render={(text, record) => (
 
                 <b>{text}</b>
@@ -126,27 +106,7 @@ class ContractTable extends React.Component {
             />
             
             
-            <Column title="trạng thái" dataIndex="status" key="status"
-            sorter={(a, b) => a.status.localeCompare(b.status)}
-            sortDirections={['descend', 'ascend']}
-              render={(text, record) => {
-                let color = 'pink'
-                if (text === 'deactive') {
-                  color = 'red'
-                } else if (text === 'active') {
-                  color = 'green'
-                } else if (text === 'pending') {
-                  color = 'blue'
-                } else if (text === 'waiting for customer') {
-                  color = 'pink'
-                } else if (text === 'rejected') {
-                  color = 'grey'
-                }
-                return (<Tag color={color} key={text}>
-                  {text.toUpperCase()}
-                </Tag>);
-              }}
-            />
+           
 
             <Column
               title="Chọn file khác"
@@ -161,17 +121,7 @@ class ContractTable extends React.Component {
                 </Space>
               )}
             />
-            <Column
-              title="Vô hiệu hóa"
-              dataIndex="status"
-              key="status"
-              render={(text, record) => (
-                
-                <Space size="middle">
-                  {text === "active" ? <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
-                </Space>
-              )}
-            />
+           
           </Table></div>
       );
     }

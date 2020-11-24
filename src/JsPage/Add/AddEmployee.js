@@ -1,17 +1,17 @@
-import { CloudUploadOutlined, QuestionCircleOutlined, ReloadOutlined } from '@ant-design/icons';
+import { CheckOutlined, CloseOutlined, CloudUploadOutlined, ReloadOutlined } from '@ant-design/icons';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import { Button, Col, Popover, Row, Switch } from 'antd';
-import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import { Button, Col, Form, Input, Row, Switch } from 'antd';
 import 'antd/dist/antd.css';
 import React from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import { createEmployee } from '../../actions/EmployeeAction';
 import '../../index.css';
 import "../Column.css";
+import EmployeeTable from '../Table/EmployeeTable';
 
 const layout = {
     labelCol: {
@@ -62,7 +62,13 @@ class AddEmployee extends React.Component {
     constructor() {
         super();
         this.state = {
-            finish: false
+            finish: false,
+            signPermission:false,
+            employeePermission:false,
+            contractPermission:false,
+            customerPermission:false,
+            companyInfoPermission:false,
+            permission:[],
         };
         this.onFinish = this.onFinish.bind(this);
         this.onFinishFailed = this.onFinishFailed.bind(this);
@@ -91,6 +97,17 @@ class AddEmployee extends React.Component {
         })
     }
     render() {
+        var i = 0;
+        function onChange(e) {
+            if (e.target == "checked") { i--; }
+            else { i++ }
+            console.log('checked = ${e.target.checked}');
+        }
+        if (this.state.finish) {
+            return (<Router>
+                <Redirect push to={"/capstone/employee"} />
+                <Route exact path="/capstone/employee" component={EmployeeTable} /></Router>);
+        } else {
 
         var i = 0;
         function onChange(e) {
@@ -105,117 +122,156 @@ class AddEmployee extends React.Component {
                 <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
                     Trở về
               </Button>
-                <h2 style={{ textAlign: 'center' }}>Tạo nhân viên</h2>
-                <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
-                    <Col span={10} >
-                        <Grid container alignItems="center" spacing={3}>
-                            <Grid item style={{ display: 'inline-flex' }} direction="row" xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="firstname"
-                                    name="Họ"
-                                    label="Họ"
-                                    autoComplete="Họ nhân viên"
-                                /><Popover content={ValidationFName} trigger="hover">
-                                    <Button size="small" shape="circle" style={{ border: "none",backgroundColor:"inherit" }} icon={<QuestionCircleOutlined />} />
+                    <h2 style={{ textAlign: 'center' }}>Tạo nhân viên</h2>
 
-                                </Popover>
-                            </Grid>
-                            <Grid item style={{ display: 'inline-flex' }} xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="lastname"
-                                    name="Tên"
-                                    label="Tên"
-                                    fullWidth
-                                    autoComplete="Tên nhân viên"
-                                /><Popover content={ValidationLName} trigger="hover">
-                                    <Button size="small" shape="circle" style={{ border: "none",backgroundColor:"inherit" }} icon={<QuestionCircleOutlined />} />
-                                </Popover>
-                            </Grid>
-                            <Grid item style={{ display: 'inline-flex' }} xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="taxCode"
-                                    name="Mã số thuế"
-                                    label="Mã số thuế"
-                                    fullWidth
-                                    autoComplete="family-name"
-                                /><Popover content={ValidationTax} trigger="hover">
-                                    <Button size="small" shape="circle" style={{ border: "none",backgroundColor:"inherit" }} icon={<QuestionCircleOutlined />} />
-                                </Popover>
-                            </Grid>
-                            <Grid item style={{ display: 'inline-flex' }} xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="telePhone"
-                                    name="Số điện thoại"
-                                    label="Điện thoại"
-                                    fullWidth
-                                    autoComplete="shipping address-line1"
-                                /><Popover content={ValidationPhone} trigger="hover">
-                                    <Button size="small" shape="circle" style={{ border: "none",backgroundColor:"inherit" }} icon={<QuestionCircleOutlined />} />
-                                </Popover>
-                            </Grid>
-                            <Grid item style={{ display: 'inline-flex' }} xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="email"
-                                    name="Địa chỉ mail"
-                                    label="Địa chỉ mail"
-                                    fullWidth
-                                    autoComplete="shipping address-level2"
-                                /><Popover content={ValidationEmail} trigger="hover">
-                                    <Button size="small" shape="circle" style={{ border: "none",backgroundColor:"inherit" }} icon={<QuestionCircleOutlined />} />
-                                </Popover>
-                            </Grid>
-                            <Grid item style={{ display: 'inline-flex' }} xs={12} sm={6}>
-                                <TextField
-                                    id="address"
-                                    name="Địa chỉ"
-                                    label="Địa chỉ"
-                                    fullWidth
-                                    autoComplete="shipping address-line2"
-                                /><Popover content={ValidationAdd} trigger="hover">
-                                    <Button size="small" shape="circle" style={{ border: "none",backgroundColor:"inherit" }} icon={<QuestionCircleOutlined />} />
-                                </Popover>
-                            </Grid>
+                    <Form
+                        {...layout}
+                        name="basic"
+                        className="employee-form"
+                        
+                        onFinish={this.onFinish}
+                        onFinishFailed={this.onFinishFailed}
 
-                            <Grid item style={{ display: 'inline-flex' }} xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="role"
-                                    name="Chức vụ"
-                                    label="Chức vụ"
-                                    fullWidth
-                                    autoComplete="shipping postal-code"
-                                /><Popover content={ValidationRole} trigger="hover">
-                                    <Button size="small" shape="circle" style={{ border: "none",backgroundColor:"inherit" }} icon={<QuestionCircleOutlined />} />
-                                </Popover>
-                            </Grid>
-                            <Grid item xs={12}>
+                    >
+
+                        <Form.Item
+                            label="Họ và tên"
+                            name="name"
+                            rules={[
+               
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập tên ',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Họ và tên" />
+                        </Form.Item>
+                        <Form.Item
+                            label="cmnd/cmt"
+                            name="id"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập cmnd/cmt ',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="cmnd/cmt" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Tên người dùng"
+                            name="username"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập tên người dùng',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="tên người dùng" />
+                        </Form.Item>
+
+
+                        <Form.Item
+                            label="Điện thoại"
+                            name="phone"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập sdt',
+                                    min: 10,
+                                    max: 10,
+                                },
+                                {
+                                    
+                                    message: 'Vui lòng nhập 10 ký tự',
+                                    min: 10,
+                                    max: 10,
+                                },
+                            ]}
+                        >
+                            <Input prefix="+84" placeholder="số điện thoại" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Địa chỉ"
+                            name="address"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập Địa chỉ',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Địa chỉ" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Email"
+                            name="Email"
+                            rules={[
+                                {
+                                    type: 'email',
+                                    message: 'The input is not valid E-mail!',
+                                },
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập Email',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Email" />
+                        </Form.Item>
+                        <Form.Item
+                            label="Chức vụ"
+                            name="role"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập Chức vụ',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Chức vụ" />
+                        </Form.Item>
+                        <Grid item xs={12}>
                                 <b>Quyền Hạn</b>
                                 <br />
-                                <Row gutter={2}>
+                                <Row>
                                     <Col span={8}>
                                         <FormControlLabel
-                                            control={<Checkbox onChange={onChange} ></Checkbox>}
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                             label="Ký"
                                         />
                                         <p></p>
                                     </Col>
                                     <Col span={8}>
                                         <FormControlLabel
-                                            control={<Checkbox onChange={onChange} ></Checkbox>}
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                             label="Thêm hợp đồng"
                                         />
                                         <p></p>
                                     </Col>
                                     <Col span={8}>
                                         <FormControlLabel
-                                            control={<Checkbox onChange={onChange} ></Checkbox>}
-                                            label="Sửa trạng thái hợp đồng"
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                            label="Sửa hợp đồng"
                                         />
+                                        <p></p>
+                                    </Col>
+                                    <Col span={8}>
+                                        <FormControlLabel
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                            label="Quản lý nhân viên"
+                                        />
+
+                                        <p></p>
+                                    </Col>
+                                    <Col span={8}>
+                                        <FormControlLabel
+                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                            label="Quản lý loại hợp đồng"
+                                        />
+
                                         <p></p>
                                     </Col>
                                     <Col span={8}>
@@ -286,8 +342,7 @@ class AddEmployee extends React.Component {
                                     </Col>
                                 </Row>
                             </Grid>
-                        </Grid>
-                        <div></div><br />
+                        <br />
                         <Grid item xs={12} sm={6}>
                             <Popup trigger={<Button type="primary" >
                                 <CloudUploadOutlined />  Nộp
@@ -303,13 +358,13 @@ class AddEmployee extends React.Component {
                                 <ReloadOutlined />   Reset
                             </Button>
                         </Grid>
-                    </Col>
-                </Row>
-            </React.Fragment >
+                        </Form>
+
+            </React.Fragment>
         );
     }
 }
-
+}
 var mapDispatchToProps = (dispatch, props) => {
     return {
         onSubmit: (employee) => {
