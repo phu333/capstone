@@ -184,7 +184,7 @@ class LoginPage extends React.Component {
 
 
 
-                        <Col span={10} >
+                        <Col span={16} >
                             <Form
                                 {...layout}
                                 name="basic"
@@ -192,6 +192,7 @@ class LoginPage extends React.Component {
                                 initialValues={{
                                     remember: true,
                                 }}
+                                hideRequiredMark
                                 onFinish={this.onFinish}
                                 onFinishFailed={this.onFinishFailed}
 
@@ -223,18 +224,22 @@ class LoginPage extends React.Component {
                                     <Input.Password />
                                 </Form.Item>
                                 <Form.Item {...middleLayout} name="remember" valuePropName="unchecked" >
-                                    <Checkbox
+                              <Row gutter="2">    <Col>  <Checkbox style={{fontSize:'20px'}}
                                         onChange={() => {
                                             this.setState({
                                                 remember: !this.state.remember
                                             })
                                         }}
-                                    >Ghi nhớ</Checkbox>
-                                    <Button type="link" htmlType="button"
+                                    >Ghi nhớ</Checkbox></Col>
+                                <Col>    <Button  type="link" htmlType="button"
                                         onClick={this.ForgetPassword}
                                     >
                                         Quên mật khẩu
-                                </Button>
+                                </Button></Col>
+                            <Col>  <Button type="link" htmlType="button"
+                                            onClick={this.SendJoinRequest}>
+                                            Đăng ký
+                                </Button></Col> </Row>
                                 </Form.Item>
 
 
@@ -242,7 +247,7 @@ class LoginPage extends React.Component {
 
                                 <Form.Item {...tailLayout}>
                                     <Space size="large">
-                                        <Button type="primary" htmlType="submit" className="login-form-button">
+                                        <Button type="primary" htmlType="submit" >
                                             Đăng nhập
                                 </Button>
                                         <GoogleLogin
@@ -251,19 +256,16 @@ class LoginPage extends React.Component {
                                             render={renderProps => (
 
 
-                                                <GoogleOutlined style={{ fontSize: '30px', color: '#08c' }} >
-                                                    Đăng nhập với google
-                                                </GoogleOutlined>
+                                             ( <button style={{border:'none',backgroundColor:'deepskyblue',color:'white',height:'20 px',width:'20 px'}}>  <GoogleOutlined style={{ fontSize: '30px', color: '#08c' }} >
+                                                   
+                                                </GoogleOutlined>  Đăng nhập với google</button>)
                                             )}
                                             onSuccess={this.responseGoogle}
                                             onFailure={this.responseGoogle}
                                             cookiePolicy={'single_host_origin'}
                                         />
 
-                                        <Button type="link" htmlType="button"
-                                            onClick={this.SendJoinRequest}>
-                                            Gửi yêu cầu đăng ký
-                                </Button>
+                                        
                                     </Space>
                                 </Form.Item>
                                 <Form.Item>
