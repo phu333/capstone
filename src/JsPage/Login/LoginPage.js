@@ -7,11 +7,12 @@ import { GoogleLogin } from 'react-google-login';
 import { Form, Input, Button, Checkbox,message } from 'antd';
 import EmployeeSideMenu from './EmployeeSideMenu';
 
+import logo from '../../logo/Capture.PNG';
 import axios from 'axios'
 
 import AddComAd from '../Login/AddComAd'
 import ForgetPassword from './ForgetPassword'
-import { GoogleOutlined } from "@ant-design/icons"
+import GoogleOutlined  from '../../logo/icons8-google-64.png'
 import { createFromIconfontCN } from '@ant-design/icons';
 import { connect } from 'react-redux'
 import { addLogin, login } from '../../actions/loginAction'
@@ -178,7 +179,7 @@ class LoginPage extends React.Component {
                     <AddComAd />);
             } else {
                 return (
-                    <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
+                    <Row type="flex" justify="center" align="middle" style={{ height: "100vh",backgroundColor:'rgba(2, 21, 2,1)' }}>
 
                         <Redirect push to="/capstone/Login" />
 
@@ -195,11 +196,11 @@ class LoginPage extends React.Component {
                                 hideRequiredMark
                                 onFinish={this.onFinish}
                                 onFinishFailed={this.onFinishFailed}
-
                             >
-                                <IconFont type="icon-javascript" style={{ fontSize: '60px', color: '#08c', marginLeft: "40%" }} />
+                                {/* <IconFont type="icon-javascript" style={{ fontSize: '60px', color: '#08c', marginLeft: "40%" }} /> */}
+                                 <img src={logo} type="icon-javascript" style={{ height: '180px',width:'300px', color: '#08c', marginLeft: "25%" }} alt="Logo" />
                                 <Form.Item
-                                    label="Tên người dùng"
+                                    label={<label style={{ color: "skyblue" }}>Tên người dùng</label>}
                                     name="username"
                                     rules={[
                                         {
@@ -208,11 +209,11 @@ class LoginPage extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input style={{width:'300px'}}/>
                                 </Form.Item>
 
                                 <Form.Item
-                                    label="Mật khẩu"
+                                    label={<label style={{ color: "skyblue" }}>Mật khẩu</label>}
                                     name="password"
                                     rules={[
                                         {
@@ -221,10 +222,10 @@ class LoginPage extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input.Password />
+                                    <Input.Password style={{width:'300px'}} />
                                 </Form.Item>
                                 <Form.Item {...middleLayout} name="remember" valuePropName="unchecked" >
-                              <Row gutter="2">    <Col>  <Checkbox style={{fontSize:'20px'}}
+                              <Row gutter="2">    <Col>  <Checkbox style={{fontSize:'20px',color:'skyblue'}}
                                         onChange={() => {
                                             this.setState({
                                                 remember: !this.state.remember
@@ -256,9 +257,9 @@ class LoginPage extends React.Component {
                                             render={renderProps => (
 
 
-                                             ( <button style={{border:'none',backgroundColor:'deepskyblue',color:'white',height:'20 px',width:'20 px'}}>  <GoogleOutlined style={{ fontSize: '30px', color: '#08c' }} >
+                                             ( <button style={{border:'none',backgroundColor:'deepskyblue',color:'white',height:'20 px',width:'20 px'}}> 
                                                    
-                                                </GoogleOutlined>  Đăng nhập với google</button>)
+                                                   <img src={GoogleOutlined} style={{ width:'30px',height   :'30px', color: '#08c' }}  />  Đăng nhập với google</button>)
                                             )}
                                             onSuccess={this.responseGoogle}
                                             onFailure={this.responseGoogle}
