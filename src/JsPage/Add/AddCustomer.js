@@ -35,7 +35,7 @@ class AddCustomer extends React.Component {
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
-        values.companyId = 3
+        values.companyId = 1
         axios({
             url: '/api/v1/Customer',
             method: "POST",
