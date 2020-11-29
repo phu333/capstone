@@ -35,7 +35,37 @@ class AddCustomer extends React.Component {
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
-        values.companyId = 1
+        axios({
+            url: '/api/v1/Company',
+            method: "GET",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
+
+            },
+            params:{
+                Name:values.name,
+            },
+            
+        })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+
+                console.log(data)
+
+            })
+            .catch(error => {
+
+                if (error.response.status === 500) {
+                    message.error(error.response.status + ' Server under maintainence');
+                } else if (error.response.status === 404) {
+                    message.error(error.response.status + ' Server not found');
+                }
+
+            });
+        
         axios({
             url: '/api/v1/Customer',
             method: "POST",
