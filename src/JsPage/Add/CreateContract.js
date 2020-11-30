@@ -10,6 +10,11 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios'
 import 'react-quill/dist/quill.snow.css';
 import JoditEditor from "jodit-react";
+
+import { SES } from 'aws-sdk';
+import template from './hello.txt'
+
+
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { Column, ColumnGroup } = Table;
@@ -167,6 +172,17 @@ class CreateContract extends React.Component {
             contractValue: this.state.contractValue,
             contractContent: this.state.contractContent,
         }
+        SES.set_template_directory(template);
+        var person = {
+            Link: 'hello.com',
+            name: this.state.BSide.Email,
+            email: this.state.BSide.Representative,
+            subject:"Contract"
+        }
+
+        SES.email('Contract', person, function (result) {
+            console.log(result);
+        })
         axios({
             url: '',
             method: "POST",
@@ -213,7 +229,7 @@ class CreateContract extends React.Component {
     };
     handleChange(value) {
         console.log(value);
-        const company=JSON.parse(value)
+        const company = JSON.parse(value)
         this.setState({
             BSide: {
                 Name: company.name,
@@ -298,11 +314,11 @@ class CreateContract extends React.Component {
                                             optionFilterProp="customer"
                                             onChange={this.handleChange}
                                             onSearch={this.handleChange}
-                                           
+
                                         >
-                                           {this.state.customers.map((customer)=>(
-                                               <Option value={JSON.stringify(customer)} >{customer.name}</Option>
-                                           ))}
+                                            {this.state.customers.map((customer) => (
+                                                <Option value={JSON.stringify(customer)} >{customer.name}</Option>
+                                            ))}
                                         </Select></Descriptions.Item>
                                     <Descriptions.Item label={(<><b>{"Địa chỉ:"}</b></>)}>{this.state.BSide.Address}</Descriptions.Item>
                                     <Descriptions.Item label={(<><b>{"Điện thoại:"}</b></>)}>{this.state.BSide.Phone}</Descriptions.Item>

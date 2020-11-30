@@ -70,12 +70,6 @@ class AddCustomer extends React.Component {
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        console.log(values)
-=======
-=======
->>>>>>> origin/main
         axios({
             url: '/api/v1/Company',
             method: "GET",
@@ -106,10 +100,6 @@ class AddCustomer extends React.Component {
                 }
 
             });
-<<<<<<< HEAD
->>>>>>> origin/main
-=======
->>>>>>> origin/main
         
         axios({
             url: '/api/v1/Customer',
