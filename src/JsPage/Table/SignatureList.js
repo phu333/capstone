@@ -10,7 +10,11 @@ import SignatureSearch from '../Search/SignatureSearch'
 import { createSignature, signatureInformation } from '../../actions/SignatureAction'
 import { connect } from 'react-redux'
 import "../Column.css"
+<<<<<<< HEAD
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,FolderViewOutlined } from "@ant-design/icons"
+=======
+import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
+>>>>>>> 9a4cc28 (no message)
 const { Column, ColumnGroup } = Table;
 
 
