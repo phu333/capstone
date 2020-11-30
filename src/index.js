@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { ConfigProvider } from 'antd'
+import vnVN from 'antd/lib/locale/vi_VN'
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import { createStore } from "redux"
@@ -11,7 +13,9 @@ const store = createStore(allReducers)
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <ConfigProvider locale={vnVN}>
+        <App />
+      </ConfigProvider>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
