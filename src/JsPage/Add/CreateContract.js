@@ -60,7 +60,7 @@ class CreateContract extends React.Component {
                 Representative: "",
                 Position: "",
                 BusinessLicensce: "",
-                YoB: "",
+
                 BankAccount: "",
             },
             ASide: {
@@ -72,7 +72,7 @@ class CreateContract extends React.Component {
                 Representative: "",
                 Position: "",
                 BusinessLicensce: "",
-                YoB: "",
+
                 BankAccount: "",
             },
             contractNum: "",
@@ -92,38 +92,41 @@ class CreateContract extends React.Component {
     }
 
     rteChange = (value) => {
-        console.log(value); // HTML/rich text
+        this.setState({
+            contractContent: value.replace(/"/g,'\'')
+        })
+        console.log(value.replace(/"/g,'\'')); // HTML/rich text
     }
     componentDidMount() {
-        axios({
-            url: '/api/v1/Company',
-            method: "GET",
-            headers: {
-                Authorization: 'Bearer ' + this.props.token,
+        // axios({
+        //     url: '/api/v1/Company',
+        //     method: "GET",
+        //     headers: {
+        //         Authorization: 'Bearer ' + this.props.token,
 
-            }
-        })
-            .then((response) => {
+        //     }
+        // })
+        //     .then((response) => {
 
-                return response.data;
-            })
-            .then((data) => {
-                console.log(data)
-                this.setState({
-                    company: data.data,
-                })
+        //         return response.data;
+        //     })
+        //     .then((data) => {
+        //         console.log(data)
+        //         this.setState({
+        //             company: data.data,
+        //         })
 
 
-            })
-            .catch(error => {
-                console.log(error)
-                if (error.response.status === 500) {
-                    message.error(error.response.status + ' Server under maintainence');
-                } else if (error.response.status === 404) {
-                    message.error(error.response.status + ' Server not found');
-                }
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //         if (error.response.status === 500) {
+        //             message.error(error.response.status + ' Server under maintainence');
+        //         } else if (error.response.status === 404) {
+        //             message.error(error.response.status + ' Server not found');
+        //         }
 
-            });
+        //     });
         axios({
             url: '/api/v1/Customer',
             method: "GET",
@@ -153,23 +156,57 @@ class CreateContract extends React.Component {
                 }
 
             });
+        axios({
+            url: '/api/v1/Company/info',
+            method: "PUT",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
+
+            }
+        })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+                console.log(data.data)
+                this.setState({
+                    company: data.data
+                })
+                console.log(this.state.company)
+            })
+            .catch(error => {
+                console.log(error)
+                if (error.response.status === 500) {
+                    message.error(error.response.status + ' Server under maintainence');
+                } else if (error.response.status === 404) {
+                    message.error(error.response.status + ' Server not found');
+                }
+
+            });
     }
     onFinish = (values) => {
+       
         const contract = {
-            contractTitle: this.state.contractTitle,
+            contractTitle: this.props.template.name,
             contractNum: this.state.contractNum,
-            contractName: this.state.contractName,
+            contractName: this.props.template.name,
             contractPlace: this.state.contractPlace,
-            contractCreateDate: "",
-            contractExpiredDate: this.state.contractExpiredDate,
-            ASide: this.state.ASide,
-            BSide: this.state.BSide,
+            contractTypeId: this.props.template.id,
+            contractExpiredDate: "2022-11-30T13:55:57.445Z",
+
             contractValue: this.state.contractValue,
-            contractContent: this.state.contractContent,
+            contractContent:this.state.contractContent.replace(/"/g,'\'') ,
+            customerId: 1,
         }
+        console.log(contract)
         axios({
-            url: '',
+            url: '/api/v1/Contract',
             method: "POST",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
+
+            },
             data: contract
         })
             .then((response) => {
@@ -213,9 +250,10 @@ class CreateContract extends React.Component {
     };
     handleChange(value) {
         console.log(value);
-        const company=JSON.parse(value)
+        const company = JSON.parse(value)
         this.setState({
             BSide: {
+                id: company.companyId,
                 Name: company.name,
                 MST: company.taxCode,
                 Phone: company.phoneNumber,
@@ -239,7 +277,7 @@ class CreateContract extends React.Component {
             return (
                 <Router>
                     <Redirect push to={"/capstone/contract"} />
-                    <Route exact path="/capstone/contract" render={() => <ContractTable role={this.props.role} />
+                    <Route exact path="/capstone/contract" render={() => <ContractTable token={this.props.token} role={this.props.role} />
                     } /></Router>
             );
         } else {
@@ -259,24 +297,37 @@ class CreateContract extends React.Component {
                                 <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>
                                 <h6 style={{ textAlign: 'center', fontSize: 14 }}>Độc lập-tự do-hạnh phúc</h6>
                                 <br />
-                                <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}>Hợp đồng mua bán</h2>
-                                <h6 style={{ textAlign: 'center', fontSize: 14 }}>Số<Input style={{ width: "30px" }} size="small" />/<Input style={{ width: "30px" }} size="small" /></h6>
+                                <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}>{this.props.template.name}</h2>
+                                <h6 style={{ textAlign: 'center', fontSize: 14 }}>Số
+                                <Input style={{ width: "100px" }} size="small"
+                                        onChange={(value) => {
+                                            this.setState({
+                                                contractNum: value.target.value
+                                            })
+                                        }} />
+                                    {/* /<Input style={{ width: "30px" }} size="small" /> */}
+                                </h6>
                                 <h6 style={{ fontSize: 14 }}>Hôm nay, ngày 3 tháng 11 năm 2020,
-                                tại<Input style={{ width: "100px" }} size="small" />, chúng tôi gồm
+                                tại<Input style={{ width: "100px" }} size="small"
+                                        onChange={(value) => {
+                                            this.setState({
+                                                contractPlace: value.target.value
+                                            })
+                                        }} />, chúng tôi gồm
                             </h6>
                             </Card>
                             <Card bordered={false}>
                                 <Descriptions size="small" column={2} title={"Thông tin bên A"}  >
-                                    <Descriptions.Item label={(<><b>{"Công ty/Tổ chức:"}</b></>)}>Công ty cổ phần HiSign
-                                        </Descriptions.Item>
-                                    <Descriptions.Item label={(<><b>{"Địa chỉ:"}</b></>)}>asdasdasd</Descriptions.Item>
-                                    <Descriptions.Item label={(<><b>{"Điện thoại:"}</b></>)}>123123123123</Descriptions.Item>
-                                    <Descriptions.Item label={(<><b>{"Địa chỉ Email:"}</b></>)}>sfds@gmail.com</Descriptions.Item>
-                                    <Descriptions.Item label={(<><b>{"Giấy phép kinh doanh:"}</b></>)}>123123123123</Descriptions.Item>
-                                    <Descriptions.Item label={(<><b>{"Mã số thuế:"}</b></>)}>123123123123</Descriptions.Item>
-                                    <Descriptions.Item label={(<><b>{"Tài khoản số:"}</b></>)}>123123123123</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Công ty/Tổ chức"}</b></>)}>{this.state.company.name}
+                                    </Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Địa chỉ"}</b></>)}>{this.state.company.address}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Điện thoại"}</b></>)}>{this.state.company.phoneNumber}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Địa chỉ Email"}</b></>)}>{this.state.company.email}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Giấy phép kinh doanh"}</b></>)}>{this.state.company.businessLicense}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Mã số thuế"}</b></>)}>{this.state.company.taxCode}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Tài khoản số"}</b></>)}>{this.state.company.bankAccount}</Descriptions.Item>
                                     {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
-                                    <Descriptions.Item label={(<><b>{"Do ông(bà):"}</b></>)} span={2}>Usada Pekora</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Do ông(bà)"}</b></>)} span={2}>{this.state.company.name}</Descriptions.Item>
 
                                     <Descriptions.Item label={(<><b>{"Chức vụ"}</b></>)} span={2}>
                                         Giám đốc làm đại diện
@@ -290,7 +341,7 @@ class CreateContract extends React.Component {
 
                                 >
 
-                                    <Descriptions.Item label={(<><b>{"Công ty/Tổ chức:"}</b></>)}>
+                                    <Descriptions.Item label={(<><b>{"Công ty/Tổ chức"}</b></>)}>
                                         <Select
                                             showSearch
                                             style={{ width: 200 }}
@@ -298,18 +349,18 @@ class CreateContract extends React.Component {
                                             optionFilterProp="customer"
                                             onChange={this.handleChange}
                                             onSearch={this.handleChange}
-                                           
+
                                         >
-                                           {this.state.customers.map((customer)=>(
-                                               <Option value={JSON.stringify(customer)} >{customer.name}</Option>
-                                           ))}
+                                            {this.state.customers.map((customer) => (
+                                                <Option value={JSON.stringify(customer)} >{customer.name}</Option>
+                                            ))}
                                         </Select></Descriptions.Item>
-                                    <Descriptions.Item label={(<><b>{"Địa chỉ:"}</b></>)}>{this.state.BSide.Address}</Descriptions.Item>
-                                    <Descriptions.Item label={(<><b>{"Điện thoại:"}</b></>)}>{this.state.BSide.Phone}</Descriptions.Item>
-                                    <Descriptions.Item label={(<><b>{"Địa chỉ Email:"}</b></>)}>{this.state.BSide.Email}</Descriptions.Item>
-                                    <Descriptions.Item label={(<><b>{"Giấy phép kinh doanh:"}</b></>)}>{this.state.BSide.BusinessLicensce}</Descriptions.Item>
-                                    <Descriptions.Item label={(<><b>{"Mã số thuế:"}</b></>)}>{this.state.BSide.MST}</Descriptions.Item>
-                                    <Descriptions.Item label={(<><b>{"Tài khoản số:"}</b></>)}>{this.state.BSide.BankAccount}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Địa chỉ"}</b></>)}>{this.state.BSide.Address}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Điện thoại"}</b></>)}>{this.state.BSide.Phone}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Địa chỉ Email"}</b></>)}>{this.state.BSide.Email}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Giấy phép kinh doanh"}</b></>)}>{this.state.BSide.BusinessLicensce}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Mã số thuế"}</b></>)}>{this.state.BSide.MST}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Tài khoản số"}</b></>)}>{this.state.BSide.BankAccount}</Descriptions.Item>
                                     {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
                                     <Descriptions.Item label={(<><b>{"Do ông(bà):"}</b></>)} span={2}>{this.state.BSide.Representative}</Descriptions.Item>
 
@@ -328,7 +379,9 @@ class CreateContract extends React.Component {
                                 title="Giá trị hợp đồng"
                                 formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                 parser={value => value.replace(/\$\s?|(,*)/g, '')}
-
+                                onChange={value => this.setState({
+                                    contractValue : value.target.value
+                                })}                
                             />
                             <h6 style={{ fontSize: 16 }}>Chúng tôi thỏa thuận với các điều khoản sau
                             </h6>
@@ -358,7 +411,7 @@ class CreateContract extends React.Component {
                                         </h6>
                                         <Space size="large">
 
-                                            <Button type="primary" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
+                                            <Button type="primary" htmlType="submit" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
                                                             nộp
                                                     </Button>
 
