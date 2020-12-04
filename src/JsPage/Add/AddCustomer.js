@@ -70,36 +70,36 @@ class AddCustomer extends React.Component {
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
-        axios({
-            url: '/api/v1/Company',
-            method: "GET",
-            headers: {
-                Authorization: 'Bearer ' + this.props.token,
+        // axios({
+        //     url: '/api/v1/Company',
+        //     method: "GET",
+        //     headers: {
+        //         Authorization: 'Bearer ' + this.props.token,
 
-            },
-            params:{
-                Name:values.name,
-            },
+        //     },
+        //     params:{
+        //         Name:values.name,
+        //     },
             
-        })
-            .then((response) => {
+        // })
+        //     .then((response) => {
 
-                return response.data;
-            })
-            .then((data) => {
+        //         return response.data;
+        //     })
+        //     .then((data) => {
 
-                console.log(data)
+        //         console.log(data)
 
-            })
-            .catch(error => {
+        //     })
+        //     .catch(error => {
 
-                if (error.response.status === 500) {
-                    message.error(error.response.status + ' Server under maintainence');
-                } else if (error.response.status === 404) {
-                    message.error(error.response.status + ' Server not found');
-                }
+        //         if (error.response.status === 500) {
+        //             message.error(error.response.status + ' Server under maintainence');
+        //         } else if (error.response.status === 404) {
+        //             message.error(error.response.status + ' Server not found');
+        //         }
 
-            });
+        //     });
         
         axios({
             url: '/api/v1/Customer',
@@ -147,7 +147,8 @@ class AddCustomer extends React.Component {
         if (this.state.finish) {
             return (<Router>
                 <Redirect push to={"/capstone/customerList"} />
-                <Route exact path="/capstone/customerList" component={CustomerTable} />
+                <Route exact path="/capstone/customerList" render={() => <CustomerTable token={this.props.token} role={this.props.role} />
+                    } />
             </Router>);
         } else {
 

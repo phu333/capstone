@@ -42,7 +42,7 @@ class CustomerList extends React.Component {
         return response.data;
       })
       .then((data) => {
-        console.log(data)
+        console.log(data.data)
         this.setState({
           customers:data.data,
         })
@@ -98,11 +98,11 @@ class CustomerList extends React.Component {
           <CustomerSearch />
           <Table dataSource={this.state.customers}
 
-              rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
-              <Column title="Tên doanh nghiệp" dataIndex="company" key="company"
-                sorter={(a, b) => a.company.localeCompare(b.company)}
-                sortDirections={['descend', 'ascend']}
-                render={(text, record) => (
+            rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
+            <Column title="Tên doanh nghiệp" dataIndex="name" key="name"
+              sorter={(a, b) => a.name.localeCompare(b.name)}
+              sortDirections={['descend', 'ascend']}
+              render={(text, record) => (
 
                   <a>{text}</a>
 
