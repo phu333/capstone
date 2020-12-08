@@ -3,8 +3,8 @@ import Popup from 'reactjs-popup';
 import 'antd/dist/antd.css';
 import '../../index.css';
 import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
-
-import { Space, Card, Button, Descriptions, Avatar, Form, Input, Popover, Row, Col, Tooltip } from 'antd';
+import axios from 'axios'
+import { Space, Card, Button, Descriptions, Avatar, Form, Input, Popover, Row, Col, message } from 'antd';
 import {
     QuestionCircleOutlined, UserOutlined
 } from '@ant-design/icons';
@@ -45,6 +45,7 @@ class UpdateProfile extends React.Component {
 
         this.state = {
             isEdit: false,
+            company: {},
         };
 
         this.onFinish = this.onFinish.bind(this);
@@ -72,9 +73,38 @@ class UpdateProfile extends React.Component {
         console.log('Failed:', errorInfo);
     };
 
+    componentWillMount(){
+        axios({
+            url: '/api/v1/Company/info',
+            method: "PUT",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
 
+            }
+        })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+                console.log(data.data)
+                this.setState({
+                    company: data.data
+                })
+                console.log(this.state.company)
+            })
+            .catch(error => {
+                console.log(error)
+                if (error.response.status === 500) {
+                    message.error(error.response.status + ' Server under maintainence');
+                } else if (error.response.status === 404) {
+                    message.error(error.response.status + ' Server not found');
+                }
+
+            });
+    }
     render() {
-
+        console.log(this.props.myLoginReducer)
         var information = this.props.myLoginReducer.map((login, index) => {
             return (
 
@@ -94,7 +124,7 @@ class UpdateProfile extends React.Component {
                                 <Descriptions.Item><br />
                                     <b >{login.username}</b><br />
 
-                                    <b >Company ABC</b>
+                                    <b >{this.state.company.name}</b>
                                 </Descriptions.Item>
 
                             </Descriptions>
@@ -111,7 +141,7 @@ class UpdateProfile extends React.Component {
                             >
 
                                 <Form.Item
-                                    label="Họ và tên"
+                                    label="tên"
                                     name="name"
 
                                 >
@@ -128,17 +158,21 @@ class UpdateProfile extends React.Component {
                                             </Popover></Col></Row>}
                                 </Form.Item>
                                 <Form.Item
-                                    label="cmnd/cmt"
-                                    name="id"
-                                    required
+                                    label="Họ"
+                                    name="name"
+
                                 >
                                     {this.state.isEdit === false ?
-                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue="320202342342" /></Col>    <Popover content={name} trigger="hover">
-                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                                        </Popover></Row> :
-                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue="320202342342" /></Col>    <Popover content={name} trigger="hover">
-                                            <Button shape="circle" icon={<QuestionCircleOutlined />} />
-                                        </Popover></Row>}
+                                        <Row gutter={8}> <Col span={10}><Input disabled defaultValue="Nguyen " /></Col><Col span={10}> <Input disabled defaultValue="Van A" /></Col>
+
+                                            <Col span={4}>    <Popover content={name} trigger="hover">
+                                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                            </Popover></Col></Row> :
+                                        <Row gutter={8}> <Col span={10}><Input defaultValue="Nguyen " /></Col><Col span={10}> <Input defaultValue="Van A" /></Col>
+
+                                            <Col span={4}>    <Popover content={name} trigger="hover">
+                                                <Button shape="circle" icon={<QuestionCircleOutlined />} />
+                                            </Popover></Col></Row>}
                                 </Form.Item>
                                 {/* <Form.Item
                                     label="Tên người dùng"
@@ -178,7 +212,7 @@ class UpdateProfile extends React.Component {
                                 </Form.Item>
 
 
-                                <Form.Item
+                                {/* <Form.Item
                                     label="Địa chỉ"
                                     name="address"
 
@@ -190,17 +224,17 @@ class UpdateProfile extends React.Component {
                                         <Row gutter={8}> <Col span={20}><Input defaultValue="12/3/4" /></Col>    <Popover content={name} trigger="hover">
                                             <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                         </Popover></Row>}
-                                </Form.Item>
+                                </Form.Item> */}
                                 <Form.Item
                                     label="Email"
-                                    name="Email"
+                                    name="email"
 
                                 >
                                     {this.state.isEdit === false ?
-                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Email" /></Col>    <Popover content={name} trigger="hover">
+                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue={login.email} /></Col>    <Popover content={name} trigger="hover">
                                             <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                         </Popover></Row> :
-                                        <Row gutter={8}> <Col span={20}><Input defaultValue="Email" /></Col>    <Popover content={name} trigger="hover">
+                                        <Row gutter={8}> <Col span={20}><Input defaultValue={login.email} /></Col>    <Popover content={name} trigger="hover">
                                             <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                         </Popover></Row>}
                                 </Form.Item>
@@ -209,7 +243,7 @@ class UpdateProfile extends React.Component {
                                     name="role"
                                     required
                                 >
-                                    <Row gutter={8}> <Col span={20}> <Input disabled defaultValue="Giám đốc" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}> <Input disabled defaultValue={login.role} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                                 </Form.Item>

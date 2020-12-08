@@ -1,13 +1,13 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import '../../index.css';
-
+import axios from 'axios'
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined
 } from '@ant-design/icons';
 
-import { Form, Input, Button, Row, Popover, Col, Card, Space } from 'antd';
+import { Form, Input, Button, Row, Popover, Col, Card, Space,message } from 'antd';
 
 import {
     QuestionCircleOutlined, UserOutlined
@@ -47,13 +47,38 @@ class UpdateProfileCompany extends React.Component {
         this.state = {
             finish: false,
             isEdit: false,
-            value: 'date'
+            value: 'date',
+            company: {},
         };
         this.onFinish = this.onFinish.bind(this);
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
+        axios({
+            url: '/api/v1/Company/'+this.state.company.id,
+            method: "PUT",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
 
+            },
+            data:values
+        })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+                
+            })
+            .catch(error => {
+                console.log(error)
+                if (error.response.status === 500) {
+                    message.error(error.response.status + ' Server under maintainence');
+                } else if (error.response.status === 404) {
+                    message.error(error.response.status + ' Server not found');
+                }
+
+            });
 
         this.setState({
             finish: true
@@ -74,8 +99,38 @@ class UpdateProfileCompany extends React.Component {
     }; onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+    componentDidMount(){
+        axios({
+            url: '/api/v1/Company/info',
+            method: "PUT",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
 
+            }
+        })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+                console.log(data.data)
+                this.setState({
+                    company: data.data
+                })
+                console.log(this.state.company)
+            })
+            .catch(error => {
+                console.log(error)
+                if (error.response.status === 500) {
+                    message.error(error.response.status + ' Server under maintainence');
+                } else if (error.response.status === 404) {
+                    message.error(error.response.status + ' Server not found');
+                }
+
+            });
+    }
     render() {
+        console.log(this.state.company.name)
         const name = "hello"
 
 
@@ -98,22 +153,29 @@ class UpdateProfileCompany extends React.Component {
                             onFinishFailed={this.onFinishFailed}
 
                         >
+                             <Form.Item
+                                
+                                name="id"
+                                initialValue={this.state.company.id}
+                            >
+                               
+                            </Form.Item>
                             <Form.Item
                                 label="Tên doanh nghiệp"
-                                name="company"
+                                name="name"
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="HiSign" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.name} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="HiSign" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.name} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
                             <Form.Item
                                 label="Mã số thuế"
-                                name="name"
+                                name="taxCode"
                                 rules={[
                                     
                                     {
@@ -125,16 +187,16 @@ class UpdateProfileCompany extends React.Component {
                                 ]}   
                             >
                                 {this.state.isEdit === false ?
-                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.taxCode} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.taxCode} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
                             <Form.Item
                                 label="Điện thoại"
-                                name="phone"
+                                name="phoneNumber"
                                 rules={[
                                    
                                     {
@@ -146,10 +208,10 @@ class UpdateProfileCompany extends React.Component {
                                 ]}    
                             >
                                 {this.state.isEdit === false ?
-                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.phoneNumber} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="1231231" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.phoneNumber} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
@@ -159,69 +221,69 @@ class UpdateProfileCompany extends React.Component {
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="12/10/4/8" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.address} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="12/10/4/8" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.address} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
                             <Form.Item
                                 label="Email"
-                                name="Email"
+                                name="email"
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Email" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.email} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="Email" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.email} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
                             <Form.Item
                                 label="Giấy phép kinh doanh"
-                                name="certificate"
+                                name="businessLicense"
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.businessLicense} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.businessLicense} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
                             <Form.Item
                                 label="Tài khoản ngân hàng"
-                                name="bankaccount"
+                                name="bankAccount"
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.bankAccount} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="34534534" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.bankAccount} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
                             <Form.Item
                                 label="Người đại diện"
-                                name="presentor"
+                                name="representaive"
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Nguyen Van A" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.name} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue="Nguyen Van A" /></Col>    <Popover content={name} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.name} /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
 
 
 
-                            <Form.Item
+                            {/* <Form.Item
                                 label="Chức vụ"
                                 name="role"
 
@@ -233,7 +295,7 @@ class UpdateProfileCompany extends React.Component {
                                     <Row gutter={8}> <Col span={20}><Input defaultValue="Giám đốc" /></Col>    <Popover content={name} trigger="hover">
                                         <Button shape="circle" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
-                            </Form.Item>
+                            </Form.Item> */}
 
 
 

@@ -63,6 +63,7 @@
     "jest-resolve": "24.9.0",
     "jest-watch-typeahead": "0.4.2",
     "jodit-react": "^1.0.66",
+    "js-file-download": "^0.4.12",
     "mini-css-extract-plugin": "0.9.0",
     "npm": "^6.14.8",
     "optimize-css-assets-webpack-plugin": "5.0.3",

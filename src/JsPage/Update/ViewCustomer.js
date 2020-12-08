@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import '../../index.css';
-
-import { Form, Input, Button, Checkbox, Card, Space } from 'antd';
+import axios from 'axios'
+import { Form, Input, Button, message, Card, Space } from 'antd';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined
@@ -36,6 +36,31 @@ class ViewCustomer extends React.Component {
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
+        axios({
+            url: '/api/v1/Company/'+this.state.company.id,
+            method: "PUT",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
+
+            },
+            data:values
+        })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+                
+            })
+            .catch(error => {
+                console.log(error)
+                if (error.response.status === 500) {
+                    message.error(error.response.status + ' Server under maintainence');
+                } else if (error.response.status === 404) {
+                    message.error(error.response.status + ' Server not found');
+                }
+
+            });
         this.setState({
             isEdit: false
         })
@@ -59,7 +84,7 @@ class ViewCustomer extends React.Component {
 
 
     render() {
-
+        console.log(this.props.customer)
 
         return (
             <Card>
@@ -85,36 +110,36 @@ class ViewCustomer extends React.Component {
                         
                     >
                         {this.state.isEdit === false ?
-                            <Input disabled defaultValue="Fsoft" /> :
-                            <Input defaultValue="Fsoft" />}
+                            <Input disabled defaultValue={this.props.customer.name} /> :
+                            <Input defaultValue={this.props.customer.name} />}
                     </Form.Item>
                     <Form.Item
                         label="Mã số thuế"
-                        name="taxcode"
+                        name="taxCode"
                         
                     >
                          {this.state.isEdit === false ?
-                            <Input disabled defaultValue="12345" /> :
-                            <Input defaultValue="12345" />}
+                            <Input disabled defaultValue={this.props.customer.taxCode} /> :
+                            <Input defaultValue={this.props.customer.taxCode} />}
                     </Form.Item>
 
                     <Form.Item
                         label="Giấy phép kinh doanh"
-                        name="certificate"
+                        name="businessLicense"
                         
                     >
                         {this.state.isEdit === false ?
-                            <Input disabled defaultValue="4234234" /> :
-                            <Input defaultValue="4234234" />}
+                            <Input disabled defaultValue={this.props.customer.businessLicense} /> :
+                            <Input defaultValue={this.props.customer.businessLicense} />}
                     </Form.Item>
                     <Form.Item
                         label="Điện thoại"
-                        name="phone"
+                        name="phoneNumber"
                         
                     >
                          {this.state.isEdit === false ?
-                            <Input disabled defaultValue="12312322424" /> :
-                            <Input defaultValue="12312322424" />}
+                            <Input disabled defaultValue={this.props.customer.phoneNumber} /> :
+                            <Input defaultValue={this.props.customer.phoneNumber} />}
                     </Form.Item>
                     <Form.Item
                         label="Địa chỉ"
@@ -122,26 +147,26 @@ class ViewCustomer extends React.Component {
                         
                     >
                         {this.state.isEdit === false ?
-                            <Input disabled defaultValue="12/5/6/8" /> :
-                            <Input defaultValue="12/5/6/8" />}
+                            <Input disabled defaultValue={this.props.customer.address} /> :
+                            <Input defaultValue={this.props.customer.address} />}
                     </Form.Item>
                     <Form.Item
                         label="Email"
-                        name="Email"
+                        name="email"
                         
                     >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue="Some email" /> :
-                            <Input defaultValue="Some email" />}
+                       {this.state.isEdit === false ?
+                            <Input disabled defaultValue={this.props.customer.email} /> :
+                            <Input defaultValue={this.props.customer.email} />}
                     </Form.Item>
                     <Form.Item
                         label="Số tài khoản"
-                        name="bankaccount"
+                        name="bankAccount"
                         
                     >
                         {this.state.isEdit === false ?
-                            <Input disabled defaultValue="34534534534534" /> :
-                            <Input defaultValue="34534534534534" />}
+                            <Input disabled defaultValue={this.props.customer.bankAccount} /> :
+                            <Input defaultValue={this.props.customer.bankAccount} />}
                     </Form.Item>
                     <Form.Item
                         label="Người đại diện"
@@ -152,7 +177,7 @@ class ViewCustomer extends React.Component {
                             <Input disabled defaultValue="Nguyen Van B" /> :
                             <Input defaultValue="Nguyen Van B" />}
                     </Form.Item>
-                    <Form.Item
+                    {/* <Form.Item
                         label="Chức vụ"
                         name="role"
                         
@@ -160,7 +185,7 @@ class ViewCustomer extends React.Component {
                         {this.state.isEdit === false ?
                             <Input disabled defaultValue="Giám đốc" /> :
                             <Input defaultValue="Giám đốc" />}
-                    </Form.Item>
+                    </Form.Item> */}
 
 
 

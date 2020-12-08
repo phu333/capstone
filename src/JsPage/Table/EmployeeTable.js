@@ -23,6 +23,7 @@ class EmployeeList extends React.Component {
 
       employee: {},
       openEmployee: "",
+      employees:[],
 
     };
     this.OpenAddEmployee = this.OpenAddEmployee.bind(this);
@@ -30,18 +31,22 @@ class EmployeeList extends React.Component {
   }
   componentDidMount() {
 
-    if (this.props.newEmployee.length === 0) {
       axios({
-        url: '',
+        url: '/api/Account/employee',
         method: "GET",
+        headers: {
+          Authorization: 'Bearer ' + this.props.token,
 
+      }
       })
         .then((response) => {
 
           return response.data;
         })
         .then((data) => {
-
+          this.setState({
+            employees:data.data
+          })
 
 
         })
@@ -54,47 +59,9 @@ class EmployeeList extends React.Component {
           }
 
         });
-      const contract1 = {
-        id: "A1",
-        name: 'Mike wasdzxczxc',
-        email: "some email",
-        address: '10 Downing Street',
-        status: "active",
-        role: "director",
-        phone: 123123123,
-        permissionList: [
-          "signPermission",
-          "contractManagePermision",
-          "customerManagePermission",
-          "contractTypeManagePermission",
-          "employeeManagePermission",
-          "signatureManagePermission",
-          "editCompanyInformationPermission",
-        ]
-      }
-      const contract2 = {
-        id: "A2",
-        name: 'John wasdzxczxc',
-        email: "some email",
-        address: '10 Downing Street',
-        status: "deactive",
-        role: "secrectery",
-        phone: 123123123,
-        permissionList: [
+      
 
-          "contractManagePermision",
-          "customerManagePermission",
-          "contractTypeManagePermission",
-          "employeeManagePermission",
-          "signatureManagePermission",
-
-        ]
-      }
-
-      this.props.onSubmit(contract1)
-      this.props.onSubmit(contract2)
-
-    }
+    
 
   }
   OpenAddEmployee() {
@@ -108,17 +75,18 @@ class EmployeeList extends React.Component {
     })
   }
   render() {
+    console.log(this.state.employees)
     if (this.state.openEmployee === "openAddEmployee") {
       return (
         <Router>
           <Redirect push to={"/capstone/addEmployee"} />
-          <Route exact path="/capstone/addEmployee" component={AddEmployee} /></Router>
+          <Route exact path="/capstone/addEmployee" render={() => <AddEmployee token={this.props.token} employee={this.state.employee} />} /></Router>
       );
     } else if (this.state.openEmployee === "openViewEmployee") {
       return (
         <Router>
           <Redirect push to={"/capstone/updateEmployee/" + this.state.employee.name} />
-          <Route exact path="/capstone/updateEmployee/:id" render={() => <ViewEmployee employee={this.state.employee} />} />
+          <Route exact path="/capstone/updateEmployee/:id" render={() => <ViewEmployee token={this.props.token} employee={this.state.employee} />} />
 
         </Router>
       );
@@ -126,7 +94,7 @@ class EmployeeList extends React.Component {
       return (
         <Router>
           <Redirect push to={"/capstone/employeeDetail/" + this.state.employee.name} />
-          <Route exact path="/capstone/employeeDetail/:id" render={() => <EmployeeDetail employee={this.state.employee} />} />
+          <Route exact path="/capstone/employeeDetail/:id" render={() => <EmployeeDetail token={this.props.token} employee={this.state.employee} />} />
 
         </Router>
       );
@@ -135,21 +103,26 @@ class EmployeeList extends React.Component {
       return (
         <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button>
           <EmployeeSearch />
-          <Table dataSource={this.props.newEmployee}
+          <Table dataSource={this.state.employees}
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
 
-            <Column title="Tên" dataIndex="name" key="name"
-              sorter={(a, b) => a.name.localeCompare(b.name)}
+            <Column title="Tên" dataIndex="userName" key="userName"
+              sorter={(a, b) => a.userName.localeCompare(b.userName)}
               sortDirections={['descend', 'ascend']}
               render={(text, record) => (
 
                 <b>{text}</b>
 
               )} />
-            <Column title="chức vụ" dataIndex="role"
-              sorter={(a, b) => a.role.localeCompare(b.role)}
+            <Column title="chức vụ" dataIndex="roles"
+              sorter={(a, b) => a.roles[0].localeCompare(b.roles[0])}
               sortDirections={['descend', 'ascend']}
-              key="role" />
+              key="roles" 
+              render={(text, record) => (
+                
+                <b>{text}</b>
+
+              )}/>
             {/* <Column title="điện thoại" dataIndex="phone" key="phone" render={(text, record) => (
 
               <a>{text}</a>

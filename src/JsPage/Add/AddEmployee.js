@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Switch, Space, Card,Popover,Col,Row } from 'antd';
+import { Form, Input, Button, Switch, Space, Card,Select,Col,Row } from 'antd';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
@@ -56,21 +56,22 @@ class AddEmployee extends React.Component {
     onFinish = (values) => {
         
         let employeeInfo = {
-            firstname:values.name,
-            lastname :values.name,
-            email:values.Email,
-            signPermission:this.state.signPermission,
-            employeePermission:this.state.employeePermission,
-            contractPermission:this.state.contractPermission,
-            customerPermission:this.state.customerPermission,
-            companyInfoPermission:this.state.companyInfoPermission,
-            password:"123",
-            confirmPassword:"123"
+            firstname:values.firstName,
+            lastname :values.lastName,
+            email:values.email,
+            password:"123Pa$$word!",
+            confirmPassword:"123Pa$$word!",
+            username:values.username,
+            role:values.role
         }
         axios({
-            url: '/api/Account/register',
+            url: '/api/Account/register-employee',
             method: "POST",
-            data: employeeInfo
+            data: employeeInfo,
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
+
+            }
         })
             .then( (response)=> {
                
@@ -118,7 +119,8 @@ class AddEmployee extends React.Component {
         if (this.state.finish) {
             return (<Router>
                 <Redirect push to={"/capstone/employee"} />
-                <Route exact path="/capstone/employee" component={EmployeeTable} /></Router>);
+                <Route exact path="/capstone/employee" render={() => <EmployeeTable token={this.props.token} role={this.props.role} />
+                    } /></Router>);
         } else {
 
             return (
@@ -138,10 +140,9 @@ class AddEmployee extends React.Component {
                         onFinishFailed={this.onFinishFailed}
 
                     >
-
                         <Form.Item
-                            label="Họ và tên"
-                            name="name"
+                            label=" tên"
+                            name="firstName"
                             rules={[
                
                                 {
@@ -153,6 +154,19 @@ class AddEmployee extends React.Component {
                             <Input placeholder="Họ và tên" />
                         </Form.Item>
                         <Form.Item
+                            label="Họ "
+                            name="lastName"
+                            rules={[
+               
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập tên ',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Họ và tên" />
+                        </Form.Item>
+                        {/* <Form.Item
                             label="cmnd/cmt"
                             name="id"
                             rules={[
@@ -163,7 +177,7 @@ class AddEmployee extends React.Component {
                             ]}
                         >
                             <Input placeholder="cmnd/cmt" />
-                        </Form.Item>
+                        </Form.Item> */}
                         <Form.Item
                             label="Tên người dùng"
                             name="username"
@@ -178,7 +192,7 @@ class AddEmployee extends React.Component {
                         </Form.Item>
 
 
-                        <Form.Item
+                        {/* <Form.Item
                             label="Điện thoại"
                             name="phone"
                             rules={[
@@ -197,8 +211,8 @@ class AddEmployee extends React.Component {
                             ]}
                         >
                             <Input prefix="+84" placeholder="số điện thoại" />
-                        </Form.Item>
-                        <Form.Item
+                        </Form.Item> */}
+                        {/* <Form.Item
                             label="Địa chỉ"
                             name="address"
                             rules={[
@@ -209,10 +223,10 @@ class AddEmployee extends React.Component {
                             ]}
                         >
                             <Input placeholder="Địa chỉ" />
-                        </Form.Item>
+                        </Form.Item> */}
                         <Form.Item
                             label="Email"
-                            name="Email"
+                            name="email"
                             rules={[
                                 {
                                     type: 'email',
@@ -236,7 +250,10 @@ class AddEmployee extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="Chức vụ" />
+                            <Select>
+                                <Select.Option value={2}>giám đốc</Select.Option>
+                                <Select.Option value={3}>nhân viên</Select.Option>
+                            </Select>
                         </Form.Item>
                         <Grid item xs={12}>
                                 <b>Quyền Hạn</b>
@@ -300,7 +317,7 @@ class AddEmployee extends React.Component {
 
                         <Form.Item {...tailLayout}>
                             <Space size="large">
-                                <Button type="primary" htmlType="submit" >
+                                <Button type="primary" htmlType="submit" htmlType="submit" >
                                     Nộp
                                 </Button>
                                 <Button type="primary" htmlType="reset" >
