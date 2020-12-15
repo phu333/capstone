@@ -10,6 +10,11 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios'
 import 'react-quill/dist/quill.snow.css';
 import JoditEditor from "jodit-react";
+
+import { SES } from 'aws-sdk';
+import template from './hello.txt'
+
+
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { Column, ColumnGroup } = Table;

@@ -1,14 +1,15 @@
-import axios from 'axios'
-import { Table, Button, Tag,message } from 'antd';
-import ContractSearch from '../Search/ContractSearch'
-import { EyeOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, ContainerOutlined } from "@ant-design/icons"
-import AddContractExtension from '../Add/AddContractExtension'
-import UpdateContractExtension from '../Update/UpdateContractExtension'
+import { ContainerOutlined, DeleteOutlined, FileAddOutlined, FormOutlined } from "@ant-design/icons";
+import { Button, message, Table, Tag } from 'antd';
+import axios from 'axios';
 import React from 'react';
-import { createcontractExtension, contractExtensionInformation } from '../../actions/ContractExtension'
-import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
-import "../Column.css"
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import { createcontractExtension } from '../../actions/ContractExtension';
+import AddContractExtension from '../Add/AddContractExtension';
+import {  FolderViewOutlined} from "@ant-design/icons"
+import "../Column.css";
+import ContractSearch from '../Search/ContractSearch';
+import UpdateContractExtension from '../Update/UpdateContractExtension';
 const { Column } = Table;
 
 
@@ -185,7 +186,7 @@ class ContractExtensionTable extends React.Component {
                             key="action"
                             render={(text, record) => (
 
-                                <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                                <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
                                     () => this.setState({
                                         contract: text,
                                         showContractExtension: true

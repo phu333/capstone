@@ -8,7 +8,7 @@ import CustomerSearch from '../Search/CustomerSearch'
 import { createCustomer, customerInformation } from '../../actions/CustomerAction'
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, EyeOutlined } from "@ant-design/icons"
+import { UserAddOutlined, FolderViewOutlined} from "@ant-design/icons"
 import axios from 'axios'
 const { Column } = Table;
 
@@ -49,7 +49,9 @@ class CustomerList extends React.Component {
         
 
 
-      })
+      },
+      
+      )
       .catch(error => {
         console.log(error)
         if (error.response.status === 500) {
@@ -102,26 +104,41 @@ class CustomerList extends React.Component {
               sortDirections={['descend', 'ascend']}
               render={(text, record) => (
 
+                  <a>{text}</a>
+
+                )} />
+
+              <Column title="Người đại diện" dataIndex="name" key="name"
+                sorter={(a, b) => a.name.localeCompare(b.name)}
+                sortDirections={['descend', 'ascend']}
+                render={(text, record) => (
+
+                  <b>{text}</b>
+
+                )} />
+                {/*những cái này tui nghĩ chỉ cần hiện trong phần Thông tin công ty thôi
+              <Column title="Địa chỉ" dataIndex="address" key="address"
+                sorter={(a, b) => a.address.localeCompare(b.address)}
+                sortDirections={['descend', 'ascend']}
+                render={(text, record) => (
+
+                  <b>{text}</b>
+
+                )} />*
+              <Column title="Mã số thuế" dataIndex="taxCode" key="taxCode" render={(text, record) => (
+
                 <b>{text}</b>
 
-              )} />
+              )} />*/}
 
-            <Column title="Người đại diện" dataIndex="name" key="name"
-              sorter={(a, b) => a.name.localeCompare(b.name)}
-              sortDirections={['descend', 'ascend']}
-              render={(text, record) => (
-
-                <b>{text}</b>
-
-              )} />
-            <Column title="Địa chỉ" dataIndex="address" key="address"
+            {/* <Column title="Địa chỉ" dataIndex="address" key="address"
               sorter={(a, b) => a.address.localeCompare(b.address)}
               sortDirections={['descend', 'ascend']}
               render={(text, record) => (
 
                 <b>{text}</b>
 
-              )} />
+              )} /> */}
             <Column title="Mã số thuế" dataIndex="taxCode" key="taxCode" render={(text, record) => (
 
               <b>{text}</b>
@@ -137,7 +154,7 @@ class CustomerList extends React.Component {
               <b>{text}</b>
 
             )} />
-            <Column title="email" dataIndex="email" key="email" render={(text, record) => (
+            {/* <Column title="email" dataIndex="email" key="email" render={(text, record) => (
 
               <a>{text}</a>
 
@@ -148,7 +165,7 @@ class CustomerList extends React.Component {
               sortDirections={['descend', 'ascend']}
               render={(text, record) => {
                 let color = 'pink'
-                if (text === 'deactive') {
+                if (text === 'inactive') {
                   color = 'red'
                 } else if (text === 'active') {
                   color = 'green'
@@ -169,7 +186,7 @@ class CustomerList extends React.Component {
               key="action"
               render={(text, record) => (
                 <Space size="middle">
-                  <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                  <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
                     () => this.setState({
                       customer: text,
                       openCustomer: "openViewCustomer",

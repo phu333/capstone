@@ -1,16 +1,15 @@
+import { UserAddOutlined,FolderViewOutlined } from "@ant-design/icons";
+import { Button, message, Space, Switch, Table, Tag } from 'antd';
 import 'antd/dist/antd.css';
-import axios from 'axios'
-import { Table, Space, Button, Tag,Switch,message } from 'antd';
-import AddSignature from '../Add/AddSignature'
-import UpdateSignature from '../Update/UpdateSignature'
+import axios from 'axios';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
-import SignatureSearch from '../Search/SignatureSearch'
-import { createSignature, signatureInformation } from '../../actions/SignatureAction'
-import { connect } from 'react-redux'
-import "../Column.css"
-import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import { createSignature } from '../../actions/SignatureAction';
+import AddSignature from '../Add/AddSignature';
+import "../Column.css";
+import SignatureSearch from '../Search/SignatureSearch';
+import UpdateSignature from '../Update/UpdateSignature';
 const { Column, ColumnGroup } = Table;
 
 
@@ -99,7 +98,7 @@ class SignatureList extends React.Component {
             openSignature: "openAddSignature",
         })
     }
-    
+
     render() {
         if (this.state.openSignature === "openAddSignature") {
 
@@ -162,7 +161,7 @@ class SignatureList extends React.Component {
                             key="action"
                             render={(text, record) => (
                                 <Space size="middle">
-                                   <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                                   <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
                                     () => this.setState({
                                         signature: text,
                                         openSignature: "openViewSignature",

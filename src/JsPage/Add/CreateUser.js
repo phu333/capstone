@@ -79,34 +79,38 @@ class SendJoinRequest extends React.Component {
                         <Col span={10} >
                             <Grid container spacing={3}>
 
-                                <Grid item xs={12} sm={6}>
+                                <Grid item xs={12} >
                                     <TextField
                                         required
                                         id="company"
-                                        name="Tên doanh nghiệp"
-                                        label="Tên doanh nghiệp"
+                                        name="Tên công ty"
+                                        label="Tên công ty"
                                         fullWidth
-                                        autoComplete="Tên doanh nghiệp"
+                                        autoComplete="Tên công ty"
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={6}>
+                                <Grid item xs={12} >
                                     <TextField
                                         required
-                                        id="taxCode"
-                                        name="Mã số thuế"
-                                        label="Mã số thuế"
+                                        id="user"
+                                        name="Tên người dùng"
+                                        label="Tên người dùng"
                                         fullWidth
-                                        autoComplete="family-name"
+                                        autoComplete="Tên người dùng"
                                     />
                                 </Grid>
-                                <Grid item xs={12}>
+
+                                <Grid item xs={12} sm={6}>
                                     <TextField
                                         id="faxCode"
-                                        name="số fax"
-                                        label="số fax"
+                                        name="số điện thoại"
+                                        label="số điện thoại"
                                         fullWidth
                                         autoComplete="shipping address-line1"
                                     />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+
                                     <TextField
                                         id="email"
                                         name="địa chỉ mail"
@@ -130,13 +134,12 @@ class SendJoinRequest extends React.Component {
                                     <TextField
                                         required
                                         id="presentor"
-                                        name="Người đại diện"
-                                        label="Người đại diện"
+                                        name="chức vụ"
+                                        label="chức vụ"
                                         fullWidth
                                         autoComplete="shipping postal-code"
                                     />
                                 </Grid>
-
                                 <Grid item xs={12}>
                                     <b>Quyền Hạn</b>
                                     <br />
@@ -159,6 +162,10 @@ class SendJoinRequest extends React.Component {
                                             </Col>   
                                                                                  <Col span={8}>
                                             <Checkbox onChange={onChange}>Quản lý chữ ký</Checkbox>
+                                            <p></p>
+                                            </Col>
+                                            <Col span={8}>
+                                            <Checkbox onChange={onChange}>Quản lý khách hàng</Checkbox>
                                             <p></p>
                                             </Col>
                                     </Row>

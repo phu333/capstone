@@ -1,18 +1,18 @@
-import 'antd/dist/antd.css';
-import { Table, Button, Space, Tag, message } from 'antd';
-import ContractSearch from '../Search/ContractSearch'
-import "../Column.css"
-import axios from 'axios'
 import {
-    EyeOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
-    FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
-} from "@ant-design/icons"
-import ChooseContractTemplate from '../Add/ChooseContractTemplate'
-import ViewContractPage from '../Update/ViewContractPage'
+    ContainerOutlined, FileAddOutlined, FileExcelOutlined,
+    FileProtectOutlined, FolderViewOutlined, FormOutlined, UploadOutlined
+} from "@ant-design/icons";
+import { Button, message, Popover, Space, Table, Tag } from 'antd';
+import 'antd/dist/antd.css';
+import axios from 'axios';
 import React, { Component } from 'react';
-import { createContract, contractInformation } from '../../actions/ContractAction'
-import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import { createContract } from '../../actions/ContractAction';
+import ChooseContractTemplate from '../Add/ChooseContractTemplate';
+import "../Column.css";
+import ContractSearch from '../Search/ContractSearch';
+import ViewContractPage from '../Update/ViewContractPage';
 const { Column } = Table;
 
 
@@ -118,7 +118,7 @@ class ContractTable extends Component {
                         <Column title="tên hợp đồng" dataIndex="contractTitle" key="contractTitle"
                             render={(text, record) => (
 
-                                <a><ContainerOutlined />{text}</a>
+                                <a><ContainerOutlined /> {text}</a>
 
                             )}
                         />
@@ -169,20 +169,6 @@ class ContractTable extends Component {
                                     {text.toUpperCase()}
                                 </Tag>);
                             }}
-                        />
-                        <Column
-                            title="Xem chi tiết"
-                            key="action"
-                            render={(text, record) => (
-
-                                <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
-                                    () => this.setState({
-                                        contract: text,
-                                        showContract: true
-                                    })
-                                } />
-
-                            )}
                         />
                         {/* <Column
                             title="Vô hiệu hóa"

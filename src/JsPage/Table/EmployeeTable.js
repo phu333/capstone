@@ -1,17 +1,16 @@
+import { EyeOutlined, UserAddOutlined } from "@ant-design/icons";
+import { Button, message, Space, Switch, Table } from 'antd';
 import 'antd/dist/antd.css';
-import { Table, Space, Tag, Button, Switch, message } from 'antd';
-import AddEmployee from '../Add/AddEmployee'
-import ViewEmployee from '../Update/ViewEmployee'
-import EmployeeDetail from '../Update/EmployeeDetail'
+import axios from 'axios';
 import React from 'react';
-import "../Column.css"
-import ReactDOM from 'react-dom';
-import EmployeeSearch from '../Search/EmployeeSearch'
-import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
-import { connect } from 'react-redux'
-import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, EyeOutlined } from "@ant-design/icons"
-import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
-import axios from 'axios'
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import { createEmployee } from '../../actions/EmployeeAction';
+import AddEmployee from '../Add/AddEmployee';
+import "../Column.css";
+import EmployeeSearch from '../Search/EmployeeSearch';
+import EmployeeDetail from '../Update/EmployeeDetail';
+import ViewEmployee from '../Update/ViewEmployee';
 const { Column, ColumnGroup } = Table;
 
 
@@ -101,7 +100,9 @@ class EmployeeList extends React.Component {
     }
     else {
       return (
-        <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button>
+        <div style={{ height: "100vh" }}>
+          <br/>
+          <Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button>
           <EmployeeSearch />
           <Table dataSource={this.state.employees}
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >

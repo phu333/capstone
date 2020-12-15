@@ -45,6 +45,7 @@ class AddUserAdmin extends React.Component {
             finish: false
         };
         this.onFinish = this.onFinish.bind(this);
+        this.onFinishFailed = this.onFinishFailed.bind(this);
 
     }
     onFinish = (values) => {
@@ -75,6 +76,10 @@ class AddUserAdmin extends React.Component {
             finish: true
         })
     }
+    onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
+
     render() {
 
         return (

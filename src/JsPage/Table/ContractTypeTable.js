@@ -1,15 +1,15 @@
+import { EyeOutlined, UploadOutlined } from "@ant-design/icons";
+import { Button, Space, Table } from 'antd';
 import 'antd/dist/antd.css';
-import { Table, Space, Button, Tag,Switch,message } from 'antd';
-import TemplateUpload from '../Add/TemplateUpload';
-import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
+import axios from 'axios';
 import React from 'react';
-import "../Column.css"
-import ViewTemplate from '../Update/TemplateView'
-import ContractTypeSearch from '../Search/ContractTypeSearch'
-import { createContractType, contractTypeInformation } from '../../actions/ContractType'
-import { connect } from 'react-redux'
-import { UploadOutlined, EyeOutlined, DeleteOutlined, UserOutlined, FileWordOutlined } from "@ant-design/icons"
-import axios from 'axios'
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import { createContractType } from '../../actions/ContractType';
+import TemplateUpload from '../Add/TemplateUpload';
+import "../Column.css";
+import ContractTypeSearch from '../Search/ContractTypeSearch';
+import ViewTemplate from '../Update/TemplateView';
 const { Column } = Table;
 
 
@@ -79,7 +79,11 @@ class ContractTable extends React.Component {
     } 
     else {
       return (
-        <div style={{ height: "100vh" }}><Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tải lên mẫu mới</Button>
+
+        <div style={{ height: "100vh" }}>
+          <br />
+        <Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tải lên mẫu mới</Button>
+
           <ContractTypeSearch />
           <Table dataSource={this.state.templateList}
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}  >

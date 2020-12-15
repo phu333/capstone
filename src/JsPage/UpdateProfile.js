@@ -38,7 +38,6 @@ class UpdateProfile extends React.Component {
         super();
 
         this.state = {
-
         };
 
         this.onFinish = this.onFinish.bind(this);

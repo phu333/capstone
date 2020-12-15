@@ -7,11 +7,12 @@ import { GoogleLogin } from 'react-google-login';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import EmployeeSideMenu from './EmployeeSideMenu';
 
+import logo from '../../logo/Capture.PNG';
 import axios from 'axios'
 
-import AddUserAdmin from '../Login/AddUserAdmin'
+import AddComAd from '../Login/AddComAd'
 import ForgetPassword from './ForgetPassword'
-import { GoogleOutlined } from "@ant-design/icons"
+import GoogleOutlined  from '../../logo/icons8-google-64.png'
 import { createFromIconfontCN } from '@ant-design/icons';
 import { connect } from 'react-redux'
 import { addLogin, login } from '../../actions/loginAction'
@@ -44,29 +45,7 @@ const middleLayout = {
     },
 };
 
-const userList = [
-    {
-        username: "phu111",
-        password: "123",
 
-    },
-    {
-        username: "phu222",
-        password: "123",
-
-    },
-    {
-        username: "phu333",
-        password: "123",
-
-    },
-    {
-        username: "phu444",
-        password: "123",
-
-    },
-
-]
 const initialState = {
     role: "",
     othersPage: "",
@@ -89,7 +68,7 @@ class LoginPage extends React.Component {
 
     onFinish = (values) => {
 
-
+       
 
 
         let loginInformation = {
@@ -156,6 +135,7 @@ class LoginPage extends React.Component {
                     }
                     this.props.onSubmit(loginInfo)
                 }
+                console.log(data.data.jwToken)
 
 
 
@@ -188,7 +168,7 @@ class LoginPage extends React.Component {
     };
     SendJoinRequest = () => {
         this.setState({
-            othersPage: "AddUserAdmin"
+            othersPage: "AddComAd"
         })
     };
 
@@ -216,18 +196,18 @@ class LoginPage extends React.Component {
                 return (
                     <ForgetPassword />);
 
-            } else if (this.state.othersPage === "AddUserAdmin") {
+            } else if (this.state.othersPage === "AddComAd") {
                 return (
-                    <AddUserAdmin />);
+                    <AddComAd />);
             } else {
                 return (
-                    <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
+                    <Row type="flex" justify="center" align="middle" style={{ height: "100vh",backgroundColor:'rgba(2, 21, 2,1)' }}>
 
                         <Redirect push to="/capstone/Login" />
 
 
 
-                        <Col span={10} >
+                        <Col span={16} >
                             <Form
                                 {...layout}
                                 name="basic"
@@ -235,13 +215,14 @@ class LoginPage extends React.Component {
                                 initialValues={{
                                     remember: true,
                                 }}
+                                hideRequiredMark
                                 onFinish={this.onFinish}
                                 onFinishFailed={this.onFinishFailed}
-
                             >
-                                <IconFont type="icon-javascript" style={{ fontSize: '60px', color: '#08c', marginLeft: "40%" }} />
+                                {/* <IconFont type="icon-javascript" style={{ fontSize: '60px', color: '#08c', marginLeft: "40%" }} /> */}
+                                 <img src={logo} type="icon-javascript" style={{ height: '180px',width:'300px', color: '#08c', marginLeft: "25%" }} alt="Logo" />
                                 <Form.Item
-                                    label="Tên người dùng"
+                                    label={<label style={{ color: "skyblue" }}>Tên người dùng</label>}
                                     name="username"
                                     rules={[
                                         {
@@ -250,11 +231,11 @@ class LoginPage extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input style={{width:'300px'}}/>
                                 </Form.Item>
 
                                 <Form.Item
-                                    label="Mật khẩu"
+                                    label={<label style={{ color: "skyblue" }}>Mật khẩu</label>}
                                     name="password"
                                     rules={[
                                         {
@@ -263,21 +244,25 @@ class LoginPage extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input.Password />
+                                    <Input.Password style={{width:'300px'}} />
                                 </Form.Item>
                                 <Form.Item {...middleLayout} name="remember" valuePropName="unchecked" >
-                                    <Checkbox
+                              <Row gutter="2">    <Col>  <Checkbox style={{fontSize:'20px',color:'skyblue'}}
                                         onChange={() => {
                                             this.setState({
                                                 remember: !this.state.remember
                                             })
                                         }}
-                                    >Ghi nhớ</Checkbox>
-                                    <Button type="link" htmlType="button"
+                                    >Ghi nhớ</Checkbox></Col>
+                                <Col>    <Button  type="link" htmlType="button"
                                         onClick={this.ForgetPassword}
                                     >
                                         Quên mật khẩu
-                                </Button>
+                                </Button></Col>
+                            <Col>  <Button type="link" htmlType="button"
+                                            onClick={this.SendJoinRequest}>
+                                            Đăng ký
+                                </Button></Col> </Row>
                                 </Form.Item>
 
 
@@ -285,7 +270,7 @@ class LoginPage extends React.Component {
 
                                 <Form.Item {...tailLayout}>
                                     <Space size="large">
-                                        <Button type="primary" htmlType="submit" className="login-form-button">
+                                        <Button type="primary" htmlType="submit" >
                                             Đăng nhập
                                 </Button>
                                         <GoogleLogin
@@ -294,19 +279,16 @@ class LoginPage extends React.Component {
                                             render={renderProps => (
 
 
-                                                <GoogleOutlined style={{ fontSize: '30px', color: '#08c' }} >
-                                                    Đăng nhập với google
-                                                </GoogleOutlined>
+                                             ( <button style={{border:'none',backgroundColor:'deepskyblue',color:'white',height:'20 px',width:'20 px'}}> 
+                                                   
+                                                   <img src={GoogleOutlined} style={{ width:'30px',height   :'30px', color: '#08c' }}  />  Đăng nhập với google</button>)
                                             )}
                                             onSuccess={this.responseGoogle}
                                             onFailure={this.responseGoogle}
                                             cookiePolicy={'single_host_origin'}
                                         />
 
-                                        <Button type="link" htmlType="button"
-                                            onClick={this.SendJoinRequest}>
-                                            Gửi yêu cầu đăng ký
-                                </Button>
+                                        
                                     </Space>
                                 </Form.Item>
                                 <Form.Item>

@@ -1,21 +1,13 @@
+import { CloudUploadOutlined, ReloadOutlined } from '@ant-design/icons';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import { Button, Card, Space } from 'antd';
+import 'antd/dist/antd.css';
 import React from 'react';
 import Popup from 'reactjs-popup';
-import 'antd/dist/antd.css';
 import '../index.css';
-import { createEmployee, employeeInformation } from '../actions/EmployeeAction'
-import { connect } from 'react-redux'
-import { Space, Card, Button, Row, Col } from 'antd';
-import {
-    IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-    , CloudUploadOutlined, RedoOutlined, ReloadOutlined
-} from '@ant-design/icons';
+import "./Column.css";
 
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import "./Column.css"
 const layout = {
     labelCol: {
         span: 4,
