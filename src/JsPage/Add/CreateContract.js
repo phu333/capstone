@@ -30,7 +30,15 @@ const options = [
     },
 ];
 
-
+function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+ }
 class CreateContract extends React.Component {
     constructor() {
         super();
@@ -57,6 +65,7 @@ class CreateContract extends React.Component {
         this.state = {
             contractContent: "",
             BSide: {
+                id:0,
                 Name: "",
                 MST: "",
                 Phone: "",
@@ -80,7 +89,7 @@ class CreateContract extends React.Component {
 
                 BankAccount: "",
             },
-            contractNum: "",
+            contractNum: makeid(10),
             contractName: "",
             contractValue: 0,
 
@@ -202,7 +211,7 @@ class CreateContract extends React.Component {
 
             contractValue: this.state.contractValue,
             contractContent:this.state.contractContent.replace(/"/g,'\'') ,
-            customerId: 1,
+            customerId: this.state.BSide.id,
         }
         console.log(contract)
         axios({
@@ -303,14 +312,7 @@ class CreateContract extends React.Component {
                                 <h6 style={{ textAlign: 'center', fontSize: 14 }}>Độc lập-tự do-hạnh phúc</h6>
                                 <br />
                                 <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}>{this.props.template.name}</h2>
-                                <h6 style={{ textAlign: 'center', fontSize: 14 }}>Số
-                                <Input style={{ width: "100px" }} size="small"
-                                        onChange={(value) => {
-                                            this.setState({
-                                                contractNum: value.target.value
-                                            })
-                                        }} />
-                                    {/* /<Input style={{ width: "30px" }} size="small" /> */}
+                                <h6 style={{ textAlign: 'center', fontSize: 14 }}>Số {this.state.contractNum}
                                 </h6>
                                 <h6 style={{ fontSize: 14 }}>Hôm nay, ngày 3 tháng 11 năm 2020,
                                 tại<Input style={{ width: "100px" }} size="small"
@@ -349,7 +351,7 @@ class CreateContract extends React.Component {
                                     <Descriptions.Item label={(<><b>{"Công ty/Tổ chức"}</b></>)}>
                                         <Select
                                             showSearch
-                                            style={{ width: 200 }}
+                                            style={{ width: 400 }}
                                             placeholder="chọn khách hàng"
                                             optionFilterProp="customer"
                                             onChange={this.handleChange}
@@ -385,7 +387,7 @@ class CreateContract extends React.Component {
                                 formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                 parser={value => value.replace(/\$\s?|(,*)/g, '')}
                                 onChange={value => this.setState({
-                                    contractValue : value.target.value
+                                    contractValue : value
                                 })}                
                             />
                             <h6 style={{ fontSize: 16 }}>Chúng tôi thỏa thuận với các điều khoản sau
@@ -412,7 +414,11 @@ class CreateContract extends React.Component {
                                     >
 
                                         <h6 style={{ fontSize: 14 }}>Hợp đồng có hiệu lực kể từ ngày 3 tháng 11 năm 2020 đến
-                                        <DatePicker size="small" bordered={false} />
+                                        <DatePicker size="small" bordered={false}
+                                        onChange={value => this.setState({
+                                            contractValue : value
+                                        })}   
+                                         />
                                         </h6>
                                         <Space size="large">
 

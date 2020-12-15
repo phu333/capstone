@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { PageHeader, Space, Row, Col } from 'antd';
 import { GoogleLogin } from 'react-google-login';
-import { Form, Input, Button, Checkbox,message } from 'antd';
+import { Form, Input, Button, Checkbox, message } from 'antd';
 import EmployeeSideMenu from './EmployeeSideMenu';
 
 import logo from '../../logo/Capture.PNG';
@@ -94,39 +94,61 @@ class LoginPage extends React.Component {
                 return response.data;
             })
             .then((data) => {
-                
-                let loginInfo = {
-                    id:data.data.id,
-                    username: data.data.userName,
-                    email: "triphan@gmail.com",
-                    password: "123Pa$$word!",
-                    companyId:3,
-                    companyName:"HiSign",
-                    role: data.data.roles[0],
-                    signPermission: true,
-                    contractManagePermision: true,
-                    customerManagePermission: true,
-                    contractTypeManagePermission: true,
-                    employeeManagePermission: true,
-                    signatureManagePermission: true,
-                    editCompanyInformationPermission: true,
-                    isVerified:data.data.isVerified,
-                    jwToken:data.data.jwToken,
-                    loginCode: true,
+                console.log(data.data)
+                if (data.data.roles[0] === "CompanyAdmin" || data.data.roles[0] === "CEO" ||
+                    data.data.roles[0] === "SystemAdmin") {
+                    let loginInfo = {
+                        id: data.data.id,
+                        username: data.data.userName,
+                        email: data.data.email,
+                        
+                        role: data.data.roles[0],
+                        signPermission: true,
+                        contractManagePermision: true,
+                        customerManagePermission: true,
+                        contractTypeManagePermission: true,
+                        employeeManagePermission: true,
+                        signatureManagePermission: true,
+                        editCompanyInformationPermission: true,
+                        isVerified: data.data.isVerified,
+                        jwToken: data.data.jwToken,
+                        loginCode: true,
+                    }
+                    this.props.onSubmit(loginInfo)
+                } else {
+                    let loginInfo = {
+                        id: data.data.id,
+                        username: data.data.userName,
+                        email: data.data.email,
+                        
+                        role: data.data.roles[0],
+                        signPermission: false,
+                        contractManagePermision: true,
+                        customerManagePermission: true,
+                        contractTypeManagePermission: true,
+                        employeeManagePermission: true,
+                        signatureManagePermission: true,
+                        editCompanyInformationPermission: true,
+                        isVerified: data.data.isVerified,
+                        jwToken: data.data.jwToken,
+                        loginCode: true,
+                    }
+                    this.props.onSubmit(loginInfo)
                 }
                 console.log(data.data.jwToken)
 
-                this.props.onSubmit(loginInfo)
-                message.success("welcome "+ data.data.userName);
+
+
+                message.success("welcome " + data.data.userName);
             })
             .catch(error => {
-                
-                if(error.response.status === 500){
+
+                if (error.response.status === 500) {
                     message.error(error.response.status + ' Server under maintainence');
-                }else if(error.response.status === 404){
+                } else if (error.response.status === 404) {
                     message.error(error.response.status + ' Server not found');
                 }
-                
+
             });
 
 

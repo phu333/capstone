@@ -1,5 +1,15 @@
+<<<<<<< HEAD
 import { CheckOutlined, CloseOutlined, CloudUploadOutlined, ReloadOutlined } from '@ant-design/icons';
 import Checkbox from '@material-ui/core/Checkbox';
+=======
+import React from 'react';
+// import Popup from 'reactjs-popup';
+import 'antd/dist/antd.css';
+import '../../index.css';
+import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
+import { connect } from 'react-redux'
+import { Form, Input, Button, Switch, Space, Card,Select,Col,Row } from 'antd';
+>>>>>>> main
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import { Button, Col, Form, Input, Row, Switch } from 'antd';
@@ -74,6 +84,7 @@ class AddEmployee extends React.Component {
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
+<<<<<<< HEAD
         const contract1 = {
             name: 'Mike',
             email: "some email",
@@ -81,6 +92,48 @@ class AddEmployee extends React.Component {
             status: "active",
             role: "secretery"
         }
+=======
+        
+        let employeeInfo = {
+            firstname:values.firstName,
+            lastname :values.lastName,
+            email:values.email,
+            password:"123Pa$$word!",
+            confirmPassword:"123Pa$$word!",
+            username:values.username,
+            role:values.role
+        }
+        axios({
+            url: '/api/Account/register-employee',
+            method: "POST",
+            data: employeeInfo,
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
+
+            }
+        })
+            .then( (response)=> {
+               
+                return response.data.data;
+            })
+            .then( (data)=> {
+                console.log(data)
+                // let loginInfo = {
+                //     username: "Tri",
+                //     email: "triphan@gmail.com",
+                //     password: "123Pa$$word!",
+                //     signPermission: true,
+                //     contractManagePermision: true,
+                //     customerManagePermission: true,
+                //     contractTypeManagePermission: true,
+                //     employeeManagePermission: true,
+                //     signatureManagePermission: true,
+                //     editCompanyInformationPermission: true,
+                //     loginCode: true,
+                // }
+    
+                // this.props.onSubmit(data)
+>>>>>>> main
 
         this.props.onSubmit(contract1)
         this.setState({
@@ -106,7 +159,8 @@ class AddEmployee extends React.Component {
         if (this.state.finish) {
             return (<Router>
                 <Redirect push to={"/capstone/employee"} />
-                <Route exact path="/capstone/employee" component={EmployeeTable} /></Router>);
+                <Route exact path="/capstone/employee" render={() => <EmployeeTable token={this.props.token} role={this.props.role} />
+                    } /></Router>);
         } else {
 
         var i = 0;
@@ -133,10 +187,9 @@ class AddEmployee extends React.Component {
                         onFinishFailed={this.onFinishFailed}
 
                     >
-
                         <Form.Item
-                            label="Họ và tên"
-                            name="name"
+                            label=" tên"
+                            name="firstName"
                             rules={[
                
                                 {
@@ -148,6 +201,19 @@ class AddEmployee extends React.Component {
                             <Input placeholder="Họ và tên" />
                         </Form.Item>
                         <Form.Item
+                            label="Họ "
+                            name="lastName"
+                            rules={[
+               
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập tên ',
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Họ và tên" />
+                        </Form.Item>
+                        {/* <Form.Item
                             label="cmnd/cmt"
                             name="id"
                             rules={[
@@ -158,7 +224,7 @@ class AddEmployee extends React.Component {
                             ]}
                         >
                             <Input placeholder="cmnd/cmt" />
-                        </Form.Item>
+                        </Form.Item> */}
                         <Form.Item
                             label="Tên người dùng"
                             name="username"
@@ -173,7 +239,7 @@ class AddEmployee extends React.Component {
                         </Form.Item>
 
 
-                        <Form.Item
+                        {/* <Form.Item
                             label="Điện thoại"
                             name="phone"
                             rules={[
@@ -192,8 +258,8 @@ class AddEmployee extends React.Component {
                             ]}
                         >
                             <Input prefix="+84" placeholder="số điện thoại" />
-                        </Form.Item>
-                        <Form.Item
+                        </Form.Item> */}
+                        {/* <Form.Item
                             label="Địa chỉ"
                             name="address"
                             rules={[
@@ -204,10 +270,10 @@ class AddEmployee extends React.Component {
                             ]}
                         >
                             <Input placeholder="Địa chỉ" />
-                        </Form.Item>
+                        </Form.Item> */}
                         <Form.Item
                             label="Email"
-                            name="Email"
+                            name="email"
                             rules={[
                                 {
                                     type: 'email',
@@ -231,7 +297,10 @@ class AddEmployee extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="Chức vụ" />
+                            <Select>
+                                <Select.Option value={2}>giám đốc</Select.Option>
+                                <Select.Option value={3}>nhân viên</Select.Option>
+                            </Select>
                         </Form.Item>
                         <Grid item xs={12}>
                                 <b>Quyền Hạn</b>
@@ -360,8 +429,38 @@ class AddEmployee extends React.Component {
                         </Grid>
                         </Form>
 
+<<<<<<< HEAD
             </React.Fragment>
         );
+=======
+
+
+                        <Form.Item {...tailLayout}>
+                            <Space size="large">
+                                <Button type="primary" htmlType="submit" htmlType="submit" >
+                                    Nộp
+                                </Button>
+                                <Button type="primary" htmlType="reset" >
+                                    Reset
+                                </Button>
+
+
+                            </Space>
+                        </Form.Item>
+                       
+
+
+
+
+                    </Form>
+
+
+
+
+                </Card >
+            );
+        }
+>>>>>>> main
     }
 }
 }
