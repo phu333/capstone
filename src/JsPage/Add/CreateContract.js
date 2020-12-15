@@ -60,6 +60,7 @@ class CreateContract extends React.Component {
         this.state = {
             contractContent: "",
             BSide: {
+                id:0,
                 Name: "",
                 MST: "",
                 Phone: "",
@@ -205,7 +206,7 @@ class CreateContract extends React.Component {
 
             contractValue: this.state.contractValue,
             contractContent:this.state.contractContent.replace(/"/g,'\'') ,
-            customerId: 1,
+            customerId: this.state.BSide.id,
         }
         console.log(contract)
         axios({

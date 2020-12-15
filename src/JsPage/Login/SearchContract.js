@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios'
 import 'antd/dist/antd.css';
-import { PageHeader, Space, Row, Col, Table } from 'antd';
+import { PageHeader, Tag, Row, Col, Table ,message} from 'antd';
 import { Input } from 'antd';
 import {
     EyeOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
@@ -31,24 +32,64 @@ const middleLayout = {
     },
 };
 class SearchContractByCode extends React.Component {
+    constructor() {
+        super();
+
+        this.state = {
+            searchValue: []
+        };
+
+        
+    }
     render() {
-        const onSearch = value => console.log(value);
+        const onSearch = value => {
+            axios({
+                url: '/api/v1/Contract/get-by-taxcode',
+                method: "GET",
+                params: {
+                    taxCode: value,
+    
+                }
+            })
+                .then((response) => {
+    
+                    return response.data;
+                })
+                .then((data) => {
+                    console.log(data.data)
+                    this.setState({
+                        searchValue: data.data,
+                    })
+    
+    
+                })
+                .catch(error => {
+                    console.log(error)
+                    if (error.response.status === 500) {
+                        message.error(error.response.status + ' Server under maintainence');
+                    } else if (error.response.status === 404) {
+                        message.error(error.response.status + ' Server not found');
+                    }
+    
+                });
+        };
         return (
-            <Row type="flex" justify="center" align="top" style={{ height: "100vh" }}>
+            <Row type="flex" justify="center" align="top" >
 
 
 
 
                 <Col span={10} > <Search placeholder="vui lòng nhập mã hợp đồng" onSearch={onSearch} enterButton />
 
-                    <Table dataSource={this.props.newContract}
+                <Table dataSource={this.state.searchValue}
+                
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}>
-                        <Column title="Mã hợp đồng" dataIndex="id" key="id"
+                        <Column title="Mã hợp đồng" dataIndex="contractNum" key="contractNum"
                             render={(text, record) => (
                                 <a><FileProtectOutlined /> {text}</a>
                             )}
                         />
-                        <Column title="tên hợp đồng" dataIndex="contract_name" key="contract_name"
+                        <Column title="tên hợp đồng" dataIndex="contractTitle" key="contractTitle"
                             render={(text, record) => (
 
                                 <a><ContainerOutlined />{text}</a>
@@ -56,8 +97,13 @@ class SearchContractByCode extends React.Component {
                             )}
                         />
 
+                        <Column title="bên đối tác" dataIndex="customer" key="customer"
+                            render={(text, record) => (
 
-                        <Column title="Ngày hết hạn" dataIndex="deadline" key="deadline"
+                                <b>{text.companyName}</b>
+
+                            )} />
+                        <Column title="Ngày hết hạn" dataIndex="contractExpiredDate" key="contractExpiredDate"
                             sorter={(a, b) => a.deadline.localeCompare(b.deadline)}
                             sortDirections={['descend', 'ascend']}
                             render={(text, record) => (
@@ -65,8 +111,39 @@ class SearchContractByCode extends React.Component {
                                 <b>{text}</b>
 
                             )} />
+                        {/* <Column title="bên tạo hợp đồng" dataIndex="ben_tao_hd" key="ben_tao_hd"
+                            render={(text, record) => (
 
+                                <b>{text}</b>
 
+                            )} /> */}
+                        <Column title="giá trị hợp đồng" dataIndex="contractValue" key="contractValue"
+                            render={(text, record) => (
+
+                                <b>{text}</b>
+
+                            )} />
+                        <Column title="trạng thái" dataIndex="statusAsString" key="statusAsString"
+                            sorter={(a, b) => a.status.localeCompare(b.status)}
+                            sortDirections={['descend', 'ascend']}
+                            render={(text, record) => {
+                                let color = 'pink'
+                                if (text === 'Deactive') {
+                                    color = 'red'
+                                } else if (text === 'Active') {
+                                    color = 'green'
+                                } else if (text === 'Draft') {
+                                    color = 'blue'
+                                } else if (text === 'waiting for customer') {
+                                    color = 'pink'
+                                } else if (text === 'rejected') {
+                                    color = 'grey'
+                                }
+                                return (<Tag color={color} key={text}>
+                                    {text.toUpperCase()}
+                                </Tag>);
+                            }}
+                        />
                         <Column
                             title="Xem chi tiết"
                             key="action"
@@ -81,7 +158,8 @@ class SearchContractByCode extends React.Component {
 
                             )}
                         />
-
+                       
+                      
 
                     </Table>
 

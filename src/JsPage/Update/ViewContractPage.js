@@ -59,22 +59,7 @@ class ContractView extends React.Component {
             submitting: false,
             value: '',
             currentPage: 1,
-            products: [
-                {
-                    key: 1,
-                    product_name: "abc",
-                    unit: 1,
-                    quantitve: 2,
-                    price: 1000,
-                },
-                {
-                    key: 2,
-                    product_name: "abc",
-                    unit: 1,
-                    quantitve: 2,
-                    price: 1000,
-                }
-            ],
+            creator: "",
             isEdit: false,
             company: {},
             BSide: {
@@ -90,7 +75,7 @@ class ContractView extends React.Component {
                 BankAccount: "",
             },
             customers: [],
-            validSignature:false,
+            validSignature: false,
         };
 
         this.OpenExtension = this.OpenExtension.bind(this)
@@ -113,6 +98,34 @@ class ContractView extends React.Component {
 
     };
     componentDidMount() {
+        axios({
+            url: '/api/v1/Contract/a-side-info',
+            method: "GET",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
+
+            },
+            params: {
+                id: this.props.contract.id,
+            }
+        })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+                console.log(data.companyId)
+                this.setState({
+                    creator: data.companyId
+                })
+
+
+            })
+            .catch(error => {
+                console.log(error)
+
+
+            });
         axios({
             url: '/api/v1/Customer',
             method: "GET",
@@ -158,7 +171,7 @@ class ContractView extends React.Component {
                 axios({
                     url: 'https://localhost:44338/api/Values',
                     method: "GET",
-                    
+
                 })
                     .then((response) => {
                         console.log(response)
@@ -166,18 +179,18 @@ class ContractView extends React.Component {
                     })
                     .then((data) => {
                         console.log(data.subject)
-                        if(data.subject.includes(this.state.company.taxCode)){
+                        if (data.subject.includes(this.state.company.taxCode)) {
                             this.setState({
-                                validSignature:true
+                                validSignature: true
                             })
-                        }else{
+                        } else {
 
                         }
                     })
                     .catch(error => {
                         console.log(error)
-        
-        
+
+
                     });
             })
             .catch(error => {
@@ -185,7 +198,7 @@ class ContractView extends React.Component {
 
 
             });
-            
+
     }
     handleSubmit = () => {
         if (!this.state.value) {
@@ -243,17 +256,17 @@ class ContractView extends React.Component {
                 'Accept': 'application/docx'
             },
             responseType: 'arraybuffer',
-            
+
         })
             .then((response) => {
                 console.log(response)
                 var fileDownload = require('js-file-download');
-                fileDownload(response.data, 'contract.docx');
+                fileDownload(response.data, this.props.contract.id + '.docx');
                 return response.data;
             })
             .then((data) => {
                 console.log(data.data)
-                
+
             })
             .catch(error => {
                 console.log(error)
@@ -299,6 +312,30 @@ class ContractView extends React.Component {
         console.log(customer)
         const bside = customer.map(customer => (
             <Descriptions title="" size="small" column={2} title="Thông tin bên B"
+
+            >
+
+                <Descriptions.Item label={(<><b>{"Công ty/Tổ chức"}</b></>)}>
+                    {customer.name}
+                </Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Địa chỉ"}</b></>)}>{customer.address}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Điện thoại"}</b></>)}>{customer.phoneNumber}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Địa chỉ Email"}</b></>)}>{customer.email}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Giấy phép kinh doanh"}</b></>)}>{customer.businessLicense}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Mã số thuế"}</b></>)}>{customer.taxCode}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Tài khoản số"}</b></>)}>{customer.bankAccount}</Descriptions.Item>
+                {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
+                <Descriptions.Item label={(<><b>{"Do ông(bà):"}</b></>)} span={2}>{customer.name}</Descriptions.Item>
+
+                <Descriptions.Item label={(<><b>{"Chức vụ"}</b></>)} span={2}>
+                    làm đại diện
+                        </Descriptions.Item>
+
+
+            </Descriptions>
+        ))
+        const aside = customer.map(customer => (
+            <Descriptions title="" size="small" column={2} title="Thông tin bên A"
 
             >
 
@@ -384,7 +421,8 @@ class ContractView extends React.Component {
                                     tại {this.props.contract.contractPlace}, chúng tôi gồm
                             </h6>
                                 </Card>
-                                <Card>
+                                {this.state.company.id === this.state.creator ? <Card>
+
                                     <Descriptions size="small" column={2} title={"Thông tin bên A"}  >
                                         <Descriptions.Item label={(<><b>{"Công ty/Tổ chức"}</b></>)}>{this.state.company.name}
                                         </Descriptions.Item>
@@ -405,8 +443,34 @@ class ContractView extends React.Component {
                                     </Descriptions>
                                     {bside}
 
-                                   
-                                </Card>
+
+                                </Card> :
+                                    <Card>
+                                        {aside}
+                                        <Descriptions size="small" column={2} title={"Thông tin bên B"}  >
+                                            <Descriptions.Item label={(<><b>{"Công ty/Tổ chức"}</b></>)}>{this.state.company.name}
+                                            </Descriptions.Item>
+                                            <Descriptions.Item label={(<><b>{"Địa chỉ"}</b></>)}>{this.state.company.address}</Descriptions.Item>
+                                            <Descriptions.Item label={(<><b>{"Điện thoại"}</b></>)}>{this.state.company.phoneNumber}</Descriptions.Item>
+                                            <Descriptions.Item label={(<><b>{"Địa chỉ Email"}</b></>)}>{this.state.company.email}</Descriptions.Item>
+                                            <Descriptions.Item label={(<><b>{"Giấy phép kinh doanh"}</b></>)}>{this.state.company.businessLicense}</Descriptions.Item>
+                                            <Descriptions.Item label={(<><b>{"Mã số thuế"}</b></>)}>{this.state.company.taxCode}</Descriptions.Item>
+                                            <Descriptions.Item label={(<><b>{"Tài khoản số"}</b></>)}>{this.state.company.bankAccount}</Descriptions.Item>
+                                            {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
+                                            <Descriptions.Item label={(<><b>{"Do ông(bà)"}</b></>)} span={2}>{this.state.company.name}</Descriptions.Item>
+
+                                            <Descriptions.Item label={(<><b>{"Chức vụ"}</b></>)} span={2}>
+                                                Giám đốc làm đại diện
+                    </Descriptions.Item>
+
+
+                                        </Descriptions>
+
+
+
+                                    </Card>
+                                }
+
                             </Space>
                             <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
                                 Giá trị hợp đồng:{this.props.contract.contractValue}
@@ -437,8 +501,8 @@ class ContractView extends React.Component {
                                         <Space size="large">
                                             {comments.length > 0 && <CommentList comments={comments} />}
 
-                                            {this.props.role === true && this.state.validSignature === true ? <Button type="primary" value="Sign" onClick={this.onFinish}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
-                                                        Kí
+                                            {this.props.role === true ? <Button type="primary" value="Sign" onClick={this.onFinish}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
+                                                        Tải về
                                                     </Button> : null}
                                             {this.props.contract.status == "pending" && this.props.role === true ? <Comment
                                                 avatar={
