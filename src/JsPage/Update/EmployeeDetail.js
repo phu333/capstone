@@ -4,11 +4,10 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { updateEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Checkbox, Space, Card,message } from 'antd';
-// import {
-//     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-//     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
-// } from '@ant-design/icons';
+import { Form, Input, Button, Row, Space, Card,Col,Popover } from 'antd';
+import {
+    QuestionCircleOutlined
+} from '@ant-design/icons';
 import EmployeeTable from '../Table/EmployeeTable'
 import axios from 'axios'
 import "../Column.css"
@@ -29,6 +28,11 @@ const tailLayout = {
         span: 10,
     },
 };
+const names = (
+
+    <p>Tên công ty đối tác nên để tên dưới 250 ký tự</p>
+
+);
 const middleLayout = {
     wrapperCol: {
         offset: 6,
@@ -139,7 +143,9 @@ class EmployeeDetail extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="Họ và tên" />
+                             <Row gutter={8}> <Col span={20}><Input placeholder="Họ và tên" /> </Col>    <Popover content={names} trigger="hover">
+                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                    </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="cmnd/cmt"
@@ -151,7 +157,9 @@ class EmployeeDetail extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="cmnd/cmt" />
+                             <Row gutter={8}> <Col span={20}><Input placeholder="cmnd/cmt" /> </Col>    <Popover content={names} trigger="hover">
+                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                    </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Tên người dùng"
@@ -163,7 +171,9 @@ class EmployeeDetail extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="tên người dùng" />
+                             <Row gutter={8}> <Col span={20}><Input placeholder="tên người dùng" /> </Col>    <Popover content={names} trigger="hover">
+                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                    </Popover></Row>
                         </Form.Item>
 
 
@@ -185,7 +195,9 @@ class EmployeeDetail extends React.Component {
                                 },
                             ]}
                         >
-                            <Input prefix="+84" placeholder="số điện thoại" />
+                            <Row gutter={8}> <Col span={20}><Input prefix="+84" placeholder="số điện thoại" /> </Col>    <Popover content={names} trigger="hover">
+                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                    </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Địa chỉ"
@@ -197,7 +209,9 @@ class EmployeeDetail extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="Địa chỉ" />
+                             <Row gutter={8}> <Col span={20}><Input placeholder="Địa chỉ" /> </Col>    <Popover content={names} trigger="hover">
+                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                    </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Email"
@@ -213,7 +227,9 @@ class EmployeeDetail extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="Email" />
+                             <Row gutter={8}> <Col span={20}><Input placeholder="Email" /> </Col>    <Popover content={names} trigger="hover">
+                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                    </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Chức vụ"
@@ -225,7 +241,9 @@ class EmployeeDetail extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="Chức vụ" />
+                             <Row gutter={8}> <Col span={20}><Input placeholder="Chức vụ" /> </Col>    <Popover content={names} trigger="hover">
+                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                    </Popover></Row>
                         </Form.Item>
                         {/* <Form.Item {...tailLayout} name="signPermission" valuePropName="checked" >
                             

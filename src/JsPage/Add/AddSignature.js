@@ -4,10 +4,9 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { createSignature, signatureInformation } from '../../actions/SignatureAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Card, Space, DatePicker,message } from 'antd';
+import { Form, Input, Button, Card, Space, DatePicker,message,Row,Col,Popover } from 'antd';
 import {
-    IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-    , CloudUploadOutlined, RedoOutlined
+    QuestionCircleOutlined
 } from '@ant-design/icons';
 import SignatureList from '../Table/SignatureList'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
@@ -26,6 +25,11 @@ const tailLayout = {
         span: 10,
     },
 };
+const names = (
+
+    <p>Tên công ty đối tác nên để tên dưới 250 ký tự</p>
+
+);
 
 class AddSignature extends React.Component {
     constructor() {
@@ -117,7 +121,9 @@ class AddSignature extends React.Component {
                                     },
                                 ]}
                             >
-                                <Input placeholder="Số serial" />
+                                <Row gutter={8}> <Col span={20}><Input placeholder="Số serial" /> </Col>    <Popover content={names} trigger="hover">
+                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                        </Popover></Row>
                             </Form.Item>
                             <Form.Item
                                 label="Nhà cung cấp"
@@ -129,7 +135,9 @@ class AddSignature extends React.Component {
                                     },
                                 ]}
                             >
-                                <Input placeholder="Nhà cung cấp" />
+                                <Row gutter={8}> <Col span={20}><Input placeholder="Nhà cung cấp" /> </Col>    <Popover content={names} trigger="hover">
+                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                        </Popover></Row>
                             </Form.Item>
                             <Form.Item
                                 label="Thời hạn"
