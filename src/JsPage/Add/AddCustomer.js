@@ -29,7 +29,44 @@ const names = (
     <p>Tên công ty đối tác nên để tên dưới 250 ký tự</p>
 
 );
+const ValidationCompany = (
 
+    <p>Tên công ty khách hàng sẽ được in trên hợp đồng</p>
+
+);
+const ValidationAdd = (
+
+    <p>Số địa chỉ công ty khách hàng sẽ được in trên hợp đồng</p>
+
+);const ValidationPresentor = (
+
+    <p>Người đại diện cho công ty khách</p>
+
+);const ValidationCertificate = (
+
+    <p>Mã giấy phép kinh doanh do nhà nước cấp</p>
+
+);const ValidationEmail = (
+
+    <p>Địa chỉ email của khách </p>
+
+);const ValidationTax = (
+
+    <p>Mã số thuế của công ty khách hàng </p>
+
+);const ValidationRole = (
+
+    <p>Chức vụ trong của người đại diện công ty khách</p>
+
+);const ValidationPhone = (
+
+    <p>Số điện thoại công ty khách trong khoảng 10 ký tự</p>
+
+);const ValidationBank = (
+
+    <p>Mã số Ngân hàng của công ty khách</p>
+
+);
 class AddCustomer extends React.Component {
     constructor() {
         super();
@@ -135,7 +172,7 @@ class AddCustomer extends React.Component {
                         {...layout}
                         name="basic"
                         className="employee-form"
-
+hideRequiredMark
                         onFinish={this.onFinish}
                         onFinishFailed={this.onFinishFailed}
 
@@ -156,7 +193,7 @@ class AddCustomer extends React.Component {
                                     message: 'Vui lòng nhập tên doanh nghiệp',
                                 },
                             ]}>
-                            <Row gutter={8}> <Col span={20}><Input placeholder="tên doanh nghiệp" /> </Col>    <Popover content={names} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input placeholder="tên doanh nghiệp" /> </Col>    <Popover content={ValidationCompany} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
@@ -176,7 +213,7 @@ class AddCustomer extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Mã số thuế" /> </Col>    <Popover content={names} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input placeholder="Mã số thuế" /> </Col>    <Popover content={ValidationTax} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
@@ -191,7 +228,7 @@ class AddCustomer extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Giấy phép kinh doanh" /> </Col>    <Popover content={names} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input placeholder="Giấy phép kinh doanh" /> </Col>    <Popover content={ValidationCertificate} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
@@ -211,7 +248,7 @@ class AddCustomer extends React.Component {
                                 },
                             ]}
                         >
-                           <Row gutter={8}> <Col span={20}> <Input prefix="+84" placeholder="Điện thoại" /> </Col>    <Popover content={names} trigger="hover">
+                           <Row gutter={8}> <Col span={20}> <Input prefix="+84" placeholder="Điện thoại" /> </Col>    <Popover content={ValidationPhone} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
@@ -225,7 +262,7 @@ class AddCustomer extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Địa chỉ" /> </Col>    <Popover content={names} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input placeholder="Địa chỉ" /> </Col>    <Popover content={ValidationAdd} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
@@ -243,7 +280,7 @@ class AddCustomer extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Email" /> </Col>    <Popover content={names} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input placeholder="Email" /> </Col>    <Popover content={ValidationEmail} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
@@ -257,7 +294,7 @@ class AddCustomer extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Số tài khoản" /> </Col>    <Popover content={names} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input placeholder="Số tài khoản" /> </Col>    <Popover content={ValidationBank} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
@@ -271,7 +308,7 @@ class AddCustomer extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Người đại diện" /> </Col>    <Popover content={names} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input placeholder="Người đại diện" /> </Col>    <Popover content={ValidationPresentor} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
@@ -285,7 +322,7 @@ class AddCustomer extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Chức vụ" /> </Col>    <Popover content={names} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input placeholder="Chức vụ" /> </Col>    <Popover content={ValidationRole} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>

@@ -40,7 +40,38 @@ const middleLayout = {
 };
 const names = (
 
-    <p>Tên công ty đối tác nên để tên dưới 250 ký tự</p>
+    <p>Nhập Username khoảng 8 đến 10 ký tự</p>
+
+);
+const ValidationFName = (
+
+    <p>Họ nhân viên</p>
+
+);
+const ValidationLName = (
+
+    <p>Tên nhân viên</p>
+
+);
+const ValidationAdd = (
+
+    <p>Số địa chỉ công ty</p>
+
+); const ValidationPhone = (
+
+    <p>Số điện thoại </p>
+
+); const ValidationEmail = (
+
+    <p>Địa chỉ email</p>
+
+); const ValidationTax = (
+
+    <p>Mã số thuế của công ty khách hàng</p>
+
+); const ValidationRole = (
+
+    <p>Chức vụ trong công ty có thể để trống</p>
 
 );
 
@@ -141,7 +172,7 @@ class AddEmployee extends React.Component {
                         {...layout}
                         name="basic"
                         className="employee-form"
-
+hideRequiredMark
                         onFinish={this.onFinish}
                         onFinishFailed={this.onFinishFailed}
 
@@ -157,7 +188,7 @@ class AddEmployee extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Họ và tên" /> </Col>    <Popover content={names} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input placeholder="Tên" /> </Col>    <Popover content={ValidationLName} trigger="hover">
                                 <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                         </Form.Item>
@@ -168,11 +199,11 @@ class AddEmployee extends React.Component {
 
                                 {
                                     required: true,
-                                    message: 'Vui lòng nhập tên ',
+                                    message: 'Vui lòng nhập họ ',
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Họ và tên" /> </Col>    <Popover content={names} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input placeholder="Họ" /> </Col>    <Popover content={ValidationFName} trigger="hover">
                                 <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                         </Form.Item>
@@ -256,7 +287,7 @@ class AddEmployee extends React.Component {
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Email" /> </Col>    <Popover content={names} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input placeholder="Email" /> </Col>    <Popover content={ValidationEmail} trigger="hover">
                                 <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                         </Form.Item>

@@ -25,12 +25,21 @@ const tailLayout = {
         span: 10,
     },
 };
-const names = (
+const ValidationSeri = (
 
-    <p>Tên công ty đối tác nên để tên dưới 250 ký tự</p>
+    <p>Số Seri của chữ ký số được phép dùng để ký</p>
 
 );
+const ValidationSup = (
 
+    <p>Tên đơn vị cung cấp chữ ký số</p>
+
+);
+const ValidationDate = (
+
+    <p>Thời hạn sử dụng chữ ký mà người dùng muốn trong hệ thống</p>
+
+);
 class AddSignature extends React.Component {
     constructor() {
         super();
@@ -121,7 +130,7 @@ class AddSignature extends React.Component {
                                     },
                                 ]}
                             >
-                                <Row gutter={8}> <Col span={20}><Input placeholder="Số serial" /> </Col>    <Popover content={names} trigger="hover">
+                                <Row gutter={8}> <Col span={20}><Input placeholder="Số serial" /> </Col>    <Popover content={ValidationSeri} trigger="hover">
                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                         </Popover></Row>
                             </Form.Item>
@@ -135,7 +144,7 @@ class AddSignature extends React.Component {
                                     },
                                 ]}
                             >
-                                <Row gutter={8}> <Col span={20}><Input placeholder="Nhà cung cấp" /> </Col>    <Popover content={names} trigger="hover">
+                                <Row gutter={8}> <Col span={20}><Input placeholder="Nhà cung cấp" /> </Col>    <Popover content={ValidationSup} trigger="hover">
                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                         </Popover></Row>
                             </Form.Item>
@@ -149,12 +158,14 @@ class AddSignature extends React.Component {
                                     },
                                 ]}
                             >
-                                <RangePicker
+                                <Row gutter={8}> <Col span={20}> <RangePicker
                                     showTime={{ format: 'HH:mm' }}
                                     format="YYYY-MM-DD HH:mm"
                                     onChange={this.onChange}
                                     onOk={this.onOk}
-                                />
+                                /> </Col>    <Popover content={ValidationDate} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                             </Form.Item>
 
 
