@@ -141,7 +141,12 @@ class ContractView extends React.Component {
             .then((data) => {
                 console.log(data.data)
                 this.setState({
-                    customers: data.data,
+                    customers: data.data.filter(
+                        customer => customer.id === this.props.contract.customer.id
+            
+            
+            
+                    ),
                 })
 
 
@@ -169,23 +174,19 @@ class ContractView extends React.Component {
                     company: data.data
                 })
                 axios({
-                    url: 'https://localhost:44338/api/Values',
-                    method: "GET",
-
+                    url: "https://localhost:44338/api/Signature/PostContract",
+                    method: "POST",
+                    data: {
+                        aInfo: this.state.company.taxCode,
+                        bInfo: this.state.customers[0].taxCode
+                    }
                 })
                     .then((response) => {
-                        console.log(response)
-                        return response.data;
+
+
                     })
                     .then((data) => {
-                        console.log(data.subject)
-                        if (data.subject.includes(this.state.company.taxCode)) {
-                            this.setState({
-                                validSignature: true
-                            })
-                        } else {
 
-                        }
                     })
                     .catch(error => {
                         console.log(error)
@@ -300,17 +301,10 @@ class ContractView extends React.Component {
         console.log('Failed:', errorInfo);
     };
     render() {
-        console.log(this.props.contract)
-        console.log(this.props.contract.customer.id)
-        const currentCustomer = this.props.contract.customer.id
-        const customer = this.state.customers.filter(
-            customer => customer.id === currentCustomer
-
-
-
-        )
-        console.log(customer)
-        const bside = customer.map(customer => (
+        
+         
+        console.log(this.state.customers)
+        const bside = this.state.customers.map(customer => (
             <Descriptions title="" size="small" column={2} title="Thông tin bên B"
 
             >
@@ -322,7 +316,9 @@ class ContractView extends React.Component {
                 <Descriptions.Item label={(<><b>{"Điện thoại"}</b></>)}>{customer.phoneNumber}</Descriptions.Item>
                 <Descriptions.Item label={(<><b>{"Địa chỉ Email"}</b></>)}>{customer.email}</Descriptions.Item>
                 <Descriptions.Item label={(<><b>{"Giấy phép kinh doanh"}</b></>)}>{customer.businessLicense}</Descriptions.Item>
-                <Descriptions.Item label={(<><b>{"Mã số thuế"}</b></>)}>{customer.taxCode}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Mã số thuế"}</b></>)}>{customer.taxCode}
+                
+                </Descriptions.Item>
                 <Descriptions.Item label={(<><b>{"Tài khoản số"}</b></>)}>{customer.bankAccount}</Descriptions.Item>
                 {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
                 <Descriptions.Item label={(<><b>{"Do ông(bà):"}</b></>)} span={2}>{customer.name}</Descriptions.Item>
@@ -334,7 +330,7 @@ class ContractView extends React.Component {
 
             </Descriptions>
         ))
-        const aside = customer.map(customer => (
+        const aside = this.state.customers.map(customer => (
             <Descriptions title="" size="small" column={2} title="Thông tin bên A"
 
             >
