@@ -67,7 +67,7 @@ class TemplateUpload extends React.Component {
     }
 
     rteChange = (value) => {
-        
+        console.log(value)
         this.setState({
             contractContent: value
         })
