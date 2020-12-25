@@ -4,10 +4,10 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Switch, Space, Card,Select,Col,Row } from 'antd';
+import { Form, Input, Button, Switch, Space, Card, Select, Col, Row,Popover } from 'antd';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
-import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import { CloseOutlined, CheckOutlined,QuestionCircleOutlined } from '@ant-design/icons';
 // import {
 //     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
 //     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
@@ -38,31 +38,68 @@ const middleLayout = {
         span: 10,
     },
 };
+const names = (
+
+    <p>Nhập Username khoảng 8 đến 10 ký tự</p>
+
+);
+const ValidationFName = (
+
+    <p>Họ nhân viên</p>
+
+);
+const ValidationLName = (
+
+    <p>Tên nhân viên</p>
+
+);
+const ValidationAdd = (
+
+    <p>Số địa chỉ công ty</p>
+
+); const ValidationPhone = (
+
+    <p>Số điện thoại </p>
+
+); const ValidationEmail = (
+
+    <p>Địa chỉ email</p>
+
+); const ValidationTax = (
+
+    <p>Mã số thuế của công ty khách hàng</p>
+
+); const ValidationRole = (
+
+    <p>Chức vụ trong công ty có thể để trống</p>
+
+);
+
 class AddEmployee extends React.Component {
     constructor() {
         super();
         this.state = {
             finish: false,
-            signPermission:false,
-            employeePermission:false,
-            contractPermission:false,
-            customerPermission:false,
-            companyInfoPermission:false,
-            permission:[],
+            signPermission: false,
+            employeePermission: false,
+            contractPermission: false,
+            customerPermission: false,
+            companyInfoPermission: false,
+            permission: [],
         };
         this.onFinish = this.onFinish.bind(this);
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
-        
+
         let employeeInfo = {
-            firstname:values.firstName,
-            lastname :values.lastName,
-            email:values.email,
-            password:"123Pa$$word!",
-            confirmPassword:"123Pa$$word!",
-            username:values.username,
-            role:values.role
+            firstname: values.firstName,
+            lastname: values.lastName,
+            email: values.email,
+            password: "123Pa$$word!",
+            confirmPassword: "123Pa$$word!",
+            username: values.username,
+            role: values.role
         }
         axios({
             url: '/api/Account/register-employee',
@@ -73,11 +110,11 @@ class AddEmployee extends React.Component {
 
             }
         })
-            .then( (response)=> {
-               
+            .then((response) => {
+
                 return response.data.data;
             })
-            .then( (data)=> {
+            .then((data) => {
                 console.log(data)
                 // let loginInfo = {
                 //     username: "Tri",
@@ -92,7 +129,7 @@ class AddEmployee extends React.Component {
                 //     editCompanyInformationPermission: true,
                 //     loginCode: true,
                 // }
-    
+
                 // this.props.onSubmit(data)
 
             })
@@ -120,7 +157,7 @@ class AddEmployee extends React.Component {
             return (<Router>
                 <Redirect push to={"/capstone/employee"} />
                 <Route exact path="/capstone/employee" render={() => <EmployeeTable token={this.props.token} role={this.props.role} />
-                    } /></Router>);
+                } /></Router>);
         } else {
 
             return (
@@ -135,7 +172,7 @@ class AddEmployee extends React.Component {
                         {...layout}
                         name="basic"
                         className="employee-form"
-                        
+hideRequiredMark
                         onFinish={this.onFinish}
                         onFinishFailed={this.onFinishFailed}
 
@@ -144,27 +181,31 @@ class AddEmployee extends React.Component {
                             label=" tên"
                             name="firstName"
                             rules={[
-               
+
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập tên ',
                                 },
                             ]}
                         >
-                            <Input placeholder="Họ và tên" />
+                            <Row gutter={8}> <Col span={20}><Input placeholder="Tên" /> </Col>    <Popover content={ValidationLName} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Họ "
                             name="lastName"
                             rules={[
-               
+
                                 {
                                     required: true,
-                                    message: 'Vui lòng nhập tên ',
+                                    message: 'Vui lòng nhập họ ',
                                 },
                             ]}
                         >
-                            <Input placeholder="Họ và tên" />
+                            <Row gutter={8}> <Col span={20}><Input placeholder="Họ" /> </Col>    <Popover content={ValidationFName} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         {/* <Form.Item
                             label="cmnd/cmt"
@@ -176,7 +217,9 @@ class AddEmployee extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="cmnd/cmt" />
+                            <Row gutter={8}> <Col span={20}><Input placeholder="cmnd/cmt" /> </Col>    <Popover content={names} trigger="hover">
+                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                    </Popover></Row>
                         </Form.Item> */}
                         <Form.Item
                             label="Tên người dùng"
@@ -188,7 +231,9 @@ class AddEmployee extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="tên người dùng" />
+                            <Row gutter={8}> <Col span={20}><Input placeholder="tên người dùng" /> </Col>    <Popover content={names} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
 
 
@@ -210,7 +255,9 @@ class AddEmployee extends React.Component {
                                 },
                             ]}
                         >
-                            <Input prefix="+84" placeholder="số điện thoại" />
+                            <Input prefix="+84" placeholder="số điện thoại" /> </Col>    <Popover content={names} trigger="hover">
+                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                    </Popover></Row>
                         </Form.Item> */}
                         {/* <Form.Item
                             label="Địa chỉ"
@@ -222,7 +269,9 @@ class AddEmployee extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="Địa chỉ" />
+                            <Row gutter={8}> <Col span={20}><Input placeholder="Địa chỉ" /> </Col>    <Popover content={names} trigger="hover">
+                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                    </Popover></Row>
                         </Form.Item> */}
                         <Form.Item
                             label="Email"
@@ -238,7 +287,9 @@ class AddEmployee extends React.Component {
                                 },
                             ]}
                         >
-                            <Input placeholder="Email" />
+                            <Row gutter={8}> <Col span={20}><Input placeholder="Email" /> </Col>    <Popover content={ValidationEmail} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Chức vụ"
@@ -256,62 +307,62 @@ class AddEmployee extends React.Component {
                             </Select>
                         </Form.Item>
                         <Grid item xs={12}>
-                                <b>Quyền Hạn</b>
-                                <br />
-                                <Row>
-                                    <Col span={8}>
-                                        <FormControlLabel
-                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
-                                            label="Ký"
-                                        />
-                                        <p></p>
-                                    </Col>
-                                    <Col span={8}>
-                                        <FormControlLabel
-                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
-                                            label="Thêm hợp đồng"
-                                        />
-                                        <p></p>
-                                    </Col>
-                                    <Col span={8}>
-                                        <FormControlLabel
-                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
-                                            label="Sửa hợp đồng"
-                                        />
-                                        <p></p>
-                                    </Col>
-                                    <Col span={8}>
-                                        <FormControlLabel
-                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
-                                            label="Quản lý nhân viên"
-                                        />
+                            <b>Quyền Hạn</b>
+                            <br />
+                            <Row>
+                                <Col span={8}>
+                                    <FormControlLabel
+                                        control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        label="Ký"
+                                    />
+                                    <p></p>
+                                </Col>
+                                <Col span={8}>
+                                    <FormControlLabel
+                                        control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        label="Thêm hợp đồng"
+                                    />
+                                    <p></p>
+                                </Col>
+                                <Col span={8}>
+                                    <FormControlLabel
+                                        control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        label="Sửa hợp đồng"
+                                    />
+                                    <p></p>
+                                </Col>
+                                <Col span={8}>
+                                    <FormControlLabel
+                                        control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        label="Quản lý nhân viên"
+                                    />
 
-                                        <p></p>
-                                    </Col>
-                                    <Col span={8}>
-                                        <FormControlLabel
-                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
-                                            label="Quản lý loại hợp đồng"
-                                        />
+                                    <p></p>
+                                </Col>
+                                <Col span={8}>
+                                    <FormControlLabel
+                                        control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        label="Quản lý loại hợp đồng"
+                                    />
 
-                                        <p></p>
-                                    </Col>
-                                    <Col span={8}>
-                                        <FormControlLabel
-                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
-                                            label="Quản lý chữ ký"
-                                        />
-                                        <p></p>
-                                    </Col>
-                                    <Col span={8}>
-                                        <FormControlLabel
-                                            control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
-                                            label="Quản lý khách hàng"
-                                        />
-                                        <p></p>
-                                    </Col>
-                                </Row>
-                            </Grid>
+                                    <p></p>
+                                </Col>
+                                <Col span={8}>
+                                    <FormControlLabel
+                                        control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        label="Quản lý chữ ký"
+                                    />
+                                    <p></p>
+                                </Col>
+                                <Col span={8}>
+                                    <FormControlLabel
+                                        control={<Switch onChange={onChange} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        label="Quản lý khách hàng"
+                                    />
+                                    <p></p>
+                                </Col>
+                            </Row>
+                        </Grid>
 
 
 
@@ -327,7 +378,7 @@ class AddEmployee extends React.Component {
 
                             </Space>
                         </Form.Item>
-                       
+
 
 
 

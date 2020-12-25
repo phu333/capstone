@@ -33,9 +33,9 @@ class App extends React.Component {
           <Online>
 
             <Router>
-              {this.props.myLoginReducer.length === 0 ?
+              {/* {this.props.myLoginReducer.length === 0 ?
                 <Tabs onTabClick={this.changeTab} defaultActiveKey="Login" centered >
-                  <TabPane tab="Login" key="login">
+                  <TabPane tab="Login" key="login" style={{  backgroundColor: 'rgb(8, 59, 102)' }}>
                     <Redirect push to={"/capstone/" + this.state.currentTab} />
 
                     <Route exact path="/capstone/Login" component={LoginPage} />
@@ -46,12 +46,17 @@ class App extends React.Component {
                     <Route exact path="/capstone/SearchContract" component={SearchByCode} />
                   </TabPane>
 
-                </Tabs> : <Router>
+                </Tabs> 
+                : <Router>
                   <Redirect push to={"/capstone/Login"} />
 
                   <Route exact path="/capstone/Login" component={LoginPage} />
-                </Router>}
+                </Router>} */}
+                <Router>
+                  <Redirect push to={"/capstone/Login"} />
 
+                  <Route exact path="/capstone/Login" component={LoginPage} />
+                </Router>
 
               {/* {information} */}
             </Router></Online>

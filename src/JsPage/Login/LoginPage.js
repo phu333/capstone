@@ -9,9 +9,11 @@ import EmployeeSideMenu from './EmployeeSideMenu';
 
 import axios from 'axios'
 
+import GoogleOutlined from '../../logo/Google.png'
+
+import logo from '../../logo/Capture.PNG'
 import AddUserAdmin from '../Login/AddUserAdmin'
 import ForgetPassword from './ForgetPassword'
-import { GoogleOutlined } from "@ant-design/icons"
 import { createFromIconfontCN } from '@ant-design/icons';
 import { connect } from 'react-redux'
 import { addLogin, login } from '../../actions/loginAction'
@@ -122,7 +124,7 @@ class LoginPage extends React.Component {
                         id: data.data.id,
                         username: data.data.userName,
                         email: data.data.email,
-                        
+
                         role: data.data.roles[0],
                         signPermission: true,
                         contractManagePermision: true,
@@ -141,7 +143,7 @@ class LoginPage extends React.Component {
                         id: data.data.id,
                         username: data.data.userName,
                         email: data.data.email,
-                        
+
                         role: data.data.roles[0],
                         signPermission: false,
                         contractManagePermision: true,
@@ -221,13 +223,10 @@ class LoginPage extends React.Component {
                     <AddUserAdmin />);
             } else {
                 return (
-                    <Row type="flex" justify="center" align="middle" style={{ height: "100vh" }}>
+                    <Row type="flex" justify="center" align="middle" style={{ height: "100vh", backgroundColor: 'rgb(8, 59, 102)' }}>
 
                         <Redirect push to="/capstone/Login" />
-
-
-
-                        <Col span={10} >
+                        <Col span={16} >
                             <Form
                                 {...layout}
                                 name="basic"
@@ -235,13 +234,14 @@ class LoginPage extends React.Component {
                                 initialValues={{
                                     remember: true,
                                 }}
+                                hideRequiredMark
                                 onFinish={this.onFinish}
                                 onFinishFailed={this.onFinishFailed}
-
                             >
-                                <IconFont type="icon-javascript" style={{ fontSize: '60px', color: '#08c', marginLeft: "40%" }} />
+                                {/* <IconFont type="icon-javascript" style={{ fontSize: '60px', color: '#08c', marginLeft: "40%" }} /> */}
+                                <img src={logo} type="icon-javascript" style={{ height: '180px', width: '300px', color: '#08c', marginLeft: "25%" }} alt="Logo" />
                                 <Form.Item
-                                    label="Tên người dùng"
+                                    label={<label style={{ color: "white" }}>Email người dùng</label>}
                                     name="username"
                                     rules={[
                                         {
@@ -250,11 +250,11 @@ class LoginPage extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input />
+                                    <Input style={{ width: '300px' }} />
                                 </Form.Item>
 
                                 <Form.Item
-                                    label="Mật khẩu"
+                                    label={<label style={{ color: "white" }}>Mật khẩu</label>}
                                     name="password"
                                     rules={[
                                         {
@@ -263,21 +263,28 @@ class LoginPage extends React.Component {
                                         },
                                     ]}
                                 >
-                                    <Input.Password />
+                                    <Input.Password style={{ width: '300px' }} />
                                 </Form.Item>
                                 <Form.Item {...middleLayout} name="remember" valuePropName="unchecked" >
-                                    <Checkbox
+                                    <Row gutter="2">    <Col>  <Checkbox style={{ fontSize: '20px', color: 'white' }}
                                         onChange={() => {
                                             this.setState({
                                                 remember: !this.state.remember
                                             })
                                         }}
-                                    >Ghi nhớ</Checkbox>
-                                    <Button type="link" htmlType="button"
-                                        onClick={this.ForgetPassword}
-                                    >
-                                        Quên mật khẩu
-                                </Button>
+                                    >Ghi nhớ</Checkbox></Col>
+                                        <Col>    <Button type="link" htmlType="button"
+                                            onClick={this.ForgetPassword}
+                                            style={{ color: "white" }}
+                                        >
+                                            Quên mật khẩu
+                                </Button></Col>
+                                        <Col>
+                                            <Button type="link" htmlType="button"
+                                                style={{ color: "white" }}
+                                                onClick={this.SendJoinRequest}>
+                                                Đăng ký
+                                </Button></Col> </Row>
                                 </Form.Item>
 
 
@@ -285,7 +292,7 @@ class LoginPage extends React.Component {
 
                                 <Form.Item {...tailLayout}>
                                     <Space size="large">
-                                        <Button type="primary" htmlType="submit" className="login-form-button">
+                                        <Button type="primary" htmlType="submit" >
                                             Đăng nhập
                                 </Button>
                                         <GoogleLogin
@@ -294,19 +301,17 @@ class LoginPage extends React.Component {
                                             render={renderProps => (
 
 
-                                                <GoogleOutlined style={{ fontSize: '30px', color: '#08c' }} >
-                                                    Đăng nhập với google
-                                                </GoogleOutlined>
+                                                (<Button type="primary" htmlType="submit" >
+
+                                                    <img src={GoogleOutlined} style={{ width: '30px', height: '25px', color: '#08c' }} />  Đăng nhập với google</Button>)
                                             )}
+
                                             onSuccess={this.responseGoogle}
                                             onFailure={this.responseGoogle}
                                             cookiePolicy={'single_host_origin'}
                                         />
 
-                                        <Button type="link" htmlType="button"
-                                            onClick={this.SendJoinRequest}>
-                                            Gửi yêu cầu đăng ký
-                                </Button>
+
                                     </Space>
                                 </Form.Item>
                                 <Form.Item>

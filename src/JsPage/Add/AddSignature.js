@@ -4,10 +4,9 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { createSignature, signatureInformation } from '../../actions/SignatureAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Card, Space, DatePicker,message } from 'antd';
+import { Form, Input, Button, Card, Space, DatePicker,message,Row,Col,Popover } from 'antd';
 import {
-    IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-    , CloudUploadOutlined, RedoOutlined
+    QuestionCircleOutlined
 } from '@ant-design/icons';
 import SignatureList from '../Table/SignatureList'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
@@ -26,7 +25,21 @@ const tailLayout = {
         span: 10,
     },
 };
+const ValidationSeri = (
 
+    <p>Số Seri của chữ ký số được phép dùng để ký</p>
+
+);
+const ValidationSup = (
+
+    <p>Tên đơn vị cung cấp chữ ký số</p>
+
+);
+const ValidationDate = (
+
+    <p>Thời hạn sử dụng chữ ký mà người dùng muốn trong hệ thống</p>
+
+);
 class AddSignature extends React.Component {
     constructor() {
         super();
@@ -117,7 +130,9 @@ class AddSignature extends React.Component {
                                     },
                                 ]}
                             >
-                                <Input placeholder="Số serial" />
+                                <Row gutter={8}> <Col span={20}><Input placeholder="Số serial" /> </Col>    <Popover content={ValidationSeri} trigger="hover">
+                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                        </Popover></Row>
                             </Form.Item>
                             <Form.Item
                                 label="Nhà cung cấp"
@@ -129,7 +144,9 @@ class AddSignature extends React.Component {
                                     },
                                 ]}
                             >
-                                <Input placeholder="Nhà cung cấp" />
+                                <Row gutter={8}> <Col span={20}><Input placeholder="Nhà cung cấp" /> </Col>    <Popover content={ValidationSup} trigger="hover">
+                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                        </Popover></Row>
                             </Form.Item>
                             <Form.Item
                                 label="Thời hạn"
@@ -141,12 +158,14 @@ class AddSignature extends React.Component {
                                     },
                                 ]}
                             >
-                                <RangePicker
+                                <Row gutter={8}> <Col span={20}> <RangePicker
                                     showTime={{ format: 'HH:mm' }}
                                     format="YYYY-MM-DD HH:mm"
                                     onChange={this.onChange}
                                     onOk={this.onOk}
-                                />
+                                /> </Col>    <Popover content={ValidationDate} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                             </Form.Item>
 
 
