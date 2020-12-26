@@ -10,7 +10,7 @@ import SignatureSearch from '../Search/SignatureSearch'
 import { createSignature, signatureInformation } from '../../actions/SignatureAction'
 import { connect } from 'react-redux'
 import "../Column.css"
-import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,EyeOutlined } from "@ant-design/icons"
+import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,FolderViewOutlined } from "@ant-design/icons"
 const { Column, ColumnGroup } = Table;
 
 
@@ -162,7 +162,7 @@ class SignatureList extends React.Component {
                             key="action"
                             render={(text, record) => (
                                 <Space size="middle">
-                                   <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                                   <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
                                     () => this.setState({
                                         signature: text,
                                         openSignature: "openViewSignature",
