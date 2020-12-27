@@ -6,6 +6,8 @@ import 'antd/dist/antd.css';
 import React from 'react';
 import '../../index.css';
 import axios from 'axios'
+const { TextArea } = Input;
+
 const layout = {
     labelCol: {
         span: 6,
@@ -56,7 +58,7 @@ const ValidationAdd = (
 
 );const ValidationBank = (
 
-    <p>Mã số Ngân hàng của công ty có thể để trắng</p>
+    <p>8 số cuối của mã số ngân hàng trên thẻ của công ty</p>
 
 );
 
@@ -130,21 +132,19 @@ class AddCompany extends React.Component {
 
                 >
 
-                    <Form.Item
-                        label="Tên doanh nghiệp"
-                        name="name"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng nhập tên ',
-                            },
-                        ]}
-                    >
-                        <Row gutter={8}> <Col span={20}><Input /></Col>
-                            <Popover content={ValidationCompany} trigger="hover">
-                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                            </Popover></Row>
-                    </Form.Item>
+                        <Form.Item
+                            label="Tên doanh nghiệp"
+                            name="name"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập tên doanh nghiệp',
+                                },
+                            ]}>
+                            <Row gutter={8}> <Col span={20}><TextArea autoSize placeholder="tên doanh nghiệp" /> </Col>    <Popover content={ValidationCompany} trigger="hover">
+                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                    </Popover></Row>
+</Form.Item>
                     <Form.Item
                         label="Mã số thuế"
                         name="taxCode"
@@ -162,7 +162,7 @@ class AddCompany extends React.Component {
                             },
                         ]}
                     >
-                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={ValidationTax} trigger="hover">
+                        <Row gutter={8}> <Col span={20}><Input type="number" /></Col>    <Popover content={ValidationTax} trigger="hover">
                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                         </Popover></Row>
                     </Form.Item>
@@ -183,7 +183,7 @@ class AddCompany extends React.Component {
                             },
                         ]}
                     >
-                        <Row gutter={8}> <Col span={20}><Input prefix="+84" /></Col>    <Popover content={ValidationPhone} trigger="hover">
+                        <Row gutter={8}> <Col span={20}><Input type="number" prefix="+84" /></Col>    <Popover content={ValidationPhone} trigger="hover">
                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                         </Popover></Row>
                     </Form.Item>
@@ -192,7 +192,7 @@ class AddCompany extends React.Component {
                         name="address"
                         required
                     >
-                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={ValidationAdd} trigger="hover">
+                        <Row gutter={8}> <Col span={20}><TextArea autoSize /></Col>    <Popover content={ValidationAdd} trigger="hover">
                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                         </Popover></Row>
                     </Form.Item>
@@ -219,16 +219,27 @@ class AddCompany extends React.Component {
                         name="businessLicense"
                         required
                     >
-                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={ValidationCertificate} trigger="hover">
+                        <Row gutter={8}> <Col span={20}><Input type="number" /></Col>    <Popover content={ValidationCertificate} trigger="hover">
                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                         </Popover></Row>
                     </Form.Item>
                     <Form.Item
                         label="Tài khoản ngân hàng"
                         name="bankAccount"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng nhập Số tài khoản',
+                                
+                            },{
 
+                                message: 'Vui lòng nhập 8 ký tự',
+                                min: 8,
+                                max: 8,
+                            },
+                        ]}
                     >
-                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={ValidationBank} trigger="hover">
+                        <Row gutter={8}> <Col span={20}><Input type="number" /></Col>    <Popover content={ValidationBank} trigger="hover">
                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                         </Popover></Row>
                     </Form.Item>
@@ -237,7 +248,7 @@ class AddCompany extends React.Component {
                         name="comRepresentative"
                         required
                     >
-                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={ValidationPresentor} trigger="hover">
+                        <Row gutter={8}> <Col span={20}><Input type="number" /></Col>    <Popover content={ValidationPresentor} trigger="hover">
                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                         </Popover></Row>
                     </Form.Item>

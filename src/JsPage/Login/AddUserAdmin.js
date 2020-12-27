@@ -11,6 +11,8 @@ import EmployeeTable from '../Table/EmployeeTable'
 import axios from 'axios'
 import "../Column.css"
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+const { TextArea } = Input;
+
 const layout = {
     labelCol: {
         span: 6,
@@ -57,7 +59,7 @@ const ValidationLPresentor = (
 
 );const ValidationCmt = (
 
-    <p>Số chứng minh thư do nhà nước cấp</p>
+    <p>Số chứng minh thư của người đại diện do nhà nước cấp</p>
 
 );const ValidationEmail = (
 
@@ -81,7 +83,7 @@ const ValidationLPresentor = (
 
 );const ValidationBank = (
 
-    <p>Mã số Ngân hàng của công ty có thể để trắng</p>
+    <p>8 số cuối của mã số ngân hàng trên thẻ của công ty</p>
 
 );
 
@@ -203,7 +205,7 @@ class AddUserAdmin extends React.Component {
                             },
                         ]}
                     >
-                        <Row gutter={8}> <Col span={20}><Input placeholder="cmnd/cmt" /> </Col>    <Popover content={ValidationCmt} trigger="hover">
+                        <Row gutter={8}> <Col span={20}><Input type="number" placeholder="cmnd/cmt" /> </Col>    <Popover content={ValidationCmt} trigger="hover">
                             <Button shape="circle" style={{ border: "none",backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{color:'white'}} />} />
                         </Popover></Row>
 
@@ -281,7 +283,7 @@ class AddUserAdmin extends React.Component {
                             },
                         ]}
                     >
-                        <Row gutter={8}> <Col span={20}><Input /></Col>
+                        <Row gutter={8}> <Col span={20}><TextArea autoSize /></Col>
                             <Popover content={ValidationCompany} trigger="hover">
                                 <Button shape="circle" style={{ border: "none",backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{color:'white'}} />} />
                             </Popover></Row>
@@ -303,7 +305,7 @@ class AddUserAdmin extends React.Component {
                             },
                         ]}
                     >
-                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={ValidationTax} trigger="hover">
+                        <Row gutter={8}> <Col span={20}><Input type="number" /></Col>    <Popover content={ValidationTax} trigger="hover">
                             <Button shape="circle" style={{ border: "none",backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{color:'white'}} />} />
                         </Popover></Row>
                     </Form.Item>
@@ -312,16 +314,27 @@ class AddUserAdmin extends React.Component {
                         name="businessLicense"
                         required
                     >
-                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={ValidationCertificate} trigger="hover">
+                        <Row gutter={8}> <Col span={20}><Input type="number" /></Col>    <Popover content={ValidationCertificate} trigger="hover">
                             <Button shape="circle" style={{ border: "none",backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{color:'white'}} />} />
                         </Popover></Row>
                     </Form.Item>
                     <Form.Item
                         label={<label style={{ color: "white" }}>Tài khoản ngân hàng</label>}
                         name="bankAccount"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng nhập Số tài khoản',
+                                
+                            },{
 
+                                message: 'Vui lòng nhập 8 ký tự',
+                                min: 8,
+                                max: 8,
+                            },
+                        ]}
                     >
-                        <Row gutter={8}> <Col span={20}><Input /></Col>    <Popover content={ValidationBank} trigger="hover">
+                        <Row gutter={8}> <Col span={20}><Input type="number" /></Col>    <Popover content={ValidationBank} trigger="hover">
                             <Button shape="circle" style={{ border: "none",backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{color:'white'}} />} />
                         </Popover></Row>
                     </Form.Item>
@@ -337,7 +350,7 @@ class AddUserAdmin extends React.Component {
                             },
                         ]}
                     >
-                        <Row gutter={8}> <Col span={20}><Input prefix="+84" placeholder="Điện thoại" /></Col>    <Popover content={ValidationPhone} trigger="hover">
+                        <Row gutter={8}> <Col span={20}><Input type="number" prefix="+84" placeholder="Điện thoại" /></Col>    <Popover content={ValidationPhone} trigger="hover">
                             <Button shape="circle" style={{ border: "none",backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{color:'white'}} />} />
                         </Popover></Row>
                     </Form.Item>
@@ -351,7 +364,7 @@ class AddUserAdmin extends React.Component {
                             },
                         ]}
                     >
-                        <Row gutter={8}> <Col span={20}><Input placeholder="Địa chỉ" /></Col>    <Popover content={ValidationAdd} trigger="hover">
+                        <Row gutter={8}> <Col span={20}><TextArea autoSize placeholder="Địa chỉ" /></Col>    <Popover content={ValidationAdd} trigger="hover">
                             <Button shape="circle" style={{ border: "none",backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{color:'white'}} />} />
                         </Popover></Row>
                     </Form.Item>

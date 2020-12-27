@@ -10,9 +10,11 @@ import { Form, Input, Button, Row, Space, Card, message,Col,Popover } from 'antd
 import CustomerTable from '../Table/CustomerTable'
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+const { TextArea } = Input;
+
 const layout = {
     labelCol: {
-        span: 4,
+        span: 8,
     },
     wrapperCol: {
         span: 10,
@@ -64,7 +66,7 @@ const ValidationAdd = (
 
 );const ValidationBank = (
 
-    <p>Mã số Ngân hàng của công ty khách</p>
+    <p>8 số cuối của mã số ngân hàng trên thẻ của công ty khách</p>
 
 );
 class AddCustomer extends React.Component {
@@ -193,7 +195,7 @@ hideRequiredMark
                                     message: 'Vui lòng nhập tên doanh nghiệp',
                                 },
                             ]}>
-                            <Row gutter={8}> <Col span={20}><Input placeholder="tên doanh nghiệp" /> </Col>    <Popover content={ValidationCompany} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><TextArea autoSize placeholder="tên doanh nghiệp" /> </Col>    <Popover content={ValidationCompany} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
@@ -213,7 +215,7 @@ hideRequiredMark
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Mã số thuế" /> </Col>    <Popover content={ValidationTax} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input type="number" placeholder="Mã số thuế" /> </Col>    <Popover content={ValidationTax} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
@@ -228,7 +230,7 @@ hideRequiredMark
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Giấy phép kinh doanh" /> </Col>    <Popover content={ValidationCertificate} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input type="number" placeholder="Giấy phép kinh doanh" /> </Col>    <Popover content={ValidationCertificate} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
@@ -248,7 +250,7 @@ hideRequiredMark
                                 },
                             ]}
                         >
-                           <Row gutter={8}> <Col span={20}> <Input prefix="+84" placeholder="Điện thoại" /> </Col>    <Popover content={ValidationPhone} trigger="hover">
+                           <Row gutter={8}> <Col span={20}> <Input type="number" prefix="+84" placeholder="Điện thoại" /> </Col>    <Popover content={ValidationPhone} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
@@ -262,7 +264,7 @@ hideRequiredMark
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Địa chỉ" /> </Col>    <Popover content={ValidationAdd} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><TextArea autoSize  placeholder="Địa chỉ" /> </Col>    <Popover content={ValidationAdd} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
@@ -291,10 +293,16 @@ hideRequiredMark
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập Số tài khoản',
+                                    
+                                },{
+
+                                    message: 'Vui lòng nhập 10 ký tự',
+                                    min: 8,
+                                    max: 8,
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Số tài khoản" /> </Col>    <Popover content={ValidationBank} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input type='number' placeholder="Số tài khoản" /> </Col>    <Popover content={ValidationBank} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>

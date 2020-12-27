@@ -13,7 +13,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 're
 const { RangePicker } = DatePicker;
 const layout = {
     labelCol: {
-        span: 4,
+        span: 8,
     },
     wrapperCol: {
         span: 10,

@@ -69,7 +69,7 @@ class UpdateProfileCompany extends React.Component {
 
             <React.Fragment>
                 <br />
-                <h2 style={{ textAlign: 'center' }}>Thông tin cá nhân</h2>
+                <h2 style={{ textAlign: 'center' }}>Thông tin công ty</h2>
                 <Space direction="horizontal" align="start"  >
 
 
