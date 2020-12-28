@@ -76,7 +76,7 @@ const ValidationAdd = (
 
 );const ValidationBank = (
 
-    <p>Mã số Ngân hàng của công ty có thể để trắng</p>
+    <p>8 số cuối của mã số ngân hàng trên thẻ công ty có thể để trắng</p>
 
 );
 
@@ -206,7 +206,8 @@ class UpdateProfileCompany extends React.Component {
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                              
+                              <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationCompany} trigger="hover">
                                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
                                     <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationCompany} trigger="hover">
@@ -287,23 +288,34 @@ class UpdateProfileCompany extends React.Component {
 
                             >
                                 {this.state.isEdit === false ?
-                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.businessLicense} /></Col>    <Popover content={ValidationCertificate} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input type="number" disabled defaultValue={this.state.company.businessLicense} /></Col>    <Popover content={ValidationCertificate} trigger="hover">
                                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.businessLicense} /></Col>    <Popover content={ValidationCertificate} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input type="number" defaultValue={this.state.company.businessLicense} /></Col>    <Popover content={ValidationCertificate} trigger="hover">
                                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>
                             <Form.Item
                                 label="Tài khoản ngân hàng"
                                 name="bankAccount"
-
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Vui lòng nhập Số tài khoản',
+                                        
+                                    },{
+        
+                                        message: 'Vui lòng nhập 8 ký tự',
+                                        min: 8,
+                                        max: 8,
+                                    },
+                                ]}
                             >
                                 {this.state.isEdit === false ?
-                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.bankAccount} /></Col>    <Popover content={ValidationBank} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input type="number" disabled defaultValue={this.state.company.bankAccount} /></Col>    <Popover content={ValidationBank} trigger="hover">
                                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
-                                    <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.bankAccount} /></Col>    <Popover content={ValidationBank} trigger="hover">
+                                    <Row gutter={8}> <Col span={20}><Input type="number" defaultValue={this.state.company.bankAccount} /></Col>    <Popover content={ValidationBank} trigger="hover">
                                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>}
                             </Form.Item>

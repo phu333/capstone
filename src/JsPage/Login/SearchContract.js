@@ -5,7 +5,7 @@ import 'antd/dist/antd.css';
 import { PageHeader, Tag, Row, Col, Table ,message} from 'antd';
 import { Input } from 'antd';
 import {
-    EyeOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
+    FolderViewOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
     FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
 } from "@ant-design/icons"
 const { Search } = Input;
@@ -149,7 +149,7 @@ class SearchContractByCode extends React.Component {
                             key="action"
                             render={(text, record) => (
 
-                                <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                                <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
                                     () => this.setState({
                                         contract: text,
                                         showContract: true

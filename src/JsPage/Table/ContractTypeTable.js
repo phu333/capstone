@@ -8,7 +8,7 @@ import ViewTemplate from '../Update/TemplateView'
 import ContractTypeSearch from '../Search/ContractTypeSearch'
 import { createContractType, contractTypeInformation } from '../../actions/ContractType'
 import { connect } from 'react-redux'
-import { UploadOutlined, EyeOutlined, DeleteOutlined, UserOutlined, FileWordOutlined } from "@ant-design/icons"
+import { UploadOutlined, FolderViewOutlined, DeleteOutlined, UserOutlined, FileWordOutlined } from "@ant-design/icons"
 import axios from 'axios'
 const { Column } = Table;
 
@@ -109,11 +109,11 @@ class ContractTable extends React.Component {
               key="Update"
               render={(text, record) => (
                 <Space size="middle">
-                  <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={()=>{
+                  <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={()=>{
                     this.setState({
                       viewTemplate : !this.state.viewTemplate
                     })
-                  }}></EyeOutlined>
+                  }}></FolderViewOutlined>
                 </Space>
               )}
             />

@@ -8,7 +8,7 @@ import CustomerSearch from '../Search/CustomerSearch'
 import { createCustomer, customerInformation } from '../../actions/CustomerAction'
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, EyeOutlined } from "@ant-design/icons"
+import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, FolderViewOutlined } from "@ant-design/icons"
 import axios from 'axios'
 const { Column } = Table;
 
@@ -169,7 +169,7 @@ class CustomerList extends React.Component {
               key="action"
               render={(text, record) => (
                 <Space size="middle">
-                  <EyeOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                  <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
                     () => this.setState({
                       customer: text,
                       openCustomer: "openViewCustomer",

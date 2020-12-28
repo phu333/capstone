@@ -16,7 +16,7 @@ const dateFormat = 'YYYY-MM-DD';
 const { RangePicker } = DatePicker;
 const layout = {
     labelCol: {
-        span: 4,
+        span: 8,
     },
     wrapperCol: {
         span: 10,

@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom';
 import EmployeeSearch from '../Search/EmployeeSearch'
 import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
-import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, EyeOutlined } from "@ant-design/icons"
+import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, FolderViewOutlined } from "@ant-design/icons"
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import axios from 'axios'
 const { Column, ColumnGroup } = Table;
@@ -166,7 +166,7 @@ class EmployeeList extends React.Component {
               key="action"
               render={(text, record) => (
                 <Space size="middle">
-                  <EyeOutlined style={{ fontSize: '30px', color: '#08c', alignContent: "center", textAlign: "center" }} theme="outlined" onClick={
+                  <FolderViewOutlined style={{ fontSize: '30px', color: '#08c', alignContent: "center", textAlign: "center" }} theme="outlined" onClick={
                     () => this.setState({
                       employee: text,
                       openEmployee: "employeeDetail",
@@ -180,7 +180,7 @@ class EmployeeList extends React.Component {
               key="action"
               render={(text, record) => (
                 <Space size="middle">
-                  <EyeOutlined style={{ fontSize: '30px', color: '#08c', alignContent: "center", textAlign: "center" }} theme="outlined" onClick={
+                  <FolderViewOutlined style={{ fontSize: '30px', color: '#08c', alignContent: "center", textAlign: "center" }} theme="outlined" onClick={
                     () => this.setState({
                       employee: text,
                       openEmployee: "openViewEmployee",
