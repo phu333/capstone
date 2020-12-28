@@ -173,26 +173,7 @@ class ContractView extends React.Component {
                 this.setState({
                     company: data.data
                 })
-                axios({
-                    url: "https://localhost:44338/api/Signature/PostContract",
-                    method: "POST",
-                    data: {
-                        aInfo: this.state.company.taxCode,
-                        bInfo: this.state.customers[0].taxCode
-                    }
-                })
-                    .then((response) => {
-
-
-                    })
-                    .then((data) => {
-
-                    })
-                    .catch(error => {
-                        console.log(error)
-
-
-                    });
+                
             })
             .catch(error => {
                 console.log(error)
@@ -248,6 +229,28 @@ class ContractView extends React.Component {
         })
     }
     onFinish = () => {
+        console.log(this.state.company.taxCode)
+        console.log(this.state.customers[0].taxCode)
+        axios({
+            url: "https://localhost:44338/api/Signature/PostContract",
+            method: "POST",
+            data: {
+                aInfo: this.state.company.taxCode,
+                bInfo: this.state.customers[0].taxCode
+            }
+        })
+            .then((response) => {
+
+
+            })
+            .then((data) => {
+
+            })
+            .catch(error => {
+                console.log(error)
+
+
+            });
         axios({
             url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
             method: "GET",
