@@ -5,6 +5,7 @@ import {
     FileExcelOutlined, IdcardOutlined, BankOutlined, PhoneOutlined, PrinterOutlined, HomeOutlined, MailOutlined
     , ContactsOutlined, CalendarOutlined, DollarOutlined, DeleteOutlined, CloudUploadOutlined, AuditOutlined
 } from '@ant-design/icons';
+import { FileSaver } from 'file-saver';
 import ContractExtensionTable from '../Table/ContractExtensionTable'
 import { Descriptions, InputNumber, Space, Button, DatePicker, Input, Card, Form, Select, Table, Comment, List, Avatar, Pagination } from 'antd';
 import ContractTable from '../Table/ContractTable'
@@ -251,32 +252,61 @@ class ContractView extends React.Component {
 
 
             });
-        axios({
-            url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
-            method: "GET",
-            headers: {
-                Authorization: 'Bearer ' + this.props.token,
-                'Content-Type': 'application/json',
-                'Accept': 'application/docx'
-            },
-            responseType: 'arraybuffer',
-
-        })
-            .then((response) => {
-                console.log(response)
-                var fileDownload = require('js-file-download');
-                fileDownload(response.data, this.props.contract.id + '.docx');
-                return response.data;
-            })
-            .then((data) => {
-                console.log(data.data)
-
-            })
-            .catch(error => {
-                console.log(error)
-
-
-            });
+            if(this.props.contract.fileUrl === null){
+                axios({
+                    url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
+                    method: "GET",
+                    headers: {
+                        Authorization: 'Bearer ' + this.props.token,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/docx'
+                    },
+                    responseType: 'arraybuffer',
+        
+                })
+                    .then((response) => {
+                        console.log(response)
+                        var fileDownload = require('js-file-download');
+                        fileDownload(response.data, this.props.contract.id + '.docx');
+                        return response.data;
+                    })
+                    .then((data) => {
+                        console.log(data.data)
+        
+                    })
+                    .catch(error => {
+                        console.log(error)
+        
+        
+                    });
+            }else{
+                window.open(this.props.contract.fileUrl,"_blank")
+                // axios({
+                //     url: this.props.contract.fileUrl,
+                //     method: "GET",
+                //     headers: {
+                //         Authorization: 'Bearer ' + this.props.token,
+                //         'Content-Type': 'application/json',
+                //         'Accept': 'application/docx'
+                //     },
+                //     responseType: 'arraybuffer',
+        
+                // })
+                //     .then((response) => {
+                      
+                //         return response.data;
+                //     })
+                //     .then((data) => {
+                //         console.log(data.data)
+        
+                //     })
+                //     .catch(error => {
+                //         console.log(error)
+        
+        
+                //     });
+            }
+        
 
 
     };
