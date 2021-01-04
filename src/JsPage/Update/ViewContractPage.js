@@ -99,64 +99,8 @@ class ContractView extends React.Component {
 
     };
     componentDidMount() {
-        axios({
-            url: '/api/v1/Contract/a-side-info',
-            method: "GET",
-            headers: {
-                Authorization: 'Bearer ' + this.props.token,
-
-            },
-            params: {
-                id: this.props.contract.id,
-            }
-        })
-            .then((response) => {
-
-                return response.data;
-            })
-            .then((data) => {
-                console.log(data.companyId)
-                this.setState({
-                    creator: data.companyId
-                })
-
-
-            })
-            .catch(error => {
-                console.log(error)
-
-
-            });
-        axios({
-            url: '/api/v1/Customer',
-            method: "GET",
-            headers: {
-                Authorization: 'Bearer ' + this.props.token,
-
-            }
-        })
-            .then((response) => {
-
-                return response.data;
-            })
-            .then((data) => {
-                console.log(data.data)
-                this.setState({
-                    customers: data.data.filter(
-                        customer => customer.id === this.props.contract.customer.id
-            
-            
-            
-                    ),
-                })
-
-
-            })
-            .catch(error => {
-                console.log(error)
-
-
-            });
+        
+        
         axios({
             url: '/api/v1/Company/info',
             method: "PUT",
@@ -174,7 +118,96 @@ class ContractView extends React.Component {
                 this.setState({
                     company: data.data
                 })
-                
+                axios({
+                    url: '/api/v1/Contract/a-side-info',
+                    method: "GET",
+                    headers: {
+                        Authorization: 'Bearer ' + this.props.token,
+        
+                    },
+                    params: {
+                        id: this.props.contract.id,
+                    }
+                })
+                    .then((response) => {
+        
+                        return response.data;
+                    })
+                    .then((data) => {
+                        console.log(data)
+                        this.setState({
+                            creator: data.companyId
+                        })
+                        if(this.state.company.id === data.companyId){
+                            axios({
+                                url: '/api/v1/Customer',
+                                method: "GET",
+                                headers: {
+                                    Authorization: 'Bearer ' + this.props.token,
+                    
+                                }
+                            })
+                                .then((response) => {
+                    
+                                    return response.data;
+                                })
+                                .then((data) => {
+                                    console.log(data.data)
+                                    this.setState({
+                                        customers: data.data.filter(
+                                            customer => customer.id === this.props.contract.customer.id
+                                
+                                
+                                
+                                        ),
+                                    })
+                    
+                    
+                                })
+                                .catch(error => {
+                                    console.log(error)
+                    
+                    
+                                });
+                        }else{
+                            axios({
+                                url: '/api/v1/Customer',
+                                method: "GET",
+                                headers: {
+                                    Authorization: 'Bearer ' + this.props.token,
+                    
+                                }
+                            })
+                                .then((response) => {
+                    
+                                    return response.data;
+                                })
+                                .then((data) => {
+                                    console.log(data.data)
+                                    this.setState({
+                                        customers: data.data.filter(
+                                            customer => customer.companyId  === this.state.creator
+                                
+                                
+                                
+                                        ),
+                                    })
+                    
+                    
+                                })
+                                .catch(error => {
+                                    console.log(error)
+                    
+                    
+                                });
+                        }
+        
+                    })
+                    .catch(error => {
+                        console.log(error)
+        
+        
+                    });
             })
             .catch(error => {
                 console.log(error)

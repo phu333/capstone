@@ -101,7 +101,7 @@ class TemplateUpload extends React.Component {
             })
             .then((data) => {
 
-
+                alert("tao thanh cong")
 
             })
             .catch(error => {

@@ -79,45 +79,15 @@ class AddCustomer extends React.Component {
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
-        // axios({
-        //     url: '/api/v1/Company',
-        //     method: "GET",
-        //     headers: {
-        //         Authorization: 'Bearer ' + this.props.token,
-
-        //     },
-        //     params:{
-        //         Name:values.name,
-        //     },
-            
-        // })
-        //     .then((response) => {
-
-        //         return response.data;
-        //     })
-        //     .then((data) => {
-
-        //         console.log(data)
-
-        //     })
-        //     .catch(error => {
-
-        //         if (error.response.status === 500) {
-        //             message.error(error.response.status + ' Server under maintainence');
-        //         } else if (error.response.status === 404) {
-        //             message.error(error.response.status + ' Server not found');
-        //         }
-
-        //     });
-        
         axios({
-            url: '/api/v1/Customer',
-            method: "POST",
+            url: '/api/v1/Company?Name='+values.name,
+            method: "GET",
             headers: {
                 Authorization: 'Bearer ' + this.props.token,
 
             },
-            data: values
+            
+            
         })
             .then((response) => {
 
@@ -125,7 +95,68 @@ class AddCustomer extends React.Component {
             })
             .then((data) => {
 
-
+                for(let i = 0; i< data.data.length;i++){
+                    if(data.data[i]["name"] === values.name){
+                        values.id=data.data[i].id
+                        axios({
+                            url: '/api/v1/Customer',
+                            method: "POST",
+                            headers: {
+                                Authorization: 'Bearer ' + this.props.token,
+                
+                            },
+                            data: values
+                        })
+                            .then((response) => {
+                
+                                return response.data;
+                            })
+                            .then((data) => {
+                
+                                alert("tao thanh cong")
+                
+                            })
+                            .catch(error => {
+                
+                                if (error.response.status === 500) {
+                                    message.error(error.response.status + ' Server under maintainence');
+                                } else if (error.response.status === 404) {
+                                    message.error(error.response.status + ' Server not found');
+                                }
+                
+                            });
+                        return true;
+                    }else{
+                        axios({
+                            url: '/api/v1/Customer',
+                            method: "POST",
+                            headers: {
+                                Authorization: 'Bearer ' + this.props.token,
+                
+                            },
+                            data: values
+                        })
+                            .then((response) => {
+                
+                                return response.data;
+                            })
+                            .then((data) => {
+                
+                                alert("tao thanh cong")
+                
+                            })
+                            .catch(error => {
+                
+                                if (error.response.status === 500) {
+                                    message.error(error.response.status + ' Server under maintainence');
+                                } else if (error.response.status === 404) {
+                                    message.error(error.response.status + ' Server not found');
+                                }
+                
+                            });
+                        return false;
+                    }
+                }
 
             })
             .catch(error => {
@@ -137,6 +168,8 @@ class AddCustomer extends React.Component {
                 }
 
             });
+        
+        
 
         // this.setState({
         //     finish: true
@@ -179,13 +212,7 @@ hideRequiredMark
                         onFinishFailed={this.onFinishFailed}
 
                     >
-                        {/* <Form.Item
-
-                            name="companyId"
-                            initialValue="asdasdasdadasd"
-                        >
-
-                        </Form.Item> */}
+                        
                         <Form.Item
                             label="Tên doanh nghiệp"
                             name="name"
@@ -210,12 +237,11 @@ hideRequiredMark
                                 {
 
                                     message: 'Vui lòng nhập 10 ký tự',
-                                    min: 10,
-                                    max: 10,
+                                   
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input type="number" placeholder="Mã số thuế" /> </Col>    <Popover content={ValidationTax} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input type="text" placeholder="Mã số thuế" /> </Col>    <Popover content={ValidationTax} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
@@ -230,7 +256,7 @@ hideRequiredMark
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input type="number" placeholder="Giấy phép kinh doanh" /> </Col>    <Popover content={ValidationCertificate} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input type="text" placeholder="Giấy phép kinh doanh" /> </Col>    <Popover content={ValidationCertificate} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
