@@ -18,7 +18,7 @@ import Header from '../Login/Header'
 import { createFromIconfontCN } from '@ant-design/icons';
 import { connect } from 'react-redux'
 import "../Column.css"
-
+import logo from '../../logo/Capture.PNG'
 const IconFont = createFromIconfontCN({
   scriptUrl: [
     '//at.alicdn.com/t/font_1788044_0dwu4guekcwr.js', // icon-javascript, icon-java, icon-shoppingcart (overrided)
@@ -77,7 +77,7 @@ class EmployeeSideMenu extends React.Component {
                 }}
               >
 
-                <IconFont type="icon-javascript" style={{ fontSize: '60px', color: '#08c', marginLeft: "40%" }} />
+<img src={logo}  type="icon-javascript" style={{height: '100px', width: '100%', fontSize: '60px', color: '#08c' }} />
 
 
                 <Menu
