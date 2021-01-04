@@ -39,14 +39,9 @@ const name = (
     <p>Mật khẩu được đặt 8-12 ký tự</p>
 
 );
-const ValidationFName = (
-
-    <p>Họ nhân viên</p>
-
-);
 const ValidationLName = (
 
-    <p>Tên nhân viên</p>
+    <p>Họ và tên nhân viên</p>
 
 );
 const ValidationAdd = (
@@ -146,21 +141,18 @@ class UpdateProfile extends React.Component {
                     <Space direction="horizontal" align="start"  >
 
 
-                        <Card style={{ width: 400, minHeight: 300 }}>
-                            <Descriptions size="small" column={1}   >
+                    <Card style={{ width: 400, minHeight: 100 }}>
+                            <Row gutter={8}>
+                                <Col flex={2}> <Avatar size={100} icon={<UserOutlined />} /> </Col>
+                                <Col flex={3}>  <br />
+                                    <b >Người dùng: </b>{login.username}<br />
 
-                                <Descriptions.Item><Avatar size={100} icon={<UserOutlined />} /> </Descriptions.Item>
-
-
-
-                                <Descriptions.Item><br />
-                                    <b >{login.username}</b><br />
-
-                                    <b >{this.state.company.name}</b>
-                                </Descriptions.Item>
-
-                            </Descriptions>
+                                    <b>Email: </b>{login.email}<br />
+                                    <b >Chức vụ: </b>{login.role}
+                                </Col>
+                            </Row>
                         </Card>
+
                         <Card style={{ width: 600, height: 600 }}>
                             <Form
                                 {...layout}
@@ -173,7 +165,7 @@ hideRequiredMark
                             >
 
                                 <Form.Item
-                                    label="tên"
+                                    label="Họ và tên"
                                     name="name"
 
                                 >
@@ -186,23 +178,6 @@ hideRequiredMark
                                         <Row gutter={8}> <Col span={10}><Input defaultValue="Nguyen " /></Col><Col span={10}> <Input defaultValue="Van A" /></Col>
 
                                             <Col span={4}>    <Popover content={ValidationLName} trigger="hover">
-                                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                            </Popover></Col></Row>}
-                                </Form.Item>
-                                <Form.Item
-                                    label="Họ"
-                                    name="name"
-
-                                >
-                                    {this.state.isEdit === false ?
-                                        <Row gutter={8}> <Col span={10}><Input disabled defaultValue="Nguyen " /></Col><Col span={10}> <Input disabled defaultValue="Van A" /></Col>
-
-                                            <Col span={4}>    <Popover content={ValidationFName} trigger="hover">
-                                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                            </Popover></Col></Row> :
-                                        <Row gutter={8}> <Col span={10}><Input defaultValue="Nguyen " /></Col><Col span={10}> <Input defaultValue="Van A" /></Col>
-
-                                            <Col span={4}>    <Popover content={ValidationFName} trigger="hover">
                                                 <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                             </Popover></Col></Row>}
                                 </Form.Item>
