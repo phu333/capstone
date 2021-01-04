@@ -27,7 +27,9 @@ class ContractTable extends Component {
             showCreateContract: false,
             showContract: false,
             contract: {},
-            contracts: []
+            contractsCreate: [],
+            contractsReciceve: [],
+            contractsTotal: []
         };
         this.onOpenCreateContract = this.onOpenCreateContract.bind(this);
         this.viewContract = this.viewContract.bind(this);
@@ -36,11 +38,9 @@ class ContractTable extends Component {
 
     }
     componentDidMount() {
-
-
         axios({
-            url: '/api/v1/Contract',
-            method: "GET",
+            url: '/api/v1/Company/info',
+            method: "PUT",
             headers: {
                 Authorization: 'Bearer ' + this.props.token,
 
@@ -51,17 +51,67 @@ class ContractTable extends Component {
                 return response.data;
             })
             .then((data) => {
-                console.log(data)
-                this.setState({
-                    contracts: data.data
+                console.log(data.data)
+                axios({
+                    url: '/api/v1/Contract/get-by-taxcode?taxCode='+data.data.taxCode,
+                    method: "GET",
+                    headers: {
+                        Authorization: 'Bearer ' + this.props.token,
+        
+                    }
                 })
-                this.state.contracts.status = "pending"
+                    .then((response) => {
+        
+                        return response.data;
+                    })
+                    .then((data) => {
+                        console.log(data)
+                        this.setState({
+                            contractsReciceve: data.data
+                        })
+                        axios({
+                            url: '/api/v1/Contract',
+                            method: "GET",
+                            headers: {
+                                Authorization: 'Bearer ' + this.props.token,
+                
+                            }
+                        })
+                            .then((response) => {
+                
+                                return response.data;
+                            })
+                            .then((data) => {
+                                console.log(data)
+                                this.setState({
+                                    contractsCreate: data.data,
+                                    
+                                })
+                                this.setState({
+                                   
+                                    contractsTotal: [...this.state.contractsCreate,...this.state.contractsReciceve]
+                                })
+                            })
+                
+                            .catch(error => {
+                
+                
+                            });
+                    })
+        
+                    .catch(error => {
+        
+        
+                    });
+                
             })
-
             .catch(error => {
+                console.log(error)
 
 
             });
+
+            
 
 
 
@@ -80,7 +130,7 @@ class ContractTable extends Component {
     }
     render() {
 
-        console.log(this.state.contracts)
+        console.log(this.state.contractsTotal)
 
         if (this.state.showCreateContract) {
             return (
@@ -108,7 +158,7 @@ class ContractTable extends Component {
                         <Button type="primary" icon={<UploadOutlined />} >Tải lên hợp đồng</Button>
                     </Space>
                     <ContractSearch />
-                    <Table dataSource={this.state.contracts}
+                    <Table dataSource={this.state.contractsTotal}
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}>
                         <Column title="Mã hợp đồng" dataIndex="contractNum" key="contractNum"
                             render={(text, record) => (
@@ -123,7 +173,7 @@ class ContractTable extends Component {
                             )}
                         />
 
-                        <Column title="bên đối tác" dataIndex="customer" key="customer"
+                        <Column title="bên B" dataIndex="customer" key="customer"
                             render={(text, record) => (
 
                                 <b>{text.companyName}</b>

@@ -1,32 +1,36 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios'
-
-import { Select, DatePicker, message, Space, Button, InputNumber, Form, Table, Input, Col, Card, Pagination } from 'antd';
-import ContractExtensionTable from '../Table/ContractExtensionTable'
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import {
-    DeleteOutlined, FileOutlined, BankOutlined, PhoneOutlined, PrinterOutlined, HomeOutlined, MailOutlined
-    , ContactsOutlined, CalendarOutlined, DollarOutlined, CloudDownloadOutlined, CloudUploadOutlined, AuditOutlined
+    FileExcelOutlined, IdcardOutlined, BankOutlined, PhoneOutlined, PrinterOutlined, HomeOutlined, MailOutlined
+    , ContactsOutlined, CalendarOutlined, DollarOutlined, DeleteOutlined, CloudUploadOutlined, AuditOutlined
 } from '@ant-design/icons';
+import { FileSaver } from 'file-saver';
+import ContractExtensionTable from '../Table/ContractExtensionTable'
+import { Descriptions, InputNumber, Space, Button, DatePicker, Input, Card, Form, Select, Table, Comment, List, Avatar, Pagination } from 'antd';
+import ContractTable from '../Table/ContractTable'
+import moment from 'moment'
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { EditorState } from 'draft-js';
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { parse } from 'semver';
 import JoditEditor from "jodit-react";
-const { Option } = Select;
+const dateFormat = 'YYYY-MM-DD';
 const { RangePicker } = DatePicker;
 const { Column, ColumnGroup } = Table;
-
-const dataSource = [
-    {
-        key: '1',
-        contract_type: 'Hop dong lao dong',
-
-        fileName: 'template1.dot',
-    },
-    {
-        key: '2',
-        contract_type: 'Hop dong lao dong',
-
-        fileName: 'template1.dot',
-    },
-];
+const { TextArea } = Input;
+const { Option } = Select;
+const CommentList = ({ comments }) => (
+    <List
+        dataSource={comments}
+        header={`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`}
+        itemLayout="horizontal"
+        renderItem={props => <Comment {...props} />}
+    />
+);
 
 
 
@@ -36,187 +40,540 @@ const dataSource = [
 class AddContractExtension extends React.Component {
     constructor() {
         super();
+        this.modules = {
+            toolbar: [
 
-        this.state = {
-            option: "DeadLineExtend",
-            NewContent: "",
-            currntPage: 1,
-            finish: false,
-            chooseTemplate: false,
-            contractContent: '<p class="ql-align-justify"><strong>Điều 1. Đối tượng của hợp đồng:</strong></p><p class="ql-align-justify">Theo yêu cầu của bên A về việc thực hiện hoạt động môi giới thương mại … (ghi rõ các nội dung hoạt động môi giới thương mại, như: làm trung gian cho các bên mua bán hàng hoá, cung ứng dịch vụ trong việc đàm phán, giao kết hợp đồng mua bán hàng hoá, dịch vụ, …), bên B đảm nhận và thực hiện …</p><p class="ql-align-justify">(Đối tượng của hợp đồng môi giới thương mại là công việc có thể thực hiện được, không vi phạm điều cấm của luật, không trái đạo đức xã hội).</p><p class="ql-align-justify"><strong>Điều 2. Thời hạn thực hiện hợp đồng:</strong></p><p class="ql-align-justify">Hợp đồng này được thực hiện kể từ ngày … / …/ …</p><p class="ql-align-justify">Thời gian dự kiến hoàn thành: là … ngày, kể từ ngày …/ …/ … đến hết ngày ngày …/ …/ …</p><p class="ql-align-justify">(Bên A và bên B thoả thuận thời hạn cụ thể và ghi vào trong hợp đồng này).</p><p class="ql-align-justify"><strong>Điều 3. Nghĩa vụ và quyền của bên A:</strong></p><p class="ql-align-justify"><strong>1. Nghĩa vụ của bên A:</strong></p><p class="ql-align-justify">a) Cung cấp các thông tin, tài liệu, phương tiện cần thiết liên quan đến hàng hoá, dịch vụ;</p><p class="ql-align-justify">b) Trả thù lao môi giới và các chi phí hợp lý khác cho bên môi giới.</p><p class="ql-align-justify">(Bên A và bên B thoả thuận các nghĩa vụ cụ thể khác và ghi vào trong hợp đồng này).</p><p class="ql-align-justify"><strong>2. Quyền của bên A:</strong></p><p class="ql-align-justify">Yêu cầu bên B thực hiện hoạt động môi giới thương mại theo đúng các nội dung đã thỏa thuận tại Điều 1 của hợp đồng này.</p><p class="ql-align-justify">Trường hợp bên B vi phạm nghiêm trọng nghĩa vụ hoặc quy định tại hợp đồng này, thì bên A có quyền đơn phương chấm dứt thực hiện hợp đồng và yêu cầu bồi thường thiệt hại.</p><p class="ql-align-justify">(Bên A và bên B thoả thuận các quyền cụ thể khác và ghi vào trong hợp đồng này).</p><p class="ql-align-justify"><strong>Điều 4. Nghĩa vụ và quyền của bên B:</strong></p><p class="ql-align-justify"><strong>1. Nghĩa vụ của bên B:</strong></p><p class="ql-align-justify">Bảo quản các mẫu hàng hoá, tài liệu được giao để thực hiện việc môi giới và phải hoàn trả cho bên được môi giới sau khi hoàn thành việc môi giới;</p><p class="ql-align-justify">Không được tiết lộ, cung cấp thông tin làm phương hại đến lợi ích của bên được môi giới;</p><p class="ql-align-justify">Chịu trách nhiệm về tư cách pháp lý của các bên được môi giới, nhưng không chịu trách nhiệm về khả năng thanh toán của họ;</p><p class="ql-align-justify">Không được tham gia thực hiện hợp đồng giữa các bên được môi giới, trừ trường hợp có uỷ quyền của bên được môi giới.</p><p class="ql-align-justify">(Bên A và bên B thoả thuận các nghĩa vụ cụ thể khác và ghi vào trong hợp đồng này).</p><p class="ql-align-justify"><strong>2. Quyền của bên B:</strong></p><p class="ql-align-justify">Yêu cầu bên A cung cấp thông tin, tài liệu và phương tiện để thực hiện công việc.</p><p class="ql-align-justify">Được tiến hành các nghiệp vụ trung gian môi giới thương mai, như: … (tuỳ theo từng nội dung hoạt động môi giới thương mại quy định tại Điều 1 của hợp đồng này).</p><p class="ql-align-justify">Yêu cầu bên A trả tiền thù lao môi giới theo quy định tại Điều 5 của hợp đồng này.</p><p class="ql-align-justify">(Bên A và bên B thoả thuận các quyền cụ thể khác và ghi vào trong hợp đồng này).</p><p class="ql-align-justify"><strong>Điều 5. Tiền thù lao môi giới và phương thức thanh toán:</strong></p><p class="ql-align-justify">1. Tiền thù lao môi giới: Thực hiện công việc tại Điều 1 là: … đồng (Bằng chữ: …), đã bao gồm … % tiền thuế giá trị gia tăng.</p><p class="ql-align-justify">2. Phương thức thanh toán: …</p><p class="ql-align-justify">(Bên A và bên B thoả thuận cụ thể về phương thức thanh toán và ghi vào trong hợp đồng này).</p><p class="ql-align-justify"><strong>Điều 6. Chi phí khác:</strong></p><p class="ql-align-justify">Bên A phải thanh toán các chi phí phát sinh hợp lý liên quan đến việc môi giới, kể cả khi việc môi giới không mang lại kết quả cho bên A.</p><p class="ql-align-justify">Chi phí khác hai bên thỏa thuận bổ sung nếu xét thấy cần thiết và đúng quy định của pháp luật.</p><p class="ql-align-justify"><strong>Điều 7. Đơn phương chấm dứt thực hiện hợp đồng:</strong></p><p class="ql-align-justify">1. Trường hợp việc tiếp tục thực hiện hoạt động môi giới thương mại hoặc công việc không có lợi cho bên A thì bên A có quyền đơn phương chấm dứt thực hiện hợp đồng, nhưng phải báo cho bên B biết trước … ngày. Bên A phải trả tiền thù lao môi giới theo phần hoạt động môi giới thương mại hoặc công việc mà bên B đã thực hiện và bồi thường thiệt hại (theo thoả thuận nếu có).</p><p class="ql-align-justify">2. Trường hợp bên A vi phạm nghiêm trọng nghĩa vụ hoặc quy định tại hợp đồng này thì bên B có quyền đơn phương chấm dứt thực hiện hợp đồng và yêu cầu bồi thường thiệt hại.</p><p class="ql-align-justify"><strong>Điều 8. Phương thực giải quyết tranh chấp:</strong></p><p class="ql-align-justify">Trong quá trình thực hiện hợp đồng, nếu có vấn đề phát sinh cần giải quyết, thì hai bên tiến hành thỏa thuận và thống nhất giải quyết kịp thời, hợp tình và hợp lý. Trường hợp không thỏa thuận được thì một trong các bên có quyền khởi kiện tại tòa án có thẩm quyền giải quyết vụ việc theo quy định của pháp luật.</p><p class="ql-align-justify"><strong>Điều 9. Các thoả thuận khác:</strong></p><p class="ql-align-justify">Bên A và bên B đồng ý đã hiểu rõ quyền, nghĩa vụ, lợi ích hợp pháp của mình và hậu quả pháp lý của việc giao kết hợp đồng này.</p><p class="ql-align-justify">Bên A và bên B đồng ý thực hiện theo đúng các điều khoản trong hợp đồng này và không nêu thêm điều kiện gì khác.</p><p class="ql-align-justify">Hợp đồng này được lập thành … bản, mỗi bản gồm … trang, có giá trị pháp lý như nhau và được giao cho bên A … bản, bên B … bản./.</p><p><br></p>',
+            ]
         };
-        this.handleChange = this.handleChange.bind(this);
-        this.rteChange = this.rteChange.bind(this);
 
+        this.formats = [
+            'font',
+            'size',
+            'bold', 'italic', 'underline',
+            'list', 'bullet',
+            'align',
+            'color', 'background'
+        ];
+        this.state = {
+
+
+            openExtension: false,
+            openCommentSection: false,
+            finish: false,
+            showContent: "customer",
+            comments: [],
+            submitting: false,
+            value: '',
+            currentPage: 1,
+            creator: "",
+            isEdit: false,
+            company: {},
+            BSide: {
+                Name: "",
+                MST: "",
+                Phone: "",
+                Address: "",
+                Email: "",
+                Representative: "",
+                Position: "",
+                BusinessLicensce: "",
+
+                BankAccount: "",
+            },
+            customers: [],
+            validSignature: false,
+        };
+
+        this.OpenExtension = this.OpenExtension.bind(this)
+        this.OpenCommentSection = this.OpenCommentSection.bind(this)
+        this.onEditorStateChange = this.onEditorStateChange.bind(this);
     }
-    rteChange = (value) => {
-        console.log(value); // HTML/rich text
-    }
-    handleChange(value) {
+    onEditorStateChange(editorState) {
+        console.log(editorState)
         this.setState({
-            chooseTemplate: true,
-        })
-    }
-    Cancel = () => {
+            editorState: editorState,
+        });
+    };
+    onEdit = (values) => {
         this.setState({
-            finish: true
+            isEdit: true
         })
 
 
 
 
     };
-    onChangeTemplate = (values) => {
-        this.setState({
-            chooseTemplate: false
-        })
-
-
-
-
-    };
-    onFinish = (values) => {
+    componentDidMount() {
         axios({
-            url: '',
-            method: "POST",
-            data: values
+            url: '/api/v1/Contract/a-side-info',
+            method: "GET",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
+
+            },
+            params: {
+                id: this.props.contract.id,
+            }
         })
             .then((response) => {
 
                 return response.data;
             })
             .then((data) => {
+                console.log(data.companyId)
+                this.setState({
+                    creator: data.companyId
+                })
 
-                
 
             })
             .catch(error => {
+                console.log(error)
 
-                if (error.response.status === 500) {
-                    message.error(error.response.status + ' Server under maintainence');
-                } else if (error.response.status === 404) {
-                    message.error(error.response.status + ' Server not found');
-                }
 
             });
-        this.setState({
-            finish: true
+        axios({
+            url: '/api/v1/Customer',
+            method: "GET",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
+
+            }
         })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+                console.log(data.data)
+                this.setState({
+                    customers: data.data.filter(
+                        customer => customer.id === this.props.contract.customer.id
+            
+            
+            
+                    ),
+                })
 
 
+            })
+            .catch(error => {
+                console.log(error)
 
 
-    };
-    onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+            });
+        axios({
+            url: '/api/v1/Company/info',
+            method: "PUT",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
+
+            }
+        })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+                console.log(data.data)
+                this.setState({
+                    company: data.data
+                })
+                
+            })
+            .catch(error => {
+                console.log(error)
+
+
+            });
+
+    }
+    handleSubmit = () => {
+        if (!this.state.value) {
+            return;
+        }
+
+        this.setState({
+            submitting: true,
+        });
+
+        setTimeout(() => {
+            this.setState({
+                submitting: false,
+                value: '',
+                comments: [
+                    {
+                        author: 'Han Solo',
+
+                        content: <p>{this.state.value}</p>,
+                        datetime: moment().fromNow(),
+                    },
+                    ...this.state.comments,
+                ],
+            });
+        }, 1000);
     };
     onPageChange = page => {
         console.log(page);
         this.setState({
-            currntPage: page,
+            currentPage: page,
         });
     };
-    log = (type) => console.log.bind(console, type);
-    onChange(value, dateString) {
-        console.log('Selected Time: ', value);
-        console.log('Formatted Selected Time: ', dateString);
+    handleChange = e => {
+        this.setState({
+            value: e.target.value,
+        });
+    };
+    OpenExtension() {
+        this.setState({
+            openExtension: true
+        })
     }
-
-    onOk(value) {
-        console.log('onOk: ', value);
+    OpenCommentSection() {
+        this.setState({
+            openCommentSection: true
+        })
     }
+    onFinish = () => {
+        console.log(this.state.company.taxCode)
+        console.log(this.state.customers[0].taxCode)
+        axios({
+            url: "https://localhost:44338/api/Signature/PostContract",
+            method: "POST",
+            data: {
+                aInfo: this.state.company.taxCode,
+                bInfo: this.state.customers[0].taxCode
+            }
+        })
+            .then((response) => {
 
+
+            })
+            .then((data) => {
+
+            })
+            .catch(error => {
+                console.log(error)
+
+
+            });
+            if(this.props.contract.fileUrl === null){
+                axios({
+                    url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
+                    method: "GET",
+                    headers: {
+                        Authorization: 'Bearer ' + this.props.token,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/docx'
+                    },
+                    responseType: 'arraybuffer',
+        
+                })
+                    .then((response) => {
+                        console.log(response)
+                        var fileDownload = require('js-file-download');
+                        fileDownload(response.data, this.props.contract.id + '.docx');
+                        return response.data;
+                    })
+                    .then((data) => {
+                        console.log(data.data)
+        
+                    })
+                    .catch(error => {
+                        console.log(error)
+        
+        
+                    });
+            }else{
+                window.open(this.props.contract.fileUrl,"_blank")
+                // axios({
+                //     url: this.props.contract.fileUrl,
+                //     method: "GET",
+                //     headers: {
+                //         Authorization: 'Bearer ' + this.props.token,
+                //         'Content-Type': 'application/json',
+                //         'Accept': 'application/docx'
+                //     },
+                //     responseType: 'arraybuffer',
+        
+                // })
+                //     .then((response) => {
+                      
+                //         return response.data;
+                //     })
+                //     .then((data) => {
+                //         console.log(data.data)
+        
+                //     })
+                //     .catch(error => {
+                //         console.log(error)
+        
+        
+                //     });
+            }
+        
+
+
+    };
+    onFinishComment = () => {
+
+
+
+    };
+    onFinishCommenFailt = () => {
+
+
+
+    };
+    ShowCustomer = () => {
+        this.setState({
+            showContent: "customer"
+        })
+    };
+    ShowContent = () => {
+        this.setState({
+            showContent: "content"
+        })
+    };
+    onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
     render() {
+        
+         
+        console.log(this.state.customers)
+        const bside = this.state.customers.map(customer => (
+            <Descriptions title="" size="small" column={2} title="Thông tin bên B"
+
+            >
+
+                <Descriptions.Item label={(<><b>{"Công ty/Tổ chức"}</b></>)}>
+                    {customer.name}
+                </Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Địa chỉ"}</b></>)}>{customer.address}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Điện thoại"}</b></>)}>{customer.phoneNumber}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Địa chỉ Email"}</b></>)}>{customer.email}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Giấy phép kinh doanh"}</b></>)}>{customer.businessLicense}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Mã số thuế"}</b></>)}>{customer.taxCode}
+                
+                </Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Tài khoản số"}</b></>)}>{customer.bankAccount}</Descriptions.Item>
+                {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
+                <Descriptions.Item label={(<><b>{"Do ông(bà):"}</b></>)} span={2}>{customer.name}</Descriptions.Item>
+
+                <Descriptions.Item label={(<><b>{"Chức vụ"}</b></>)} span={2}>
+                    làm đại diện
+                        </Descriptions.Item>
+
+
+            </Descriptions>
+        ))
+        const aside = this.state.customers.map(customer => (
+            <Descriptions title="" size="small" column={2} title="Thông tin bên A"
+
+            >
+
+                <Descriptions.Item label={(<><b>{"Công ty/Tổ chức"}</b></>)}>
+                    {customer.name}
+                </Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Địa chỉ"}</b></>)}>{customer.address}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Điện thoại"}</b></>)}>{customer.phoneNumber}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Địa chỉ Email"}</b></>)}>{customer.email}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Giấy phép kinh doanh"}</b></>)}>{customer.businessLicense}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Mã số thuế"}</b></>)}>{customer.taxCode}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Tài khoản số"}</b></>)}>{customer.bankAccount}</Descriptions.Item>
+                {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
+                <Descriptions.Item label={(<><b>{"Do ông(bà):"}</b></>)} span={2}>{customer.name}</Descriptions.Item>
+
+                <Descriptions.Item label={(<><b>{"Chức vụ"}</b></>)} span={2}>
+                    làm đại diện
+                        </Descriptions.Item>
+
+
+            </Descriptions>
+        ))
         const config = {
-            readonly: false // all options from https://xdsoft.net/jodit/doc/
+            readonly: false, // all options from https://xdsoft.net/jodit/doc/
+            toolbar: true
         }
-        if (this.state.finish) {
+        const { comments, submitting, value } = this.state;
+        const Editor = ({ onChange, onSubmit, submitting, value }) => (
+            <Form
+
+                name="basic"
+                className="lcontract-form"
+
+                onFinish={this.onFinishComment}
+                onFinishFailed={this.onFinishCommentFailed}
+
+            >
+                <Form.Item>
+                    <TextArea rows={4} onChange={onChange} value={value} />
+                </Form.Item>
+                <Form.Item>
+                    <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">
+                        Yêu cầu sửa
+                </Button>
+                </Form.Item>
+            </Form>
+        );
+
+
+        if (this.state.openExtension) {
             return (
                 <Router>
-                    <Redirect push to={"/capstone/viewContractExtension/" + this.props.contractId} />
-                    <Route exact path="/capstone/viewContractExtension/:id" render={() => <ContractExtensionTable contractId={this.props.contractId} role={this.props.role} />
+                    <Redirect push to={"/capstone/viewContract/" + this.props.contract.id + "/viewExtension"} />
+                    <Route exact path="/capstone/viewContract/:id/viewExtension" render={() => <ContractExtensionTable contractId={this.props.contract.id} role={this.props.role} />
                     } /></Router>
             );
         } else {
-            if (this.state.chooseTemplate === false) {
-
+            if (this.state.finish) {
                 return (
-                    <>
-                        <Button type="primary" value="cancel" onClick={this.Cancel}>
-                            Trở về
-              </Button>
-                        <Table dataSource={dataSource} >
-                            <Column title="loại hợp đồng" dataIndex="contract_type" key="contract_type" />
-                            <Column title="khóa" dataIndex="key" key="key" />
-                            <Column title="Tên file" dataIndex="fileName" key="fileName" />
-
-
-                            <Column
-                                title="Chọn hợp đồng"
-                                key="action"
-                                render={(text, record) => (
-                                    <Space size="middle">
-                                        <Button type="primary" icon={<FileOutlined />} onClick={this.handleChange}>Tạo hợp đồng với mẫu này</Button>
-                                    </Space>
-                                )}
-                            />
-                        </Table></>);
-
+                    <Router>
+                        <Redirect push to={"/capstone/" + this.state.showComponent} />
+                        <Route exact path="/capstone/contract" render={() => <ContractTable role={this.props.role} />
+                        } /></Router>
+                );
             } else {
                 return (
-                    <div style={{ border: "solid", backgroundColor: "white", height: "100vh" }} >
+
+                    <div style={{ height: "100vh", fontSize: 14 }}>
                         <Button type="primary" value="cancel" onClick={this.Cancel}>
                             Trở về
-              </Button>
-                        <Button type="primary" value="change" onClick={this.onChangeTemplate}>
-                            Đỗi mẫu
-              </Button>
-                        <h2 style={{ textAlign: 'center' }}>phụ lục hợp đồng</h2>
-                        <Space direction="vertical" align="start" >
+                            </Button>
+
+                        <Space direction="vertical" align="center" >
+
+                            <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
+                                <Card bordered={false} >
+                                    <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>
+                                    <h6 style={{ textAlign: 'center', fontSize: 14 }}>Độc lập-tự do-hạnh phúc</h6>
+                                    <br />
+                                    <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}>{this.props.contract.contractName}</h2>
+                                    <h6 style={{ textAlign: 'center', fontSize: 14 }}>Số {this.props.contract.contractNum}</h6>
+                                    <h6 style={{ fontSize: 14 }}>Hôm nay, ngày 3 tháng 11 năm 2020,
+                                    tại {this.props.contract.contractPlace}, chúng tôi gồm
+                            </h6>
+                                </Card>
+                                {this.state.company.id === this.state.creator ? <Card>
+
+                                    <Descriptions size="small" column={2} title={"Thông tin bên A"}  >
+                                        <Descriptions.Item label={(<><b>{"Công ty/Tổ chức"}</b></>)}>{this.state.company.name}
+                                        </Descriptions.Item>
+                                        <Descriptions.Item label={(<><b>{"Địa chỉ"}</b></>)}>{this.state.company.address}</Descriptions.Item>
+                                        <Descriptions.Item label={(<><b>{"Điện thoại"}</b></>)}>{this.state.company.phoneNumber}</Descriptions.Item>
+                                        <Descriptions.Item label={(<><b>{"Địa chỉ Email"}</b></>)}>{this.state.company.email}</Descriptions.Item>
+                                        <Descriptions.Item label={(<><b>{"Giấy phép kinh doanh"}</b></>)}>{this.state.company.businessLicense}</Descriptions.Item>
+                                        <Descriptions.Item label={(<><b>{"Mã số thuế"}</b></>)}>{this.state.company.taxCode}</Descriptions.Item>
+                                        <Descriptions.Item label={(<><b>{"Tài khoản số"}</b></>)}>{this.state.company.bankAccount}</Descriptions.Item>
+                                        {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
+                                        <Descriptions.Item label={(<><b>{"Do ông(bà)"}</b></>)} span={2}>{this.state.company.name}</Descriptions.Item>
+
+                                        <Descriptions.Item label={(<><b>{"Chức vụ"}</b></>)} span={2}>
+                                            Giám đốc làm đại diện
+                        </Descriptions.Item>
+
+
+                                    </Descriptions>
+                                    {bside}
+
+
+                                </Card> :
+                                    <Card>
+                                        {aside}
+                                        <Descriptions size="small" column={2} title={"Thông tin bên B"}  >
+                                            <Descriptions.Item label={(<><b>{"Công ty/Tổ chức"}</b></>)}>{this.state.company.name}
+                                            </Descriptions.Item>
+                                            <Descriptions.Item label={(<><b>{"Địa chỉ"}</b></>)}>{this.state.company.address}</Descriptions.Item>
+                                            <Descriptions.Item label={(<><b>{"Điện thoại"}</b></>)}>{this.state.company.phoneNumber}</Descriptions.Item>
+                                            <Descriptions.Item label={(<><b>{"Địa chỉ Email"}</b></>)}>{this.state.company.email}</Descriptions.Item>
+                                            <Descriptions.Item label={(<><b>{"Giấy phép kinh doanh"}</b></>)}>{this.state.company.businessLicense}</Descriptions.Item>
+                                            <Descriptions.Item label={(<><b>{"Mã số thuế"}</b></>)}>{this.state.company.taxCode}</Descriptions.Item>
+                                            <Descriptions.Item label={(<><b>{"Tài khoản số"}</b></>)}>{this.state.company.bankAccount}</Descriptions.Item>
+                                            {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
+                                            <Descriptions.Item label={(<><b>{"Do ông(bà)"}</b></>)} span={2}>{this.state.company.name}</Descriptions.Item>
+
+                                            <Descriptions.Item label={(<><b>{"Chức vụ"}</b></>)} span={2}>
+                                                Giám đốc làm đại diện
+                    </Descriptions.Item>
+
+
+                                        </Descriptions>
 
 
 
-                            <Card>
+                                    </Card>
+                                }
 
-                                <Form
+                            </Space>
+                            <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
+                                Giá trị hợp đồng:{this.props.contract.contractValue}
+                                <JoditEditor
 
-                                    name="basic"
-                                    className="lcontract-form"
-
-                                    onFinish={this.onFinish}
-                                    onFinishFailed={this.onFinishFailed}
-
-                                >
-                                    <Space title="Nội dung hợp đồng" direction="vertical" style={{ width: "100%" }}   >
-
-                                        <JoditEditor
-
-                                            value={this.state.contractContent}
-                                            config={config}
-                                            tabIndex={1} // tabIndex of textarea
-
-                                            onChange={this.rteChange}
-                                        />
+                                    value={this.props.contract.contractContent}
+                                    config={config}
+                                    tabIndex={1} // tabIndex of textarea
 
 
+                                />
+                            </Space>
+                            <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
+                                <Card>
 
-                                    </Space>
+                                    <Form
 
-                                    <Space size="large">
-                                        <Button type="primary" value="submit" htmlType="submit">
-                                            Nộp
-                  </Button>
-                                    </Space>
-                                </Form>
-                                
-                            </Card>
+                                        name="basic"
+                                        className="lcontract-form"
 
+                                        onFinish={this.onFinish}
+                                        onFinishFailed={this.onFinishFailed}
+
+                                    >
+                                        <h6 style={{ fontSize: 14 }}>Hợp đồng có hiệu lực kể từ ngày 3 tháng 11 năm 2020 đến
+                                             {this.props.contract.contractExpiredDate}
+                                        </h6>
+                                        <Space size="large">
+                                            {comments.length > 0 && <CommentList comments={comments} />}
+
+                                            {this.props.role === true ? <Button type="primary" value="Sign" onClick={this.onFinish}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
+                                                        Tải về
+                                                    </Button> : null}
+                                            {this.props.contract.status == "pending" && this.props.role === true ? <Comment
+                                                avatar={
+                                                    <Avatar
+                                                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                                                        alt="Han Solo"
+                                                    />
+                                                }
+                                                content={
+                                                    <Editor
+                                                        onChange={this.handleChange}
+                                                        onSubmit={this.handleSubmit}
+                                                        submitting={submitting}
+                                                        value={value}
+                                                    />
+                                                }
+                                            /> : null}
+
+
+                                            {this.props.role === true ? <Button type="primary" value="reject">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
+                                                            Reject
+                                                        </Button> : null}
+                                        </Space>
+                                    </Form>
+
+                                </Card>
+                            </Space>
                         </Space>
                     </div>
 
                 );
             }
         }
+
+
+
+
     }
 }
 export default AddContractExtension

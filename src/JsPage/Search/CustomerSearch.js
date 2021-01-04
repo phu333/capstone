@@ -86,20 +86,7 @@ class CustomerSearch extends React.Component {
 
                     </Radio.Group>
                 </Card> */}
-                <Card>
-                    <Radio.Group onChange={this.onChangeThirdSearchValue} value={this.state.thirdSearchValue}>
-                        <Radio style={radioStyle} value={"all"}>
-                            tất cả
-                        </Radio>
-                        <Radio style={radioStyle} value={"active"}>
-                            đang có hiệu lực
-        </Radio>
-
-                        <Radio style={radioStyle} value={"deactive"}>
-                            hết hiệu lực
-        </Radio>
-                    </Radio.Group>
-                </Card>
+                
             </Space>
         )
         return (
