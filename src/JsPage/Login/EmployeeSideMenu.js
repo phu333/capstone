@@ -58,9 +58,8 @@ class EmployeeSideMenu extends React.Component {
       var information = this.props.myLoginReducer.map((login, index) => {
         return (
 
-          <Layout style={{ height: "100vh" }}>
+          <Layout style={{ minHeight: "130vh" }}>
 
-            <Layout style={{ height: "100vh" }}>
 
               <Sider width={250} className="site-layout-background"
                 collapsible
@@ -70,7 +69,7 @@ class EmployeeSideMenu extends React.Component {
                 })}
                 style={{
                   overflow: "auto",
-                  height: "100vh",
+                  height: "92vh",
                   position: "sticky",
                   top: 0,
                   left: 0
@@ -118,7 +117,7 @@ class EmployeeSideMenu extends React.Component {
                 </Menu>
 
               </Sider>
-              <Layout style={{ padding: "0 24px 24px", height: "110vh" }}>
+              <Layout style={{ padding: "0 24px 24px", minHeight: "100vh" }}>
                 <Affix >
 
                   <Header></Header>
@@ -197,7 +196,6 @@ class EmployeeSideMenu extends React.Component {
 
               </Layout>
             </Layout>
-          </Layout>
         );
       })
 
