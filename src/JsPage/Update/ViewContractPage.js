@@ -265,80 +265,158 @@ class ContractView extends React.Component {
     onFinish = () => {
         console.log(this.state.company.taxCode)
         console.log(this.state.customers[0].taxCode)
-        axios({
-            url: "https://localhost:44338/api/Signature/PostContract",
-            method: "POST",
-            data: {
-                aInfo: this.state.company.taxCode,
-                bInfo: this.state.customers[0].taxCode
-            }
-        })
-            .then((response) => {
-
-
+        if(this.state.company.id !== undefined){
+            axios({
+                url: "https://localhost:44338/api/Signature/PostContract",
+                method: "POST",
+                data: {
+                    Info: this.state.company.taxCode,
+                    
+                }
             })
-            .then((data) => {
-
-            })
-            .catch(error => {
-                console.log(error)
-
-
-            });
-            if(this.props.contract.fileUrl === null){
-                axios({
-                    url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
-                    method: "GET",
-                    headers: {
-                        Authorization: 'Bearer ' + this.props.token,
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/docx'
-                    },
-                    responseType: 'arraybuffer',
-        
+                .then((response) => {
+    
+    
                 })
-                    .then((response) => {
-                        console.log(response)
-                        var fileDownload = require('js-file-download');
-                        fileDownload(response.data, this.props.contract.id + '.docx');
-                        return response.data;
+                .then((data) => {
+    
+                })
+                .catch(error => {
+                    console.log(error)
+    
+    
+                });
+                if(this.props.contract.fileUrl === null){
+                    axios({
+                        url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
+                        method: "GET",
+                        headers: {
+                            Authorization: 'Bearer ' + this.props.token,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/docx'
+                        },
+                        responseType: 'arraybuffer',
+            
                     })
-                    .then((data) => {
-                        console.log(data.data)
-        
+                        .then((response) => {
+                            console.log(response)
+                            var fileDownload = require('js-file-download');
+                            fileDownload(response.data, this.props.contract.id + '.docx');
+                            return response.data;
+                        })
+                        .then((data) => {
+                            console.log(data.data)
+            
+                        })
+                        .catch(error => {
+                            console.log(error)
+            
+            
+                        });
+                }else{
+                    window.open(this.props.contract.fileUrl,"_blank")
+                    // axios({
+                    //     url: this.props.contract.fileUrl,
+                    //     method: "GET",
+                    //     headers: {
+                    //         Authorization: 'Bearer ' + this.props.token,
+                    //         'Content-Type': 'application/json',
+                    //         'Accept': 'application/docx'
+                    //     },
+                    //     responseType: 'arraybuffer',
+            
+                    // })
+                    //     .then((response) => {
+                          
+                    //         return response.data;
+                    //     })
+                    //     .then((data) => {
+                    //         console.log(data.data)
+            
+                    //     })
+                    //     .catch(error => {
+                    //         console.log(error)
+            
+            
+                    //     });
+                }
+        }else{
+            axios({
+                url: "https://localhost:44338/api/Signature/PostContract",
+                method: "POST",
+                data: {
+                    Info: this.state.customers[0].taxCode,
+                    
+                }
+            })
+                .then((response) => {
+    
+    
+                })
+                .then((data) => {
+    
+                })
+                .catch(error => {
+                    console.log(error)
+    
+    
+                });
+                if(this.props.contract.fileUrl === null){
+                    axios({
+                        url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
+                        method: "GET",
+                        headers: {
+                            Authorization: 'Bearer ' + this.props.token,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/docx'
+                        },
+                        responseType: 'arraybuffer',
+            
                     })
-                    .catch(error => {
-                        console.log(error)
+                        .then((response) => {
+                            console.log(response)
+                            var fileDownload = require('js-file-download');
+                            fileDownload(response.data, this.props.contract.id + '.docx');
+                            return response.data;
+                        })
+                        .then((data) => {
+                            console.log(data.data)
+            
+                        })
+                        .catch(error => {
+                            console.log(error)
+            
+            
+                        });
+                }else{
+                    window.open(this.props.contract.fileUrl,"_blank")
+                    // axios({
+                    //     url: this.props.contract.fileUrl,
+                    //     method: "GET",
+                    //     headers: {
+                    //         Authorization: 'Bearer ' + this.props.token,
+                    //         'Content-Type': 'application/json',
+                    //         'Accept': 'application/docx'
+                    //     },
+                    //     responseType: 'arraybuffer',
+            
+                    // })
+                    //     .then((response) => {
+                          
+                    //         return response.data;
+                    //     })
+                    //     .then((data) => {
+                    //         console.log(data.data)
+            
+                    //     })
+                    //     .catch(error => {
+                    //         console.log(error)
+            
+            
+                    //     });
+                }
+        }
         
-        
-                    });
-            }else{
-                window.open(this.props.contract.fileUrl,"_blank")
-                // axios({
-                //     url: this.props.contract.fileUrl,
-                //     method: "GET",
-                //     headers: {
-                //         Authorization: 'Bearer ' + this.props.token,
-                //         'Content-Type': 'application/json',
-                //         'Accept': 'application/docx'
-                //     },
-                //     responseType: 'arraybuffer',
-        
-                // })
-                //     .then((response) => {
-                      
-                //         return response.data;
-                //     })
-                //     .then((data) => {
-                //         console.log(data.data)
-        
-                //     })
-                //     .catch(error => {
-                //         console.log(error)
-        
-        
-                //     });
-            }
         
 
 
