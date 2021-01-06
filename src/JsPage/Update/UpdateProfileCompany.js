@@ -1,19 +1,11 @@
-import React from 'react';
+import {
+    QuestionCircleOutlined
+} from '@ant-design/icons';
+import { Button, Card, Col, Form, Input, message, Popover, Row, Space } from 'antd';
 import 'antd/dist/antd.css';
+import axios from 'axios';
+import React from 'react';
 import '../../index.css';
-import axios from 'axios'
-import {
-    IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-    , CloudUploadOutlined, RedoOutlined
-} from '@ant-design/icons';
-
-import { Form, Input, Button, Row, Popover, Col, Card, Space, message } from 'antd';
-
-import {
-    QuestionCircleOutlined, UserOutlined
-} from '@ant-design/icons';
-
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 
 
 
