@@ -7,7 +7,7 @@ import {
     , CloudUploadOutlined, RedoOutlined
 } from '@ant-design/icons';
 
-import { Form, Input, Button, Row, Popover, Col, Card, Space,message } from 'antd';
+import { Form, Input, Button, Row, Popover, Col, Card, Space, message } from 'antd';
 
 import {
     QuestionCircleOutlined, UserOutlined
@@ -20,7 +20,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 're
 
 const layout = {
     labelCol: {
-        span: 6,
+        span: 7,
 
     },
     wrapperCol: {
@@ -50,31 +50,31 @@ const ValidationAdd = (
 
     <p>Số địa chỉ công ty</p>
 
-);const ValidationPresentor = (
+); const ValidationPresentor = (
 
     <p>Người đại diện cho công ty </p>
 
-);const ValidationCertificate = (
+); const ValidationCertificate = (
 
     <p>Mã giấy phép kinh doanh do nhà nước cấp</p>
 
-);const ValidationEmail = (
+); const ValidationEmail = (
 
     <p>Địa chỉ email của google</p>
 
-);const ValidationTax = (
+); const ValidationTax = (
 
     <p>Mã số thuế của công ty nhập dưới 10 ký tự</p>
 
-);const ValidationRole = (
+); const ValidationRole = (
 
     <p>Chức vụ trong công ty có thể để trống</p>
 
-);const ValidationPhone = (
+); const ValidationPhone = (
 
     <p>Số điện thoại công ty dưới 10 ký tự</p>
 
-);const ValidationBank = (
+); const ValidationBank = (
 
     <p>8 số cuối của mã số ngân hàng trên thẻ công ty có thể để trắng</p>
 
@@ -95,20 +95,20 @@ class UpdateProfileCompany extends React.Component {
     }
     onFinish = (values) => {
         axios({
-            url: '/api/v1/Company/'+this.state.company.id,
+            url: '/api/v1/Company/' + this.state.company.id,
             method: "PUT",
             headers: {
                 Authorization: 'Bearer ' + this.props.token,
 
             },
-            data:values
+            data: values
         })
             .then((response) => {
 
                 return response.data;
             })
             .then((data) => {
-                
+
             })
             .catch(error => {
                 console.log(error)
@@ -139,7 +139,7 @@ class UpdateProfileCompany extends React.Component {
     }; onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-    componentDidMount(){
+    componentDidMount() {
         axios({
             url: '/api/v1/Company/info',
             method: "PUT",
@@ -182,23 +182,23 @@ class UpdateProfileCompany extends React.Component {
                 <Space direction="horizontal" align="start"  >
 
 
-                    <Card style={{ width: 800, minHeight: 600 }}>
+                    <Card style={{ width: 1000, minHeight: 600 }}>
 
                         <Form
                             {...layout}
                             name="basic"
                             className="employee-form"
-
+                            hideRequiredMark
                             onFinish={this.onFinish}
                             onFinishFailed={this.onFinishFailed}
 
                         >
-                             <Form.Item
-                                
+                            <Form.Item
+
                                 name="id"
                                 initialValue={this.state.company.id}
                             >
-                               
+
                             </Form.Item>
                             <Form.Item
                                 label="Tên doanh nghiệp"
@@ -206,8 +206,8 @@ class UpdateProfileCompany extends React.Component {
 
                             >
                                 {this.state.isEdit === false ?
-                              
-                              <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+
+                                    <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationCompany} trigger="hover">
                                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row> :
                                     <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationCompany} trigger="hover">
@@ -218,14 +218,14 @@ class UpdateProfileCompany extends React.Component {
                                 label="Mã số thuế"
                                 name="taxCode"
                                 rules={[
-                                    
+
                                     {
-                                        
+
                                         message: 'Vui lòng nhập 10 ký tự',
                                         min: 10,
                                         max: 10,
                                     },
-                                ]}   
+                                ]}
                             >
                                 {this.state.isEdit === false ?
                                     <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.taxCode} /></Col>    <Popover content={ValidationTax} trigger="hover">
@@ -239,14 +239,14 @@ class UpdateProfileCompany extends React.Component {
                                 label="Điện thoại"
                                 name="phoneNumber"
                                 rules={[
-                                   
+
                                     {
-                                        
+
                                         message: 'Vui lòng nhập 10 ký tự',
                                         min: 10,
                                         max: 10,
                                     },
-                                ]}    
+                                ]}
                             >
                                 {this.state.isEdit === false ?
                                     <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.phoneNumber} /></Col>    <Popover content={ValidationPhone} trigger="hover">
@@ -302,9 +302,9 @@ class UpdateProfileCompany extends React.Component {
                                     {
                                         required: true,
                                         message: 'Vui lòng nhập Số tài khoản',
-                                        
-                                    },{
-        
+
+                                    }, {
+
                                         message: 'Vui lòng nhập 8 ký tự',
                                         min: 8,
                                         max: 8,

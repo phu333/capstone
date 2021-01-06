@@ -162,41 +162,41 @@ class ContractTable extends Component {
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}>
                         <Column title="Mã hợp đồng" dataIndex="contractNum" key="contractNum"
                             render={(text, record) => (
-                                <a><FileProtectOutlined /> {text}</a>
+                                <a> {text}</a>
                             )}
                         />
-                        <Column title="tên hợp đồng" dataIndex="contractTitle" key="contractTitle"
+                        <Column title="Tên hợp đồng" dataIndex="contractTitle" key="contractTitle"
                             render={(text, record) => (
 
-                                <a><ContainerOutlined />{text}</a>
+                                <a>{text}</a>
 
                             )}
                         />
 
-                        <Column title="bên B" dataIndex="customer" key="customer"
+                        <Column title="Khách hàng" dataIndex="customer" key="customer"
                             render={(text, record) => (
 
-                                <b>{text.companyName}</b>
+                                <p>{text.companyName}</p>
 
                             )} />
-                        <Column title="Ngày hết hạn" dataIndex="contractExpiredDate" key="contractExpiredDate"
+                        {/* <Column title="Ngày hết hạn" dataIndex="contractExpiredDate" key="contractExpiredDate"
                             sorter={(a, b) => a.deadline.localeCompare(b.deadline)}
                             sortDirections={['descend', 'ascend']}
                             render={(text, record) => (
 
-                                <b>{text}</b>
+                                <p>{text}</p>
 
-                            )} />
+                            )} /> */}
                         {/* <Column title="bên tạo hợp đồng" dataIndex="ben_tao_hd" key="ben_tao_hd"
                             render={(text, record) => (
 
-                                <b>{text}</b>
+                                <p>{text}</p>
 
                             )} /> */}
                         <Column title="giá trị hợp đồng" dataIndex="contractValue" key="contractValue"
                             render={(text, record) => (
 
-                                <b>{text}</b>
+                                <p>{text}</p>
 
                             )} />
                         <Column title="trạng thái" dataIndex="statusAsString" key="statusAsString"

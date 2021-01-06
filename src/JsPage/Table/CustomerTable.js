@@ -102,7 +102,7 @@ class CustomerList extends React.Component {
               sortDirections={['descend', 'ascend']}
               render={(text, record) => (
 
-                <b>{text}</b>
+                <p>{text}</p>
 
               )} />
 
@@ -111,37 +111,24 @@ class CustomerList extends React.Component {
               sortDirections={['descend', 'ascend']}
               render={(text, record) => (
 
-                <b>{text}</b>
-
-              )} />
-            <Column title="Địa chỉ" dataIndex="address" key="address"
-              sorter={(a, b) => a.address.localeCompare(b.address)}
-              sortDirections={['descend', 'ascend']}
-              render={(text, record) => (
-
-                <b>{text}</b>
+                <p>{text}</p>
 
               )} />
             <Column title="Mã số thuế" dataIndex="taxCode" key="taxCode" render={(text, record) => (
 
-              <b>{text}</b>
-
-            )} />
-            <Column title="Số giấy phép kinh doanh" dataIndex="businessLicense" key="businessLicense" render={(text, record) => (
-
-              <b>{text}</b>
+              <p>{text}</p>
 
             )} />
             <Column title="Số điện thoại" dataIndex="phoneNumber" key="phoneNumber" render={(text, record) => (
 
-              <b>{text}</b>
+              <p>{text}</p>
 
             )} />
-            <Column title="email" dataIndex="email" key="email" render={(text, record) => (
+            {/* <Column title="email" dataIndex="email" key="email" render={(text, record) => (
 
               <a>{text}</a>
 
-            )} />
+            )} /> */}
 
             {/* <Column title="trạng thái" dataIndex="status" key="status"
               sorter={(a, b) => a.status.localeCompare(b.status)}

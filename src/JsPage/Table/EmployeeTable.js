@@ -111,7 +111,7 @@ class EmployeeList extends React.Component {
               sortDirections={['descend', 'ascend']}
               render={(text, record) => (
 
-                <b>{text}</b>
+                <p>{text}</p>
 
               )} />
             <Column title="chức vụ" dataIndex="roles"
@@ -120,7 +120,7 @@ class EmployeeList extends React.Component {
               key="roles" 
               render={(text, record) => (
                 
-                <b>{text}</b>
+                <p>{text}</p>
 
               )}/>
             {/* <Column title="điện thoại" dataIndex="phone" key="phone" render={(text, record) => (
