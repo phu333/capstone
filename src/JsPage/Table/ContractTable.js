@@ -193,13 +193,13 @@ class ContractTable extends Component {
                                 <p>{text}</p>
 
                             )} /> */}
-                        <Column title="giá trị hợp đồng" dataIndex="contractValue" key="contractValue"
+                        <Column title="Giá trị hợp đồng" dataIndex="contractValue" key="contractValue"
                             render={(text, record) => (
 
                                 <p>{text}</p>
 
                             )} />
-                        <Column title="trạng thái" dataIndex="statusAsString" key="statusAsString"
+                        <Column title="Trạng thái" dataIndex="statusAsString" key="statusAsString"
                             sorter={(a, b) => a.status.localeCompare(b.status)}
                             sortDirections={['descend', 'ascend']}
                             render={(text, record) => {

@@ -114,7 +114,7 @@ class EmployeeList extends React.Component {
                 <p>{text}</p>
 
               )} />
-            <Column title="chức vụ" dataIndex="roles"
+            <Column title="Chức vụ" dataIndex="roles"
               sorter={(a, b) => a.roles[0].localeCompare(b.roles[0])}
               sortDirections={['descend', 'ascend']}
               key="roles" 
