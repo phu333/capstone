@@ -7,36 +7,9 @@ const myCustomerReducer = (state = initialState, action) => {
         case 'LIST_customer':
             return state;
         case 'CREATE_customer':
-            console.log(action)
+            console.log(action.customerList)
             state = initialState
-            axios({
-                url: '/api/v1/Customer',
-                method: "GET",
-                headers: {
-                  Authorization: 'Bearer ' + action.token,
-        
-                }
-              })
-                .then((response) => {
-        
-                  return response.data;
-                })
-                .then((data) => {
-                  
-                  data.data.map((customer)=>state.push(customer))
-                  
-        
-        
-                })
-                .catch(error => {
-                  console.log(error)
-                  if (error.response.status === 500) {
-                      message.error(error.response.status + ' Server under maintainence');
-                  } else if (error.response.status === 404) {
-                      message.error(error.response.status + ' Server not found');
-                  }
-        
-                });
+            state = action.customerList
                 console.log(state)
             
             

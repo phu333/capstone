@@ -3,11 +3,11 @@ export const customerInformation = () => {
       type: 'LIST_customer',
     }
   }
-  export const createCustomer = (token) => {
+  export const createCustomer = (customerList) => {
     
     return {
       type: 'CREATE_customer',
-      token
+      customerList
     }
   }
   export const updateCustomer = (customer) => {

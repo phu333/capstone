@@ -30,7 +30,7 @@ class App extends React.Component {
         <ReactCSSTransitionGroup transitionName="example"
           transitionAppear={true} transitionAppearTimeout={500}
         >
-          <Online>
+          {/* <Online> */}
 
             <Router>
               {/* {this.props.myLoginReducer.length === 0 ?
@@ -59,13 +59,14 @@ class App extends React.Component {
                 </Router>
 
               {/* {information} */}
-            </Router></Online>
-          <Offline><Result
+            </Router>
+            {/* </Online> */}
+          {/* <Offline><Result
             status="404"
             title="404"
             subTitle="Sorry, the page you visited does not exist."
 
-          /></Offline>
+          /></Offline> */}
 
         </ReactCSSTransitionGroup>
 

@@ -17,7 +17,7 @@ const { Column } = Table;
 
 
 const dataSource = []
-
+var hash = require('object-hash')
 
 class ContractTable extends Component {
     constructor() {
@@ -143,7 +143,7 @@ class ContractTable extends Component {
         } else if (this.state.showContract) {
             return (
                 <Router>
-                    <Redirect push to={"/capstone/viewContract/" + this.state.contract.id} />
+                    <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.state.contract.id)} />
                     <Route exact path="/capstone/viewContract/:id" render={() => <ViewContractPage contract={this.state.contract} token={this.props.token} role={this.props.role} />
                     } /></Router>
 
