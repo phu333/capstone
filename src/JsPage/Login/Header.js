@@ -1,8 +1,8 @@
 import { Menu, Layout } from 'antd';
-import { PageHeader, Avatar, Dropdown, Space } from 'antd';
+import { PageHeader, Avatar, Dropdown, Space,Row,Col,Divider } from 'antd';
 import React, { Component } from 'react';
 import { Badge } from 'antd';
-import { UserOutlined, DownOutlined, BellOutlined, LogoutOutlined } from "@ant-design/icons";
+import { UserOutlined, DownOutlined,CloseCircleTwoTone , BellOutlined,FormOutlined, LogoutOutlined,ExclamationCircleTwoTone,CheckCircleTwoTone  } from "@ant-design/icons";
 import { connect } from 'react-redux'
 import { logout, login } from '../../actions/loginAction'
 
@@ -32,14 +32,40 @@ class Header extends Component {
         var information = this.props.myLoginReducer.map((login, index) => {
 
             const notifications = (
-                <Menu >
+                <Menu  >
+                    <Divider orientation="left"  style={{ fontSize: '15px' }} >Chưa coi </Divider >
+                        <Menu.Item  style={{whiteSpace: 'normal', height: '100px',width:'300px'}} >
+                            <Row wrap >
+                                <Col span={6}><CheckCircleTwoTone  style={{ fontSize: '30px', color: '#blue' }}  /></Col>
+                                    <Col  span={14}><h6><b>anh@gmail.com</b> đã chấp nhận mẫu hợp đồng của bạn</h6></Col>
+                             </Row>
+                            <Row><h6 style={{color:"green"}}>ngày 20 tháng 12 năm 2020</h6></Row>
+                        </Menu.Item>    <Menu.Divider />
+    
+                    <Divider orientation="left" style={{ fontSize: '15px' }}>Đã coi </Divider >
+    
+                         <Menu.Item  style={{whiteSpace: 'normal', height: '100px',width:'300px',backgroundColor:"lightgrey"}} >
+                            <Row wrap >
+                                <Col span={6}><FormOutlined  style={{ fontSize: '30px', color: '#08c' }}  /></Col>
+                                <Col  span={14}><h6><b>anh@gmail.com</b> đã yêu cầu bạn tạo mẫu hợp đồng</h6></Col>
+                            </Row>
+                            <Row><h6 style={{color:"blue"}}>ngày 20 tháng 12 năm 2020</h6></Row>
+                        </Menu.Item>    <Menu.Divider />
 
-                    <Menu.Item  key="2" >
-                       
-                      Some notifications
-             
-                    </Menu.Item>
-                   
+                        <Menu.Item  style={{whiteSpace: 'normal', height: '100px',width:'300px',backgroundColor:"lightgrey"}} >
+                            <Row wrap >
+                                <Col span={6}><CloseCircleTwoTone   twoToneColor='red'  style={{ fontSize: '30px',  }}  /></Col>
+                                <Col  span={14}><h6><b>anh@gmail.com</b> đã Từ chối yêu cầu của bạn</h6></Col>
+                            </Row>
+                            < Row><h6 style={{color:"blue"}}>ngày 20 tháng 12 năm 2020</h6></Row>
+                        </Menu.Item>    <Menu.Divider />    
+                        <Menu.Item  style={{whiteSpace: 'normal', height: '100px',width:'300px',backgroundColor:"lightgrey"}} >
+                            <Row wrap >
+                                <Col span={6}><ExclamationCircleTwoTone twoToneColor="orange"  style={{ fontSize: '30px' }}  /></Col>
+                                <Col  span={14}><h6><b>anh@gmail.com</b> đã yêu cầu bạn kiểm tra mẫu hợp đồng</h6></Col>
+                            </Row>
+                            <Row><h6 style={{color:"blue"}}>ngày 20 tháng 12 năm 2020</h6></Row>
+                        </Menu.Item>    <Menu.Divider />    <Menu.Divider />    
     
                 </Menu >
             );
@@ -64,7 +90,7 @@ class Header extends Component {
                 extra={[
                     <Space direction="horizontal" size="large" >
                         <b>Thời hạn còn lại của tài khoản : 25 ngày</b>
-                    <Dropdown overlay={notifications} placement="bottomCenter" trigger={['click']}>
+                    <Dropdown overlay={notifications}  placement="bottomCenter" trigger={['click']}>
                     <Badge count={1}><BellOutlined style={{ fontSize: '20px', color: '#08c' }} /></Badge>
                     </Dropdown>
                     <Space direction="horizontal" size="small" >
