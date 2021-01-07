@@ -46,18 +46,12 @@ class CustomerList extends React.Component {
         this.setState({
           customers:data.data,
         })
-        
+        this.props.onSubmit(data.data)
 
 
       })
       .catch(error => {
-        console.log(error)
-        if (error.response.status === 500) {
-            message.error(error.response.status + ' Server under maintainence');
-        } else if (error.response.status === 404) {
-            message.error(error.response.status + ' Server not found');
-        }
-
+       
       });
       
      
@@ -93,8 +87,8 @@ class CustomerList extends React.Component {
     else {
       return (
         <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddCustomer} icon={<UserAddOutlined />}>Tạo khách hàng mới</Button>
-          <CustomerSearch />
-          <Table dataSource={this.state.customers}
+          <CustomerSearch token={this.props.token} customerList={this.state.customers} />
+          <Table dataSource={this.props.newCustomer}
 
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
             <Column title="Tên doanh nghiệp" dataIndex="name" key="name"
@@ -105,7 +99,7 @@ class CustomerList extends React.Component {
                 <p>{text}</p>
 
               )} />
-
+{/* 
             <Column title="Người đại diện" dataIndex="name" key="name"
               sorter={(a, b) => a.name.localeCompare(b.name)}
               sortDirections={['descend', 'ascend']}
@@ -113,13 +107,18 @@ class CustomerList extends React.Component {
 
                 <p>{text}</p>
 
-              )} />
+              )} /> */}
+
             <Column title="Mã số thuế" dataIndex="taxCode" key="taxCode" render={(text, record) => (
 
               <p>{text}</p>
 
             )} />
+            <Column title="Số điện thoại" dataIndex="phoneNumber" key="phoneNumber" render={(text, record) => (
 
+              <p>{text}</p>
+
+            )} />
             <Column title="email" dataIndex="email" key="email" render={(text, record) => (
 
               <a>{text}</a>
