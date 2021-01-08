@@ -88,7 +88,21 @@ class LoginPage extends React.Component {
         this.onFinishFailed = this.onFinishFailed.bind(this);
 
     }
+    componentDidMount() {
+        let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) 
+        console.log(loginInfo)
+        if (loginInfo != undefined && loginInfo != null) {
+            this.props.onSubmit(loginInfo)
+        } else {
+            return( <Router>
+                <Redirect push to={"/capstone/Login"} />
 
+                <Route exact path="/capstone/Login" component={LoginPage} />
+            </Router>)
+           
+        }
+
+    }
     onFinish = (values) => {
 
 
@@ -138,6 +152,7 @@ class LoginPage extends React.Component {
                         loginCode: true,
                     }
                     this.props.onSubmit(loginInfo)
+                    console.log(loginInfo)
                 } else {
                     let loginInfo = {
                         id: data.data.id,
@@ -157,6 +172,7 @@ class LoginPage extends React.Component {
                         loginCode: true,
                     }
                     this.props.onSubmit(loginInfo)
+                    console.log(loginInfo)
                 }
 
 

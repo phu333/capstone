@@ -113,8 +113,10 @@ class AddCustomer extends React.Component {
                             })
                             .then((data) => {
                 
-                                alert("tao thanh cong")
-                
+                                message.success("tao thanh cong")
+                                this.setState({
+                                    finish: true
+                                })
                             })
                             .catch(error => {
                 
@@ -142,7 +144,10 @@ class AddCustomer extends React.Component {
                             })
                             .then((data) => {
                 
-                                alert("tao thanh cong")
+                                message.success("tao thanh cong")
+                                this.setState({
+                                    finish: true
+                                })
                 
                             })
                             .catch(error => {

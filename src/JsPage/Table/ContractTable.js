@@ -165,7 +165,7 @@ class ContractTable extends Component {
                                 <a><FileProtectOutlined /> {text}</a>
                             )}
                         />
-                        <Column title="tên hợp đồng" dataIndex="contractTitle" key="contractTitle"
+                        <Column title="Tên hợp đồng" dataIndex="contractTitle" key="contractTitle"
                             render={(text, record) => (
 
                                 <a><ContainerOutlined />{text}</a>
@@ -173,7 +173,7 @@ class ContractTable extends Component {
                             )}
                         />
 
-                        <Column title="bên B" dataIndex="customer" key="customer"
+                        <Column title="Bên B" dataIndex="customer" key="customer"
                             render={(text, record) => (
 
                                 <b>{text.companyName}</b>
