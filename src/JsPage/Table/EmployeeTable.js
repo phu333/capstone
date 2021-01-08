@@ -47,16 +47,16 @@ class EmployeeList extends React.Component {
           this.setState({
             employees:data.data
           })
-
+          this.props.onSubmit(data.data)
 
         })
         .catch(error => {
 
-          if (error.response.status === 500) {
-            message.error(error.response.status + ' Server under maintainence');
-          } else if (error.response.status === 404) {
-            message.error(error.response.status + ' Server not found');
-          }
+          // if (error.response.status === 500) {
+          //   message.error(error.response.status + ' Server under maintainence');
+          // } else if (error.response.status === 404) {
+          //   message.error(error.response.status + ' Server not found');
+          // }
 
         });
       
@@ -75,7 +75,6 @@ class EmployeeList extends React.Component {
     })
   }
   render() {
-    console.log(this.state.employees)
     if (this.state.openEmployee === "openAddEmployee") {
       return (
         <Router>
@@ -102,8 +101,8 @@ class EmployeeList extends React.Component {
     else {
       return (
         <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button>
-          <EmployeeSearch />
-          <Table dataSource={this.state.employees}
+          <EmployeeSearch token={this.props.token} employeeList={this.state.employees}/>
+          <Table dataSource={this.props.newEmployee}
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
 
             <Column title="Tên" dataIndex="userName" key="userName"
@@ -206,8 +205,8 @@ class EmployeeList extends React.Component {
 }
 var mapDispatchToProps = (dispatch, props) => {
   return {
-    onSubmit: (employee) => {
-      dispatch(createEmployee(employee))
+    onSubmit: (token) => {
+      dispatch(createEmployee(token))
     }
   }
 }
@@ -215,7 +214,8 @@ var mapStateToProps = state => {
 
 
   return {
-    newEmployee: state.myEmployeeReducer
+    newEmployee: state.myEmployeeReducer,
+    myLoginReducer: state.myLoginReducer
   }
 
 
