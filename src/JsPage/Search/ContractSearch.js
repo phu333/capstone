@@ -96,12 +96,12 @@ class ContractSearch extends React.Component {
                         <Radio style={radioStyle} value={"1Year"}>
                             1 năm
         </Radio>
-                        <Radio style={radioStyle} value={"SearchByContractDeadline"}>
+                        {/* <Radio style={radioStyle} value={"SearchByContractDeadline"}>
                             tìm kiếm theo ngày hết hạn
         </Radio>
                         <Radio style={radioStyle} value={"SearchByContractCreatedDate"}>
                             tìm kiếm theo ngày tạo
-        </Radio>
+        </Radio> */}
                     </Radio.Group>
                 </Card>
                 <Card>

@@ -69,7 +69,7 @@ class EmployeeSideMenu extends React.Component {
                 })}
                 style={{
                   overflow: "auto",
-                  height: "92vh",
+                  minHeight: "92vh",
                   position: "sticky",
                   top: 0,
                   left: 0

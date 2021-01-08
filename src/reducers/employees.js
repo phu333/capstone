@@ -7,12 +7,11 @@ const myEmployeeReducer = (state = initialState, action) => {
             return state;
         case 'CREATE_employee':
             
-                  
-            state.push(action.employee)
-                  
-        
-        
-               
+            console.log(action.employeeList)
+            state = initialState
+            state = action.employeeList
+                console.log(state)
+            
             
             return [...state];
         case 'UPDATE_employee':

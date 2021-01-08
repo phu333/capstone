@@ -83,20 +83,20 @@ class ContractTable extends React.Component {
           <ContractTypeSearch />
           <Table dataSource={this.state.templateList}
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}  >
-           <Column title="mã" dataIndex="id" key="id"
+           <Column title="Mã" dataIndex="id" key="id"
             sorter={(a, b) => a.contract_type.localeCompare(b.contract_type)}
             sortDirections={['descend', 'ascend']}
               render={(text, record) => (
 
-                <b>{text}</b>
+                <p>{text}</p>
 
               )}
             />
 
-            <Column title="tên" dataIndex="name" key="name"
+            <Column title="Tên" dataIndex="name" key="name"
               render={(text, record) => (
 
-                <b>{text}</b>
+                <p>{text}</p>
 
               )}
             />

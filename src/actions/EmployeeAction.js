@@ -3,11 +3,11 @@ export const employeeInformation = () => {
     type: 'LIST_employee',
   }
 }
-export const createEmployee = (employee) => {
+export const createEmployee = (employeeList) => {
   
   return {
     type: 'CREATE_employee',
-    employee
+    employeeList
   }
 }
 export const updateEmployee = (employee) => {
