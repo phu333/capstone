@@ -4,7 +4,7 @@ import ContractSearch from '../Search/ContractSearch'
 import "../Column.css"
 import axios from 'axios'
 import {
-    FolderViewOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
+    FolderViewOutlined, DownloadOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
     FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
 } from "@ant-design/icons"
 import ChooseContractTemplate from '../Add/ChooseContractTemplate'
@@ -29,11 +29,12 @@ class ContractTable extends Component {
             contract: {},
             contractsCreate: [],
             contractsReciceve: [],
-            contractsTotal: []
+            contractsTotal: [],
+            company:{},
         };
         this.onOpenCreateContract = this.onOpenCreateContract.bind(this);
         this.viewContract = this.viewContract.bind(this);
-
+        this.Donwload = this.Donwload.bind(this);
 
 
     }
@@ -51,7 +52,10 @@ class ContractTable extends Component {
                 return response.data;
             })
             .then((data) => {
-                console.log(data.data)
+                this.setState({
+                    company: data.data
+                })
+                console.log(data.data.taxCode)
                 axios({
                     url: '/api/v1/Contract/get-by-taxcode?taxCode='+data.data.taxCode,
                     method: "GET",
@@ -115,6 +119,63 @@ class ContractTable extends Component {
 
 
 
+    }
+    Donwload(text){
+        if (this.state.company.id !== undefined) {
+            axios({
+                url: "https://localhost:44338/api/Signature/PostContract",
+                method: "POST",
+                data: {
+                    Info: this.state.company.taxCode,
+
+                }
+            })
+                .then((response) => {
+
+
+                })
+                .then((data) => {
+
+                })
+                .catch(error => {
+                    console.log(error)
+
+
+                });
+            if (text.fileUrl === null) {
+                axios({
+                    url: '/api/v1/Contract/export-docx/' + text.id,
+                    method: "GET",
+                    headers: {
+                        Authorization: 'Bearer ' + this.props.token,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/docx'
+                    },
+                    responseType: 'arraybuffer',
+
+                })
+                    .then((response) => {
+                        console.log(response)
+                        var fileDownload = require('js-file-download');
+                        fileDownload(response.data, text.id + '.docx');
+                        return response.data;
+                    })
+                    .then((data) => {
+                        console.log(data.data)
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+
+
+                    });
+            } else {
+                window.open(text.fileUrl, "_blank")
+                
+            }
+        } else {
+           
+        }
     }
     onOpenCreateContract() {
         this.setState({
@@ -243,15 +304,17 @@ class ContractTable extends Component {
 
                             )}
                         /> */}
-                        {this.props.role === true ? <Column
-                            title="Ký"
+                        <Column
+                            title="Tải về"
                             key="action"
                             render={(text, record) => (
 
-                                <FormOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.viewContract} />
+                                <DownloadOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                                    () =>this.Donwload(text)
+                                } />
 
                             )}
-                        /> : null}
+                        /> 
 
                     </Table></div>
             );
