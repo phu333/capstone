@@ -11,7 +11,7 @@ import axios from 'axios'
 import 'reactjs-popup/dist/index.css';
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-
+import ContractTypeTable from '../Table/ContractTypeTable'
 import 'react-quill/dist/quill.snow.css';
 import JoditEditor from "jodit-react";
 import e from 'cors';
@@ -59,7 +59,7 @@ class TemplateUpload extends React.Component {
             contractContent: "",
             templateName: "",
             contractName: "",
-
+            finish:false
         };
 
         this.rteChange = this.rteChange.bind(this);
@@ -101,7 +101,10 @@ class TemplateUpload extends React.Component {
             })
             .then((data) => {
 
-                alert("tao thanh cong")
+                message.success("tao thanh cong")
+                this.setState({
+                    finish: true
+                })
 
             })
             .catch(error => {
@@ -115,7 +118,14 @@ class TemplateUpload extends React.Component {
         const config = {
             readonly: false // all options from https://xdsoft.net/jodit/doc/
         }
-
+        if (this.state.finish) {
+            return (
+                <Router>
+                    <Redirect push to={'/capstone/contractType'} />
+                    <Route exact path='/capstone/contractType' render={() => <ContractTypeTable token={this.props.token} role={this.props.role} />
+                    } /></Router>
+            );
+        } else {
 
         return (
             <div style={{ fontSize: 14 }} >
@@ -232,7 +242,7 @@ class TemplateUpload extends React.Component {
 
     }
 }
-
+}
 var mapStateToProps = state => {
     console.log(state.myLoginReducer)
     return {

@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Switch, Space, Card, Select, Col, Row,Popover } from 'antd';
+import { Form, Input, Button, Switch, Space, Card, Select, Col, Row,Popover,message } from 'antd';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import { CloseOutlined, CheckOutlined,QuestionCircleOutlined } from '@ant-design/icons';
@@ -131,6 +131,10 @@ class AddEmployee extends React.Component {
                 // }
 
                 // this.props.onSubmit(data)
+                this.setState({
+                    finish: true
+                })
+                message.success("tao thanh cong")
 
             })
             .catch(error => {
