@@ -53,15 +53,15 @@ class ContractTable extends Component {
             .then((data) => {
                 console.log(data.data)
                 axios({
-                    url: '/api/v1/Contract/get-by-taxcode?taxCode='+data.data.taxCode,
+                    url: '/api/v1/Contract/get-by-taxcode?taxCode=' + data.data.taxCode,
                     method: "GET",
                     headers: {
                         Authorization: 'Bearer ' + this.props.token,
-        
+
                     }
                 })
                     .then((response) => {
-        
+
                         return response.data;
                     })
                     .then((data) => {
@@ -74,36 +74,37 @@ class ContractTable extends Component {
                             method: "GET",
                             headers: {
                                 Authorization: 'Bearer ' + this.props.token,
-                
+
                             }
                         })
                             .then((response) => {
-                
+
                                 return response.data;
                             })
                             .then((data) => {
                                 console.log(data)
                                 this.setState({
                                     contractsCreate: data.data,
-                                    
+
                                 })
                                 this.setState({
-                                   
-                                    contractsTotal: [...this.state.contractsCreate,...this.state.contractsReciceve]
+
+                                    contractsTotal: [...this.state.contractsCreate, ...this.state.contractsReciceve]
                                 })
+                                this.props.onSubmit(data.data)
                             })
-                
+
                             .catch(error => {
-                
-                
+
+
                             });
                     })
-        
+
                     .catch(error => {
-        
-        
+
+
                     });
-                
+
             })
             .catch(error => {
                 console.log(error)
@@ -111,7 +112,7 @@ class ContractTable extends Component {
 
             });
 
-            
+
 
 
 
@@ -157,8 +158,8 @@ class ContractTable extends Component {
                         <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContract}>Tạo hợp đồng</Button>
                         <Button type="primary" icon={<UploadOutlined />} >Tải lên hợp đồng</Button>
                     </Space>
-                    <ContractSearch />
-                    <Table dataSource={this.state.contractsTotal}
+                    <ContractSearch token={this.props.token} contractList={this.state.contractsTotal} />
+                    <Table dataSource={this.props.newContract}
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}>
                         <Column title="Mã hợp đồng" dataIndex="contractNum" key="contractNum"
                             render={(text, record) => (
@@ -193,14 +194,12 @@ class ContractTable extends Component {
                                 <p>{text}</p>
 
                             )} /> */}
-                        <Column title="Giá trị hợp đồng" dataIndex="contractValue" key="contractValue"
-                            render={(text, record) => (
+                        <Column title="Giá trị hợp đồng"  dataIndex="contractValue" key="contractValue"
 
-                                <p>{text}</p>
+                            render={(text, record) =>  `$ ${text}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 
-                            )} />
+                             />   
                         <Column title="Trạng thái" dataIndex="statusAsString" key="statusAsString"
-                            sorter={(a, b) => a.status.localeCompare(b.status)}
                             sortDirections={['descend', 'ascend']}
                             render={(text, record) => {
                                 let color = 'pink'
@@ -253,7 +252,7 @@ class ContractTable extends Component {
                             )}
                         /> : null}
 
-                    </Table></div>
+                    </Table></div >
             );
         }
 
@@ -261,8 +260,8 @@ class ContractTable extends Component {
 }
 var mapDispatchToProps = (dispatch, props) => {
     return {
-        onSubmit: (contract) => {
-            dispatch(createContract(contract))
+        onSubmit: (token) => {
+            dispatch(createContract(token))
         }
     }
 }
@@ -270,7 +269,8 @@ var mapStateToProps = state => {
 
 
     return {
-        newContract: state.myContractReducer
+        newContract: state.myContractReducer,
+        myLoginReducer: state.myLoginReducer
     }
 
 

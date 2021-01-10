@@ -210,7 +210,7 @@ class TemplateUpload extends React.Component {
                                     <Space size="large">
 
                                         <Button type="primary" htmlType="submit" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
-                                                            nộp
+                                                            Tạo
                                                     </Button>
 
                                         <Button type="primary" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}

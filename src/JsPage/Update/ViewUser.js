@@ -125,7 +125,7 @@ class ViewUser extends React.Component {
 
                     <Form.Item {...tailLayout}>
                         <Button type="primary" htmlType="submit">
-                            <CloudUploadOutlined /> Nộp
+                            <CloudUploadOutlined /> Tạo
                             </Button>
                         <Button type="primary" style={{
                             margin: '0 8px',

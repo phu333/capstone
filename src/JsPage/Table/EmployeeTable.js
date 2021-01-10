@@ -84,7 +84,7 @@ class EmployeeList extends React.Component {
     } else if (this.state.openEmployee === "openViewEmployee") {
       return (
         <Router>
-          <Redirect push to={"/capstone/updateEmployee/" + this.state.employee.name} />
+          <Redirect push to={"/capstone/updateEmployee/" + this.state.employee.userName} />
           <Route exact path="/capstone/updateEmployee/:id" render={() => <ViewEmployee token={this.props.token} employee={this.state.employee} />} />
 
         </Router>

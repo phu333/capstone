@@ -120,7 +120,7 @@ class SignatureList extends React.Component {
         else {
             return (
                 <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddSignature} icon={<UserAddOutlined />}>Thêm chữ ký mới</Button>
-                    <SignatureSearch />
+                    <SignatureSearch token={this.props.token} SignatureList={this.props.newSignature}/>
                     <Table dataSource={this.props.newSignature}
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
 

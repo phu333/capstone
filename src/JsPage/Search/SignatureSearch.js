@@ -2,20 +2,67 @@ import React from "react";
 import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
 import { Select,Form, DatePicker, Button, Space, Breadcrumb, PageHeader, Input, InputNumber, Dropdown, Card, Radio } from 'antd';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import axios from 'axios'
+import { connect } from 'react-redux';
+import { createSignature } from '../../actions/SignatureAction';
 const { RangePicker } = DatePicker;
 class SignatureSearch extends React.Component {
     constructor() {
         super();
 
         this.state = {
-
+            SearchBy: "all",
             firstSearchValue: "all",
             secondSearchValue: "all",
             thirdSearchValue: "all",
+            SearchValue: "",
         };
 
+        this.handleChange = this.handleChange.bind(this);
 
     }
+    handleChange(value) {
+        this.setState({
+            SearchBy: value.target.value
+        })
+    }
+    
+    onFinish = (values) => {
+        console.log(this.state.SearchValue)
+        if (this.state.SearchBy === "SearchByProvider") {
+            let SignatureSearchList = this.props.SignatureList.filter(Signature => Signature.provider.toLowerCase().includes(this.state.SearchValue.toLowerCase()))
+            console.log(SignatureSearchList)
+            this.props.onSubmit(SignatureSearchList)
+        } else if (this.state.SearchBy === "SearchBySerial") {
+            let SignatureSearchList = this.props.SignatureList.filter(Signature => Signature.Serial.toLowerCase().includes(this.state.SearchValue.toLowerCase()))
+            console.log(SignatureSearchList)
+            this.props.onSubmit(SignatureSearchList)
+        } else {
+            axios({
+                url: '/api/v1/Customer',
+                method: "GET",
+                headers: {
+                    Authorization: 'Bearer ' + this.props.token,
+
+                }
+            })
+                .then((response) => {
+
+                    return response.data;
+                })
+                .then((data) => {
+
+
+                    this.props.onSubmit(data.data)
+
+
+                })
+                .catch(error => {
+
+                });
+        }
+
+    };
     onChangeFirstSearchValue = e => {
         this.setState({
             firstSearchValue: e.target.value
@@ -38,21 +85,22 @@ class SignatureSearch extends React.Component {
         const dropDown = (
             <Space direction="horizontal">
                 <Card>
-                    <Radio.Group onChange={this.onChangeFirstSearchValue} value={this.state.firstSearchValue}>
+                    <Radio.Group onChange={this.handleChange} value={this.state.SearchBy}>
+                    <Radio style={radioStyle} value={"all"}>
+                            tất cả
+        </Radio>
                         <Radio style={radioStyle} value={"SearchByProvider"}>
                             tìm kiếm nhà cung cấp
         </Radio>
                         <Radio style={radioStyle} value={"SearchBySerial"}>
                             Số serial
         </Radio>
-                        <Radio style={radioStyle} value={"all"}>
-                            tất cả
-        </Radio>
+
 
 
                     </Radio.Group>
                 </Card>
-                <Card>
+                {/* <Card>
                     <Radio.Group onChange={this.onChangeSecondSearchValue} value={this.state.secondSearchValue}>
                         <Radio style={radioStyle} value={"all"}>
                             tất cả
@@ -68,8 +116,8 @@ class SignatureSearch extends React.Component {
                             Trong khoản thời gian
         </Radio>
                     </Radio.Group>
-                </Card>
-                <Card>
+                </Card> */}
+                {/* <Card>
                     <Radio.Group onChange={this.onChangeThirdSearchValue} value={this.state.thirdSearchValue}>
                         <Radio style={radioStyle} value={"all"}>
                             tất cả
@@ -82,7 +130,7 @@ class SignatureSearch extends React.Component {
                             hết hiệu lực
         </Radio>
                     </Radio.Group>
-                </Card>
+                </Card> */}
             </Space>
         )
         return (
@@ -113,13 +161,12 @@ class SignatureSearch extends React.Component {
                                 </Dropdown>
 
 
-                                {this.state.firstSearchValue === "SearchByProvider" ? <> <Input name="searchValue" />
-                                </> : null}
-                                {this.state.firstSearchValue === "SearchBySerial" ?
-                                    <> <Input name="searchValue" />
-                                    </>
-                                    : null}
-                                {this.state.secondSearchValue === "SearchByGivenDate" ? <> 
+                                {this.state.SearchBy === "SearchByProvider" ? <> <Input onInput={values => this.setState({ SearchValue: values.target.value })} style={{ width: '300px' }} />
+                                    </> : null}
+                                {this.state.SearchBy === "SearchBySerial" ?
+                                   <> <Input onInput={values => this.setState({ SearchValue: values.target.value })} style={{ width: '300px' }} />
+                                   </> : null}
+                                {this.state.SearchBy === "SearchByGivenDate" ? <> 
                                 <DatePicker showTime onChange={this.onChange} onOk={this.onOk} />
                                 </> : null}
                                 {this.state.secondSearchValue === "SearchByDeadline" ?
@@ -148,5 +195,11 @@ class SignatureSearch extends React.Component {
 
             </div>);
     }
+}var mapDispatchToProps = (dispatch, props) => {
+    return {
+        onSubmit: (token) => {
+            dispatch(createSignature(token))
+        }
+    }
 }
-export default SignatureSearch;
+export default connect(null, mapDispatchToProps)( SignatureSearch);

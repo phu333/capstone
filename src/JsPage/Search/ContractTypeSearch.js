@@ -2,13 +2,17 @@ import React from "react";
 import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
 import { Select, DatePicker, Button, Space, Breadcrumb, PageHeader, Input, InputNumber, Form, Radio,Dropdown,Card } from 'antd';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import axios from 'axios'
+import { connect } from 'react-redux';
+import { createContractType } from '../../actions/ContractType';
 const { Option } = Select;
 class ContractTypeSearch extends React.Component {
     constructor() {
         super();
 
         this.state = {
-
+            SearchValue: "",
+            SearchBy: "all",
             firstSearchValue: "all",
             secondSearchValue: "all",
             thirdSearchValue: "all",
@@ -18,14 +22,43 @@ class ContractTypeSearch extends React.Component {
     }
     handleChange(value) {
         this.setState({
-            SearchBy: value
+            SearchBy: value.target.value
         })
     }
     onFinish = (values) => {
-        console.log(values)
+        console.log(this.state.SearchValue)
+        if (this.state.SearchBy === "SearchByContractType") {
+            let custometSearchList = this.props.templateList.filter(template => template.name.toLowerCase().includes(this.state.SearchValue.toLowerCase()))
+            console.log(custometSearchList)
+            this.props.onSubmit(custometSearchList)
+        } else if (this.state.SearchBy === "SearchByCreater") {
+            let custometSearchList = this.props.templateList.filter(template => template.createdBy.toLowerCase().includes(this.state.SearchValue.toLowerCase()))
+            console.log(custometSearchList)
+            this.props.onSubmit(custometSearchList)
+        } else {
+            axios({
+                url: '/api/v1/ContractType',
+                method: "GET",
+                headers: {
+                    Authorization: 'Bearer ' + this.props.token,
+
+                }
+            })
+                .then((response) => {
+
+                    return response.data;
+                })
+                .then((data) => {
 
 
-    };
+                    this.props.onSubmit(data.data)
+
+
+                })
+                .catch(error => {
+
+                });
+        }};
     onChange(value, dateString) {
         console.log('Selected Time: ', value);
         console.log('Formatted Selected Time: ', dateString);
@@ -59,12 +92,12 @@ class ContractTypeSearch extends React.Component {
         const dropDown = (
             <Space direction="horizontal">
                 <Card>
-                    <Radio.Group onChange={this.onChangeFirstSearchValue} value={this.state.firstSearchValue}>
+                    <Radio.Group onChange={this.handleChange} value={this.state.SearchBy}>
                         <Radio style={radioStyle} value={"SearchByContractType"}>
                             tìm kiếm bằng loại hợp đồng
         </Radio>
                         <Radio style={radioStyle} value={"SearchByCreater"}>
-                            tìm kiếm theo mã số thuế
+                            tìm kiếm theo tên người tạo
         </Radio>
                         <Radio style={radioStyle} value={"all"}>
                             tất cả
@@ -73,7 +106,7 @@ class ContractTypeSearch extends React.Component {
 
                     </Radio.Group>
                 </Card>
-                <Card>
+                {/* <Card>
                     <Radio.Group onChange={this.onChangeSecondSearchValue} value={this.state.secondSearchValue}>
                         <Radio style={radioStyle} value={"all"}>
                             tất cả
@@ -107,7 +140,7 @@ class ContractTypeSearch extends React.Component {
                             hết hiệu lực
         </Radio>
                     </Radio.Group>
-                </Card>
+                </Card> */}
             </Space>
         )
         return (
@@ -136,13 +169,12 @@ class ContractTypeSearch extends React.Component {
                                     <Button icon={<MenuOutlined />}>Tìm kiếm bằng</Button>
                                 </Dropdown>
 
-                                {this.state.firstSearchValue === "SearchByContractType" ?
-                                    <> <Input name="searchValue" />
-                                        </>
-                                    : null}
-                                {this.state.firstSearchValue === "SearchByCreater" ? <> <Input name="searchValue" />
+                                {this.state.SearchBy === "SearchByContractType" ?
+                                     <> <Input onInput={values => this.setState({ SearchValue: values.target.value })} style={{ width: '300px' }} />
+                                     </> : null}
+                                {this.state.SearchBy === "SearchByCreater" ?  <> <Input onInput={values => this.setState({ SearchValue: values.target.value })} style={{ width: '300px' }} />
                                     </> : null}
-                                {this.state.secondSearchValue === "SearchByCreateDate" ?
+                                {this.state.SearchBy === "SearchByCreateDate" ?
                                     <> <DatePicker showTime onChange={this.onChange} onOk={this.onOk} />
                                         </>
                                     : null}
@@ -160,4 +192,11 @@ class ContractTypeSearch extends React.Component {
             </div>);
     }
 }
-export default ContractTypeSearch;
+var mapDispatchToProps = (dispatch, props) => {
+    return {
+        onSubmit: (token) => {
+            dispatch(createContractType(token))
+        }
+    }
+}
+export default connect(null, mapDispatchToProps)(ContractTypeSearch);

@@ -154,7 +154,7 @@ class UpdateProfile extends React.Component {
                         <div style={{marginTop:"50px", paddingLeft:"200px"}}>
                         <Space size="large">
                             <Popup trigger={<Button type="primary" >
-                                <CloudUploadOutlined />  Nộp
+                                <CloudUploadOutlined />  Tạo
                             </Button>} position="right center">
                                 <div>The sytem admin will contact you within 3 days</div>
                                 <Button onClick={this.onFinish} type="primary" >

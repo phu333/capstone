@@ -369,7 +369,7 @@ hideRequiredMark
                         <Form.Item {...tailLayout}>
                             <Space size="large">
                                 <Button type="primary" htmlType="submit" htmlType="submit" >
-                                    Nộp
+                                    Tạo
                                 </Button>
                                 <Button type="primary" htmlType="reset" >
                                     Reset

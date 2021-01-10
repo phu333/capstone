@@ -65,8 +65,7 @@ class Header extends Component {
                                 <Col  span={14}><h6><b>anh@gmail.com</b> đã yêu cầu bạn kiểm tra mẫu hợp đồng</h6></Col>
                             </Row>
                             <Row><h6 style={{color:"blue"}}>ngày 20 tháng 12 năm 2020</h6></Row>
-                        </Menu.Item>    <Menu.Divider />    <Menu.Divider />    
-    
+                        </Menu.Item>    <Menu.Divider />
                 </Menu >
             );
             const menu = (
@@ -88,9 +87,9 @@ class Header extends Component {
                 title={[
                 ]}
                 extra={[
-                    <Space direction="horizontal" size="large" >
+                    <Space  direction="horizontal" size="large" >
                         <b>Thời hạn còn lại của tài khoản : 25 ngày</b>
-                    <Dropdown overlay={notifications}  placement="bottomCenter" trigger={['click']}>
+                    <Dropdown style={{flexGrow: 0,maxHeight: 50,overflow: "auto"}} overlay={notifications}  placement="bottomCenter" >{/* trigger={['click']} */}
                     <Badge count={1}><BellOutlined style={{ fontSize: '20px', color: '#08c' }} /></Badge>
                     </Dropdown>
                     <Space direction="horizontal" size="small" >

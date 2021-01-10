@@ -108,7 +108,7 @@ class EmployeeSearch extends React.Component {
 
                     </Radio.Group>
                 </Card>
-                <Card>
+                {/* <Card>
                     <Radio.Group onChange={this.onChangeThirdSearchValue} value={this.state.thirdSearchValue}>
                         <Radio style={radioStyle} value={"all"}>
                             tất cả
@@ -121,7 +121,7 @@ class EmployeeSearch extends React.Component {
                             hết hiệu lực
         </Radio>
                     </Radio.Group>
-                </Card>
+                </Card> */}
             </Space>
         )
         return (

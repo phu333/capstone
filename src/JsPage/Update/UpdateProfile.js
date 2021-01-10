@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import axios from 'axios'
-import { Space, Card, Button, Descriptions, Avatar, Form, Input, Popover, Row, Col, message } from 'antd';
+import { Space, Card, Button, Descriptions,Select, Avatar, Form, Input, Popover, Row, Col, message } from 'antd';
 import {
     QuestionCircleOutlined, UserOutlined
 } from '@ant-design/icons';
@@ -41,7 +41,12 @@ const name = (
 );
 const ValidationLName = (
 
-    <p>Họ và tên nhân viên</p>
+    <p>Tên nhân viên</p>
+
+);
+const ValidationFName = (
+
+    <p>Họ  nhân viên</p>
 
 );
 const ValidationAdd = (
@@ -72,7 +77,7 @@ class UpdateProfile extends React.Component {
 
         this.state = {
             isEdit: false,
-            company: {},
+            Account: {},
         };
 
         this.onFinish = this.onFinish.bind(this);
@@ -111,14 +116,11 @@ class UpdateProfile extends React.Component {
         })
             .then((response) => {
 
-                return response.data;
+                return response.data.data;
             })
             .then((data) => {
-                console.log(data.data)
-                this.setState({
-                    company: data.data
-                })
-                console.log(this.state.company)
+                console.log(data)
+
             })
             .catch(error => {
                 console.log(error)
@@ -141,7 +143,7 @@ class UpdateProfile extends React.Component {
                     <Space direction="horizontal" align="start"  >
 
 
-                    <Card style={{ width: 400, minHeight: 100 }}>
+                        <Card style={{ width: 400, minHeight: 100 }}>
                             <Row gutter={8}>
                                 <Col flex={2}> <Avatar size={100} icon={<UserOutlined />} /> </Col>
                                 <Col flex={3}>  <br />
@@ -158,28 +160,46 @@ class UpdateProfile extends React.Component {
                                 {...layout}
                                 name="basic"
                                 className="employee-form"
-hideRequiredMark
+                                hideRequiredMark
                                 onFinish={this.onFinish}
                                 onFinishFailed={this.onFinishFailed}
 
                             >
 
                                 <Form.Item
-                                    label="Họ và tên"
-                                    name="name"
+                                    label=" tên"
+                                    name="firstName"
+                                    rules={[
 
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập tên ',
+                                        },
+                                    ]}
                                 >
                                     {this.state.isEdit === false ?
-                                        <Row gutter={8}> <Col span={10}><Input disabled defaultValue="Nguyen " /></Col><Col span={10}> <Input disabled defaultValue="Van A" /></Col>
+                                        <Row gutter={8}> <Col span={20}><Input disabled placeholder="Tên" /> </Col>    <Popover content={ValidationLName} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row> : <Row gutter={8}> <Col span={20}><Input placeholder="Tên" /> </Col>    <Popover content={ValidationLName} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row>}
+                                </Form.Item>
+                                <Form.Item
+                                    label="Họ "
+                                    name="lastName"
+                                    rules={[
 
-                                            <Col span={4}>    <Popover content={ValidationLName} trigger="hover">
-                                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                            </Popover></Col></Row> :
-                                        <Row gutter={8}> <Col span={10}><Input defaultValue="Nguyen " /></Col><Col span={10}> <Input defaultValue="Van A" /></Col>
-
-                                            <Col span={4}>    <Popover content={ValidationLName} trigger="hover">
-                                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                            </Popover></Col></Row>}
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập họ ',
+                                        },
+                                    ]}
+                                >
+                                    {this.state.isEdit === false ? <Row gutter={8}> <Col span={20}><Input disabled placeholder="Họ" /> </Col>    <Popover content={ValidationFName} trigger="hover">
+                                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row> : <Row gutter={8}> <Col span={20}><Input placeholder="Họ" /> </Col>    <Popover content={ValidationFName} trigger="hover">
+                                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>}
                                 </Form.Item>
                                 {/* <Form.Item
                                     label="Tên người dùng"
@@ -204,6 +224,18 @@ hideRequiredMark
                                         </Popover></Row>}
 
                                 </Form.Item>
+                                {this.state.isEdit === false ?
+                                    <Form.Item
+                                        label="Xác nhận mật khẩu"
+                                        name="Cpassword"
+                                        required
+                                    >
+                                        <Row gutter={8}> <Col span={20}>  <Input.Password defaultValue="123" /></Col>    <Popover content={name} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row>
+                                    </Form.Item> : <p></p>}
+
+
                                 <Form.Item
                                     label="Điện thoại"
                                     name="phone"
@@ -250,17 +282,29 @@ hideRequiredMark
                                     name="role"
                                     required
                                 >
-                                    <Row gutter={8}> <Col span={20}> <Input disabled defaultValue={login.role} /></Col>    <Popover content={ValidationRole} trigger="hover">
-                                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                    </Popover></Row>
-                                </Form.Item>
+
+                                    {this.state.isEdit === false ?
+                                        <Row gutter={8}> <Col span={20}>
+                                            {login.role === 2 ? <Input disabled defaultValue="giám đốc" /> :
+                                                <Input disabled defaultValue="nhân viên" />}
+                                        </Col>    <Popover content={ValidationRole} trigger="hover">
+                                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                            </Popover></Row>
+                                        : <Row gutter={8}> <Col span={20}>
+                                            <Select>
+                                                <Select.Option value={2}>giám đốc</Select.Option>
+                                                <Select.Option value={3}>nhân viên</Select.Option>
+                                            </Select></Col>    <Popover content={ValidationRole} trigger="hover">
+                                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                            </Popover></Row>
+                                    }</Form.Item>
 
 
 
                                 <Form.Item {...tailLayout}>
                                     <Space size="large">
                                         {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
-                                            Nộp
+                                            Tạo
                             </Button> : null}
                                         {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
                                             Reset
