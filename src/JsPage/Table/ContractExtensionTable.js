@@ -174,6 +174,16 @@ class ContractExtensionTable extends React.Component {
                                     color = 'pink'
                                 } else if (text === 'rejected') {
                                     color = 'grey'
+                                } else if (text === 'Hiệu lực') {
+                                    color = 'green'
+                                } else if (text === 'Vô hiệu hóa') {
+                                    color = 'red'
+                                } else if (text === 'Chờ bên ta ký') {
+                                    color = 'blue'
+                                } else if (text === 'Chờ đối tác ký') {
+                                    color = 'blue'
+                                } else if (text === 'Hoàn thành') {
+                                    color = 'yellow'
                                 }
                                 return (<Tag color={color} key={text}>
                                     {text.toUpperCase()}

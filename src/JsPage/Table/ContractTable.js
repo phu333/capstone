@@ -174,7 +174,7 @@ class ContractTable extends Component {
                             )}
                         />
 
-                        <Column title="Bên B" dataIndex="customer" key="customer"
+                        <Column title="Khách hàng" dataIndex="customer" key="customer"
                             render={(text, record) => (
 
                                 <p>{text.companyName}</p>
@@ -195,7 +195,7 @@ class ContractTable extends Component {
 
                             )} /> */}
                         <Column title="Giá trị hợp đồng"  dataIndex="contractValue" key="contractValue"
-
+align='right'
                             render={(text, record) =>  `$ ${text}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 
                              />   
@@ -211,8 +211,16 @@ class ContractTable extends Component {
                                     color = 'blue'
                                 } else if (text === 'waiting for customer') {
                                     color = 'pink'
-                                } else if (text === 'rejected') {
-                                    color = 'grey'
+                                } else if (text === 'Hiệu lực') {
+                                    color = 'green'
+                                } else if (text === 'Vô hiệu hóa') {
+                                    color = 'red'
+                                } else if (text === 'Chờ bên ta ký') {
+                                    color = 'blue'
+                                } else if (text === 'Chờ đối tác ký') {
+                                    color = 'blue'
+                                } else if (text === 'Hoàn thành') {
+                                    color = 'yellow'
                                 }
                                 return (<Tag color={color} key={text}>
                                     {text.toUpperCase()}

@@ -150,6 +150,16 @@ class SignatureList extends React.Component {
                                     color = 'pink'
                                 } else if (text === 'rejected') {
                                     color = 'grey'
+                                } else if (text === 'Hiệu lực') {
+                                    color = 'green'
+                                } else if (text === 'Vô hiệu hóa') {
+                                    color = 'red'
+                                } else if (text === 'Chờ bên ta ký') {
+                                    color = 'blue'
+                                } else if (text === 'Chờ đối tác ký') {
+                                    color = 'blue'
+                                } else if (text === 'Hoàn thành') {
+                                    color = 'yellow'
                                 }
                                 return (<Tag color={color} key={text}>
                                     {text.toUpperCase()}
@@ -177,7 +187,7 @@ class SignatureList extends React.Component {
                             key="status"
                             render={(text, record) => (
                                 <Space size="middle">
-                                    {text === "active" ? <Switch style={{ fontSize: '30px' }} onClick={this.OpenViewCustomer} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
+                                    {text === "Deactive" ? <Switch style={{ fontSize: '30px' }} onClick={this.OpenViewCustomer} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
                                 </Space>
                             )}
                         /></Table></div>

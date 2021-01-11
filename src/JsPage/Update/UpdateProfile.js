@@ -225,7 +225,7 @@ class UpdateProfile extends React.Component {
 
                                 </Form.Item>
                                 {this.state.isEdit === false ?
-                                    <Form.Item
+                                   <p></p>: <Form.Item
                                         label="Xác nhận mật khẩu"
                                         name="Cpassword"
                                         required
