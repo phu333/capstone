@@ -174,7 +174,7 @@ class ContractTable extends Component {
                             )}
                         />
 
-                        <Column title="Khách hàng" dataIndex="customer" key="customer"
+                        <Column title="Bên nhận hợp đồng" dataIndex="customer" key="customer"
                             render={(text, record) => (
 
                                 <p>{text.companyName}</p>
