@@ -12,14 +12,14 @@ import {
 import EmployeeTable from '../Table/EmployeeTable'
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import "../Column.css"
-
+import axios from 'axios'
 
 const layout = {
     labelCol: {
-        span: 4,
+        span: 10,
     },
     wrapperCol: {
-        span: 10,
+        span: 12,
     },
 };
 const tailLayout = {
@@ -30,7 +30,7 @@ const tailLayout = {
 };
 const middleLayout = {
     wrapperCol: {
-        offset: 6,
+        offset: 8,
         span: 10,
     },
 };
@@ -41,36 +41,37 @@ class ViewEmployee extends React.Component {
         this.state = {
             isEdit: false,
             finish: false,
-            currentPermission: this.props.employee.permissionList,
-            permissions: [
-                {
-                    name: "signPermission",
-                    lable: "Quyền ký",
-                },
-                {
-                    name: "contractManagePermision",
-                    lable: "Quyền quản lý hợp đồng",
-                },
-                {
-                    name: "customerManagePermission",
-                    lable: "Quyền quản lý khách hàng",
-                },
-                {
-                    name: "contractTypeManagePermission",
-                    lable: "Quyền quản lý loại hợp đổng",
-                },
-                {
-                    name: "employeeManagePermission",
-                    lable: "Quyền quản lý nhân viên",
-                },
-                {
-                    name: "signatureManagePermission",
-                    lable: "Quyền quản lý chữ ký",
-                },
-                {
-                    name: "editCompanyInformationPermission",
-                    lable: "Quyền chỉnh sửa thông tin doanh nghiệp",
-                },
+            EmployeeReciceve: [],
+            currentPermission: this.props.employee.permissions,
+            permissionsReciceve: [
+                // {
+                //     name: "signPermission",
+                //     lable: "Quyền ký",
+                // },
+                // {
+                //     name: "contractManagePermision",
+                //     lable: "Quyền quản lý hợp đồng",
+                // },
+                // {
+                //     name: "customerManagePermission",
+                //     lable: "Quyền quản lý khách hàng",
+                // },
+                // {
+                //     name: "contractTypeManagePermission",
+                //     lable: "Quyền quản lý loại hợp đổng",
+                // },
+                // {
+                //     name: "employeeManagePermission",
+                //     lable: "Quyền quản lý nhân viên",
+                // },
+                // {
+                //     name: "signatureManagePermission",
+                //     lable: "Quyền quản lý chữ ký",
+                // },
+                // {
+                //     name: "editCompanyInformationPermission",
+                //     lable: "Quyền chỉnh sửa thông tin doanh nghiệp",
+                // },
 
             ]
         };
@@ -88,6 +89,43 @@ class ViewEmployee extends React.Component {
 
 
     };
+    handleChange(index, info) {
+        if (info == false)
+         { info = true } 
+        else { info = false }
+        let permission = {
+            userId: this.props.employee.id,
+           
+            permissionId: index,
+            enabled: info
+        }
+        console.log(permission)
+        axios({
+            url: '/api/Account/permission',
+            data: permission,
+            method: "PUT",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
+
+            }
+
+        })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+                console.log(data.data)
+
+
+            })
+            .catch(error => {
+                console.log(error)
+
+
+            });
+
+    }
     onEdit = (values) => {
         this.setState({
             isEdit: true
@@ -116,13 +154,13 @@ class ViewEmployee extends React.Component {
         //         <List.Item>{permisssion}</List.Item>
         //     )
         // })
-        var permissions = this.state.permissions.map((permisssion) => {
+        var permissions = this.state.currentPermission.map((permisssion) => {
             return (
-                <Form.Item {...middleLayout} label={permisssion.lable} name={permisssion.name} >
-                    {this.props.employee.permissionList.some(item => permisssion.name === item) ?
-                        <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked />
+                <Form.Item {...middleLayout}labelAlign='left' label={permisssion.permissionName}  >
+                    {this.props.employee.permissions.some(item => permisssion.enabled === true) ?//hàm lấy permission
+                        <Switch style={{ fontSize: '30px' }} onChange={() => this.handleChange(permisssion.permissionId, permisssion.enabled)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />///>
                         :
-                        <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />
+                        <Switch style={{ fontSize: '30px' }} onChange={() => this.handleChange(permisssion.permissionId, permisssion.enabled)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked />//onChange={ () => this.handleChange(index, this.state.info[index])}/>
                     }
 
                     {/* <Button type="primary" onClick={() => {
@@ -164,7 +202,7 @@ class ViewEmployee extends React.Component {
                         {...layout}
                         name="basic"
                         className="employee-form"
-                        
+
                         onFinish={this.onFinish}
                         onFinishFailed={this.onFinishFailed}
 
@@ -209,8 +247,8 @@ class ViewEmployee extends React.Component {
 }
 var mapDispatchToProps = (dispatch, props) => {
     return {
-        onSubmit: (employee) => {
-            dispatch(updateEmployee(employee))
+        onSubmit: (token) => {
+            dispatch(updateEmployee(token))
         }
     }
 }

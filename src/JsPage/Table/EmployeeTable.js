@@ -52,11 +52,11 @@ class EmployeeList extends React.Component {
         })
         .catch(error => {
 
-          // if (error.response.status === 500) {
-          //   message.error(error.response.status + ' Server under maintainence');
-          // } else if (error.response.status === 404) {
-          //   message.error(error.response.status + ' Server not found');
-          // }
+          if (error.response.status === 500) {
+            message.error(error.response.status + ' Server under maintainence');
+          } else if (error.response.status === 404) {
+            message.error(error.response.status + ' Server not found');
+          }
 
         });
       
