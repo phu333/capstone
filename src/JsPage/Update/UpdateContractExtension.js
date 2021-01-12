@@ -200,7 +200,7 @@ class UpdateContractExtension extends React.Component {
                                                     Sửa
                                             </Button> : null}
                                         {this.props.contract.status == "pending" && this.state.isEdit === true ? <Button type="primary" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
-                                                    nộp
+                                                    Tạo
                                             </Button> : null}
                                         {this.props.contract.status == "waiting for sign" ? <Button type="primary" value="reject">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
                                                     Reject
@@ -262,7 +262,7 @@ class UpdateContractExtension extends React.Component {
                                     <Space size="large">
                                         {comments.length > 0 && <CommentList comments={comments} />}
                                         {this.props.contract.status == "pending" && this.state.isEdit === true ? <Button type="primary" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
-                                                        nộp
+                                                        Tạo
                                                 </Button> : null}
 
                                         {this.props.contract.status == "pending" && this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}

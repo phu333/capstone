@@ -300,7 +300,7 @@ class EmployeeDetail extends React.Component {
                         <Form.Item {...tailLayout}>
                             <Space size="large">
                                 <Button type="primary" htmlType="submit" >
-                                    Nộp
+                                    Tạo
                                 </Button>
                                 <Button type="primary" htmlType="reset" >
                                     Reset

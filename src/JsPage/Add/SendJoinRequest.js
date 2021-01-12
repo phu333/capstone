@@ -141,7 +141,7 @@ class SendJoinRequest extends React.Component {
                             <div></div><br />
                             <Grid item xs={12} sm={6}>
                                 <Popup trigger={<Button type="primary" >
-                                    Nộp
+                                    Tạo
                             </Button>} position="right center">
                                     <div>The sytem admin will contact you within 3 days</div>
                                     <Button onClick={this.onFinish} type="primary" >

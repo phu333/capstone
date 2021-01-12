@@ -3,11 +3,11 @@ export const contractTypeInformation = () => {
       type: 'LIST_contractType',
     }
   }
-  export const createContractType = (contractType) => {
+  export const createContractType = (contractTypeList) => {
     
     return {
       type: 'CREATE_contractType',
-      contractType
+      contractTypeList
     }
   }
   export const updateContractType = (contractType) => {

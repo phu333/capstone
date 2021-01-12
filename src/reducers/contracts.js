@@ -4,8 +4,10 @@ const myContractReducer = (state = initialState, action) => {
         case 'LIST_contract':
             return state;
         case 'CREATE_contract':
-            state.push(action.contract)
-            
+            console.log(action.contractList)
+            state = initialState
+            state = action.contractList
+            console.log(state)
             return [...state];
         case 'UPDATE_contract':
             state.push(action.contract)

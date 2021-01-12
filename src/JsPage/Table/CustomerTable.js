@@ -109,16 +109,12 @@ class CustomerList extends React.Component {
 
               )} /> */}
 
-            <Column title="Mã số thuế" dataIndex="taxCode" key="taxCode" render={(text, record) => (
+            <Column title="Mã số thuế" dataIndex="taxCode" key="taxCode"align='center' render={(text, record) => (
 
               <p>{text}</p>
 
             )} />
-            <Column title="Số điện thoại" dataIndex="phoneNumber" key="phoneNumber" render={(text, record) => (
 
-              <p>{text}</p>
-
-            )} />
             <Column title="email" dataIndex="email" key="email" render={(text, record) => (
 
               <a>{text}</a>
@@ -168,7 +164,7 @@ class CustomerList extends React.Component {
               sortDirections={['descend', 'ascend']}
               render={(text, record) => (
                 <Space size="middle">
-                  {text === "active" ? <Switch style={{ fontSize: '20px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked /> : <Switch style={{ fontSize: '20px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
+                  {text === "Deactive" ? <Switch style={{ fontSize: '20px' }}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt"defaultunChecked  /> : <Switch style={{ fontSize: '20px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
                 </Space>
               )}
             />

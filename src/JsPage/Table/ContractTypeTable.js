@@ -51,7 +51,7 @@ class ContractTable extends React.Component {
             this.setState({
               templateList:data.data
             })
-
+            this.props.onSubmit(data.data)
         })
         .catch(error => {
 
@@ -80,8 +80,8 @@ class ContractTable extends React.Component {
     else {
       return (
         <div style={{ height: "100vh" }}><Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tải lên mẫu mới</Button>
-          <ContractTypeSearch />
-          <Table dataSource={this.state.templateList}
+          <ContractTypeSearch token={this.props.token} templateList={this.state.templateList} />
+          <Table dataSource={this.props.newContractType}
             rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}  >
            <Column title="Mã" dataIndex="id" key="id"
             sorter={(a, b) => a.contract_type.localeCompare(b.contract_type)}
@@ -126,8 +126,8 @@ class ContractTable extends React.Component {
 }
 var mapDispatchToProps = (dispatch, props) => {
   return {
-    onSubmit: (contractType) => {
-      dispatch(createContractType(contractType))
+    onSubmit: (token) => {
+      dispatch(createContractType(token))
     }
   }
 }
@@ -135,7 +135,8 @@ var mapStateToProps = state => {
 
 
   return {
-    newContractType: state.myContractTypeReducer
+    newContractType: state.myContractTypeReducer,
+    myLoginReducer: state.myLoginReducer
   }
 
 

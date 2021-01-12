@@ -89,7 +89,7 @@ class ForgetPassword extends React.Component {
 
                         <Form.Item {...tailLayout}>
                             <Button type="primary" htmlType="submit">
-                                Nộp
+                                Tạo
                             </Button>
 
                         </Form.Item>

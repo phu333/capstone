@@ -4,8 +4,12 @@ const mySignatureReducer = (state = initialState, action) => {
         case 'LIST_signature':
             return state;
         case 'CREATE_signature':
-            state.push(action.signature)
-            
+            state.push(action.signatureList)
+            // console.log(action.signatureList)
+            // state = initialState
+            // state = action.signatureList
+            // console.log(state)
+     
             return [...state];
         case 'UPDATE_signature':
             state.push(action.signature)

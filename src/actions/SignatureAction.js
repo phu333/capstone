@@ -3,11 +3,11 @@ export const signatureInformation = () => {
     type: 'LIST_signature',
   }
 }
-export const createSignature = (signature) => {
+export const createSignature = (signatureList) => {
   
   return {
     type: 'CREATE_signature',
-    signature
+    signatureList
   }
 }
 export const updateSignature = (signature) => {

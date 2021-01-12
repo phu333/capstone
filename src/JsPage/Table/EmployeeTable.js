@@ -52,11 +52,11 @@ class EmployeeList extends React.Component {
         })
         .catch(error => {
 
-          // if (error.response.status === 500) {
-          //   message.error(error.response.status + ' Server under maintainence');
-          // } else if (error.response.status === 404) {
-          //   message.error(error.response.status + ' Server not found');
-          // }
+          if (error.response.status === 500) {
+            message.error(error.response.status + ' Server under maintainence');
+          } else if (error.response.status === 404) {
+            message.error(error.response.status + ' Server not found');
+          }
 
         });
       
@@ -84,7 +84,7 @@ class EmployeeList extends React.Component {
     } else if (this.state.openEmployee === "openViewEmployee") {
       return (
         <Router>
-          <Redirect push to={"/capstone/updateEmployee/" + this.state.employee.name} />
+          <Redirect push to={"/capstone/updateEmployee/" + this.state.employee.userName} />
           <Route exact path="/capstone/updateEmployee/:id" render={() => <ViewEmployee token={this.props.token} employee={this.state.employee} />} />
 
         </Router>
@@ -194,7 +194,7 @@ class EmployeeList extends React.Component {
               key="status"
               render={(text, record) => (
                 <Space size="middle">
-                  {text === "active" ? <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="kích hoạt" unCheckedChildren="Vô hiệu hóa" defaultunChecked />}
+                  {text === "Deactive" ? <Switch style={{ fontSize: '30px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
                 </Space>
               )}
             /></Table></div>
