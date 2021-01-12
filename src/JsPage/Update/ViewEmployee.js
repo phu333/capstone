@@ -90,12 +90,11 @@ class ViewEmployee extends React.Component {
 
     };
     handleChange(index, info) {
-        if (info == false)
-         { info = true } 
+        if (info == false) { info = true }
         else { info = false }
         let permission = {
             userId: this.props.employee.id,
-           
+
             permissionId: index,
             enabled: info
         }
@@ -156,7 +155,7 @@ class ViewEmployee extends React.Component {
         // })
         var permissions = this.state.currentPermission.map((permisssion) => {
             return (
-                <Form.Item {...middleLayout}labelAlign='left' label={permisssion.permissionName}  >
+                <Form.Item {...middleLayout} labelAlign='left' label={permisssion.permissionName}  >
                     {this.props.employee.permissions.some(item => permisssion.enabled === true) ?//hàm lấy permission
                         <Switch style={{ fontSize: '30px' }} onChange={() => this.handleChange(permisssion.permissionId, permisssion.enabled)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />///>
                         :
@@ -184,6 +183,24 @@ class ViewEmployee extends React.Component {
 
                 </Form.Item>)
         })
+        var Viewpermission = this.state.currentPermission.map((permisssion) => {
+            return (
+                <Form.Item {...middleLayout} labelAlign='left' label={permisssion.permissionName}  >
+                    {this.props.employee.permissions.some(item => permisssion.enabled === true) ?//hàm lấy permission
+                        <p>Có quyền sử dụng</p>
+                        :
+                        <p>Không có quyền sử dụng</p>
+                    }
+
+
+                </Form.Item>)
+        })
+        var information = this.props.myLoginReducer.map((login, index) => {return(
+            <div> {
+                login.UpdateAccountPermission === true ? <div>{ permissions }</div>
+                : <div>{ Viewpermission }</div>
+            }</div>)
+        })
         if (this.state.finish) {
             return (<Router>
                 <Redirect push to={"/capstone/employee"} />
@@ -206,27 +223,14 @@ class ViewEmployee extends React.Component {
                         onFinish={this.onFinish}
                         onFinishFailed={this.onFinishFailed}
 
-                    >
+                    >{information}
                         {/* <List
                             size="large"
                             header={<div>danh sách quyền hiện tại</div>}
                             footer={<div></div>}
                             bordered
                         >{currentPermissions}</List> */}
-                        {permissions}
 
-
-                        <Form.Item {...tailLayout}>
-                            <Space size="large">
-
-
-                                {this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
-                                    Sửa
-                            </Button> : null}
-
-
-                            </Space>
-                        </Form.Item>
                         <Form.Item>
 
                         </Form.Item>
@@ -252,5 +256,11 @@ var mapDispatchToProps = (dispatch, props) => {
         }
     }
 }
+var mapStateToProps = state => {
 
-export default connect(null, mapDispatchToProps)(ViewEmployee);
+    console.log(state.myLoginReducer)
+    return {
+      myLoginReducer: state.myLoginReducer
+    }
+  }
+export default connect(mapStateToProps, mapDispatchToProps)(ViewEmployee);
