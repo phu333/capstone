@@ -6,7 +6,7 @@ import { PageHeader, Space, Row, Col } from 'antd';
 import { GoogleLogin } from 'react-google-login';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import EmployeeSideMenu from './EmployeeSideMenu';
-
+import FadeIn from 'react-fade-in'
 import axios from 'axios'
 
 import GoogleOutlined from '../../logo/Google.png'
@@ -217,12 +217,12 @@ class LoginPage extends React.Component {
 
         var information = this.props.myLoginReducer.map((login, index) => {
 
-            return (
+            return (<FadeIn>
                 <Router>
                     <Redirect push to="/capstone/SideMenu" />
 
                     <Route exact path="/capstone/SideMenu" component={EmployeeSideMenu} />
-                </Router>
+                </Router></FadeIn>
             );
 
         })
@@ -231,14 +231,14 @@ class LoginPage extends React.Component {
             return (<div> { information}</div >);
         } else {
             if (this.state.othersPage === "ForgetPassword") {
-                return (
-                    <ForgetPassword />);
+                return (<FadeIn>
+                    <ForgetPassword /></FadeIn>);
 
             } else if (this.state.othersPage === "AddUserAdmin") {
-                return (
-                    <AddUserAdmin />);
+                return (<FadeIn>
+                    <AddUserAdmin /></FadeIn>);
             } else {
-                return (
+                return (<FadeIn>
                     <Row type="flex" justify="center" align="middle" style={{ height: "100vh", backgroundColor: 'rgb(8, 59, 102)' }}>
 
                         <Redirect push to="/capstone/Login" />
@@ -339,7 +339,7 @@ class LoginPage extends React.Component {
 
                             </Form>
 
-                        </Col></Row>
+                        </Col></Row></FadeIn>
 
                 );
             }

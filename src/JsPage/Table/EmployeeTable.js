@@ -12,6 +12,7 @@ import { connect } from 'react-redux'
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, FolderViewOutlined } from "@ant-design/icons"
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import axios from 'axios'
+import FadeIn from 'react-fade-in'
 const { Column, ColumnGroup } = Table;
 
 
@@ -76,30 +77,30 @@ class EmployeeList extends React.Component {
   }
   render() {
     if (this.state.openEmployee === "openAddEmployee") {
-      return (
+      return (<FadeIn>
         <Router>
           <Redirect push to={"/capstone/addEmployee"} />
           <Route exact path="/capstone/addEmployee" render={() => <AddEmployee token={this.props.token} employee={this.state.employee} />} /></Router>
-      );
+          </FadeIn>);
     } else if (this.state.openEmployee === "openViewEmployee") {
-      return (
+      return (<FadeIn>
         <Router>
           <Redirect push to={"/capstone/updateEmployee/" + this.state.employee.userName} />
           <Route exact path="/capstone/updateEmployee/:id" render={() => <ViewEmployee token={this.props.token} employee={this.state.employee} />} />
 
-        </Router>
+        </Router></FadeIn>
       );
     }else if (this.state.openEmployee === "employeeDetail") {
-      return (
+      return (<FadeIn>
         <Router>
           <Redirect push to={"/capstone/employeeDetail/" + this.state.employee.name} />
           <Route exact path="/capstone/employeeDetail/:id" render={() => <EmployeeDetail token={this.props.token} employee={this.state.employee} />} />
 
-        </Router>
+        </Router></FadeIn>
       );
     }
     else {
-      return (
+      return (<FadeIn>
         <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button>
           <EmployeeSearch token={this.props.token} employeeList={this.state.employees}/>
           <Table dataSource={this.props.newEmployee}
@@ -197,7 +198,7 @@ class EmployeeList extends React.Component {
                   {text === "Deactive" ? <Switch style={{ fontSize: '30px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
                 </Space>
               )}
-            /></Table></div>
+            /></Table></div></FadeIn>
       );
     }
 

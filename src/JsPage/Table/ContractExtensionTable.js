@@ -8,6 +8,7 @@ import React from 'react';
 import { createcontractExtension, contractExtensionInformation } from '../../actions/ContractExtension'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import FadeIn from 'react-fade-in'
 import "../Column.css"
 const { Column } = Table;
 
@@ -112,25 +113,25 @@ class ContractExtensionTable extends React.Component {
     }
     render() {
         if (this.state.showCreateContractExtension) {
-            return (
+            return (<FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/viewContract/" + this.props.contractId + "/createExtension"} />
                     <Route exact path="/capstone/viewContract/:id/createExtension" render={() => <AddContractExtension contractId={this.props.contractId} role={this.props.role} />
-                    } /></Router>
+                    } /></Router></FadeIn>
 
 
             );
         } else if (this.state.showContractExtension) {
-            return (
+            return (<FadeIn>
 
                 <Router>
                     <Redirect push to={"/capstone/viewContract/" + this.props.contractId + "/updateExtension"} />
                     <Route exact path="/capstone/viewContract/:id/updateExtension" render={() => <UpdateContractExtension contractId={this.props.contractId} contract={this.state.contract} role={this.props.role} />
-                    } /></Router>
+                    } /></Router></FadeIn>
             );
         }
         else {
-            return (
+            return (<FadeIn>
                 <div style={{ height: "100vh" }}><Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContractExtension}>Tạo phụ lục</Button>
                     <ContractSearch />
                     <Table dataSource={this.props.newContractExtension}
@@ -223,7 +224,7 @@ class ContractExtensionTable extends React.Component {
                             )}
                         /> : null}
 
-                    </Table></div>
+                    </Table></div></FadeIn>
 
             );
         }

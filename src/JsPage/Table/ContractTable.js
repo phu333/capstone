@@ -13,6 +13,7 @@ import React, { Component } from 'react';
 import { createContract, contractInformation } from '../../actions/ContractAction'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import FadeIn from 'react-fade-in'
 const { Column } = Table;
 
 
@@ -95,7 +96,7 @@ class ContractTable extends Component {
 
                                     contractsTotal: [...this.state.contractsCreate, ...this.state.contractsReciceve]
                                 })
-                                this.props.onSubmit(data.data)
+                                this.props.onSubmit(this.state.contractsTotal)
                             })
 
                             .catch(error => {
@@ -195,25 +196,26 @@ class ContractTable extends Component {
         console.log(this.state.contractsTotal)
 
         if (this.state.showCreateContract) {
-            return (
+            return ( <FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/chooseTemplate"} />
                     <Route exact path="/capstone/chooseTemplate" render={() => <ChooseContractTemplate token={this.props.token} role={this.props.role} />
-                    } /></Router>
+                    } /></Router></FadeIn>
 
             );
         } else if (this.state.showContract) {
-            return (
+            return ( <FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.state.contract.id)} />
                     <Route exact path="/capstone/viewContract/:id" render={() => <ViewContractPage contract={this.state.contract} token={this.props.token} role={this.props.role} />
-                    } /></Router>
+                    } /></Router></FadeIn>
 
             );
         }
         else {
 
             return (
+                <FadeIn>
                 <div >
                     <Space size="large">
                         <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContract}>Tạo hợp đồng</Button>
@@ -323,7 +325,7 @@ align='right'
                             )}
                         /> 
 
-                    </Table></div >
+                    </Table></div ></FadeIn>
             );
         }
 

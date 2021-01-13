@@ -10,6 +10,7 @@ import SignatureSearch from '../Search/SignatureSearch'
 import { createSignature, signatureInformation } from '../../actions/SignatureAction'
 import { connect } from 'react-redux'
 import "../Column.css"
+import FadeIn from 'react-fade-in'
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,FolderViewOutlined } from "@ant-design/icons"
 const { Column, ColumnGroup } = Table;
 
@@ -103,22 +104,22 @@ class SignatureList extends React.Component {
     render() {
         if (this.state.openSignature === "openAddSignature") {
 
-            return (
+            return (<FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/addSignature"} />
-                    <Route exact path="/capstone/addSignature" component={AddSignature} /></Router>
+                    <Route exact path="/capstone/addSignature" component={AddSignature} /></Router></FadeIn>
             );
         } else if (this.state.openSignature === "openViewSignature") {
-            return (
+            return (<FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/updateSignature/" + this.state.signature.serial} />
                     <Route exact path="/capstone/updateSignature/:id" render={() => <UpdateSignature signature={this.state.signature} />} />
 
-                </Router>
+                </Router></FadeIn>
             );
         }
         else {
-            return (
+            return (<FadeIn>
                 <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddSignature} icon={<UserAddOutlined />}>Thêm chữ ký mới</Button>
                     <SignatureSearch token={this.props.token} SignatureList={this.props.newSignature}/>
                     <Table dataSource={this.props.newSignature}
@@ -190,7 +191,7 @@ class SignatureList extends React.Component {
                                     {text === "Deactive" ? <Switch style={{ fontSize: '30px' }} onClick={this.OpenViewCustomer} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
                                 </Space>
                             )}
-                        /></Table></div>
+                        /></Table></div></FadeIn>
             );
         }
 

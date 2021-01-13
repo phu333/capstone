@@ -10,6 +10,7 @@ import { createContractType, contractTypeInformation } from '../../actions/Contr
 import { connect } from 'react-redux'
 import { UploadOutlined, FolderViewOutlined, DeleteOutlined, UserOutlined, FileWordOutlined } from "@ant-design/icons"
 import axios from 'axios'
+import FadeIn from 'react-fade-in'
 const { Column } = Table;
 
 
@@ -63,22 +64,22 @@ class ContractTable extends React.Component {
   }
   render() {
     if (this.state.showTemplateCreate) {
-      return (
+      return (<FadeIn>
         <Router>
         <Redirect push to={"/capstone/uploadTemplate" } />
         <Route exact path="/capstone/uploadTemplate" render={() => <TemplateUpload token={this.props.token} role={this.props.role} />} /></Router>
-       
+       </FadeIn>
       );
     }else if (this.state.showTemplateCreate) {
-      return (
+      return (<FadeIn>
         <Router>
         <Redirect push to={"/capstone/viewTemplate" } />
         <Route exact path="/capstone/viewTemplate" render={() => <ViewTemplate token={this.props.token} role={this.props.role} />} /></Router>
-       
+        </FadeIn>
       );
     } 
     else {
-      return (
+      return (<FadeIn>
         <div style={{ height: "100vh" }}><Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tải lên mẫu mới</Button>
           <ContractTypeSearch token={this.props.token} templateList={this.state.templateList} />
           <Table dataSource={this.props.newContractType}
@@ -118,7 +119,7 @@ class ContractTable extends React.Component {
               )}
             />
            
-          </Table></div>
+          </Table></div></FadeIn>
       );
     }
 
