@@ -24,7 +24,7 @@ class EmployeeList extends React.Component {
 
       employee: {},
       openEmployee: "",
-      employees:[],
+      employees: [],
 
     };
     this.OpenAddEmployee = this.OpenAddEmployee.bind(this);
@@ -32,37 +32,37 @@ class EmployeeList extends React.Component {
   }
   componentDidMount() {
 
-      axios({
-        url: '/api/Account/employee',
-        method: "GET",
-        headers: {
-          Authorization: 'Bearer ' + this.props.token,
+    axios({
+      url: '/api/Account/employee',
+      method: "GET",
+      headers: {
+        Authorization: 'Bearer ' + this.props.token,
 
       }
+    })
+      .then((response) => {
+
+        return response.data;
       })
-        .then((response) => {
-
-          return response.data;
+      .then((data) => {
+        this.setState({
+          employees: data.data
         })
-        .then((data) => {
-          this.setState({
-            employees:data.data
-          })
-          this.props.onSubmit(data.data)
+        this.props.onSubmit(data.data)
 
-        })
-        .catch(error => {
+      })
+      .catch(error => {
 
-          if (error.response.status === 500) {
-            message.error(error.response.status + ' Server under maintainence');
-          } else if (error.response.status === 404) {
-            message.error(error.response.status + ' Server not found');
-          }
+        // if (error.response.status === 500) {
+        //   message.error(error.response.status + ' Server under maintainence');
+        // } else if (error.response.status === 404) {
+        //   message.error(error.response.status + ' Server not found');
+        // }
 
-        });
-      
+      });
 
-    
+
+
 
   }
   OpenAddEmployee() {
@@ -90,7 +90,7 @@ class EmployeeList extends React.Component {
 
         </Router></FadeIn>
       );
-    }else if (this.state.openEmployee === "employeeDetail") {
+    } else if (this.state.openEmployee === "employeeDetail") {
       return (<FadeIn>
         <Router>
           <Redirect push to={"/capstone/employeeDetail/" + this.state.employee.name} />
@@ -100,107 +100,119 @@ class EmployeeList extends React.Component {
       );
     }
     else {
-      return (<FadeIn>
-        <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button>
-          <EmployeeSearch token={this.props.token} employeeList={this.state.employees}/>
-          <Table dataSource={this.props.newEmployee}
-            rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
+    if (this.props.myLoginReducer !== "logout") {
 
-            <Column title="Tên" dataIndex="userName" key="userName"
-              sorter={(a, b) => a.userName.localeCompare(b.userName)}
-              sortDirections={['descend', 'ascend']}
-              render={(text, record) => (
+      var information = this.props.myLoginReducer.map((login, index) => {
 
-                <p>{text}</p>
+        return (<FadeIn>
+          <div style={{ height: "100vh" }}>
+            {login.ActiveDeactiveAccount === true ? <Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button> : null}
+            <EmployeeSearch token={this.props.token} employeeList={this.state.employees} />
+            <Table dataSource={this.props.newEmployee}
+              rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
 
-              )} />
-            <Column title="Chức vụ" dataIndex="roles"
-              sorter={(a, b) => a.roles[0].localeCompare(b.roles[0])}
-              sortDirections={['descend', 'ascend']}
-              key="roles" 
-              render={(text, record) => (
-                
-                <p>{text}</p>
+              <Column title="Tên" dataIndex="userName" key="userName"
+                sorter={(a, b) => a.userName.localeCompare(b.userName)}
+                sortDirections={['descend', 'ascend']}
+                render={(text, record) => (
 
-              )}/>
-            {/* <Column title="điện thoại" dataIndex="phone" key="phone" render={(text, record) => (
+                  <p>{text}</p>
 
-              <a>{text}</a>
+                )} />
+              <Column title="Chức vụ" dataIndex="roles"
+                sorter={(a, b) => a.roles[0].localeCompare(b.roles[0])}
+                sortDirections={['descend', 'ascend']}
+                key="roles"
+                render={(text, record) => (
 
-            )} />
-            <Column title="email" dataIndex="email" key="email" render={(text, record) => (
+                  <p>{text}</p>
 
-              <a>{text}</a>
+                )} />
+              {/* <Column title="điện thoại" dataIndex="phone" key="phone" render={(text, record) => (
+    
+                  <a>{text}</a>
+    
+                )} />
+                <Column title="email" dataIndex="email" key="email" render={(text, record) => (
+    
+                  <a>{text}</a>
+    
+                )} />
+    
+                <Column title="Địa chỉ" dataIndex="address" key="address" render={(text, record) => (
+    
+                  <b>{text}</b>
+    
+                )} /> */}
 
-            )} />
+              {/* <Column title="trạng thái" dataIndex="status" key="status"
+                  sorter={(a, b) => a.status.localeCompare(b.status)}
+                  sortDirections={['descend', 'ascend']}
+                  render={(text, record) => {
+                    let color = 'pink'
+                    if (text === 'deactive') {
+                      color = 'red'
+                    } else if (text === 'active') {
+                      color = 'green'
+                    } else if (text === 'pending') {
+                      color = 'blue'
+                    } else if (text === 'waiting for customer') {
+                      color = 'pink'
+                    } else if (text === 'rejected') {
+                      color = 'grey'
+                    }
+                    return (<Tag color={color} key={text}>
+                      {text.toUpperCase()}
+                    </Tag>);
+                  }}
+                /> */}
+              {/* <Column
+                  title="Thông tin cá nhân"
+                  key="action"
+                  render={(text, record) => (
+                    <Space size="middle">
+                      <FolderViewOutlined style={{ fontSize: '30px', color: '#08c', alignContent: "center", textAlign: "center" }} theme="outlined" onClick={
+                        () => this.setState({
+                          employee: text,
+                          openEmployee: "employeeDetail",
+                        })
+                      } />
+                    </Space>
+                  )}
+                /> */}
+              <Column
+                title="Quyền hạn"
+                key="action"
+                render={(text, record) => (
+                  <Space size="middle">
+                    <FolderViewOutlined style={{ fontSize: '30px', color: '#08c', alignContent: "center", textAlign: "center" }} theme="outlined" onClick={
+                      () => this.setState({
+                        employee: text,
+                        openEmployee: "openViewEmployee",
+                      })
+                    } />
+                  </Space>
+                )}
+              />
+              {login.ActiveDeactiveAccount === true ?
+                <Column
+                  title="Trạng thái"
+                  dataIndex="status"
+                  key="status"
+                  render={(text, record) => (
+                    <Space size="middle">
+                      {text === "Deactive" ? <Switch style={{ fontSize: '30px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
+                    </Space>
+                  )}
+                /> : null}</Table></div></FadeIn>
+        );
+      }
 
-            <Column title="Địa chỉ" dataIndex="address" key="address" render={(text, record) => (
+       )
+    } if (this.props.myLoginReducer === "Logout") {
 
-              <b>{text}</b>
 
-            )} /> */}
-
-            {/* <Column title="trạng thái" dataIndex="status" key="status"
-              sorter={(a, b) => a.status.localeCompare(b.status)}
-              sortDirections={['descend', 'ascend']}
-              render={(text, record) => {
-                let color = 'pink'
-                if (text === 'deactive') {
-                  color = 'red'
-                } else if (text === 'active') {
-                  color = 'green'
-                } else if (text === 'pending') {
-                  color = 'blue'
-                } else if (text === 'waiting for customer') {
-                  color = 'pink'
-                } else if (text === 'rejected') {
-                  color = 'grey'
-                }
-                return (<Tag color={color} key={text}>
-                  {text.toUpperCase()}
-                </Tag>);
-              }}
-            /> */}
-            {/* <Column
-              title="Thông tin cá nhân"
-              key="action"
-              render={(text, record) => (
-                <Space size="middle">
-                  <FolderViewOutlined style={{ fontSize: '30px', color: '#08c', alignContent: "center", textAlign: "center" }} theme="outlined" onClick={
-                    () => this.setState({
-                      employee: text,
-                      openEmployee: "employeeDetail",
-                    })
-                  } />
-                </Space>
-              )}
-            /> */}
-            <Column
-              title="Quyền hạn"
-              key="action"
-              render={(text, record) => (
-                <Space size="middle">
-                  <FolderViewOutlined style={{ fontSize: '30px', color: '#08c', alignContent: "center", textAlign: "center" }} theme="outlined" onClick={
-                    () => this.setState({
-                      employee: text,
-                      openEmployee: "openViewEmployee",
-                    })
-                  } />
-                </Space>
-              )}
-            />
-            <Column
-              title="Trạng thái"
-              dataIndex="status"
-              key="status"
-              render={(text, record) => (
-                <Space size="middle">
-                  {text === "Deactive" ? <Switch style={{ fontSize: '30px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
-                </Space>
-              )}
-            /></Table></div></FadeIn>
-      );
-    }
+    }  return (<div>{ information }</div>); }
 
   }
 }
@@ -213,7 +225,7 @@ var mapDispatchToProps = (dispatch, props) => {
 }
 var mapStateToProps = state => {
 
-
+  console.log(state.myLoginReducer)
   return {
     newEmployee: state.myEmployeeReducer,
     myLoginReducer: state.myLoginReducer

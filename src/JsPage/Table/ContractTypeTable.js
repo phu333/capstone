@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import { Table, Space, Button, Tag,Switch,message } from 'antd';
+import { Table, Space, Button, Tag, Switch, message } from 'antd';
 import TemplateUpload from '../Add/TemplateUpload';
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import React from 'react';
@@ -21,8 +21,8 @@ class ContractTable extends React.Component {
 
     this.state = {
       showTemplateCreate: false,
-      viewTemplate:false,
-      templateList:[],
+      viewTemplate: false,
+      templateList: [],
     };
     this.handleChange = this.handleChange.bind(this);
 
@@ -34,32 +34,32 @@ class ContractTable extends React.Component {
   }
   componentDidMount() {
 
-   
-      axios({
-        url: '/api/v1/ContractType',
-        method: "GET",
-        headers: {
-          Authorization: 'Bearer ' + this.props.token,
-  
-        }
+
+    axios({
+      url: '/api/v1/ContractType',
+      method: "GET",
+      headers: {
+        Authorization: 'Bearer ' + this.props.token,
+
+      }
     })
-        .then((response) => {
+      .then((response) => {
 
-            return response.data;
+        return response.data;
+      })
+      .then((data) => {
+
+        this.setState({
+          templateList: data.data
         })
-        .then((data) => {
+        this.props.onSubmit(data.data)
+      })
+      .catch(error => {
 
-            this.setState({
-              templateList:data.data
-            })
-            this.props.onSubmit(data.data)
-        })
-        .catch(error => {
 
-           
-        });
-      
-    
+      });
+
+
 
   }
   render() {
@@ -76,8 +76,17 @@ class ContractTable extends React.Component {
         <Redirect push to={"/capstone/viewTemplate" } />
         <Route exact path="/capstone/viewTemplate" render={() => <ViewTemplate token={this.props.token} role={this.props.role} />} /></Router>
         </FadeIn>
+         
+
       );
-    } 
+    } else if (this.state.showTemplateCreate) {
+      return (
+        <Router>
+          <Redirect push to={"/capstone/viewTemplate"} />
+          <Route exact path="/capstone/viewTemplate" render={() => <ViewTemplate token={this.props.token} role={this.props.role} />} /></Router>
+
+      );
+    }
     else {
       return (<FadeIn>
         <div style={{ height: "100vh" }}><Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tải lên mẫu mới</Button>
@@ -125,6 +134,9 @@ class ContractTable extends React.Component {
 
   }
 }
+
+
+
 var mapDispatchToProps = (dispatch, props) => {
   return {
     onSubmit: (token) => {

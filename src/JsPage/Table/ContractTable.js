@@ -243,6 +243,12 @@ class ContractTable extends Component {
                                 <p>{text.companyName}</p>
 
                             )} />
+                        {/* <Column title="Chủ hợp đồng" dataIndex="customer" key="customer"
+                            render={(text, record) => (
+
+                                <p>{text.CreatorcompanyName}</p>
+
+                            )} /> */}
                         {/* <Column title="Ngày hết hạn" dataIndex="contractExpiredDate" key="contractExpiredDate"
                             sorter={(a, b) => a.deadline.localeCompare(b.deadline)}
                             sortDirections={['descend', 'ascend']}
@@ -257,11 +263,11 @@ class ContractTable extends Component {
                                 <p>{text}</p>
 
                             )} /> */}
-                        <Column title="Giá trị hợp đồng"  dataIndex="contractValue" key="contractValue"
-align='right'
-                            render={(text, record) =>  `$ ${text}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        <Column title="Giá trị hợp đồng" dataIndex="contractValue" key="contractValue"
+                            align='right'
+                            render={(text, record) => `$ ${text}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 
-                             />   
+                        />
                         <Column title="Trạng thái" dataIndex="statusAsString" key="statusAsString"
                             sortDirections={['descend', 'ascend']}
                             render={(text, record) => {
