@@ -4,7 +4,7 @@ import ContractSearch from '../Search/ContractSearch'
 import "../Column.css"
 import axios from 'axios'
 import {
-    FolderViewOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
+    FolderViewOutlined, DownloadOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
     FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
 } from "@ant-design/icons"
 import ChooseContractTemplate from '../Add/ChooseContractTemplate'
@@ -13,6 +13,7 @@ import React, { Component } from 'react';
 import { createContract, contractInformation } from '../../actions/ContractAction'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import FadeIn from 'react-fade-in'
 const { Column } = Table;
 
 
@@ -29,15 +30,20 @@ class ContractTable extends Component {
             contract: {},
             contractsCreate: [],
             contractsReciceve: [],
-            contractsTotal: []
+            contractsTotal: [],
+            company:{},
+            loading:false,
         };
         this.onOpenCreateContract = this.onOpenCreateContract.bind(this);
         this.viewContract = this.viewContract.bind(this);
-
+        this.Donwload = this.Donwload.bind(this);
 
 
     }
     componentDidMount() {
+        this.setState({
+            loading:true
+        })
         axios({
             url: '/api/v1/Company/info',
             method: "PUT",
@@ -51,7 +57,10 @@ class ContractTable extends Component {
                 return response.data;
             })
             .then((data) => {
-                console.log(data.data)
+                this.setState({
+                    company: data.data
+                })
+                console.log(data.data.taxCode)
                 axios({
                     url: '/api/v1/Contract/get-by-taxcode?taxCode=' + data.data.taxCode,
                     method: "GET",
@@ -67,7 +76,7 @@ class ContractTable extends Component {
                     .then((data) => {
                         console.log(data)
                         this.setState({
-                            contractsReciceve: data.data
+                            contractsReciceve: data.data.filter(values=>values.statusAsString !== "Draft")
                         })
                         axios({
                             url: '/api/v1/Contract',
@@ -88,10 +97,10 @@ class ContractTable extends Component {
 
                                 })
                                 this.setState({
-
-                                    contractsTotal: [...this.state.contractsCreate, ...this.state.contractsReciceve]
+                                    loading:false,
+                                    contractsTotal: [...this.state.contractsCreate, ...this.state.contractsReciceve].filter(values=>values.isMainContract === true)
                                 })
-                                this.props.onSubmit(data.data)
+                                this.props.onSubmit(this.state.contractsTotal)
                             })
 
                             .catch(error => {
@@ -117,6 +126,63 @@ class ContractTable extends Component {
 
 
     }
+    Donwload(text){
+        if (this.state.company.id !== undefined) {
+            axios({
+                url: "https://localhost:44338/api/Signature/PostContract",
+                method: "POST",
+                data: {
+                    Info: this.state.company.taxCode,
+
+                }
+            })
+                .then((response) => {
+
+
+                })
+                .then((data) => {
+
+                })
+                .catch(error => {
+                    console.log(error)
+
+
+                });
+            if (text.fileUrl === null) {
+                axios({
+                    url: '/api/v1/Contract/export-docx/' + text.id,
+                    method: "GET",
+                    headers: {
+                        Authorization: 'Bearer ' + this.props.token,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/docx'
+                    },
+                    responseType: 'arraybuffer',
+
+                })
+                    .then((response) => {
+                        console.log(response)
+                        var fileDownload = require('js-file-download');
+                        fileDownload(response.data, text.id + '.docx');
+                        return response.data;
+                    })
+                    .then((data) => {
+                        console.log(data.data)
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+
+
+                    });
+            } else {
+                window.open(text.fileUrl, "_blank")
+                
+            }
+        } else {
+           
+        }
+    }
     onOpenCreateContract() {
         this.setState({
             showCreateContract: true
@@ -134,25 +200,26 @@ class ContractTable extends Component {
         console.log(this.state.contractsTotal)
 
         if (this.state.showCreateContract) {
-            return (
+            return ( <FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/chooseTemplate"} />
                     <Route exact path="/capstone/chooseTemplate" render={() => <ChooseContractTemplate token={this.props.token} role={this.props.role} />
-                    } /></Router>
+                    } /></Router></FadeIn>
 
             );
         } else if (this.state.showContract) {
-            return (
+            return ( <FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.state.contract.id)} />
                     <Route exact path="/capstone/viewContract/:id" render={() => <ViewContractPage contract={this.state.contract} token={this.props.token} role={this.props.role} />
-                    } /></Router>
+                    } /></Router></FadeIn>
 
             );
         }
         else {
 
             return (
+                <FadeIn>
                 <div >
                     <Space size="large">
                         <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContract}>Tạo hợp đồng</Button>
@@ -160,6 +227,7 @@ class ContractTable extends Component {
                     </Space>
                     <ContractSearch token={this.props.token} contractList={this.state.contractsTotal} />
                     <Table dataSource={this.props.newContract}
+                    loading={this.state.loading}
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}>
                         <Column title="Mã hợp đồng" dataIndex="contractNum" key="contractNum"
                             render={(text, record) => (
@@ -256,17 +324,19 @@ class ContractTable extends Component {
 
                             )}
                         /> */}
-                        {this.props.role === true ? <Column
-                            title="Ký"
+                        <Column
+                            title="Tải về"
                             key="action"
                             render={(text, record) => (
 
-                                <FormOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.viewContract} />
+                                <DownloadOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                                    () =>this.Donwload(text)
+                                } />
 
                             )}
-                        /> : null}
+                        /> 
 
-                    </Table></div >
+                    </Table></div ></FadeIn>
             );
         }
 

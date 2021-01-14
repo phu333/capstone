@@ -1,16 +1,18 @@
 import axios from 'axios'
-import { Table, Button, Tag,message } from 'antd';
+import { Table, Button, Tag,message,Space } from 'antd';
 import ContractSearch from '../Search/ContractSearch'
-import { FolderViewOutlined, DeleteOutlined, FormOutlined, FileAddOutlined, ContainerOutlined } from "@ant-design/icons"
+import { FolderViewOutlined, UploadOutlined, DownloadOutlined, FileAddOutlined, ContainerOutlined } from "@ant-design/icons"
 import AddContractExtension from '../Add/AddContractExtension'
 import UpdateContractExtension from '../Update/UpdateContractExtension'
+import ViewContractPage from '../Update/ViewContractPage'
 import React from 'react';
 import { createcontractExtension, contractExtensionInformation } from '../../actions/ContractExtension'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import FadeIn from 'react-fade-in'
 import "../Column.css"
 const { Column } = Table;
-
+var hash = require('object-hash')
 
 class ContractExtensionTable extends React.Component {
     constructor() {
@@ -20,84 +22,98 @@ class ContractExtensionTable extends React.Component {
             showCreateContractExtension: false,
             showContractExtension: false,
             contract: {},
+            finish:false,
 
         };
-
+        
         this.onOpenCreateContractExtension = this.onOpenCreateContractExtension.bind(this);
         this.viewContractExtension = this.viewContractExtension.bind(this);
+        this.Donwload = this.Donwload.bind(this);
+        this.onFinish = this.onFinish.bind(this)
+    }
+    onFinish(){
+        this.setState({
+            finish:true
+        })
     }
     componentDidMount() {
 
-        if (this.props.newContractExtension.length === 0) {
-            axios({
-                url: '',
-                method: "GET",
+        axios({
+            url: '/api/v1/Company/info',
+            method: "PUT",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
+
+            }
+        })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+                this.setState({
+                    company: data.data
+                })
+                console.log(data.data.taxCode)
+                axios({
+                    url: '/api/v1/Contract/get-by-taxcode?taxCode=' + data.data.taxCode,
+                    method: "GET",
+                    headers: {
+                        Authorization: 'Bearer ' + this.props.token,
+
+                    }
+                })
+                    .then((response) => {
+
+                        return response.data;
+                    })
+                    .then((data) => {
+                        console.log(data)
+                        this.setState({
+                            contractsReciceve: data.data
+                        })
+                        axios({
+                            url: '/api/v1/Contract',
+                            method: "GET",
+                            headers: {
+                                Authorization: 'Bearer ' + this.props.token,
+
+                            }
+                        })
+                            .then((response) => {
+
+                                return response.data;
+                            })
+                            .then((data) => {
+                                console.log(data)
+                                this.setState({
+                                    contractsCreate: data.data,
+
+                                })
+                                this.setState({
+
+                                    contractsTotal: [...this.state.contractsCreate, ...this.state.contractsReciceve]
+                                })
+                                this.props.onSubmit(this.state.contractsTotal.filter(values=>values.belongToContractId === this.props.contractId))
+                            })
+
+                            .catch(error => {
+
+
+                            });
+                    })
+
+                    .catch(error => {
+
+
+                    });
 
             })
-                .then((response) => {
-
-                    return response.data;
-                })
-                .then((data) => {
+            .catch(error => {
+                console.log(error)
 
 
-
-                })
-                .catch(error => {
-
-                    if (error.response.status === 500) {
-                        message.error(error.response.status + ' Server under maintainence');
-                    } else if (error.response.status === 404) {
-                        message.error(error.response.status + ' Server not found');
-                    }
-
-                });
-            const contract1 = {
-
-                contract_type: 'Hop dong lao dong',
-                status: "active",
-                ben_tao_hd: 'HiSign',
-                ben_tham_gia: 'cty 369',
-                nguoi_tao_hd: "Nguyen Ngoc Phu",
-                deadline: "12/12/2022",
-
-            }
-            const contract2 = {
-
-                contract_type: 'Hop dong lao dong',
-                status: "deactive",
-                ben_tao_hd: 'HiSign',
-                ben_tham_gia: 'cty 369',
-                nguoi_tao_hd: "Nguyen Ngoc Phu",
-                deadline: "12/12/2022",
-
-            }
-            const contract3 = {
-
-                contract_type: 'Hop dong lao dong',
-                status: "pending",
-                ben_tao_hd: 'HiSign',
-                ben_tham_gia: 'cty 369',
-                nguoi_tao_hd: "Nguyen Ngoc Phu",
-                deadline: "12/12/2022",
-
-            }
-            const contract4 = {
-
-                contract_type: 'Hop dong lao dong',
-                status: "waiting for customer",
-                ben_tao_hd: 'HiSign',
-                ben_tham_gia: 'cty 369',
-                nguoi_tao_hd: "Nguyen Ngoc Phu",
-                deadline: "12/12/2022",
-
-            }
-            this.props.onSubmit(contract1)
-            this.props.onSubmit(contract2)
-            this.props.onSubmit(contract3)
-            this.props.onSubmit(contract4)
-        }
-
+            });
     }
     onOpenCreateContractExtension() {
         this.setState({
@@ -110,70 +126,157 @@ class ContractExtensionTable extends React.Component {
             showContractExtension: true
         })
     }
+    Donwload(text){
+        if (this.state.company.id !== undefined) {
+            axios({
+                url: "https://localhost:44338/api/Signature/PostContract",
+                method: "POST",
+                data: {
+                    Info: this.state.company.taxCode,
+
+                }
+            })
+                .then((response) => {
+
+
+                })
+                .then((data) => {
+
+                })
+                .catch(error => {
+                    console.log(error)
+
+
+                });
+            if (text.fileUrl === null) {
+                axios({
+                    url: '/api/v1/Contract/export-docx/' + text.id,
+                    method: "GET",
+                    headers: {
+                        Authorization: 'Bearer ' + this.props.token,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/docx'
+                    },
+                    responseType: 'arraybuffer',
+
+                })
+                    .then((response) => {
+                        console.log(response)
+                        var fileDownload = require('js-file-download');
+                        fileDownload(response.data, text.id + '.docx');
+                        return response.data;
+                    })
+                    .then((data) => {
+                        console.log(data.data)
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+
+
+                    });
+            } else {
+                window.open(text.fileUrl, "_blank")
+                
+            }
+        } else {
+           
+        }
+    }
     render() {
         if (this.state.showCreateContractExtension) {
-            return (
+            return (<FadeIn>
                 <Router>
-                    <Redirect push to={"/capstone/viewContract/" + this.props.contractId + "/createExtension"} />
-                    <Route exact path="/capstone/viewContract/:id/createExtension" render={() => <AddContractExtension contractId={this.props.contractId} role={this.props.role} />
-                    } /></Router>
+                    <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.props.contract.id) + "/createExtension"} />
+                    <Route exact path="/capstone/viewContract/:id/createExtension" render={() => <AddContractExtension token={this.props.token} contractId={this.props.contractId} contract={this.props.contract} role={this.props.role} />
+                    } /></Router></FadeIn>
 
 
             );
         } else if (this.state.showContractExtension) {
-            return (
+            return (<FadeIn>
 
                 <Router>
-                    <Redirect push to={"/capstone/viewContract/" + this.props.contractId + "/updateExtension"} />
-                    <Route exact path="/capstone/viewContract/:id/updateExtension" render={() => <UpdateContractExtension contractId={this.props.contractId} contract={this.state.contract} role={this.props.role} />
-                    } /></Router>
+                    <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.props.contract.id) + "/updateExtension"+hash.sha1(this.state.contract.id)} />
+                    <Route exact path="/capstone/viewContract/:id/updateExtension/:exId" render={() => <UpdateContractExtension ismycontract={this.props.ismycontract} token={this.props.token} contractId={this.props.contractId} contractEx={this.state.contract} contract={this.props.contract} role={this.props.role} />
+                    } /></Router></FadeIn>
+            );
+        }else if (this.state.finish) {
+            return ( <FadeIn>
+                <Router>
+                    <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.state.contract.id)} />
+                    <Route exact path="/capstone/viewContract/:id" render={() => <ViewContractPage contract={this.props.contract} token={this.props.token} role={this.props.role} />
+                    } /></Router></FadeIn>
+
             );
         }
         else {
-            return (
-                <div style={{ height: "100vh" }}><Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContractExtension}>Tạo phụ lục</Button>
-                    <ContractSearch />
-                    <Table dataSource={this.props.newContractExtension}
+            return ( <FadeIn>
+                <div >
+                    {this.props.ismycontract ? <Space size="large">
+                        <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContractExtension}>Tạo hợp đồng</Button>
+                        <Button type="primary" icon={<UploadOutlined />} >Tải lên hợp đồng</Button>
+                    </Space> : null}
+                   
+                    <ContractSearch token={this.props.token} contractList={this.state.contractsTotal} />
+                    <Table dataSource={this.props.newContract}
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}>
-                        <Column title="tên phụ lục" dataIndex="contract_type" key="contract_type"
+                        <Column title="Mã hợp đồng" dataIndex="contractNum" key="contractNum"
+                            render={(text, record) => (
+                                <a> {text}</a>
+                            )}
+                        />
+                        <Column title="Tên hợp đồng" dataIndex="contractTitle" key="contractTitle"
                             render={(text, record) => (
 
-                                <a><ContainerOutlined />{text}</a>
+                                <a>{text}</a>
 
                             )}
                         />
 
-                        <Column title="bên đối tác" dataIndex="ben_tham_gia" key="ben_tham_gia"
+                        <Column title="Bên nhận hợp đồng" dataIndex="customer" key="customer"
                             render={(text, record) => (
 
-                                <b>{text}</b>
+                                <p>{text.companyName}</p>
 
                             )} />
-                        <Column title="bên tạo " dataIndex="ben_tao_hd" key="ben_tao_hd"
+                        {/* <Column title="Chủ hợp đồng" dataIndex="customer" key="customer"
                             render={(text, record) => (
 
-                                <b>{text}</b>
+                                <p>{text.CreatorcompanyName}</p>
 
-                            )} />
-                        <Column title="người tạo " dataIndex="nguoi_tao_hd" key="nguoi_tao_hd"
+                            )} /> */}
+                        {/* <Column title="Ngày hết hạn" dataIndex="contractExpiredDate" key="contractExpiredDate"
+                            sorter={(a, b) => a.deadline.localeCompare(b.deadline)}
+                            sortDirections={['descend', 'ascend']}
                             render={(text, record) => (
 
-                                <b>{text}</b>
+                                <p>{text}</p>
 
-                            )} />
-                        <Column title="trạng thái" dataIndex="status" key="status"
+                            )} /> */}
+                        {/* <Column title="bên tạo hợp đồng" dataIndex="ben_tao_hd" key="ben_tao_hd"
+                            render={(text, record) => (
+
+                                <p>{text}</p>
+
+                            )} /> */}
+                        <Column title="Giá trị hợp đồng" dataIndex="contractValue" key="contractValue"
+                            align='right'
+                            render={(text, record) => `$ ${text}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+
+                        />
+                        <Column title="Trạng thái" dataIndex="statusAsString" key="statusAsString"
+                            sortDirections={['descend', 'ascend']}
                             render={(text, record) => {
                                 let color = 'pink'
-                                if (text === 'deactive') {
+                                if (text === 'Deactive') {
                                     color = 'red'
-                                } else if (text === 'active') {
+                                } else if (text === 'Active') {
                                     color = 'green'
-                                } else if (text === 'pending') {
+                                } else if (text === 'Draft') {
                                     color = 'blue'
                                 } else if (text === 'waiting for customer') {
                                     color = 'pink'
-                                } else if (text === 'rejected') {
-                                    color = 'grey'
                                 } else if (text === 'Hiệu lực') {
                                     color = 'green'
                                 } else if (text === 'Vô hiệu hóa') {
@@ -204,7 +307,7 @@ class ContractExtensionTable extends React.Component {
 
                             )}
                         />
-                        <Column
+                        {/* <Column
                             title="Vô hiệu hóa"
                             key="action"
                             render={(text, record) => (
@@ -212,18 +315,20 @@ class ContractExtensionTable extends React.Component {
                                 <DeleteOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.viewContract} />
 
                             )}
-                        />
-                        {this.props.role == 'Director' ? <Column
-                            title="Ký"
+                        /> */}
+                        <Column
+                            title="Tải về"
                             key="action"
                             render={(text, record) => (
 
-                                <FormOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={this.viewContract} />
+                                <DownloadOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                                    () =>this.Donwload(text)
+                                } />
 
                             )}
-                        /> : null}
+                        /> 
 
-                    </Table></div>
+                    </Table></div ></FadeIn>
 
             );
         }

@@ -85,7 +85,7 @@ class UpdateProfile extends React.Component {
     }
     onFinish = (values) => {
         this.setState({
-            isEdit: false
+            isEdit: !this.state.isEdit
         })
 
 
@@ -94,7 +94,7 @@ class UpdateProfile extends React.Component {
     };
     onEdit = (values) => {
         this.setState({
-            isEdit: true
+            isEdit: !this.state.isEdit
         })
 
 
@@ -233,7 +233,7 @@ class UpdateProfile extends React.Component {
                                         <Row gutter={8}> <Col span={20}>  <Input.Password defaultValue="123" /></Col>    <Popover content={name} trigger="hover">
                                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                         </Popover></Row>
-                                    </Form.Item> : <p></p>}
+                                    </Form.Item> }
 
 
                                 <Form.Item

@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-rout
 import { connect } from 'react-redux'
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined, FolderViewOutlined } from "@ant-design/icons"
 import axios from 'axios'
+import FadeIn from 'react-fade-in'
 const { Column } = Table;
 
 
@@ -70,22 +71,25 @@ class CustomerList extends React.Component {
 
   render() {
     if (this.state.openCustomer === "openAddCustomer") {
-      return (
+      return (<FadeIn>
         <Router>
           <Redirect push to={"/capstone/addCustomer"} />
           <Route exact path="/capstone/addCustomer" render={() => <AddCustomer token={this.props.token} />
-          } /></Router>
+          } /></Router></FadeIn>
 
       );
     } else if (this.state.openCustomer === "openViewCustomer") {
-      return (<Router>
+      return (<FadeIn>
+      <Router>
         <Redirect push to={"/capstone/updateCustomer/" + this.state.customer.taxCode} />
         <Route exact path="/capstone/updateCustomer/:id" render={() => <ViewCustomer customer={this.state.customer} />
-        } /></Router>);
+        } /></Router></FadeIn>
+        
+        );
 
     }
     else {
-      return (
+      return (<FadeIn>
         <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddCustomer} icon={<UserAddOutlined />}>Tạo khách hàng mới</Button>
           <CustomerSearch token={this.props.token} customerList={this.state.customers} />
           <Table dataSource={this.props.newCustomer}
@@ -169,7 +173,7 @@ class CustomerList extends React.Component {
               )}
             />
 
-          </Table></div>
+          </Table></div></FadeIn>
       );
     }
 

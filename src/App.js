@@ -4,7 +4,7 @@ import './App.css';
 import LoginPage from './JsPage/Login/LoginPage'
 
 import { Tabs, Result, Button } from 'antd';
-
+import FadeIn from 'react-fade-in'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import ContractForGuest from './JsPage/Login/ContractForGuest'
@@ -16,9 +16,7 @@ class App extends React.Component {
    
     return (
       <div >
-        <ReactCSSTransitionGroup transitionName="example"
-          transitionAppear={true} transitionAppearTimeout={500}
-        >
+        <FadeIn>
           {/* <Online> */}
 
             <Router>
@@ -43,7 +41,7 @@ class App extends React.Component {
 
           /></Offline> */}
 
-        </ReactCSSTransitionGroup>
+        </FadeIn>
 
 
 

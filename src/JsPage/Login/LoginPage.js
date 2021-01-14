@@ -6,7 +6,7 @@ import { PageHeader, Space, Row, Col } from 'antd';
 import { GoogleLogin } from 'react-google-login';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import EmployeeSideMenu from './EmployeeSideMenu';
-
+import FadeIn from 'react-fade-in'
 import axios from 'axios'
 
 import GoogleOutlined from '../../logo/Google.png'
@@ -17,6 +17,7 @@ import ForgetPassword from './ForgetPassword'
 import { createFromIconfontCN } from '@ant-design/icons';
 import { connect } from 'react-redux'
 import { addLogin, login } from '../../actions/loginAction'
+
 
 const IconFont = createFromIconfontCN({
     scriptUrl: [
@@ -132,8 +133,7 @@ class LoginPage extends React.Component {
             })
             .then((data) => {
                 console.log(data.data)
-                if (data.data.roles[0] === "CompanyAdmin" || data.data.roles[0] === "CEO" ||
-                    data.data.roles[0] === "SystemAdmin") {
+                
                     let loginInfo = {
                         id: data.data.id,
                         username: data.data.userName,
@@ -155,33 +155,33 @@ class LoginPage extends React.Component {
                         jwToken: data.data.jwToken,
                         loginCode: true,
                     }
-                    this.props.onSubmit(loginInfo)
+                    axios({
+                        url: '/api/Account/permission/'+data.data.id,
+                        method: "GET",
+                        headers: {
+                            Authorization: 'Bearer ' + data.data.jwToken,
+                  
+                        }
+                    })
+                        .then((response) => {
+                  
+                            return response.data;
+                        })
+                        .then((data) => {
+                            console.log(data)
+                            for(let i = 0; i < data.length; i++){
+                                loginInfo[data[i].permissionName]=data[i].enabled
+                            }
+                            this.props.onSubmit(loginInfo)
+                        })
+                  
+                        .catch(error => {
+                  
+                  
+                        });
+                    
                     console.log(loginInfo)
-                } else {
-                    let loginInfo = {
-                        id: data.data.id,
-                        username: data.data.userName,
-                        email: data.data.email,
-
-                        role: data.data.roles[0],
-                        signPermission: false,
-                        contractManagePermision: true,
-                        customerManagePermission: true,
-                        contractTypeManagePermission: true,
-                        employeeManagePermission: true,
-                        signatureManagePermission: true,
-                        editCompanyInformationPermission: true,
-                        ActiveDeactiveAccount:false,
-                        UpdateAccountPermission:true,
-                        ActiveDeactiveTemplate:false,
-                        UpdateTemplate:false,
-                        isVerified: data.data.isVerified,
-                        jwToken: data.data.jwToken,
-                        loginCode: true,
-                    }
-                    this.props.onSubmit(loginInfo)
-                    console.log(loginInfo)
-                }
+                
 
 
 
@@ -225,12 +225,12 @@ class LoginPage extends React.Component {
 
         var information = this.props.myLoginReducer.map((login, index) => {
 
-            return (
+            return (<FadeIn>
                 <Router>
                     <Redirect push to="/capstone/SideMenu" />
 
                     <Route exact path="/capstone/SideMenu" component={EmployeeSideMenu} />
-                </Router>
+                </Router></FadeIn>
             );
 
         })
@@ -239,14 +239,14 @@ class LoginPage extends React.Component {
             return (<div> { information}</div >);
         } else {
             if (this.state.othersPage === "ForgetPassword") {
-                return (
-                    <ForgetPassword />);
+                return (<FadeIn>
+                    <ForgetPassword /></FadeIn>);
 
             } else if (this.state.othersPage === "AddUserAdmin") {
-                return (
-                    <AddUserAdmin />);
+                return (<FadeIn>
+                    <AddUserAdmin /></FadeIn>);
             } else {
-                return (
+                return (<FadeIn>
                     <Row type="flex" justify="center" align="middle" style={{ height: "100vh", backgroundColor: 'rgb(8, 59, 102)' }}>
 
                         <Redirect push to="/capstone/Login" />
@@ -347,7 +347,7 @@ class LoginPage extends React.Component {
 
                             </Form>
 
-                        </Col></Row>
+                        </Col></Row></FadeIn>
 
                 );
             }

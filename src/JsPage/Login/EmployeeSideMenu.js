@@ -18,7 +18,9 @@ import Header from '../Login/Header'
 import { createFromIconfontCN } from '@ant-design/icons';
 import { connect } from 'react-redux'
 import "../Column.css"
+import FadeIn from 'react-fade-in'
 import logo from '../../logo/Capture.PNG'
+import axios from 'axios'
 const IconFont = createFromIconfontCN({
   scriptUrl: [
     '//at.alicdn.com/t/font_1788044_0dwu4guekcwr.js', // icon-javascript, icon-java, icon-shoppingcart (overrided)
@@ -38,6 +40,9 @@ class EmployeeSideMenu extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
   }
+  componentDidMount(){
+    
+  }
   toggleCollapsed = () => {
     this.setState({
       collapsed: !this.state.collapsed,
@@ -50,15 +55,15 @@ class EmployeeSideMenu extends React.Component {
     })
 
   };
-  
+
   render() {
 
     if (this.props.myLoginReducer !== "logout") {
 
       var information = this.props.myLoginReducer.map((login, index) => {
         return (
-
-          <Layout style={{ minHeight: "130vh" }}>
+          <FadeIn>
+            <Layout style={{ minHeight: "130vh" }}>
 
 
               <Sider width={250} className="site-layout-background"
@@ -76,7 +81,7 @@ class EmployeeSideMenu extends React.Component {
                 }}
               >
 
-<img src={logo}  type="icon-javascript" style={{height: '100px', width: '100%', fontSize: '60px', color: '#08c' }} />
+                <img src={logo} type="icon-javascript" style={{ height: '100px', width: '100%', fontSize: '60px', color: '#08c' }} />
 
 
                 <Menu
@@ -138,8 +143,8 @@ class EmployeeSideMenu extends React.Component {
                   padding: 24,
                   margin: 0,
                   minHeight: "100vh",
-                  maxHeight:"100%",
-                  
+                  maxHeight: "100%",
+
                 }}>
                   {login.companyId !== null ? <>
                     {this.state.showComponent === "Chart" ?
@@ -196,6 +201,7 @@ class EmployeeSideMenu extends React.Component {
 
               </Layout>
             </Layout>
+          </FadeIn>
         );
       })
 
