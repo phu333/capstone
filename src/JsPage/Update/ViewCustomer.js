@@ -9,6 +9,8 @@ import {
     , CloudUploadOutlined, RedoOutlined
 } from '@ant-design/icons';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { updateCustomer } from '../../actions/CustomerAction';
 const layout = {
     labelCol: {
         span: 4,
@@ -37,20 +39,20 @@ class ViewCustomer extends React.Component {
     }
     onFinish = (values) => {
         axios({
-            url: '/api/v1/Company/'+this.state.company.id,
+            url: '/api/v1/Company/' + this.state.company.id,
             method: "PUT",
             headers: {
                 Authorization: 'Bearer ' + this.props.token,
 
             },
-            data:values
+            data: values
         })
             .then((response) => {
 
                 return response.data;
             })
             .then((data) => {
-                
+
             })
             .catch(error => {
                 console.log(error)
@@ -85,7 +87,16 @@ class ViewCustomer extends React.Component {
 
     render() {
         console.log(this.props.customer)
-
+        var ButtonFix = this.props.myLoginReducer.map((login, index) => {
+            return (
+                <div> {
+                    login.UpdateCustomer === true ? <div>
+                        {this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
+                            Sửa
+            </Button> : null}</div>
+                        : null
+                }</div>)
+        })
         return (
             <Card>
                 <br />
@@ -107,7 +118,7 @@ class ViewCustomer extends React.Component {
                     <Form.Item
                         label="Tên doanh nghiệp"
                         name="name"
-                        
+
                     >
                         {this.state.isEdit === false ?
                             <Input disabled defaultValue={this.props.customer.name} /> :
@@ -116,9 +127,9 @@ class ViewCustomer extends React.Component {
                     <Form.Item
                         label="Mã số thuế"
                         name="taxCode"
-                        
+
                     >
-                         {this.state.isEdit === false ?
+                        {this.state.isEdit === false ?
                             <Input disabled defaultValue={this.props.customer.taxCode} /> :
                             <Input defaultValue={this.props.customer.taxCode} />}
                     </Form.Item>
@@ -126,7 +137,7 @@ class ViewCustomer extends React.Component {
                     <Form.Item
                         label="Giấy phép kinh doanh"
                         name="businessLicense"
-                        
+
                     >
                         {this.state.isEdit === false ?
                             <Input disabled defaultValue={this.props.customer.businessLicense} /> :
@@ -135,16 +146,16 @@ class ViewCustomer extends React.Component {
                     <Form.Item
                         label="Điện thoại"
                         name="phoneNumber"
-                        
+
                     >
-                         {this.state.isEdit === false ?
+                        {this.state.isEdit === false ?
                             <Input disabled defaultValue={this.props.customer.phoneNumber} /> :
                             <Input defaultValue={this.props.customer.phoneNumber} />}
                     </Form.Item>
                     <Form.Item
                         label="Địa chỉ"
                         name="address"
-                        
+
                     >
                         {this.state.isEdit === false ?
                             <Input disabled defaultValue={this.props.customer.address} /> :
@@ -153,16 +164,16 @@ class ViewCustomer extends React.Component {
                     <Form.Item
                         label="Email"
                         name="email"
-                        
+
                     >
-                       {this.state.isEdit === false ?
+                        {this.state.isEdit === false ?
                             <Input disabled defaultValue={this.props.customer.email} /> :
                             <Input defaultValue={this.props.customer.email} />}
                     </Form.Item>
                     <Form.Item
                         label="Số tài khoản"
                         name="bankAccount"
-                        
+
                     >
                         {this.state.isEdit === false ?
                             <Input disabled defaultValue={this.props.customer.bankAccount} /> :
@@ -171,7 +182,7 @@ class ViewCustomer extends React.Component {
                     <Form.Item
                         label="Người đại diện"
                         name="role"
-                        
+
                     >
                         {this.state.isEdit === false ?
                             <Input disabled defaultValue="Nguyen Van B" /> :
@@ -198,10 +209,8 @@ class ViewCustomer extends React.Component {
                             {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
                                 Reset
                             </Button> : null}
+                            {ButtonFix}
 
-                            {this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
-                                Sửa
-                            </Button> : null}
 
 
                         </Space>
@@ -224,5 +233,18 @@ class ViewCustomer extends React.Component {
 
 }
 
+var mapDispatchToProps = (dispatch, props) => {
+    return {
+        onSubmit: (token) => {
+            dispatch(updateCustomer(token))
+        }
+    }
+}
+var mapStateToProps = state => {
 
-export default ViewCustomer;
+    console.log(state.myLoginReducer)
+    return {
+      myLoginReducer: state.myLoginReducer
+    }
+  }
+export default connect(mapStateToProps, mapDispatchToProps)(ViewCustomer);

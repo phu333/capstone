@@ -89,8 +89,13 @@ class CustomerList extends React.Component {
 
     }
     else {
-      return (<FadeIn>
-        <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddCustomer} icon={<UserAddOutlined />}>Tạo khách hàng mới</Button>
+      if (this.props.myLoginReducer !== "logout") {
+
+        var information = this.props.myLoginReducer.map((login, index) => {
+  
+     return (<FadeIn>
+        <div style={{ height: "100vh" }}>
+        {login.AddCustomer === true ? <Button type="primary" onClick={this.OpenAddCustomer} icon={<UserAddOutlined />}>Tạo khách hàng mới</Button>:null}
           <CustomerSearch token={this.props.token} customerList={this.state.customers} />
           <Table dataSource={this.props.newCustomer}
 
@@ -160,6 +165,7 @@ class CustomerList extends React.Component {
                 </Space>
               )}
             />
+            {login.ActiveDeactiveCustomer === true ? 
             <Column
               title="Tác vụ"
               dataIndex="status"
@@ -172,13 +178,21 @@ class CustomerList extends React.Component {
                 </Space>
               )}
             />
-
+:null}
           </Table></div></FadeIn>
-      );
-    }
-
-  }
-}
+                    );
+                  }
+          
+                  )
+                } if (this.props.myLoginReducer === "Logout") {
+          
+          
+                } return (<div>{information}</div>);
+              }
+          
+            }
+          }
+          
 var mapDispatchToProps = (dispatch, props) => {
   return {
     onSubmit: (token) => {
