@@ -212,7 +212,7 @@ class CreateContract extends React.Component {
             value: value,
             contractLaw: this.state.contractContent,
             footer: footer,
-
+            isMainContract:true,
         }
         console.log(contract)
         axios({

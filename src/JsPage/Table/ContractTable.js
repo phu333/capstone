@@ -32,6 +32,7 @@ class ContractTable extends Component {
             contractsReciceve: [],
             contractsTotal: [],
             company:{},
+            loading:false,
         };
         this.onOpenCreateContract = this.onOpenCreateContract.bind(this);
         this.viewContract = this.viewContract.bind(this);
@@ -40,6 +41,9 @@ class ContractTable extends Component {
 
     }
     componentDidMount() {
+        this.setState({
+            loading:true
+        })
         axios({
             url: '/api/v1/Company/info',
             method: "PUT",
@@ -72,7 +76,7 @@ class ContractTable extends Component {
                     .then((data) => {
                         console.log(data)
                         this.setState({
-                            contractsReciceve: data.data
+                            contractsReciceve: data.data.filter(values=>values.statusAsString !== "Draft")
                         })
                         axios({
                             url: '/api/v1/Contract',
@@ -93,8 +97,8 @@ class ContractTable extends Component {
 
                                 })
                                 this.setState({
-
-                                    contractsTotal: [...this.state.contractsCreate, ...this.state.contractsReciceve]
+                                    loading:false,
+                                    contractsTotal: [...this.state.contractsCreate, ...this.state.contractsReciceve].filter(values=>values.isMainContract === true)
                                 })
                                 this.props.onSubmit(this.state.contractsTotal)
                             })
@@ -223,6 +227,7 @@ class ContractTable extends Component {
                     </Space>
                     <ContractSearch token={this.props.token} contractList={this.state.contractsTotal} />
                     <Table dataSource={this.props.newContract}
+                    loading={this.state.loading}
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}>
                         <Column title="Mã hợp đồng" dataIndex="contractNum" key="contractNum"
                             render={(text, record) => (

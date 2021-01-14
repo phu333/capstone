@@ -24,14 +24,7 @@ const { RangePicker } = DatePicker;
 const { Column, ColumnGroup } = Table;
 const { TextArea } = Input;
 const { Option } = Select;
-const CommentList = ({ comments }) => (
-    <List
-        dataSource={comments}
-        header={`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`}
-        itemLayout="horizontal"
-        renderItem={props => <Comment {...props} />}
-    />
-);
+
 var hash = require('object-hash')
 class ContractView extends React.Component {
     constructor() {
@@ -73,13 +66,14 @@ class ContractView extends React.Component {
             contractName: "",
             contractValue: "",
             contractContent: "",
-
+            ismycontract:false,
             contractTitle: "",
             contractPlace: "",
             contractExpiredDate: "",
         };
 
         this.OpenExtension = this.OpenExtension.bind(this)
+        this.OpenExtensionOther = this.OpenExtensionOther.bind(this)
         this.onGetlink = this.onGetlink.bind(this);
         this.onEditorStateChange = this.onEditorStateChange.bind(this);
         this.onNote = this.onNote.bind(this);
@@ -243,7 +237,14 @@ class ContractView extends React.Component {
     };
     OpenExtension() {
         this.setState({
-            openExtension: true
+            openExtension: true,
+            ismycontract:!this.state.ismycontract
+        })
+    }
+    OpenExtensionOther() {
+        this.setState({
+            openExtension: true,
+            ismycontract:this.state.ismycontract
         })
     }
     onNote() {
@@ -436,16 +437,7 @@ class ContractView extends React.Component {
 
     };
 
-    ShowCustomer = () => {
-        this.setState({
-            showContent: "customer"
-        })
-    };
-    ShowContent = () => {
-        this.setState({
-            showContent: "content"
-        })
-    };
+
     onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
@@ -514,7 +506,7 @@ class ContractView extends React.Component {
             return (
                 <Router>
                     <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.props.contract.id) + "/viewExtension"} />
-                    <Route exact path="/capstone/viewContract/:id/viewExtension" render={() => <ContractExtensionTable contractId={this.props.contract.id} role={this.props.role} />
+                    <Route exact path="/capstone/viewContract/:id/viewExtension" render={() => <ContractExtensionTable ismycontract={this.state.ismycontract} contract={this.props.contract} contractId={this.props.contract.id} role={this.props.role} />
                     } /></Router>
             );
         } else {
@@ -638,7 +630,7 @@ class ContractView extends React.Component {
                                             <Button type="primary" value="Sign" onClick={this.onFinish}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
                                                         Tải về
                                                     </Button>
-                                            <CopyToClipboard text={"http://localhost:3000/capstone/Contract/" + hash.sha1(this.props.contract.id)}
+                                            <CopyToClipboard text={"http://localhost:3000/capstone/Contract/" + this.props.contract.id}
                                                 onCopy={() => message.success("copied")}>
                                                 <Button type="primary">lấy link</Button>
                                             </CopyToClipboard>
@@ -646,9 +638,15 @@ class ContractView extends React.Component {
                                             {this.props.role === true ? <Button type="primary" value="reject">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
                                                             Reject
                                                         </Button> : null}
-                                            <Button type="primary" value="update" onClick={this.onEdit}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
+                                            {this.props.contract.statusAsString !== "Active" && this.state.company.id === this.state.creator ?
+                                                <Button type="primary" value="extension" onClick={this.OpenExtension}>{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
+                                                            kiểm tra phụ luc
+                                                        </Button> : <Button type="primary" value="extension" onClick={this.OpenExtensionOther}>{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
+                                                            kiểm tra phụ luc
+                                                        </Button>}
+                                            {this.props.contract.statusAsString === "Draft" ?<Button type="primary" value="update" onClick={this.onEdit}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
                                                         Chỉnh sửa
-                                                    </Button>
+                                                    </Button> : null}
                                             {this.state.isEdit === true ? <Button type="primary" value="update" onClick={this.onUpdate}>{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
                                                             nộp
                                                         </Button> : null}
