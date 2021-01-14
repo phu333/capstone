@@ -20,6 +20,7 @@ import { connect } from 'react-redux'
 import "../Column.css"
 import FadeIn from 'react-fade-in'
 import logo from '../../logo/Capture.PNG'
+import axios from 'axios'
 const IconFont = createFromIconfontCN({
   scriptUrl: [
     '//at.alicdn.com/t/font_1788044_0dwu4guekcwr.js', // icon-javascript, icon-java, icon-shoppingcart (overrided)
@@ -38,6 +39,29 @@ class EmployeeSideMenu extends React.Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
+  }
+  componentDidMount(){
+    axios({
+      url: '/api/Account/permission/'+this.props.myLoginReducer[0].id,
+      method: "GET",
+      headers: {
+          Authorization: 'Bearer ' + this.props.token,
+
+      }
+  })
+      .then((response) => {
+
+          return response.data;
+      })
+      .then((data) => {
+          console.log(data)
+         
+      })
+
+      .catch(error => {
+
+
+      });
   }
   toggleCollapsed = () => {
     this.setState({
