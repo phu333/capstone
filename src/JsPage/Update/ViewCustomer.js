@@ -90,7 +90,7 @@ class ViewCustomer extends React.Component {
         var ButtonFix = this.props.myLoginReducer.map((login, index) => {
             return (
                 <div> {
-                    login.UpdateCustomer === false ? <div>
+                    login.UpdateCustomer === true ? <div>
                         {this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
                             Sửa
             </Button> : null}</div>
