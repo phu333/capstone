@@ -66,17 +66,17 @@ class ContractTable extends React.Component {
     if (this.state.showTemplateCreate) {
       return (<FadeIn>
         <Router>
-        <Redirect push to={"/capstone/uploadTemplate" } />
-        <Route exact path="/capstone/uploadTemplate" render={() => <TemplateUpload token={this.props.token} role={this.props.role} />} /></Router>
-       </FadeIn>
+          <Redirect push to={"/capstone/uploadTemplate"} />
+          <Route exact path="/capstone/uploadTemplate" render={() => <TemplateUpload token={this.props.token} role={this.props.role} />} /></Router>
+      </FadeIn>
       );
-    }else if (this.state.showTemplateCreate) {
+    } else if (this.state.showTemplateCreate) {
       return (<FadeIn>
         <Router>
-        <Redirect push to={"/capstone/viewTemplate" } />
-        <Route exact path="/capstone/viewTemplate" render={() => <ViewTemplate token={this.props.token} role={this.props.role} />} /></Router>
-        </FadeIn>
-         
+          <Redirect push to={"/capstone/viewTemplate"} />
+          <Route exact path="/capstone/viewTemplate" render={() => <ViewTemplate token={this.props.token} role={this.props.role} />} /></Router>
+      </FadeIn>
+
 
       );
     } else if (this.state.showTemplateCreate) {
@@ -88,48 +88,56 @@ class ContractTable extends React.Component {
       );
     }
     else {
-      return (<FadeIn>
-        <div style={{ height: "100vh" }}><Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tải lên mẫu mới</Button>
-          <ContractTypeSearch token={this.props.token} templateList={this.state.templateList} />
-          <Table dataSource={this.props.newContractType}
-            rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}  >
-           <Column title="Mã" dataIndex="id" key="id"
-            sorter={(a, b) => a.contract_type.localeCompare(b.contract_type)}
-            sortDirections={['descend', 'ascend']}
-              render={(text, record) => (
+      if (this.props.myLoginReducer !== "logout") {
 
-                <p>{text}</p>
+        var information = this.props.myLoginReducer.map((login, index) => {
 
-              )}
-            />
+          return (<FadeIn>
+            <div style={{ height: "100vh" }}>
+              {login.UpdateTemplate === true ? <Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tải lên mẫu mới</Button>
+                : null}
+              <ContractTypeSearch token={this.props.token} templateList={this.state.templateList} />
+              <Table dataSource={this.props.newContractType}
+                rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}  >
+                <Column title="Mã" dataIndex="id" key="id"
+                  sorter={(a, b) => a.contract_type.localeCompare(b.contract_type)}
+                  sortDirections={['descend', 'ascend']}
+                  render={(text, record) => (
 
-            <Column title="Tên" dataIndex="name" key="name"
-              render={(text, record) => (
+                    <p>{text}</p>
 
-                <p>{text}</p>
+                  )}
+                />
+                <Column title="Tên" dataIndex="name" key="name"
+                  render={(text, record) => (
 
-              )}
-            />
-            
-            
-           
+                    <p>{text}</p>
 
-            <Column
-              title="Chọn file khác"
-              key="Update"
-              render={(text, record) => (
-                <Space size="middle">
-                  <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={()=>{
-                    this.setState({
-                      viewTemplate : !this.state.viewTemplate
-                    })
-                  }}></FolderViewOutlined>
-                </Space>
-              )}
-            />
-           
-          </Table></div></FadeIn>
-      );
+                  )}
+                />
+                {login.ActiveDeactiveTemplate === true ?
+                  <Column
+                    title="Chọn file khác"
+                    key="Update"
+                    render={(text, record) => (
+                      <Space size="middle">
+                        <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={() => {
+                          this.setState({
+                            viewTemplate: !this.state.viewTemplate
+                          })
+                        }}></FolderViewOutlined>
+                      </Space>
+                    )}
+                  /> : null}
+              </Table></div></FadeIn>
+          );
+        }
+
+        )
+      } if (this.props.myLoginReducer === "Logout") {
+
+
+      } return (<div>{information}</div>);
     }
 
   }
