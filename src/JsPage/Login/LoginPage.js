@@ -18,6 +18,7 @@ import { createFromIconfontCN } from '@ant-design/icons';
 import { connect } from 'react-redux'
 import { addLogin, login } from '../../actions/loginAction'
 
+
 const IconFont = createFromIconfontCN({
     scriptUrl: [
         '//at.alicdn.com/t/font_1788044_0dwu4guekcwr.js', // icon-javascript, icon-java, icon-shoppingcart (overrided)
@@ -132,8 +133,7 @@ class LoginPage extends React.Component {
             })
             .then((data) => {
                 console.log(data.data)
-                if (data.data.roles[0] === "CompanyAdmin" || data.data.roles[0] === "CEO" ||
-                    data.data.roles[0] === "SystemAdmin") {
+                
                     let loginInfo = {
                         id: data.data.id,
                         username: data.data.userName,
@@ -155,33 +155,33 @@ class LoginPage extends React.Component {
                         jwToken: data.data.jwToken,
                         loginCode: true,
                     }
-                    this.props.onSubmit(loginInfo)
+                    axios({
+                        url: '/api/Account/permission/'+data.data.id,
+                        method: "GET",
+                        headers: {
+                            Authorization: 'Bearer ' + data.data.jwToken,
+                  
+                        }
+                    })
+                        .then((response) => {
+                  
+                            return response.data;
+                        })
+                        .then((data) => {
+                            console.log(data)
+                            for(let i = 0; i < data.length; i++){
+                                loginInfo[data[i].permissionName]=data[i].enabled
+                            }
+                            this.props.onSubmit(loginInfo)
+                        })
+                  
+                        .catch(error => {
+                  
+                  
+                        });
+                    
                     console.log(loginInfo)
-                } else {
-                    let loginInfo = {
-                        id: data.data.id,
-                        username: data.data.userName,
-                        email: data.data.email,
-
-                        role: data.data.roles[0],
-                        signPermission: false,
-                        contractManagePermision: true,
-                        customerManagePermission: true,
-                        contractTypeManagePermission: true,
-                        employeeManagePermission: true,
-                        signatureManagePermission: true,
-                        editCompanyInformationPermission: true,
-                        ActiveDeactiveAccount:false,
-                        UpdateAccountPermission:true,
-                        ActiveDeactiveTemplate:false,
-                        UpdateTemplate:false,
-                        isVerified: data.data.isVerified,
-                        jwToken: data.data.jwToken,
-                        loginCode: true,
-                    }
-                    this.props.onSubmit(loginInfo)
-                    console.log(loginInfo)
-                }
+                
 
 
 

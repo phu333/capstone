@@ -41,27 +41,7 @@ class EmployeeSideMenu extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
   componentDidMount(){
-    axios({
-      url: '/api/Account/permission/'+this.props.myLoginReducer[0].id,
-      method: "GET",
-      headers: {
-          Authorization: 'Bearer ' + this.props.token,
-
-      }
-  })
-      .then((response) => {
-
-          return response.data;
-      })
-      .then((data) => {
-          console.log(data)
-         
-      })
-
-      .catch(error => {
-
-
-      });
+    
   }
   toggleCollapsed = () => {
     this.setState({
