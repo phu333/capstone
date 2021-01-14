@@ -97,18 +97,52 @@ class ContractTable extends Component {
 
                                 })
                                 this.setState({
-                                    loading:false,
+                                    
                                     contractsTotal: [...this.state.contractsCreate, ...this.state.contractsReciceve].filter(values=>values.isMainContract === true)
                                 })
-                                this.props.onSubmit(this.state.contractsTotal)
+                                
+                                for(let i = 0; i <this.state.contractsTotal.length; i++){
+                                    axios({
+                                        url: '/api/v1/Company/info/guest?id='+this.state.contractsTotal[i].companyId,
+                                        method: "PUT",
+                            
+                                       
+                                    })
+                                        .then((response) => {
+                            
+                                            return response.data;
+                                        })
+                                        .then((data) => {
+                                           
+                                            this.state.contractsTotal[i]['ASide'] = data.data.name
+                            
+                            
+                            
+                            
+                                        })
+                                        .catch(error => {
+                                            console.log(error)
+                            
+                            
+                                        });
+                                }
+                                
+                                setTimeout(function(){
+                                    this.setState({
+                                        loading:false,
+                                        contractsTotal:[...this.state.contractsTotal]
+                                    })
+                                    this.props.onSubmit(this.state.contractsTotal)
+                                }.bind(this),5000)
+                                
                             })
-
+                            
                             .catch(error => {
 
 
                             });
                     })
-
+                    
                     .catch(error => {
 
 
@@ -197,7 +231,7 @@ class ContractTable extends Component {
     }
     render() {
 
-        console.log(this.state.contractsTotal)
+        console.log(this.props.newContract)
 
         if (this.state.showCreateContract) {
             return ( <FadeIn>
@@ -241,33 +275,19 @@ class ContractTable extends Component {
 
                             )}
                         />
+                       <Column title="Bên biên soạn" dataIndex="ASide" key="ASide"
+                            render={(text, record) => (
 
-                        <Column title="Bên nhận hợp đồng" dataIndex="customer" key="customer"
+                                <p>{text}</p>
+
+                            )} />
+                        <Column title="Bên đối tác" dataIndex="customer" key="customer"
                             render={(text, record) => (
 
                                 <p>{text.companyName}</p>
 
                             )} />
-                        {/* <Column title="Chủ hợp đồng" dataIndex="customer" key="customer"
-                            render={(text, record) => (
-
-                                <p>{text.CreatorcompanyName}</p>
-
-                            )} /> */}
-                        {/* <Column title="Ngày hết hạn" dataIndex="contractExpiredDate" key="contractExpiredDate"
-                            sorter={(a, b) => a.deadline.localeCompare(b.deadline)}
-                            sortDirections={['descend', 'ascend']}
-                            render={(text, record) => (
-
-                                <p>{text}</p>
-
-                            )} /> */}
-                        {/* <Column title="bên tạo hợp đồng" dataIndex="ben_tao_hd" key="ben_tao_hd"
-                            render={(text, record) => (
-
-                                <p>{text}</p>
-
-                            )} /> */}
+                       
                         <Column title="Giá trị hợp đồng" dataIndex="contractValue" key="contractValue"
                             align='right'
                             render={(text, record) => `$ ${text}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
