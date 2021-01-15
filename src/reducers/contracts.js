@@ -8,7 +8,7 @@ const myContractReducer = (state = initialState, action) => {
             state = initialState
             state = action.contractList
             console.log(state)
-            return [...state];
+            return action.contractList;
         case 'UPDATE_contract':
             state.push(action.contract)
             return [...state];
