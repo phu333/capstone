@@ -103,8 +103,8 @@ class AddEmployee extends React.Component {
             GetAllCompanyList: false,
             GetAllCompanyAccount: false,
             ActiveDeactiveCustomer: false,
-            
-           
+
+
             permission: [],
         };
         this.onFinish = this.onFinish.bind(this);
@@ -120,7 +120,29 @@ class AddEmployee extends React.Component {
             confirmPassword: "123Pa$$word!",
             username: values.username,
             role: values.role,
-            permissions: []
+            permissions: [
+                { userId: "", permissionId: 3, permissionName: "Sign", enabled: this.state.Sign },
+                { userId: "", permissionId: 4, permissionName: "GetContractList(ByCompanyId)", enabled: this.state.GetContractList },
+                { userId: "", permissionId: 5, permissionName: "ActiveDeactiveContract", enabled: this.state.ActiveDeactiveContract },
+                { userId: "", permissionId: 6, permissionName: "UpdateContract", enabled: this.state.UpdateContract },
+                { userId: "", permissionId: 7, permissionName: "CreateContract", enabled: this.state.CreateContract },
+                { userId: "", permissionId: 8, permissionName: "GetAllCompanyTemplate(ByCompanyId)", enabled: this.state.GetAllCompanyTemplate },
+                { userId: "", permissionId: 9, permissionName: "ActiveDeactiveTemplate", enabled: this.state.ActiveDeactiveTemplate },
+                { userId: "", permissionId: 10, permissionName: "UpdateTemplate", enabled: this.state.UpdateTemplate },
+                { userId: "", permissionId: 11, permissionName: "UpdateCustomer", enabled: this.state.UpdateCustomer },
+                { userId: "", permissionId: 12, permissionName: "CreateTemplate", enabled: this.state.CreateTemplate },
+                { userId: "", permissionId: 13, permissionName: "GetCompanyAdminList(ByRole)", enabled: this.state.GetCompanyAdminList },
+                { userId: "", permissionId: 14, permissionName: "ActiveDeactiveAccount", enabled: this.state.ActiveDeactiveAccount },
+                { userId: "", permissionId: 15, permissionName: "GetCompanyAccountListByCompanyId", enabled: this.state.GetCompanyAccountListByCompanyId },
+                { userId: "", permissionId: 16, permissionName: "UpdateAccountPermission", enabled: this.state.UpdateAccountPermission },
+                { userId: "", permissionId: 17, permissionName: "CreateAccount", enabled: this.state.CreateAccount },
+                { userId: "", permissionId: 18, permissionName: "ActiveDeactiveSignature", enabled: this.state.ActiveDeactiveSignature },
+                { userId: "", permissionId: 19, permissionName: "UpdateSignature", enabled: this.state.UpdateSignature },
+                { userId: "", permissionId: 20, permissionName: "CreateSignature", enabled: this.state.CreateSignature },
+                { userId: "", permissionId: 21, permissionName: "GetAllCompanyList", enabled: this.state.GetAllCompanyList },
+                { userId: "", permissionId: 22, permissionName: "GetAllCompanyAccount(ByCompanyId)", enabled: this.state.GetAllCompanyAccount },
+                { userId: "", permissionId: 23, permissionName: "ActiveDeactiveCustomer", enabled: this.state.ActiveDeactiveCustomer },
+            ]
         }
         axios({
             url: '/api/Account/register-employee',
@@ -157,61 +179,43 @@ class AddEmployee extends React.Component {
                         })
                         console.log(this.state.Sign)
                         let permissionList = [
-                            { userId: this.state.current[0].id, permissionId: 3, permissionName: "Sign", enabled: this.state.Sign },
-                            { userId: this.state.current[0].id, permissionId: 4, permissionName: "GetContractList(ByCompanyId)", enabled: this.state.GetContractList },
-                            { userId: this.state.current[0].id, permissionId: 5, permissionName: "ActiveDeactiveContract", enabled: this.state.ActiveDeactiveContract },
-                            { userId: this.state.current[0].id, permissionId: 6, permissionName: "UpdateContract", enabled: this.state.UpdateContract },
-                            { userId: this.state.current[0].id, permissionId: 7, permissionName: "CreateContract", enabled: this.state.CreateContract },
-                            { userId: this.state.current[0].id, permissionId: 8, permissionName: "GetAllCompanyTemplate(ByCompanyId)", enabled: this.state.GetAllCompanyTemplate },
-                            { userId: this.state.current[0].id, permissionId: 9, permissionName: "ActiveDeactiveTemplate", enabled: this.state.ActiveDeactiveTemplate },
-                            { userId: this.state.current[0].id, permissionId: 10, permissionName: "UpdateTemplate", enabled: this.state.UpdateTemplate },
-                            { userId: this.state.current[0].id, permissionId: 11, permissionName: "UpdateCustomer", enabled: this.state.UpdateCustomer },
-                            { userId: this.state.current[0].id, permissionId: 12, permissionName: "CreateTemplate", enabled: this.state.CreateTemplate },
-                            { userId: this.state.current[0].id, permissionId: 13, permissionName: "GetCompanyAdminList(ByRole)", enabled: this.state.GetCompanyAdminList },
-                            { userId: this.state.current[0].id, permissionId: 14, permissionName: "ActiveDeactiveAccount", enabled: this.state.ActiveDeactiveAccount },
-                            { userId: this.state.current[0].id, permissionId: 15, permissionName: "GetCompanyAccountListByCompanyId", enabled: this.state.GetCompanyAccountListByCompanyId },
-                            { userId: this.state.current[0].id, permissionId: 16, permissionName: "UpdateAccountPermission", enabled: this.state.UpdateAccountPermission },
-                            { userId: this.state.current[0].id, permissionId: 17, permissionName: "CreateAccount", enabled: this.state.CreateAccount },
-                            { userId: this.state.current[0].id, permissionId: 18, permissionName: "ActiveDeactiveSignature", enabled: this.state.ActiveDeactiveSignature },
-                            { userId: this.state.current[0].id, permissionId: 19, permissionName: "UpdateSignature", enabled: this.state.UpdateSignature },
-                            { userId: this.state.current[0].id, permissionId: 20, permissionName: "CreateSignature", enabled: this.state.CreateSignature },
-                            { userId: this.state.current[0].id, permissionId: 21, permissionName: "GetAllCompanyList", enabled: this.state.GetAllCompanyList },
-                            { userId: this.state.current[0].id, permissionId: 22, permissionName: "GetAllCompanyAccount(ByCompanyId)", enabled: this.state.GetAllCompanyAccount },
-                            { userId: this.state.current[0].id, permissionId: 23, permissionName: "ActiveDeactiveCustomer", enabled: this.state.ActiveDeactiveCustomer },
+
                         ]
 
-                        for(let i = 0; i < permissionList.length;i++){
-                            console.log(permissionList[i])
+                        for (let i = 0; i < permissionList.length; i++) {
+                            console.log('its ok')
                             axios({
                                 url: '/api/Account/permission',
                                 method: "PUT",
                                 data: permissionList[i],
                                 headers: {
                                     Authorization: 'Bearer ' + this.props.token,
-    
+
                                 }
                             })
                                 .then((response) => {
-    
+
                                     return response.data;
                                 })
                                 .then((data) => {
-    
-    
-    
-    
-    
+
+
+
+
+
                                 })
                                 .catch(error => {
-    
-                                  
-    
+
+
+
                                 });
                         }
-                        
-                        this.setState({
-                            finish: true
-                        })
+                        setTimeout(function () {
+                            this.setState({
+                                finish: true
+                            })
+                        }.bind(this), 5000)
+
                     })
                     .catch(error => {
 
@@ -406,9 +410,9 @@ class AddEmployee extends React.Component {
                             <Row>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                Sign:!this.state.Sign
+                                                Sign: !this.state.Sign
                                             })
                                             console.log(this.state.Sign)
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
@@ -418,9 +422,9 @@ class AddEmployee extends React.Component {
                                 </Col>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                GetContractList:!this.state.GetContractList
+                                                GetContractList: !this.state.GetContractList
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="quản lý danh sách hợp đồng"
@@ -429,9 +433,9 @@ class AddEmployee extends React.Component {
                                 </Col>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                ActiveDeactiveContract:!this.state.ActiveDeactiveContract
+                                                ActiveDeactiveContract: !this.state.ActiveDeactiveContract
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="kích hoạt/vô hiệu hóa hợp đồng"
@@ -440,9 +444,9 @@ class AddEmployee extends React.Component {
                                 </Col>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                UpdateContract:!this.state.UpdateContract
+                                                UpdateContract: !this.state.UpdateContract
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="Chỉnh sửa hợp đồng"
@@ -451,9 +455,9 @@ class AddEmployee extends React.Component {
                                 </Col>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                CreateContract:!this.state.CreateContract
+                                                CreateContract: !this.state.CreateContract
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="Tạo hợp đồng"
@@ -462,9 +466,9 @@ class AddEmployee extends React.Component {
                                 </Col>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                GetAllCompanyTemplate:!this.state.GetAllCompanyTemplate
+                                                GetAllCompanyTemplate: !this.state.GetAllCompanyTemplate
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="Quản lý danh sách mẫu hợp đồng"
@@ -473,9 +477,9 @@ class AddEmployee extends React.Component {
                                 </Col>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                ActiveDeactiveTemplate:!this.state.ActiveDeactiveTemplate
+                                                ActiveDeactiveTemplate: !this.state.ActiveDeactiveTemplate
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="Kích hoạt/vô hiệu hóa mẫu hợp đồng"
@@ -484,9 +488,9 @@ class AddEmployee extends React.Component {
                                 </Col>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                UpdateTemplate:!this.state.UpdateTemplate
+                                                UpdateTemplate: !this.state.UpdateTemplate
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="chỉnh sửa mẫu hợp đồng"
@@ -495,9 +499,9 @@ class AddEmployee extends React.Component {
                                 </Col>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                CreateTemplate:!this.state.CreateTemplate
+                                                CreateTemplate: !this.state.CreateTemplate
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="Tạo mẫu hợp đồng"
@@ -506,9 +510,9 @@ class AddEmployee extends React.Component {
                                 </Col>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                UpdateCustomer:!this.state.UpdateCustomer
+                                                UpdateCustomer: !this.state.UpdateCustomer
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="Chỉnh sửa thông tin khách hàng"
@@ -528,9 +532,9 @@ class AddEmployee extends React.Component {
                                 </Col> */}
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                ActiveDeactiveAccount:!this.state.ActiveDeactiveAccount
+                                                ActiveDeactiveAccount: !this.state.ActiveDeactiveAccount
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="Kích hoạt/vô hiệu hóa thông tin nhân viên"
@@ -539,9 +543,9 @@ class AddEmployee extends React.Component {
                                 </Col>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                GetCompanyAccountListByCompanyId:!this.state.GetCompanyAccountListByCompanyId
+                                                GetCompanyAccountListByCompanyId: !this.state.GetCompanyAccountListByCompanyId
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="quản lý danh sách nhân viên"
@@ -550,9 +554,9 @@ class AddEmployee extends React.Component {
                                 </Col>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                UpdateAccountPermission:!this.state.UpdateAccountPermission
+                                                UpdateAccountPermission: !this.state.UpdateAccountPermission
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="chỉnh sửa quyền nhân viên"
@@ -561,9 +565,9 @@ class AddEmployee extends React.Component {
                                 </Col>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                CreateAccount:!this.state.CreateAccount
+                                                CreateAccount: !this.state.CreateAccount
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="tạo tài khoản nhân viên"
@@ -572,9 +576,9 @@ class AddEmployee extends React.Component {
                                 </Col>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                ActiveDeactiveSignature:!this.state.ActiveDeactiveSignature
+                                                ActiveDeactiveSignature: !this.state.ActiveDeactiveSignature
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="Kích hoạt/vô hiệu hóa chữ ký"
@@ -583,9 +587,9 @@ class AddEmployee extends React.Component {
                                 </Col>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                UpdateSignature:!this.state.UpdateSignature
+                                                UpdateSignature: !this.state.UpdateSignature
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="chỉnh sửa thông tin chữ ký"
@@ -594,9 +598,9 @@ class AddEmployee extends React.Component {
                                 </Col>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                CreateSignature:!this.state.CreateSignature
+                                                CreateSignature: !this.state.CreateSignature
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="Thêm chữ ký vào công ty"
@@ -616,9 +620,9 @@ class AddEmployee extends React.Component {
                                 </Col> */}
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                GetAllCompanyAccount:!this.state.GetAllCompanyAccount
+                                                GetAllCompanyAccount: !this.state.GetAllCompanyAccount
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="quản lý danh sách nhân viên công ty"
@@ -627,9 +631,9 @@ class AddEmployee extends React.Component {
                                 </Col>
                                 <Col span={8}>
                                     <FormControlLabel
-                                        control={<Switch onChange={()=>{
+                                        control={<Switch onChange={() => {
                                             this.setState({
-                                                ActiveDeactiveCustomer:!this.state.ActiveDeactiveCustomer
+                                                ActiveDeactiveCustomer: !this.state.ActiveDeactiveCustomer
                                             })
                                         }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
                                         label="Kích hoạt/vô hiệu hóa khách hàng"
