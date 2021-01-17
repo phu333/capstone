@@ -413,7 +413,7 @@ class ContractForGuest extends React.Component {
 
                     </Space>
                     <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
-                        Giá trị hợp đồng:{this.state.contract.contractValue}
+                    <h6 style={{ fontSize: 14 }}> Giá trị hợp đồng:{this.state.contract.contractValue}</h6>
                         <JoditEditor
 
                             value={this.state.contract.contractContent}

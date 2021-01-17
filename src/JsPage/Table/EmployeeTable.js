@@ -106,13 +106,21 @@ class EmployeeList extends React.Component {
 
         return (<FadeIn>
           <div style={{ height: "100vh" }}>
-            {login.ActiveDeactiveAccount === true ? <Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button> : null}
+            {login.ActiveDeactiveAccount === false ? <Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button> : null}
             <EmployeeSearch token={this.props.token} employeeList={this.state.employees} />
             <Table dataSource={this.props.newEmployee}
               rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
+        
+              <Column title="Họ" dataIndex="lastName" key="lastName"
+                sorter={(a, b) => a.userName.localeCompare(b.lastName)}
+                sortDirections={['descend', 'ascend']}
+                render={(text, record) => (
 
-              <Column title="Tên" dataIndex="userName" key="userName"
-                sorter={(a, b) => a.userName.localeCompare(b.userName)}
+                  <p>{text}</p>
+
+                )} />
+                      <Column title="Tên" dataIndex="firstName" key="firstName"
+                sorter={(a, b) => a.userName.localeCompare(b.firstName)}
                 sortDirections={['descend', 'ascend']}
                 render={(text, record) => (
 
@@ -183,6 +191,7 @@ class EmployeeList extends React.Component {
               <Column
                 title="Quyền hạn"
                 key="action"
+                align="center"
                 render={(text, record) => (
                   <Space size="middle">
                     <FolderViewOutlined style={{ fontSize: '30px', color: '#08c', alignContent: "center", textAlign: "center" }} theme="outlined" onClick={
@@ -194,7 +203,7 @@ class EmployeeList extends React.Component {
                   </Space>
                 )}
               />
-              {login.ActiveDeactiveAccount === true ?
+              {login.ActiveDeactiveAccount === false ?
                 <Column
                   title="Trạng thái"
                   dataIndex="status"

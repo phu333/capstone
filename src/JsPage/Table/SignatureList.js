@@ -169,8 +169,9 @@ class SignatureList extends React.Component {
                         />
 
                         <Column
-                            title="Xem chi tiết"
+                            title="Chi tiết"
                             key="action"
+                            align="center"
                             render={(text, record) => (
                                 <Space size="middle">
                                    <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={

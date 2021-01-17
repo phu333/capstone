@@ -126,7 +126,7 @@ class UserList extends React.Component {
               />
 
               <Column
-                title="Xem chi tiết"
+                title="Chi tiết"
                 key="action"
                 render={(text, record) => (
                   <Space size="middle">

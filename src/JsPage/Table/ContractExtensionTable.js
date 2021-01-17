@@ -13,7 +13,6 @@ import FadeIn from 'react-fade-in'
 import "../Column.css"
 const { Column } = Table;
 var hash = require('object-hash')
-
 class ContractExtensionTable extends React.Component {
     constructor() {
         super();
@@ -224,7 +223,9 @@ class ContractExtensionTable extends React.Component {
 
         }
     }
+
     render() {
+
         if (this.state.showCreateContractExtension) {
             return (<FadeIn>
                 <Router>
@@ -252,6 +253,7 @@ class ContractExtensionTable extends React.Component {
             );
         }
         else {
+             
             return (<FadeIn>
                 <div >
                     {this.props.ismycontract ? <Space size="large">
@@ -261,11 +263,11 @@ class ContractExtensionTable extends React.Component {
 
                     <ContractSearch token={this.props.token} contractList={this.state.contractsTotal} />
                     <Table dataSource={this.props.newContract}
+                        
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}>
-                        <Column title="Mã hợp đồng" dataIndex="contractNum" key="contractNum"
-                            render={(text, record) => (
-                                <a> {text}</a>
-                            )}
+                        <Column title="Stt" key="Index"
+
+                            render={(text, record, index) => index+1}
                         />
                         <Column title="Tên hợp đồng" dataIndex="contractTitle" key="contractTitle"
                             render={(text, record) => (
@@ -275,13 +277,13 @@ class ContractExtensionTable extends React.Component {
                             )}
                         />
 
-                        <Column title="Bên biên soạn" dataIndex="ASide" key="ASide"
+                        <Column title="Bên A" dataIndex="ASide" key="ASide"
                             render={(text, record) => (
 
                                 <p>{text}</p>
 
                             )} />
-                        <Column title="Bên đối tác" dataIndex="customer" key="customer"
+                        <Column title="Bên B" dataIndex="customer" key="customer"
                             render={(text, record) => (
 
                                 <p>{text.companyName}</p>
@@ -309,7 +311,7 @@ class ContractExtensionTable extends React.Component {
                             )} /> */}
                         <Column title="Giá trị hợp đồng" dataIndex="contractValue" key="contractValue"
                             align='right'
-                            render={(text, record) => `$ ${text}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                            render={(text, record) => `VNĐ ${text}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 
                         />
                         <Column title="Trạng thái" dataIndex="statusAsString" key="statusAsString"
@@ -341,8 +343,9 @@ class ContractExtensionTable extends React.Component {
                             }}
                         />
                         <Column
-                            title="Xem chi tiết"
+                            title="Chi tiết"
                             key="action"
+                            align="center"
                             render={(text, record) => (
 
                                 <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
@@ -366,6 +369,7 @@ class ContractExtensionTable extends React.Component {
                         <Column
                             title="Tải về"
                             key="action"
+                            align="center"
                             render={(text, record) => (
 
                                 <DownloadOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={

@@ -28,7 +28,7 @@ class EmployeeSearch extends React.Component {
     onFinish = (values) => {
         console.log(this.state.SearchValue)
         if (this.state.SearchBy === "SearchByName") {
-            let EmployeeSearchList = this.props.employeeList.filter(employee => employee.userName.toLowerCase().includes(this.state.SearchValue.toLowerCase()))
+            let EmployeeSearchList = this.props.employeeList.filter(employee => employee.firstName.toLowerCase().includes(this.state.SearchValue.toLowerCase()))
             console.log(EmployeeSearchList)
             this.props.onSubmit(EmployeeSearchList)
         } else if (this.state.SearchBy === "SearchByRoles") {

@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 're
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import JoditEditor from "jodit-react";
+import FadeIn from 'react-fade-in'
 const { Column } = Table;
 const dataSource = [
     {
@@ -105,9 +106,9 @@ class ChooseContractTemplate extends React.Component {
                         <Button type="primary" value="cancel" onClick={this.Cancel}>
                             Trở về
                     </Button>
-                        <ContractTypeSearch />
+                        <ContractTypeSearch /><FadeIn>
                         <Table dataSource={this.state.templateList} >
-                        <Column title="khóa" dataIndex="id" key="id" />
+                        <Column title="Stt" dataIndex="id" key="id" />
                             <Column title="loại hợp đồng" dataIndex="name" key="name" />
                             
                             
@@ -147,7 +148,7 @@ class ChooseContractTemplate extends React.Component {
                                     </Space>
                                 )}
                             />
-                        </Table></div>
+                        </Table></FadeIn></div>
                 );
             }
 

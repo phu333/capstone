@@ -40,8 +40,8 @@ class EmployeeSideMenu extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
   }
-  componentDidMount(){
-    
+  componentDidMount() {
+
   }
   toggleCollapsed = () => {
     this.setState({
@@ -52,6 +52,7 @@ class EmployeeSideMenu extends React.Component {
 
     this.setState({
       showComponent: e.key
+
     })
 
   };
@@ -94,12 +95,12 @@ class EmployeeSideMenu extends React.Component {
                 >
                   <SubMenu key="sub1" icon={<ToolOutlined />} title="Quản lý">
                     {login.companyId !== null ? <>
-                      <Menu.Item active={true} key="Chart">Xem doanh thu</Menu.Item>
-                      {login.contractManagePermision === true ? <Menu.Item key="contract">danh sách hợp đồng</Menu.Item> : null}
-                      {login.customerManagePermission === true ? <Menu.Item key="customerList">danh sách khách hàng</Menu.Item> : null}
-                      {login.contractTypeManagePermission === true ? <Menu.Item key="contractType">danh sách loại hợp đồng</Menu.Item> : null}
-                      {login.employeeManagePermission === true ? <Menu.Item key="employee">Nhân viên</Menu.Item> : null}
-                      {login.signatureManagePermission === true ? <Menu.Item key="signatureList">Danh sách chữ ký</Menu.Item> : null} </> : <Menu.Item key="addCompany">Tạo doanh nghiệp</Menu.Item>}
+                      <Menu.Item active={true} key="Chart">Doanh thu</Menu.Item>
+                      {login.customerManagePermission === true ? <Menu.Item key="customerList" >Danh sách khách hàng</Menu.Item> : null}
+                      {login.contractTypeManagePermission === true ? <Menu.Item key="contractType">Danh sách loại hợp đồng</Menu.Item> : null}
+                      {login.contractManagePermision === true ? <Menu.Item key="contract">Danh sách hợp đồng</Menu.Item> : null}
+                      {login.employeeManagePermission === true ? <Menu.Item key="employee">Danh sách nhân viên</Menu.Item> : null}
+                      {login.signatureManagePermission === true ? <Menu.Item key="signatureList" >Danh sách chữ ký</Menu.Item> : null} </> : <Menu.Item key="addCompany" name="Tạo doanh nghiệp">Tạo doanh nghiệp</Menu.Item>}
 
 
 
@@ -113,7 +114,7 @@ class EmployeeSideMenu extends React.Component {
 
                     {login.companyId !== null ? <>
                       {login.editCompanyInformationPermission === true ? <Menu.Item key="companyProfile">Thông tin công ty</Menu.Item> : null} </> : null}
-                    <Menu.Item key="profile">Thông tin cá nhân</Menu.Item>
+                    <Menu.Item key="profile" >Thông tin cá nhân</Menu.Item>
 
                   </SubMenu>
                   {/* <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
@@ -122,19 +123,27 @@ class EmployeeSideMenu extends React.Component {
                 </Menu>
 
               </Sider>
-              <Layout style={{ padding: "0 24px 24px", minHeight: "100vh" }}>
+              <Layout style={{ minHeight: "100vh" }}>
                 <Affix >
 
                   <Header></Header>
                 </Affix>
 
 
-                <Breadcrumb style={{ margin: '16px 0' }}>
-                  <Breadcrumb.Item>Home</Breadcrumb.Item>
-                  <Breadcrumb.Item>{this.state.showComponent}</Breadcrumb.Item>
-
+                <Breadcrumb style={{ margin: '26px ', fontSize: '20px' }}>
+                  <Breadcrumb.Item>{login.companyId !== null ?
+                    <>{this.state.showComponent === "customerList" ? "Danh sách khách hàng" : null}
+                      {this.state.showComponent === "Chart" ? "Doanh thu" : null}
+                      {this.state.showComponent ==="contractType" ? "Danh sách loại hợp đồng" : null}
+                      {this.state.showComponent === "contract" ? "Danh sách hợp đồng" : null}
+                      {this.state.showComponent === "employee" ? "Danh sách nhân viên" : null}
+                      {this.state.showComponent === "signatureList" ? "Danh sách chữ ký" : null}
+                      {this.state.showComponent === "profile" ? "Thông tin cá nhân" : null}
+                      {this.state.showComponent === "companyProfile" ? "Thông tin công ty" : null}
+                    </> : this.state.showComponent === "addCompany" ? "Tạo doanh nghiệp" : null}
+                    
+                  </Breadcrumb.Item>
                 </Breadcrumb>
-
 
 
 

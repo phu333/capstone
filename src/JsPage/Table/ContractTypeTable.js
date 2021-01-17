@@ -14,7 +14,6 @@ import FadeIn from 'react-fade-in'
 const { Column } = Table;
 
 
-
 class ContractTable extends React.Component {
   constructor() {
     super();
@@ -63,6 +62,8 @@ class ContractTable extends React.Component {
 
   }
   render() {
+    
+
     if (this.state.showTemplateCreate) {
       return (<FadeIn>
         <Router>
@@ -91,22 +92,17 @@ class ContractTable extends React.Component {
       if (this.props.myLoginReducer !== "logout") {
 
         var information = this.props.myLoginReducer.map((login, index) => {
-
+           
           return (<FadeIn>
             <div style={{ height: "100vh" }}>
               {login.UpdateTemplate === true ? <Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tải lên mẫu mới</Button>
                 : null}
               <ContractTypeSearch token={this.props.token} templateList={this.state.templateList} />
               <Table dataSource={this.props.newContractType}
+             
                 rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}  >
-                <Column title="Mã" dataIndex="id" key="id"
-                  sorter={(a, b) => a.contract_type.localeCompare(b.contract_type)}
-                  sortDirections={['descend', 'ascend']}
-                  render={(text, record) => (
-
-                    <p>{text}</p>
-
-                  )}
+                <Column title="Stt"   key="index"
+      render={(text, record, index) => index+1}
                 />
                 <Column title="Tên" dataIndex="name" key="name"
                   render={(text, record) => (
@@ -119,6 +115,7 @@ class ContractTable extends React.Component {
                   <Column
                     title="Chọn file khác"
                     key="Update"
+                    align="center"
                     render={(text, record) => (
                       <Space size="middle">
                         <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={() => {
@@ -128,7 +125,22 @@ class ContractTable extends React.Component {
                         }}></FolderViewOutlined>
                       </Space>
                     )}
-                  /> : null}
+                  /> : null}            {login.ActiveDeactiveCustomer === true ? 
+                    <Column
+                      title="Tác vụ"
+                      dataIndex="status"
+                      key="status"
+                      align="center"
+                      // sorter={(a, b) => a.status.localeCompare(b.status)}
+                      // sortDirections={['descend', 'ascend']}
+                      render={(text, record) => (
+                        <Space size="middle">
+                          {text === "Deactive" ? <Switch style={{ fontSize: '20px' }}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt"defaultunChecked  /> : <Switch style={{ fontSize: '20px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
+                        </Space>
+                      )}
+                    />
+        :null}
+        
               </Table></div></FadeIn>
           );
         }
