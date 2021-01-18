@@ -130,7 +130,7 @@ class CustomerList extends React.Component {
 
             )} />
 
-            {/* <Column title="trạng thái" dataIndex="status" key="status"
+            {/* <Column title="Trạng thái" dataIndex="status" key="status"
               sorter={(a, b) => a.status.localeCompare(b.status)}
               sortDirections={['descend', 'ascend']}
               render={(text, record) => {

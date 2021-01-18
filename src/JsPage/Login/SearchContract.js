@@ -123,7 +123,7 @@ class SearchContractByCode extends React.Component {
                                 <b>{text}</b>
 
                             )} />
-                        <Column title="trạng thái" dataIndex="statusAsString" key="statusAsString"
+                        <Column title="Trạng thái" dataIndex="statusAsString" key="statusAsString"
                             sorter={(a, b) => a.status.localeCompare(b.status)}
                             sortDirections={['descend', 'ascend']}
                             render={(text, record) => {

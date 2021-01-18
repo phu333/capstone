@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { createEmployee, employeeInformation, updateEmployee } from '../../actions/EmployeeAction'
 import { connect } from 'react-redux'
-import { Space, Card, Button, Form, List, Switch } from 'antd';
+import { Space, Card, Button, Form, message, Switch, Col, Row } from 'antd';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
@@ -13,6 +13,8 @@ import EmployeeTable from '../Table/EmployeeTable'
 import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom'
 import "../Column.css"
 import axios from 'axios'
+import { getKeyThenIncreaseKey } from 'antd/lib/message';
+const style = {  border: '5px solid rgb(8, 59, 102)', padding: '8px 10px' };
 
 const layout = {
     labelCol: {
@@ -20,7 +22,7 @@ const layout = {
     },
     wrapperCol: {
         span: 12,
-    },
+    }
 };
 const tailLayout = {
     wrapperCol: {
@@ -30,7 +32,7 @@ const tailLayout = {
 };
 const middleLayout = {
     wrapperCol: {
-        offset: 8,
+        offset: 2,
         span: 10,
     },
 };
@@ -120,7 +122,11 @@ class ViewEmployee extends React.Component {
             })
             .catch(error => {
                 console.log(error)
-
+                if (error.response.status === 500) {
+                    message.error(error.response.status + ' Server under maintainence');
+                } else if (error.response.status === 404) {
+                    message.error(error.response.status + ' Server not found');
+                }
 
             });
 
@@ -153,16 +159,17 @@ class ViewEmployee extends React.Component {
         //         <List.Item>{permisssion}</List.Item>
         //     )
         // })
-        var permissions = this.state.currentPermission.map((permisssion) => {
+        var permissionsT = this.state.currentPermission.map((permisssion) => {
             return (
-                <Form.Item {...middleLayout} labelAlign='left' label={permisssion.permissionName}  >
+                <Col span={10}><div style={style}><strong>{permisssion.permissionName}</strong>:
                     {this.props.employee.permissions.some(item => permisssion.enabled === true) ?//hàm lấy permission
-                        <Switch style={{ fontSize: '30px' }} onChange={() => this.handleChange(permisssion.permissionId, permisssion.enabled)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />///>
+                        <div style={{ float: 'right' }}><Switch style={{ fontSize: '30px' }} onChange={() => this.handleChange(permisssion.permissionId, permisssion.enabled)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked /></div>
                         :
-                        <Switch style={{ fontSize: '30px' }} onChange={() => this.handleChange(permisssion.permissionId, permisssion.enabled)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked />//onChange={ () => this.handleChange(index, this.state.info[index])}/>
+                        <div  style={{ float: 'right' }}><Switch style={{ fontSize: '30px' }} onChange={() => this.handleChange(permisssion.permissionId, permisssion.enabled)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /></div>
                     }
-
-                    {/* <Button type="primary" onClick={() => {
+                </div></Col>)
+        })
+        {/* <Button type="primary" onClick={() => {
                         this.setState({
                             currentPermission: [...this.state.currentPermission, permisssion.name]
                         })
@@ -181,25 +188,24 @@ class ViewEmployee extends React.Component {
                         {permisssion.lable}
                     </Button> */}
 
-                </Form.Item>)
-        })
         var Viewpermission = this.state.currentPermission.map((permisssion) => {
             return (
-                <Form.Item {...middleLayout} labelAlign='left' label={permisssion.permissionName}  >
+                <Col span={6}><div style={style}><strong>{permisssion.permissionName}</strong>:
                     {this.props.employee.permissions.some(item => permisssion.enabled === true) ?//hàm lấy permission
-                        <p>Có quyền sử dụng</p>
+                        <div style={{ float: 'right' }}>Có quyền sử dụng</div>
                         :
-                        <p>Không có quyền sử dụng</p>
+                        <div style={{ float: 'right' }}>Không có quyền sử dụng</div>
                     }
 
 
-                </Form.Item>)
+                </div></Col>)
         })
-        var information = this.props.myLoginReducer.map((login, index) => {return(
-            <div> {
-                login.UpdateAccountPermission === true ? <div>{ permissions }</div>
-                : <div>{ Viewpermission }</div>
-            }</div>)
+        var information = this.props.myLoginReducer.map((login, index) => {
+            return (<Space>
+                 {
+                    login.UpdateAccountPermission === true ?<Row  gutter={[16, 24]}>{permissionsT}</Row>
+                        : <Row  gutter={[16, 24]}>{Viewpermission}</Row>
+                }</Space>)
         })
         if (this.state.finish) {
             return (<Router>
@@ -214,16 +220,17 @@ class ViewEmployee extends React.Component {
                         Trở về
           </Button>
                     <h2 style={{ textAlign: 'center' }}> Quyền hạn của nhân viên</h2>
-
                     <Form
                         {...layout}
                         name="basic"
                         className="employee-form"
-
                         onFinish={this.onFinish}
                         onFinishFailed={this.onFinishFailed}
 
-                    >{information}
+                    >
+                    
+                        {information}
+                        </Form>
                         {/* <List
                             size="large"
                             header={<div>danh sách quyền hiện tại</div>}
@@ -231,14 +238,9 @@ class ViewEmployee extends React.Component {
                             bordered
                         >{currentPermissions}</List> */}
 
-                        <Form.Item>
-
-                        </Form.Item>
 
 
 
-
-                    </Form>
 
 
 
@@ -260,7 +262,7 @@ var mapStateToProps = state => {
 
     console.log(state.myLoginReducer)
     return {
-      myLoginReducer: state.myLoginReducer
+        myLoginReducer: state.myLoginReducer
     }
-  }
+}
 export default connect(mapStateToProps, mapDispatchToProps)(ViewEmployee);

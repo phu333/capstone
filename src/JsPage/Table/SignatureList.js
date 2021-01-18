@@ -136,7 +136,7 @@ class SignatureList extends React.Component {
                          sorter={(a, b) => a.expired.localeCompare(b.expired)}
                          sortDirections={['descend', 'ascend']}
                          dataIndex="expired" key="expired" />
-                        <Column title="trạng thái" dataIndex="status" key="status"
+                        <Column title="Trạng thái" dataIndex="status" key="status"
                          sorter={(a, b) => a.status.localeCompare(b.status)}
                          sortDirections={['descend', 'ascend']}
                             render={(text, record) => {

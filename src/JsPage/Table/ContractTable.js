@@ -288,7 +288,7 @@ class ContractTable extends Component {
                        
                         <Column title="Giá trị hợp đồng" dataIndex="contractValue" key="contractValue"
                             align='right'
-                            render={(text, record) => `VNĐ ${text}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                            render={(text, record) => `${text} VNĐ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 
                         />
                         <Column  title="Trạng thái" dataIndex="statusAsString" key="statusAsString"
