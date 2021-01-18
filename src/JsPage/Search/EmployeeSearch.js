@@ -159,7 +159,7 @@ class EmployeeSearch extends React.Component {
                                 <> <Input onInput={values => this.setState({ SearchValue: values.target.value })} style={{ width: '300px' }} />
                                     </> : null}
 
-                                    <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} />
+                                    <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined style={{verticalAlign:'baseline'}} />} />
 
 
                             </Space>
