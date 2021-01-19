@@ -158,7 +158,7 @@ class CustomerSearch extends React.Component {
                                         </>
                                         : null}
                                 {/* </Form.Item> */}
-                                <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} />
+                                <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined style={{verticalAlign:'baseline'}} />} />
 
 
                             </Space>

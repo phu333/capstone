@@ -181,7 +181,7 @@ class SignatureSearch extends React.Component {
                                 />
                                 </> : null}
                                 
-                                <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined />} />
+                                <Button  type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined style={{verticalAlign:'baseline'}} />} />
 
 
                             </Space>

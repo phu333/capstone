@@ -58,7 +58,7 @@ class ChartProfile extends React.Component {
                             <ExclamationCircleOutlined />
                         </Tooltip>
                     }
-                    total={() => <span dangerouslySetInnerHTML={{ __html: yuan(126560) }} />}
+                    total={() => <span dangerouslySetInnerHTML={{ __html: ('126560VNĐ') }} />}
                     footer={<Field label="Doanh thu tháng này" value={numeral(12423).format('0,0')} />}
                 />
             </Col>

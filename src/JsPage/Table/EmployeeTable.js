@@ -110,11 +110,17 @@ class EmployeeList extends React.Component {
             <EmployeeSearch token={this.props.token} employeeList={this.state.employees} />
             <Table dataSource={this.props.newEmployee}
               rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
+        
+              <Column title="Họ" dataIndex="lastName" key="lastName"
+                sorter={(a, b) => a.userName.localeCompare(b.lastName)}
+                sortDirections={['descend', 'ascend']}
+                render={(text, record) => (
 
-              <Column title="Tên" dataIndex="userName" key="userName"
-              align="center"
-              
-                sorter={(a, b) => a.userName.localeCompare(b.userName)}
+                  <p>{text}</p>
+
+                )} />
+                      <Column title="Tên" dataIndex="firstName" key="firstName"
+                sorter={(a, b) => a.userName.localeCompare(b.firstName)}
                 sortDirections={['descend', 'ascend']}
                 render={(text, record) => (
                   
@@ -149,7 +155,7 @@ class EmployeeList extends React.Component {
     
                 )} /> */}
 
-              {/* <Column title="trạng thái" dataIndex="status" key="status"
+              {/* <Column title="Trạng thái" dataIndex="status" key="status"
                   sorter={(a, b) => a.status.localeCompare(b.status)}
                   sortDirections={['descend', 'ascend']}
                   render={(text, record) => {
@@ -187,7 +193,6 @@ class EmployeeList extends React.Component {
               <Column
                 title="Quyền hạn"
                 key="action"
-                width="50px"
                 align="center"
                 render={(text, record) => (
                   <Space size="middle">

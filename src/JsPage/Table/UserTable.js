@@ -95,7 +95,7 @@ class UserList extends React.Component {
                 <b>{text}</b>
 
               )} />
-              <Column title="trạng thái" dataIndex="status" key="status"
+              <Column title="Trạng thái" dataIndex="status" key="status"
                 render={(text, record) => {
                   let color = 'pink'
                   if (text === 'deactive') {
@@ -126,7 +126,7 @@ class UserList extends React.Component {
               />
 
               <Column
-                title="Xem chi tiết"
+                title="Chi tiết"
                 key="action"
                 render={(text, record) => (
                   <Space size="middle">

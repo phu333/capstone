@@ -59,7 +59,7 @@ class TemplateUpload extends React.Component {
             contractContent: "",
             templateName: "",
             contractName: "",
-            finish:false
+            finish: false
         };
 
         this.rteChange = this.rteChange.bind(this);
@@ -74,7 +74,7 @@ class TemplateUpload extends React.Component {
 
     }
     nameChange = (value) => {
-        
+
         this.setState({
             contractName: value
         })
@@ -128,121 +128,121 @@ class TemplateUpload extends React.Component {
             );
         } else {
 
-        return (
-            <div style={{ fontSize: 14 }} >
-                <Button type="primary" value="cancel" onClick={this.Cancel}>
-                    Trở về
+            return (
+                <div style={{ fontSize: 14 }} >
+                    <Button type="primary" value="cancel" onClick={this.Cancel}>
+                        Trở về
       </Button>
 
-                <Space direction="vertical" align="center" >
+                    <Space direction="vertical" align="center" >
 
-                    <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
-                        <Card bordered={false}>
-                            <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>
-                            <h6 style={{ textAlign: 'center', fontSize: 14 }}>Độc lập-tự do-hạnh phúc</h6>
-                            <br />
-                            
-                            <h1 style={{ textAlign: 'center', fontSize: 14 }}><Input 
-                            onChange={(e)=>{this.nameChange(e.target.value)}} style={{ width: "100px" }} size="small" /></h1>
-                            <h6 style={{ textAlign: 'center', fontSize: 14, fontWeight: "bold" }}>Số.../...</h6>
-                            <h6 style={{ fontSize: 14, fontWeight: "bold" }}>Hôm nay, ngày...tháng...năm....,
-                            tại........, chúng tôi gồm
-                            </h6>
-
-                        </Card>
-
-                        <Card bordered={false}>
-                            <Descriptions size="small" column={2} title={"Thông tin bên A"}  >
-                                <Descriptions.Item label={(<b>{"Công ty/Tổ chức:"}</b>)}>....</Descriptions.Item>
-                                <Descriptions.Item label={(<b>{"Địa chỉ:"}</b>)}>....</Descriptions.Item>
-                                <Descriptions.Item label={(<b>{"Điện thoại:"}</b>)}>....</Descriptions.Item>
-                                <Descriptions.Item label={(<b>{"Địa chỉ Email:"}</b>)}>....</Descriptions.Item>
-                                <Descriptions.Item label={(<b>{"Giấy phép kinh doanh:"}</b>)}>....</Descriptions.Item>
-                                <Descriptions.Item label={(<b>{"Mã số thuế:"}</b>)}>....</Descriptions.Item>
-                                <Descriptions.Item label={(<b>{"Tài khoản số:"}</b>)}>....</Descriptions.Item>
-
-                                <Descriptions.Item label={(<b>{"Do ông(bà):"}</b>)} span={2}>....</Descriptions.Item>
-
-                                <Descriptions.Item label={(<b>{"Chức vụ"}</b>)} span={2}>
-                                    ........làm đại diện
-                                </Descriptions.Item>
-                            </Descriptions>
-
-
-                            <Descriptions title="" size="small" column={2} title="Thông tin bên B"
-
-                            >
-
-                                <Descriptions.Item label={(<b>{"Công ty/Tổ chức:"}</b>)}>....</Descriptions.Item>
-                                <Descriptions.Item label={(<b>{"Địa chỉ:"}</b>)}>....</Descriptions.Item>
-                                <Descriptions.Item label={(<b>{"Điện thoại:"}</b>)}>....</Descriptions.Item>
-                                <Descriptions.Item label={(<b>{"Địa chỉ Email:"}</b>)}>....</Descriptions.Item>
-                                <Descriptions.Item label={(<b>{"Giấy phép kinh doanh:"}</b>)}>....</Descriptions.Item>
-                                <Descriptions.Item label={(<b>{"Mã số thuế:"}</b>)}>....</Descriptions.Item>
-                                <Descriptions.Item label={(<b>{"Tài khoản số:"}</b>)}>....</Descriptions.Item>
-
-                                <Descriptions.Item label={(<b>{"Do ông(bà):"}</b>)} span={2}>....</Descriptions.Item>
-
-                                <Descriptions.Item label={(<b>{"Chức vụ"}</b>)} span={2}>
-                                    ........làm đại diện
-                </Descriptions.Item>
-
-
-                            </Descriptions>
-                        </Card>
-                    </Space>
-
-                    <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
-                        Giá trị hợp đồng:........
-                        <JoditEditor
-
-
-                            config={config}
-                            
-
-                            onChange={this.rteChange}
-                        />
                         <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
                             <Card bordered={false}>
+                                <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>
+                                <h6 style={{ textAlign: 'center', fontSize: 14 }}>Độc lập-tự do-hạnh phúc</h6>
+                                <br />
 
-                                <Form
+                                <h1 style={{ textAlign: 'center', fontSize: 14 }}><Input
+                                    onChange={(e) => { this.nameChange(e.target.value) }} style={{ width: "100px" }} size="small" /></h1>
+                                <h6 style={{ textAlign: 'center', fontSize: 14, fontWeight: "bold" }}>Số.../...</h6>
+                                <h6 style={{ fontSize: 14, fontWeight: "bold" }}>Hôm nay, ngày...tháng...năm....,
+                                tại........, chúng tôi gồm
+                            </h6>
 
-                                    name="basic"
-                                    className="lcontract-form"
+                            </Card>
 
-                                    onFinish={this.onFinish}
-                                    onFinishFailed={this.onFinishFailed}
+                            <Card bordered={false}>
+                                <Descriptions size="small" column={2} title={"Thông tin bên A"}  >
+                                    <Descriptions.Item label={(<b>{"Công ty/Tổ chức:"}</b>)}>....</Descriptions.Item>
+                                    <Descriptions.Item label={(<b>{"Địa chỉ:"}</b>)}>....</Descriptions.Item>
+                                    <Descriptions.Item label={(<b>{"Điện thoại:"}</b>)}>....</Descriptions.Item>
+                                    <Descriptions.Item label={(<b>{"Địa chỉ Email:"}</b>)}>....</Descriptions.Item>
+                                    <Descriptions.Item label={(<b>{"Giấy phép kinh doanh:"}</b>)}>....</Descriptions.Item>
+                                    <Descriptions.Item label={(<b>{"Mã số thuế:"}</b>)}>....</Descriptions.Item>
+                                    <Descriptions.Item label={(<b>{"Tài khoản số:"}</b>)}>....</Descriptions.Item>
+
+                                    <Descriptions.Item label={(<b>{"Do ông(bà):"}</b>)} span={2}>....</Descriptions.Item>
+
+                                    <Descriptions.Item label={(<b>{"Chức vụ"}</b>)} span={2}>
+                                        ........làm đại diện
+                                </Descriptions.Item>
+                                </Descriptions>
+
+
+                                <Descriptions title="" size="small" column={2} title="Thông tin bên B"
 
                                 >
 
-                                    <h6 style={{ fontSize: 14 }}>Hợp đồng có hiệu lực kể từ ngày 3 tháng 11 năm 2020 đến
-                                    ngày ... tháng ... năm ....
-                            </h6>
-                                    <Space size="large">
+                                    <Descriptions.Item label={(<b>{"Công ty/Tổ chức:"}</b>)}>....</Descriptions.Item>
+                                    <Descriptions.Item label={(<b>{"Địa chỉ:"}</b>)}>....</Descriptions.Item>
+                                    <Descriptions.Item label={(<b>{"Điện thoại:"}</b>)}>....</Descriptions.Item>
+                                    <Descriptions.Item label={(<b>{"Địa chỉ Email:"}</b>)}>....</Descriptions.Item>
+                                    <Descriptions.Item label={(<b>{"Giấy phép kinh doanh:"}</b>)}>....</Descriptions.Item>
+                                    <Descriptions.Item label={(<b>{"Mã số thuế:"}</b>)}>....</Descriptions.Item>
+                                    <Descriptions.Item label={(<b>{"Tài khoản số:"}</b>)}>....</Descriptions.Item>
 
-                                        <Button type="primary" htmlType="submit" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
+                                    <Descriptions.Item label={(<b>{"Do ông(bà):"}</b>)} span={2}>....</Descriptions.Item>
+
+                                    <Descriptions.Item label={(<b>{"Chức vụ"}</b>)} span={2}>
+                                        ........làm đại diện
+                </Descriptions.Item>
+
+
+                                </Descriptions>
+                            </Card>
+                        </Space>
+
+                        <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
+                            <JoditEditor
+
+
+                                config={config}
+
+
+                                onChange={this.rteChange}
+                            />
+                            <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
+                                <Card bordered={false}>
+
+                                    <Form
+
+                                        name="basic"
+                                        className="lcontract-form"
+
+                                        onFinish={this.onFinish}
+                                        onFinishFailed={this.onFinishFailed}
+
+                                    >
+                                        Giá trị hợp đồng:........
+                                        
+                                    <h6 style={{ fontSize: 14 }}>Hợp đồng có hiệu lực kể từ ngày 3 tháng 11 năm 2020 đến
+                                        ngày ... tháng ... năm ....
+                            </h6>
+                                        <Space size="large">
+
+                                            <Button type="primary" htmlType="submit" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
                                                             Tạo
                                                     </Button>
 
-                                        <Button type="primary" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
+                                            <Button type="primary" value="Edit">{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
                                                             Lưu
                                                     </Button>
 
 
-                                    </Space>
-                                </Form>
+                                        </Space>
+                                    </Form>
 
-                            </Card>
+                                </Card>
+                            </Space>
                         </Space>
+
                     </Space>
-
-                </Space>
-            </div>
-        );
+                </div>
+            );
 
 
+        }
     }
-}
 }
 var mapStateToProps = state => {
     console.log(state.myLoginReducer)

@@ -16,7 +16,6 @@ import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 're
 import FadeIn from 'react-fade-in'
 const { Column } = Table;
 
-
 const dataSource = []
 var hash = require('object-hash')
 
@@ -271,7 +270,7 @@ class ContractTable extends Component {
             );
         }
         else {
-
+             
             return (
                 <FadeIn>
                 <div >
@@ -280,13 +279,12 @@ class ContractTable extends Component {
                         <Button type="primary" icon={<UploadOutlined />} >Tải lên hợp đồng</Button>
                     </Space>
                     <ContractSearch token={this.props.token} contractList={this.state.contractsTotal} />
-                    <Table dataSource={this.props.newContract}
+                    <Table  dataSource={this.props.newContract}
+                   
                     loading={this.state.loading}
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}>
-                        <Column title="Mã hợp đồng" dataIndex="contractNum" key="contractNum"
-                            render={(text, record) => (
-                                <a> {text}</a>
-                            )}
+                        <Column title="Stt"  key="index"
+                             render={(text, record, index) => index+1}
                         />
                         <Column title="Tên hợp đồng" dataIndex="contractTitle" key="contractTitle"
                             render={(text, record) => (
@@ -295,13 +293,13 @@ class ContractTable extends Component {
 
                             )}
                         />
-                       <Column title="Bên biên soạn" dataIndex="ASide" key="ASide"
+                       <Column title="Bên A" dataIndex="ASide" key="ASide"
                             render={(text, record) => (
 
                                 <p>{text}</p>
 
                             )} />
-                        <Column title="Bên đối tác" dataIndex="customer" key="customer"
+                        <Column title="Bên B" dataIndex="customer" key="customer"
                             render={(text, record) => (
 
                                 <p>{text.companyName}</p>
@@ -310,10 +308,11 @@ class ContractTable extends Component {
                        
                         <Column title="Giá trị hợp đồng" dataIndex="contractValue" key="contractValue"
                             align='right'
-                            render={(text, record) => `$ ${text}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                            render={(text, record) => `${text} VNĐ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 
                         />
-                        <Column title="Trạng thái" dataIndex="statusAsString" key="statusAsString"
+                        <Column  title="Trạng thái" dataIndex="statusAsString" key="statusAsString"
+                            align="center"
                             sortDirections={['descend', 'ascend']}
                             render={(text, record) => {
                                 let color = 'pink'
@@ -342,8 +341,9 @@ class ContractTable extends Component {
                             }}
                         />
                         <Column
-                            title="Xem chi tiết"
+                            title="Chi tiết"
                             key="action"
+                            align="center"
                             render={(text, record) => (
 
                                 <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
@@ -367,6 +367,7 @@ class ContractTable extends Component {
                         <Column
                             title="Tải về"
                             key="action"
+                            align="center"
                             render={(text, record) => (
 
                                 <DownloadOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={

@@ -84,18 +84,19 @@ class Header extends Component {
             <PageHeader
                 className="site-page-header"
                 ghost={false}
+                style={{backgroundColor:'rgb(8, 59, 102)'}}
                 title={[
                 ]}
                 extra={[
                     <Space  direction="horizontal" size="large" >
-                        <b>Thời hạn còn lại của tài khoản : 25 ngày</b>
+                        <b style={{color:'white'}}>Thời hạn còn lại của tài khoản : 25 ngày</b>
                     <Dropdown style={{flexGrow: 0,maxHeight: 50,overflow: "auto"}} overlay={notifications}  placement="bottomCenter" >{/* trigger={['click']} */}
-                    <Badge count={1}><BellOutlined style={{ fontSize: '20px', color: '#08c' }} /></Badge>
+                    <Badge count={1}><BellOutlined style={{ fontSize: '20px', color: 'whitesmoke' }} /></Badge>
                     </Dropdown>
                     <Space direction="horizontal" size="small" >
                     <Avatar size={30} icon={<UserOutlined />} />
                     <Dropdown overlay={menu} trigger={['click']}>
-                    <h className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                    <h style={{color:'white'}} className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                         {login.username} <DownOutlined />
                     </h>
                     </Dropdown>

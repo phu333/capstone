@@ -136,7 +136,7 @@ class SignatureList extends React.Component {
                          sorter={(a, b) => a.expired.localeCompare(b.expired)}
                          sortDirections={['descend', 'ascend']}
                          dataIndex="expired" key="expired" />
-                        <Column title="trạng thái" dataIndex="status" key="status"
+                        <Column title="Trạng thái" dataIndex="status" key="status"
                          sorter={(a, b) => a.status.localeCompare(b.status)}
                          sortDirections={['descend', 'ascend']}
                             render={(text, record) => {
@@ -169,8 +169,9 @@ class SignatureList extends React.Component {
                         />
 
                         <Column
-                            title="Xem chi tiết"
+                            title="Chi tiết"
                             key="action"
+                            align="center"
                             render={(text, record) => (
                                 <Space size="middle">
                                    <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={

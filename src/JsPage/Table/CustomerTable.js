@@ -124,13 +124,13 @@ class CustomerList extends React.Component {
 
             )} />
 
-            <Column title="email" dataIndex="email" key="email" render={(text, record) => (
+            <Column title="Email" dataIndex="email" key="email" render={(text, record) => (
 
               <a>{text}</a>
 
             )} />
 
-            {/* <Column title="trạng thái" dataIndex="status" key="status"
+            {/* <Column title="Trạng thái" dataIndex="status" key="status"
               sorter={(a, b) => a.status.localeCompare(b.status)}
               sortDirections={['descend', 'ascend']}
               render={(text, record) => {
@@ -154,6 +154,7 @@ class CustomerList extends React.Component {
             <Column
               title="Xem thông tin"
               key="action"
+              align="center"
               render={(text, record) => (
                 <Space size="middle">
                   <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
@@ -170,8 +171,9 @@ class CustomerList extends React.Component {
               title="Tác vụ"
               dataIndex="status"
               key="status"
-              sorter={(a, b) => a.status.localeCompare(b.status)}
-              sortDirections={['descend', 'ascend']}
+              align="center"
+              // sorter={(a, b) => a.status.localeCompare(b.status)}
+              // sortDirections={['descend', 'ascend']}
               render={(text, record) => (
                 <Space size="middle">
                   {text === "Deactive" ? <Switch style={{ fontSize: '20px' }}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt"defaultunChecked  /> : <Switch style={{ fontSize: '20px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
