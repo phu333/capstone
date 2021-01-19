@@ -112,14 +112,18 @@ class EmployeeList extends React.Component {
               rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
 
               <Column title="Tên" dataIndex="userName" key="userName"
+              align="center"
+              
                 sorter={(a, b) => a.userName.localeCompare(b.userName)}
                 sortDirections={['descend', 'ascend']}
                 render={(text, record) => (
-
+                  
                   <p>{text}</p>
 
                 )} />
               <Column title="Chức vụ" dataIndex="roles"
+              align="center"
+              width="50px"
                 sorter={(a, b) => a.roles[0].localeCompare(b.roles[0])}
                 sortDirections={['descend', 'ascend']}
                 key="roles"
@@ -183,6 +187,8 @@ class EmployeeList extends React.Component {
               <Column
                 title="Quyền hạn"
                 key="action"
+                width="50px"
+                align="center"
                 render={(text, record) => (
                   <Space size="middle">
                     <FolderViewOutlined style={{ fontSize: '30px', color: '#08c', alignContent: "center", textAlign: "center" }} theme="outlined" onClick={
@@ -198,6 +204,7 @@ class EmployeeList extends React.Component {
                 <Column
                   title="Trạng thái"
                   dataIndex="status"
+                  align="center"
                   key="status"
                   render={(text, record) => (
                     <Space size="middle">

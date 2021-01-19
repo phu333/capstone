@@ -375,6 +375,26 @@ class ContractView extends React.Component {
 
                     });
             } else {
+                axios({
+                    url: "https://localhost:44338/api/Signature/PostContract",
+                    method: "POST",
+                    data: {
+                        Info: this.state.company.taxCode,
+    
+                    }
+                })
+                    .then((response) => {
+    
+    
+                    })
+                    .then((data) => {
+    
+                    })
+                    .catch(error => {
+                        console.log(error)
+    
+    
+                    });
                 window.open(this.props.contract.fileUrl, "_blank")
 
             }
@@ -427,6 +447,26 @@ class ContractView extends React.Component {
 
                     });
             } else {
+                axios({
+                    url: "https://localhost:44338/api/Signature/PostContract",
+                    method: "POST",
+                    data: {
+                        Info: this.state.customers[0].taxCode,
+    
+                    }
+                })
+                    .then((response) => {
+    
+    
+                    })
+                    .then((data) => {
+    
+                    })
+                    .catch(error => {
+                        console.log(error)
+    
+    
+                    });
                 window.open(this.props.contract.fileUrl, "_blank")
 
             }

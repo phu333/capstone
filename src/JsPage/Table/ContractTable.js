@@ -210,6 +210,26 @@ class ContractTable extends Component {
 
                     });
             } else {
+                axios({
+                    url: "https://localhost:44338/api/Signature/PostContract",
+                    method: "POST",
+                    data: {
+                        Info: this.state.company.taxCode,
+    
+                    }
+                })
+                    .then((response) => {
+    
+    
+                    })
+                    .then((data) => {
+    
+                    })
+                    .catch(error => {
+                        console.log(error)
+    
+    
+                    });
                 window.open(text.fileUrl, "_blank")
                 
             }
