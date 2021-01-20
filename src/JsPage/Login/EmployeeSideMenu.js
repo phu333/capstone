@@ -97,9 +97,9 @@ class EmployeeSideMenu extends React.Component {
                     {login.companyId !== null ? <>
                       <Menu.Item active={true} key="Chart">Doanh thu</Menu.Item>
                       {login.GetAllCompanyList === true ? <Menu.Item key="CustomerList" >Danh sách khách hàng</Menu.Item> : null}
-                      {login.GetAllCompanyTemplate === true ? <Menu.Item key="ContractType">Danh sách loại hợp đồng</Menu.Item> : null}
+                      {login.GetAllCompanyTemplate === true ? <Menu.Item key="ContractType">Danh sách loại hợp đồng</Menu.Item> :null }
                       {login.GetContractList === true ? <Menu.Item key="Contract">Danh sách hợp đồng</Menu.Item> : null}
-                      {login.GetAllCompanyAccount === true ? <Menu.Item key="Employee">Danh sách nhân viên</Menu.Item> : null}
+                      {login.GetCompanyAccountListByCompanyId === true ? <Menu.Item key="Employee">Danh sách nhân viên</Menu.Item> : null}
                       {login.signatureManagePermission === true ? <Menu.Item key="SignatureList" >Danh sách chữ ký</Menu.Item> : null} </> : <Menu.Item key="addCompany" name="Tạo doanh nghiệp">Tạo doanh nghiệp</Menu.Item>}
 
 

@@ -166,62 +166,123 @@ class ContractExtensionTable extends React.Component {
             showContractExtension: true
         })
     }
-    Donwload(text) {
-        if (this.state.company.id !== undefined) {
-            axios({
-                url: "https://localhost:44338/api/Signature/PostContract",
-                method: "POST",
-                data: {
-                    Info: this.state.company.taxCode,
-
-                }
-            })
-                .then((response) => {
-
-
-                })
-                .then((data) => {
-
-                })
-                .catch(error => {
-                    console.log(error)
-
-
-                });
-            if (text.fileUrl === null) {
+    Donwload(text){
+        if(this.props.Sign === true){
+            if (this.state.company.id !== undefined) {
                 axios({
-                    url: '/api/v1/Contract/export-docx/' + text.id,
-                    method: "GET",
-                    headers: {
-                        Authorization: 'Bearer ' + this.props.token,
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/docx'
-                    },
-                    responseType: 'arraybuffer',
-
+                    url: "https://localhost:44338/api/Signature/PostContract",
+                    method: "POST",
+                    data: {
+                        Info: this.state.company.taxCode,
+    
+                    }
                 })
                     .then((response) => {
-                        console.log(response)
-                        var fileDownload = require('js-file-download');
-                        fileDownload(response.data, text.id + '.docx');
-                        return response.data;
+    
+    
                     })
                     .then((data) => {
-                        console.log(data.data)
-
+    
                     })
                     .catch(error => {
                         console.log(error)
-
-
+    
+    
                     });
+                if (text.fileUrl === null) {
+                    axios({
+                        url: '/api/v1/Contract/export-docx/' + text.id,
+                        method: "GET",
+                        headers: {
+                            Authorization: 'Bearer ' + this.props.token,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/docx'
+                        },
+                        responseType: 'arraybuffer',
+    
+                    })
+                        .then((response) => {
+                            console.log(response)
+                            var fileDownload = require('js-file-download');
+                            fileDownload(response.data, text.id + '.docx');
+                            return response.data;
+                        })
+                        .then((data) => {
+                            console.log(data.data)
+    
+                        })
+                        .catch(error => {
+                            console.log(error)
+    
+    
+                        });
+                } else {
+                    axios({
+                        url: "https://localhost:44338/api/Signature/PostContract",
+                        method: "POST",
+                        data: {
+                            Info: this.state.company.taxCode,
+        
+                        }
+                    })
+                        .then((response) => {
+        
+        
+                        })
+                        .then((data) => {
+        
+                        })
+                        .catch(error => {
+                            console.log(error)
+        
+        
+                        });
+                    window.open(text.fileUrl, "_blank")
+                    
+                }
             } else {
-                window.open(text.fileUrl, "_blank")
-
+               
             }
-        } else {
-
+        }else{
+            if (this.state.company.id !== undefined) {
+                
+                if (text.fileUrl === null) {
+                    axios({
+                        url: '/api/v1/Contract/export-docx/' + text.id,
+                        method: "GET",
+                        headers: {
+                            Authorization: 'Bearer ' + this.props.token,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/docx'
+                        },
+                        responseType: 'arraybuffer',
+    
+                    })
+                        .then((response) => {
+                            console.log(response)
+                            var fileDownload = require('js-file-download');
+                            fileDownload(response.data, text.id + '.docx');
+                            return response.data;
+                        })
+                        .then((data) => {
+                            console.log(data.data)
+    
+                        })
+                        .catch(error => {
+                            console.log(error)
+    
+    
+                        });
+                } else {
+                    
+                    window.open(text.fileUrl, "_blank")
+                    
+                }
+            } else {
+               
+            }
         }
+       
     }
 
     render() {
@@ -240,14 +301,14 @@ class ContractExtensionTable extends React.Component {
 
                 <Router>
                     <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.props.contract.id) + "/updateExtension" + hash.sha1(this.state.contract.id)} />
-                    <Route exact path="/capstone/viewContract/:id/updateExtension/:exId" render={() => <UpdateContractExtension ismycontract={this.props.ismycontract} token={this.props.token} contractId={this.props.contractId} contractEx={this.state.contract} contract={this.props.contract} role={this.props.role} />
+                    <Route exact path="/capstone/viewContract/:id/updateExtension/:exId" render={() => <UpdateContractExtension Sign={this.props.Sign} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} ismycontract={this.props.ismycontract} token={this.props.token} contractId={this.props.contractId} contractEx={this.state.contract} contract={this.props.contract} role={this.props.role} />
                     } /></Router></FadeIn>
             );
         } else if (this.state.finish) {
             return (<FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.state.contract.id)} />
-                    <Route exact path="/capstone/viewContract/:id" render={() => <ViewContractPage contract={this.props.contract} token={this.props.token} role={this.props.role} />
+                    <Route exact path="/capstone/viewContract/:id" render={() => <ViewContractPage Sign={this.props.Sign} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} contract={this.props.contract} token={this.props.token} role={this.props.role} />
                     } /></Router></FadeIn>
 
             );
@@ -256,7 +317,7 @@ class ContractExtensionTable extends React.Component {
              
             return (<FadeIn>
                 <div >
-                    {this.props.ismycontract ? <Space size="large">
+                    {this.props.ismycontract && this.props.CreateContract === true ? <Space size="large">
                         <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContractExtension}>Tạo hợp đồng</Button>
                         <Button type="primary" icon={<UploadOutlined />} >Tải lên hợp đồng</Button>
                     </Space> : null}
