@@ -69,7 +69,7 @@ class TemplateUpload extends React.Component {
     rteChange = (value) => {
         console.log(value)
         this.setState({
-            contractContent: value
+            contractContent: value.replace(/\n/g, "")
         })
 
     }
@@ -78,14 +78,15 @@ class TemplateUpload extends React.Component {
         this.setState({
             contractName: value
         })
-        console.log(this.state.contractName)
+        
     }
     onFinish = (values) => {
-        console.log(this.state.contractName)
+        
         const template = {
             name: this.state.contractName,
-            content: JSON.stringify(this.state.contractContent)
+            content: this.state.contractContent.replace(/[\t ]+\</g, "<")
         }
+        console.log(this.state.contractContent)
         axios({
             url: '/api/v1/ContractType',
             method: "POST",

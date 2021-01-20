@@ -123,11 +123,13 @@ class EmployeeList extends React.Component {
                 sorter={(a, b) => a.userName.localeCompare(b.firstName)}
                 sortDirections={['descend', 'ascend']}
                 render={(text, record) => (
-
+                  
                   <p>{text}</p>
 
                 )} />
               <Column title="Chức vụ" dataIndex="roles"
+              align="center"
+              width="50px"
                 sorter={(a, b) => a.roles[0].localeCompare(b.roles[0])}
                 sortDirections={['descend', 'ascend']}
                 key="roles"
@@ -207,6 +209,7 @@ class EmployeeList extends React.Component {
                 <Column
                   title="Trạng thái"
                   dataIndex="status"
+                  align="center"
                   key="status"
                   render={(text, record) => (
                     <Space size="middle">

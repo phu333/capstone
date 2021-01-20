@@ -104,7 +104,7 @@ class CreateContract extends React.Component {
 
     rteChange = (value) => {
         this.setState({
-            contractContent: value.replace(/"/g, "\'")
+            contractContent: value.replace(/"/g, "\'").trim()
         })
 
     }
@@ -394,7 +394,7 @@ class CreateContract extends React.Component {
                             </h6>
                             <JoditEditor
 
-                                value={this.props.template.content}
+                                value={this.props.template.content.trim()}
                                 config={config}
                                 tabIndex={1} // tabIndex of textarea
 

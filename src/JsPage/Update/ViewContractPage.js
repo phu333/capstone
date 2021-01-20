@@ -66,7 +66,7 @@ class ContractView extends React.Component {
             contractName: "",
             contractValue: "",
             contractContent: "",
-            ismycontract:false,
+            ismycontract: false,
             contractTitle: "",
             contractPlace: "",
             contractExpiredDate: "",
@@ -238,13 +238,13 @@ class ContractView extends React.Component {
     OpenExtension() {
         this.setState({
             openExtension: true,
-            ismycontract:!this.state.ismycontract
+            ismycontract: !this.state.ismycontract
         })
     }
     OpenExtensionOther() {
         this.setState({
             openExtension: true,
-            ismycontract:this.state.ismycontract
+            ismycontract: this.state.ismycontract
         })
     }
     onNote() {
@@ -326,47 +326,21 @@ class ContractView extends React.Component {
     onFinish = () => {
         console.log(this.state.company.taxCode)
         console.log(this.state.customers[0].taxCode)
-        if (this.state.company.id !== undefined) {
-            axios({
-                url: "https://localhost:44338/api/Signature/PostContract",
-                method: "POST",
-                data: {
-                    Info: this.state.company.taxCode,
-
-                }
-            })
-                .then((response) => {
-
-
-                })
-                .then((data) => {
-
-                })
-                .catch(error => {
-                    console.log(error)
-
-
-                });
-            if (this.props.contract.fileUrl === null) {
+        if (this.props.Sign === true) {
+            if (this.state.company.id !== undefined) {
                 axios({
-                    url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
-                    method: "GET",
-                    headers: {
-                        Authorization: 'Bearer ' + this.props.token,
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/docx'
-                    },
-                    responseType: 'arraybuffer',
+                    url: "https://localhost:44338/api/Signature/PostContract",
+                    method: "POST",
+                    data: {
+                        Info: this.state.company.taxCode,
 
+                    }
                 })
                     .then((response) => {
-                        console.log(response)
-                        var fileDownload = require('js-file-download');
-                        fileDownload(response.data, this.props.contract.id + '.docx');
-                        return response.data;
+
+
                     })
                     .then((data) => {
-                        console.log(data.data)
 
                     })
                     .catch(error => {
@@ -374,65 +348,202 @@ class ContractView extends React.Component {
 
 
                     });
-            } else {
-                window.open(this.props.contract.fileUrl, "_blank")
+                if (this.props.contract.fileUrl === null) {
+                    axios({
+                        url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
+                        method: "GET",
+                        headers: {
+                            Authorization: 'Bearer ' + this.props.token,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/docx'
+                        },
+                        responseType: 'arraybuffer',
 
+                    })
+                        .then((response) => {
+                            console.log(response)
+                            var fileDownload = require('js-file-download');
+                            fileDownload(response.data, this.props.contract.id + '.docx');
+                            return response.data;
+                        })
+                        .then((data) => {
+                            console.log(data.data)
+
+                        })
+                        .catch(error => {
+                            console.log(error)
+
+
+                        });
+                } else {
+                    axios({
+                        url: "https://localhost:44338/api/Signature/PostContract",
+                        method: "POST",
+                        data: {
+                            Info: this.state.company.taxCode,
+
+                        }
+                    })
+                        .then((response) => {
+
+
+                        })
+                        .then((data) => {
+
+                        })
+                        .catch(error => {
+                            console.log(error)
+
+
+                        });
+                    window.open(this.props.contract.fileUrl, "_blank")
+
+                }
+            } else {
+                axios({
+                    url: "https://localhost:44338/api/Signature/PostContract",
+                    method: "POST",
+                    data: {
+                        Info: this.state.customers[0].taxCode,
+
+                    }
+                })
+                    .then((response) => {
+
+
+                    })
+                    .then((data) => {
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+
+
+                    });
+                if (this.props.contract.fileUrl === null) {
+                    axios({
+                        url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
+                        method: "GET",
+                        headers: {
+                            Authorization: 'Bearer ' + this.props.token,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/docx'
+                        },
+                        responseType: 'arraybuffer',
+
+                    })
+                        .then((response) => {
+                            console.log(response)
+                            var fileDownload = require('js-file-download');
+                            fileDownload(response.data, this.props.contract.id + '.docx');
+                            return response.data;
+                        })
+                        .then((data) => {
+                            console.log(data.data)
+
+                        })
+                        .catch(error => {
+                            console.log(error)
+
+
+                        });
+                } else {
+                    axios({
+                        url: "https://localhost:44338/api/Signature/PostContract",
+                        method: "POST",
+                        data: {
+                            Info: this.state.customers[0].taxCode,
+
+                        }
+                    })
+                        .then((response) => {
+
+
+                        })
+                        .then((data) => {
+
+                        })
+                        .catch(error => {
+                            console.log(error)
+
+
+                        });
+                    window.open(this.props.contract.fileUrl, "_blank")
+
+                }
             }
+
         } else {
-            axios({
-                url: "https://localhost:44338/api/Signature/PostContract",
-                method: "POST",
-                data: {
-                    Info: this.state.customers[0].taxCode,
+            if (this.state.company.id !== undefined) {
+
+                if (this.props.contract.fileUrl === null) {
+                    axios({
+                        url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
+                        method: "GET",
+                        headers: {
+                            Authorization: 'Bearer ' + this.props.token,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/docx'
+                        },
+                        responseType: 'arraybuffer',
+
+                    })
+                        .then((response) => {
+                            console.log(response)
+                            var fileDownload = require('js-file-download');
+                            fileDownload(response.data, this.props.contract.id + '.docx');
+                            return response.data;
+                        })
+                        .then((data) => {
+                            console.log(data.data)
+
+                        })
+                        .catch(error => {
+                            console.log(error)
+
+
+                        });
+                } else {
+
+                    window.open(this.props.contract.fileUrl, "_blank")
 
                 }
-            })
-                .then((response) => {
-
-
-                })
-                .then((data) => {
-
-                })
-                .catch(error => {
-                    console.log(error)
-
-
-                });
-            if (this.props.contract.fileUrl === null) {
-                axios({
-                    url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
-                    method: "GET",
-                    headers: {
-                        Authorization: 'Bearer ' + this.props.token,
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/docx'
-                    },
-                    responseType: 'arraybuffer',
-
-                })
-                    .then((response) => {
-                        console.log(response)
-                        var fileDownload = require('js-file-download');
-                        fileDownload(response.data, this.props.contract.id + '.docx');
-                        return response.data;
-                    })
-                    .then((data) => {
-                        console.log(data.data)
-
-                    })
-                    .catch(error => {
-                        console.log(error)
-
-
-                    });
             } else {
-                window.open(this.props.contract.fileUrl, "_blank")
 
+                if (this.props.contract.fileUrl === null) {
+                    axios({
+                        url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
+                        method: "GET",
+                        headers: {
+                            Authorization: 'Bearer ' + this.props.token,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/docx'
+                        },
+                        responseType: 'arraybuffer',
+
+                    })
+                        .then((response) => {
+                            console.log(response)
+                            var fileDownload = require('js-file-download');
+                            fileDownload(response.data, this.props.contract.id + '.docx');
+                            return response.data;
+                        })
+                        .then((data) => {
+                            console.log(data.data)
+
+                        })
+                        .catch(error => {
+                            console.log(error)
+
+
+                        });
+                } else {
+
+                    window.open(this.props.contract.fileUrl, "_blank")
+
+                }
             }
         }
-
-
 
 
     };
@@ -635,7 +746,7 @@ class ContractView extends React.Component {
                                                 <Button type="primary">lấy link</Button>
                                             </CopyToClipboard>
 
-                                            {this.props.role === true ? <Button type="primary" value="reject">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
+                                            {this.props.Sign === true ? <Button type="primary" value="reject">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
                                                             Reject
                                                         </Button> : null}
                                             {this.props.contract.statusAsString !== "Active" && this.state.company.id === this.state.creator ?
@@ -644,7 +755,7 @@ class ContractView extends React.Component {
                                                         </Button> : <Button type="primary" value="extension" onClick={this.OpenExtensionOther}>{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
                                                             kiểm tra phụ luc
                                                         </Button>}
-                                            {this.props.contract.statusAsString === "Draft" ?<Button type="primary" value="update" onClick={this.onEdit}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
+                                            {this.props.contract.statusAsString === "Draft" && this.props.UpdateContract === true ? <Button type="primary" value="update" onClick={this.onEdit}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
                                                         Chỉnh sửa
                                                     </Button> : null}
                                             {this.state.isEdit === true ? <Button type="primary" value="update" onClick={this.onUpdate}>{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
