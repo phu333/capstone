@@ -622,15 +622,15 @@ class ContractView extends React.Component {
             return (
                 <Router>
                     <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.props.contract.id) + "/viewExtension"} />
-                    <Route exact path="/capstone/viewContract/:id/viewExtension" render={() => <ContractExtensionTable Sign={this.props.Sign} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} ismycontract={this.state.ismycontract} contract={this.props.contract} contractId={this.props.contract.id} role={this.props.role} />
+                    <Route exact path="/capstone/viewContract/:id/viewExtension" render={() => <ContractExtensionTable Sign={this.props.Sign} token={this.props.token} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} ismycontract={this.state.ismycontract} contract={this.props.contract} contractId={this.props.contract.id} role={this.props.role} />
                     } /></Router>
             );
         } else {
             if (this.state.finish) {
                 return (
                     <Router>
-                        <Redirect push to={"/capstone/" + this.state.showComponent} />
-                        <Route exact path="/capstone/contract" render={() => <ContractTable role={this.props.role} Sign={this.props.Sign} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} />
+                        <Redirect push to={"/capstone/contract" } />
+                        <Route exact path="/capstone/contract" render={() => <ContractTable role={this.props.role} Sign={this.props.Sign} token={this.props.token} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} />
                         } /></Router>
                 );
             } else {

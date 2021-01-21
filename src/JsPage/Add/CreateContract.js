@@ -431,9 +431,7 @@ class CreateContract extends React.Component {
                                                             nộp
                                                     </Button>
 
-                                            <Button type='primary' value='Edit'>{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
-                                                            Lưu
-                                                    </Button>
+                                           
 
 
                                         </Space>
