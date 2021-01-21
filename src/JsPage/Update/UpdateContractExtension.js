@@ -525,7 +525,7 @@ class UpdateContractExtension extends React.Component {
             return (
                 <Router>
                     <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.props.contract.id) + "/viewExtension"} />
-                    <Route exact path="/capstone/viewContract/:id/viewExtension" render={() => <ContractExtensionTable contract={this.props.contract} role={this.props.role} />
+                    <Route exact path="/capstone/viewContract/:id/viewExtension" render={() => <ContractExtensionTable Sign={this.props.Sign} token={this.props.token} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} ismycontract={this.props.ismycontract} contract={this.props.contract} contractId={this.props.contract.id} role={this.props.role} />
                     } /></Router>
             );
         } else {

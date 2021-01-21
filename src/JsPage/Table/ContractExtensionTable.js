@@ -284,14 +284,18 @@ class ContractExtensionTable extends React.Component {
         }
 
     }
-
+    Cancel () {
+        this.setState({
+            finish: true
+        })
+    };
     render() {
 
         if (this.state.showCreateContractExtension) {
             return (<FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.props.contract.id) + "/createExtension"} />
-                    <Route exact path="/capstone/viewContract/:id/createExtension" render={() => <AddContractExtension token={this.props.token} contractId={this.props.contractId} contract={this.props.contract} role={this.props.role} />
+                    <Route exact path="/capstone/viewContract/:id/createExtension" render={() => <AddContractExtension Sign={this.props.Sign} token={this.props.token} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} ismycontract={this.props.ismycontract} contract={this.props.contract} contractId={this.props.contract.id} role={this.props.role} />
                     } /></Router></FadeIn>
 
 
@@ -308,7 +312,7 @@ class ContractExtensionTable extends React.Component {
             return (<FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.state.contract.id)} />
-                    <Route exact path="/capstone/viewContract/:id" render={() => <ViewContractPage Sign={this.props.Sign} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} contract={this.props.contract} token={this.props.token} role={this.props.role} />
+                    <Route exact path="/capstone/viewContract/:id" render={() => <ViewContractPage Sign={this.props.Sign} token={this.props.token} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} ismycontract={this.props.ismycontract} contract={this.props.contract} contractId={this.props.contract.id} role={this.props.role} />
                     } /></Router></FadeIn>
 
             );
@@ -319,9 +323,11 @@ class ContractExtensionTable extends React.Component {
                 <div >
                     {this.props.ismycontract && this.props.CreateContract === true ? <Space size="large">
                         <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContractExtension}>Tạo hợp đồng</Button>
-                        <Button type="primary" icon={<UploadOutlined />} >Tải lên hợp đồng</Button>
+                        
                     </Space> : null}
-
+                    <Button type="primary" value="cancel" onClick={this.Cancel}>
+                            Trở về
+                            </Button>
                     <ContractSearch token={this.props.token} contractList={this.state.contractsTotal} />
                     <Table dataSource={this.props.newContract}
                         loading={this.state.loading}
