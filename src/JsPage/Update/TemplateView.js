@@ -4,10 +4,10 @@ import 'antd/dist/antd.css';
 import { connect } from 'react-redux'
 
 import { MailOutlined, PrinterOutlined, IdcardOutlined, HomeOutlined, PhoneOutlined, BankOutlined, ContactsOutlined } from '@ant-design/icons';
-import { Card, Button, Space, Checkbox, Descriptions, Select, Form, Input } from 'antd';
+import { Card, Button, Space, message, Descriptions, Select, Form, Input } from 'antd';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { FormBuilder } from 'react-formio';
-
+import axios from 'axios'
 import 'reactjs-popup/dist/index.css';
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
