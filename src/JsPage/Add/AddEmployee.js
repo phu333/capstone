@@ -199,14 +199,14 @@ class AddEmployee extends React.Component {
                                 })
                                 .then((data) => {
 
-
+                                    message.success("taọ thành công")
 
 
 
                                 })
                                 .catch(error => {
 
-
+                                    message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
 
                                 });
                         }

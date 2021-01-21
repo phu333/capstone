@@ -21,7 +21,7 @@ class EmployeeList extends React.Component {
     super();
 
     this.state = {
-
+      loading:true,
       employee: {},
       openEmployee: "",
       employees: [],
@@ -48,7 +48,15 @@ class EmployeeList extends React.Component {
         this.setState({
           employees: data.data
         })
-        this.props.onSubmit(data.data)
+        setTimeout(function(){
+          this.setState({
+              loading:false,
+              
+          })
+          this.props.onSubmit(data.data)
+
+      }.bind(this),5000)
+        
 
       })
       .catch(error => {
@@ -109,6 +117,7 @@ class EmployeeList extends React.Component {
             {login.ActiveDeactiveAccount === true ? <Button type="primary" onClick={this.OpenAddEmployee} icon={<UserAddOutlined />}>Tạo nhân viên mới</Button> : null}
             <EmployeeSearch token={this.props.token} employeeList={this.state.employees} />
             <Table dataSource={this.props.newEmployee}
+            loading={this.state.loading}
               rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
         
               <Column title="Họ" dataIndex="lastName" key="lastName"

@@ -77,6 +77,8 @@ class ContractView extends React.Component {
         this.onGetlink = this.onGetlink.bind(this);
         this.onEditorStateChange = this.onEditorStateChange.bind(this);
         this.onNote = this.onNote.bind(this);
+        this.Cancel = this.Cancel.bind(this);
+
     }
     onGetlink() {
         const el = "http://localhost:3000/capstone/Contract/" + this.props.contract.id
@@ -314,12 +316,11 @@ class ContractView extends React.Component {
                 this.setState({
                     finish: true
                 })
-                message.success("tao thanh cong")
+                message.success("chỉnh sửa thành công")
 
             })
             .catch(error => {
-                message.error("vui long kiem tra thong tin va ket noi mang")
-                console.log(error)
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
 
             });
     }
@@ -548,7 +549,11 @@ class ContractView extends React.Component {
 
     };
 
-
+    Cancel () {
+        this.setState({
+            finish: true
+        })
+    };
     onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
@@ -741,7 +746,7 @@ class ContractView extends React.Component {
                                             <Button type="primary" value="Sign" onClick={this.onFinish}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
                                                         Tải về
                                                     </Button>
-                                            <CopyToClipboard text={"http://localhost:3000/capstone/Contract/" + this.props.contract.id}
+                                            <CopyToClipboard text={"http://localhost:3001/capstone/Contract/" + this.props.contract.id}
                                                 onCopy={() => message.success("copied")}>
                                                 <Button type="primary">lấy link</Button>
                                             </CopyToClipboard>

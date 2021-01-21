@@ -82,7 +82,29 @@ class TemplateView extends React.Component {
 
     }
     onFinish = (values) => {
+        axios({
+            url: '/api/v1/ContractType/' + this.props.template.id,
+            method: "PUT",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
 
+            },
+            data: values
+        })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+                message.success("thông tin chỉnh sửa thành công")
+                this.setState({
+                    isEdit: false
+                })
+            })
+            .catch(error => {
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
+
+            });
 
     };
     render() {

@@ -113,18 +113,15 @@ class AddCustomer extends React.Component {
                             })
                             .then((data) => {
                 
-                                message.success("tao thanh cong")
+                                message.success("taọ thành công")
+
                                 this.setState({
                                     finish: true
                                 })
                             })
                             .catch(error => {
                 
-                                if (error.response.status === 500) {
-                                    message.error(error.response.status + ' Server under maintainence');
-                                } else if (error.response.status === 404) {
-                                    message.error(error.response.status + ' Server not found');
-                                }
+                                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
                 
                             });
                         return true;

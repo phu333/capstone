@@ -223,12 +223,11 @@ class UpdateContractExtension extends React.Component {
                 this.setState({
                     finish: true
                 })
-                message.success("tao thanh cong")
+                message.success("chỉnh sửa thành công")
 
             })
             .catch(error => {
-                message.error("vui long kiem tra thong tin va ket noi mang")
-                console.log(error)
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
 
             });
     }

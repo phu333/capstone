@@ -211,14 +211,17 @@ class AddContractExtension extends React.Component {
                 return response.data;
             })
             .then((data) => {
-                this.setState({
-                    finish: true
-                })
-                message.success("tao thanh cong")
+                setTimeout(function(){
+                    this.setState({
+                        finish: true
+                    })
+                }.bind(this),5000)
+                message.success("taọ thành công")
+
 
             })
             .catch(error => {
-                message.error("vui long kiem tra thong tin va ket noi mang")
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
                 console.log(error)
 
             });
@@ -226,7 +229,15 @@ class AddContractExtension extends React.Component {
 
 
     };
-   
+    Cancel = () => {
+        this.setState({
+            finish: true
+        })
+
+
+
+
+    };
     onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };

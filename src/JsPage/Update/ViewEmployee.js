@@ -117,16 +117,11 @@ class ViewEmployee extends React.Component {
             })
             .then((data) => {
                 console.log(data.data)
-
+                message.success("quyền đã được cập nhật")
 
             })
             .catch(error => {
-                console.log(error)
-                if (error.response.status === 500) {
-                    message.error(error.response.status + ' Server under maintainence');
-                } else if (error.response.status === 404) {
-                    message.error(error.response.status + ' Server not found');
-                }
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
 
             });
 

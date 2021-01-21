@@ -39,7 +39,7 @@ class ViewCustomer extends React.Component {
     }
     onFinish = (values) => {
         axios({
-            url: '/api/v1/Company/' + this.state.company.id,
+            url: '/api/v1/Customer/' + this.props.customer.id,
             method: "PUT",
             headers: {
                 Authorization: 'Bearer ' + this.props.token,
@@ -52,20 +52,16 @@ class ViewCustomer extends React.Component {
                 return response.data;
             })
             .then((data) => {
-
+                message.success("thông tin chỉnh sửa thành công")
+                this.setState({
+                    isEdit: false
+                })
             })
             .catch(error => {
-                console.log(error)
-                if (error.response.status === 500) {
-                    message.error(error.response.status + ' Server under maintainence');
-                } else if (error.response.status === 404) {
-                    message.error(error.response.status + ' Server not found');
-                }
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
 
             });
-        this.setState({
-            isEdit: false
-        })
+        
 
 
 
