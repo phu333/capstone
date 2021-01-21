@@ -92,7 +92,7 @@ class UpdateSignature extends React.Component {
         if (this.state.finish) {
             return (<Router>
                 <Redirect push to={"/capstone/signatureList" } />
-                <Route exact path="/capstone/signatureList" component={SignatureList} /></Router>);
+                <Route exact path="/capstone/signatureList" render={() => <SignatureList ActiveDeactiveSignature={this.props.ActiveDeactiveSignature} UpdateSignature={this.props.UpdateSignature} CreateSignature={this.props.CreateSignature} token={this.props.token} />} /></Router>);
         } else {
 
             return (
@@ -160,13 +160,13 @@ class UpdateSignature extends React.Component {
                             <Form.Item {...tailLayout}>
                                 <Space size="large">
                                     {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
-                                        Tạo
+                                        Nộp
                             </Button> : null}
                                     {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
                                         Reset
                             </Button> : null}
 
-                                    {this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
+                                    {this.state.isEdit === false && this.props.UpdateSignature ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
                                         Sửa
                             </Button> : null}
 

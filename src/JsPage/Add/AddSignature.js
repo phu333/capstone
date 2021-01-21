@@ -127,7 +127,7 @@ class AddSignature extends React.Component {
         if (this.state.finish) {
             return (<Router>
                 <Redirect push to={"/capstone/signatureList"} />
-                <Route exact path="/capstone/signatureList" component={SignatureList} /></Router>);
+                <Route exact path="/capstone/signatureList" render={() => <SignatureList ActiveDeactiveSignature={this.props.ActiveDeactiveSignature} UpdateSignature={this.props.UpdateSignature} CreateSignature={this.props.CreateSignature} token={this.props.token} />} /></Router>);
         } else {
             return (
                 <div >

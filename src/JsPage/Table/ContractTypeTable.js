@@ -23,7 +23,7 @@ class ContractTable extends React.Component {
       showTemplateCreate: false,
       viewTemplate: false,
       templateList: [],
-      template:{},
+      template: {},
     };
     this.handleChange = this.handleChange.bind(this);
 
@@ -77,14 +77,14 @@ class ContractTable extends React.Component {
       return (<FadeIn>
         <Router>
           <Redirect push to={"/capstone/uploadTemplate"} />
-          <Route exact path="/capstone/uploadTemplate" render={() => <TemplateUpload token={this.props.token} role={this.props.role} />} /></Router>
+          <Route exact path="/capstone/uploadTemplate" render={() => <TemplateUpload ActiveDeactiveTemplate={this.props.ActiveDeactiveTemplate} UpdateTemplate={this.props.UpdateTemplate} CreateTemplate={this.props.CreateTemplate} token={this.props.token} role={this.props.role} />} /></Router>
       </FadeIn>
       );
     } else if (this.state.viewTemplate) {
       return (<FadeIn>
         <Router>
           <Redirect push to={"/capstone/viewTemplate"} />
-          <Route exact path="/capstone/viewTemplate" render={() => <ViewTemplate template={this.state.template} token={this.props.token} role={this.props.role} />} /></Router>
+          <Route exact path="/capstone/viewTemplate" render={() => <ViewTemplate ActiveDeactiveTemplate={this.props.ActiveDeactiveTemplate} UpdateTemplate={this.props.UpdateTemplate} CreateTemplate={this.props.CreateTemplate} template={this.state.template} token={this.props.token} role={this.props.role} />} /></Router>
       </FadeIn>
 
 
@@ -123,7 +123,7 @@ class ContractTable extends React.Component {
                         <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={() => {
                           this.setState({
                             viewTemplate: !this.state.viewTemplate,
-                            template:text
+                            template: text
                           })
                         }}></FolderViewOutlined>
                       </Space>

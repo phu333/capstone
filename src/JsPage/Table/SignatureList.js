@@ -80,20 +80,22 @@ class SignatureList extends React.Component {
             return (<FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/addSignature"} />
-                    <Route exact path="/capstone/addSignature" render={() => <AddSignature token={this.props.token} />} /></Router></FadeIn>
+                    <Route exact path="/capstone/addSignature" render={() => <AddSignature ActiveDeactiveSignature={this.props.ActiveDeactiveSignature} UpdateSignature={this.props.UpdateSignature} CreateSignature={this.props.CreateSignature} token={this.props.token} />} /></Router></FadeIn>
             );
         } else if (this.state.openSignature === "openViewSignature") {
             return (<FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/updateSignature/" + this.state.signature.serial} />
-                    <Route exact path="/capstone/updateSignature/:id" render={() => <UpdateSignature token={this.props.token} signature={this.state.signature} />} />
+                    <Route exact path="/capstone/updateSignature/:id" render={() => <UpdateSignature ActiveDeactiveSignature={this.props.ActiveDeactiveSignature} UpdateSignature={this.props.UpdateSignature} CreateSignature={this.props.CreateSignature} token={this.props.token} signature={this.state.signature} />} />
 
                 </Router></FadeIn>
             );
         }
         else {
             return (<FadeIn>
-                <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddSignature} icon={<UserAddOutlined />}>Thêm chữ ký mới</Button>
+                <div style={{ height: "100vh" }}>
+                    {this.props.CreateSignature ?<Button type="primary" onClick={this.OpenAddSignature} icon={<UserAddOutlined />}>Thêm chữ ký mới</Button> :null}
+                    
                     <SignatureSearch token={this.props.token} SignatureList={this.props.newSignature}/>
                     <Table dataSource={this.props.newSignature}
                     loading={this.state.loading}
@@ -183,7 +185,7 @@ var mapStateToProps = state => {
 
 
     return {
-        newSignature: state.mySignatureReducer
+        newSignature: state.mySignatureReducer,
     }
 
 
