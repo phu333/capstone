@@ -99,8 +99,8 @@ class EmployeeSideMenu extends React.Component {
                       {login.GetAllCompanyList === true ? <Menu.Item key="CustomerList" >Danh sách khách hàng</Menu.Item> : null}
                       {login.GetAllCompanyTemplate === true ? <Menu.Item key="ContractType">Danh sách loại hợp đồng</Menu.Item> : null}
                       {login.GetContractList === true ? <Menu.Item key="Contract">Danh sách hợp đồng</Menu.Item> : null}
-                      {login.GetAllCompanyAccount === true ? <Menu.Item key="Employee">Danh sách nhân viên</Menu.Item> : null}
-                      {login.signatureManagePermission === true ? <Menu.Item key="SignatureList" >Danh sách chữ ký</Menu.Item> : null} </> : <Menu.Item key="addCompany" name="Tạo doanh nghiệp">Tạo doanh nghiệp</Menu.Item>}
+                      {login.GetAllCompanyAccount=== true ? <Menu.Item key="Employee">Danh sách nhân viên</Menu.Item> : null}
+                      {login.Sign === true ? <Menu.Item key="SignatureList" >Danh sách chữ ký</Menu.Item> : null} </> : <Menu.Item key="addCompany" name="Tạo doanh nghiệp">Tạo doanh nghiệp</Menu.Item>}
 
 
 
@@ -113,8 +113,8 @@ class EmployeeSideMenu extends React.Component {
                   <SubMenu key="sub2" icon={<UserOutlined />} title="Thông tin">
 
                     {login.companyId !== null ? <>
-                      {login.editCompanyInformationPermission === true ? <Menu.Item key="CompanyProfile">Thông tin công ty</Menu.Item> : null} </> : null}
-                    <Menu.Item key="profile" >Thông tin cá nhân</Menu.Item>
+                      {login.UpdateCompany === true ? <Menu.Item key="CompanyProfile">Thông tin công ty</Menu.Item> : null} </> : null}
+                    <Menu.Item key="Profile" >Thông tin cá nhân</Menu.Item>
 
                   </SubMenu>
                   {/* <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
@@ -189,6 +189,11 @@ class EmployeeSideMenu extends React.Component {
                       <Router>
                         <Redirect push to={"/capstone/" + this.state.showComponent} />
                         <Route exact path="/capstone/CompanyProfile" render={() => <UpdateProfileCompany token={login.jwToken} role={login.role} />} /></Router> : null}
+                      {this.state.showComponent === "Profile" ?
+                    <Router>
+                      <Redirect push to={"/capstone/" + this.state.showComponent} />
+                      <Route exact path="/capstone/Profile" render={() => <UpdateProfile token={login.jwToken} role={login.role} />} /></Router> : null}
+
                   </> : <Router>
                       <Redirect push to={"/capstone/" + this.state.showComponent} />
                       <Route exact path="/capstone/CompanyProfile" render={() => <AddCompany token={login.jwToken} role={login.role} />} /></Router>}
@@ -197,10 +202,6 @@ class EmployeeSideMenu extends React.Component {
 
 
 
-                  {this.state.showComponent === "Profile" ?
-                    <Router>
-                      <Redirect push to={"/capstone/" + this.state.showComponent} />
-                      <Route exact path="/capstone/Profile" render={() => <UpdateProfile token={login.jwToken} role={login.role} />} /></Router> : null}
 
 
 

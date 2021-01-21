@@ -51,9 +51,7 @@ class ViewCustomer extends React.Component {
 
                 return response.data;
             })
-            .then((data) => {
 
-            })
             .catch(error => {
                 console.log(error)
                 if (error.response.status === 500) {
@@ -109,7 +107,7 @@ class ViewCustomer extends React.Component {
                     {...layout}
                     name="basic"
                     className="employee-form"
-
+                    hideRequiredMark
                     onFinish={this.onFinish}
                     onFinishFailed={this.onFinishFailed}
 
@@ -244,7 +242,7 @@ var mapStateToProps = state => {
 
     console.log(state.myLoginReducer)
     return {
-      myLoginReducer: state.myLoginReducer
+        myLoginReducer: state.myLoginReducer
     }
-  }
+}
 export default connect(mapStateToProps, mapDispatchToProps)(ViewCustomer);
