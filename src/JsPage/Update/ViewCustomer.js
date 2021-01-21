@@ -202,7 +202,7 @@ class ViewCustomer extends React.Component {
                     <Form.Item {...tailLayout}>
                         <Space size="large">
                             {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
-                                Tạo
+                                Sửa
                             </Button> : null}
                             {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
                                 Reset
