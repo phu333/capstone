@@ -21,24 +21,7 @@ class SignatureList extends React.Component {
 
         this.state = {
 
-            dataSource: [
-                {
-                    key: '1',
-                    name: 'Mike',
-                    email: "some email",
-                    provider: '10 Downing Street',
-                    status: "active",
-                    expired: 2022
-                },
-                {
-                    key: '2',
-                    name: 'John',
-                    email: "some email",
-                    provider: '10 Downing Street',
-                    status: "active",
-                    expired: 2022
-                },
-            ],
+            
             openSignature: "",
             signature:{},
 
@@ -50,9 +33,12 @@ class SignatureList extends React.Component {
 
         if (this.props.newSignature.length === 0) {
             axios({
-                url: '',
+                url: '/api/DigitalSignature',
                 method: "GET",
-                
+                headers: {
+                    Authorization: "Bearer " + this.props.token,
+    
+                },
             })
                 .then((response) => {
         
@@ -60,37 +46,18 @@ class SignatureList extends React.Component {
                 })
                 .then((data) => {
         
-                    
+                    this.props.onSubmit(data.data)
         
                 })
                 .catch(error => {
         
-                    if (error.response.status === 500) {
-                        message.error(error.response.status + ' Server under maintainence');
-                    } else if (error.response.status === 404) {
-                        message.error(error.response.status + ' Server not found');
-                    }
+                   
         
                 });
-            const contract1 = {
-                serial:123123123123123123,
-                
-                provider: 'Viettel',
-                status: "active",
-                expired: "12/11/2022"
+           
 
-            }
-            const contract2 = {
-                serial:123123123123123123,
-               
-                provider: 'Fpt',
-                status: "deactive",
-                expired: "12/12/2022"
-
-            }
-
-            this.props.onSubmit(contract1)
-            this.props.onSubmit(contract2)
+            
+            
 
         }
 

@@ -297,7 +297,7 @@ class ContractTable extends Component {
             return ( <FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/chooseTemplate"} />
-                    <Route exact path="/capstone/chooseTemplate" render={() => <ChooseContractTemplate token={this.props.token} role={this.props.role} />
+                    <Route exact path="/capstone/chooseTemplate" render={() => <ChooseContractTemplate token={this.props.token} Sign={this.props.Sign} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} role={this.props.role} />
                     } /></Router></FadeIn>
 
             );
@@ -305,7 +305,7 @@ class ContractTable extends Component {
             return ( <FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.state.contract.id)} />
-                    <Route exact path="/capstone/viewContract/:id" render={() => <ViewContractPage contract={this.state.contract} UpdateContract={this.props.UpdateContract} Sign={this.props.Sign} token={this.props.token} role={this.props.role} />
+                    <Route exact path="/capstone/viewContract/:id" render={() => <ViewContractPage contract={this.state.contract} Sign={this.props.Sign} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} token={this.props.token} role={this.props.role} />
                     } /></Router></FadeIn>
 
             );

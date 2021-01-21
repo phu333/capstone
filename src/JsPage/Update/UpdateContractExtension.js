@@ -34,7 +34,7 @@ class UpdateContractExtension extends React.Component {
         ];
         this.state = {
 
-           
+
 
             finish: false,
 
@@ -58,12 +58,12 @@ class UpdateContractExtension extends React.Component {
             contractTitle: "",
             contractPlace: "",
             contractExpiredDate: "",
-          
+
         };
         this.onGetlink = this.onGetlink.bind(this);
         this.onEditorStateChange = this.onEditorStateChange.bind(this);
         this.onNote = this.onNote.bind(this);
-       
+
     }
     onGetlink() {
         const el = "http://localhost:3000/capstone/Contract/" + this.props.contractEx.id
@@ -142,9 +142,9 @@ class UpdateContractExtension extends React.Component {
                 this.setState({
                     customers: data.data.filter(
                         customer => customer.id === this.props.contract.customer.id
-            
-            
-            
+
+
+
                     ),
                 })
 
@@ -172,7 +172,7 @@ class UpdateContractExtension extends React.Component {
                 this.setState({
                     company: data.data
                 })
-                
+
             })
             .catch(error => {
                 console.log(error)
@@ -235,47 +235,21 @@ class UpdateContractExtension extends React.Component {
     onFinish = () => {
         console.log(this.state.company.taxCode)
         console.log(this.state.customers[0].taxCode)
-        if (this.state.company.id !== undefined) {
-            axios({
-                url: "https://localhost:44338/api/Signature/PostContract",
-                method: "POST",
-                data: {
-                    Info: this.state.company.taxCode,
-
-                }
-            })
-                .then((response) => {
-
-
-                })
-                .then((data) => {
-
-                })
-                .catch(error => {
-                    console.log(error)
-
-
-                });
-            if (this.props.contract.fileUrl === null) {
+        if (this.props.Sign === true) {
+            if (this.state.company.id !== undefined) {
                 axios({
-                    url: '/api/v1/Contract/export-docx/' + this.props.contractEx.id,
-                    method: "GET",
-                    headers: {
-                        Authorization: 'Bearer ' + this.props.token,
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/docx'
-                    },
-                    responseType: 'arraybuffer',
+                    url: "https://localhost:44338/api/Signature/PostContract",
+                    method: "POST",
+                    data: {
+                        Info: this.state.company.taxCode,
 
+                    }
                 })
                     .then((response) => {
-                        console.log(response)
-                        var fileDownload = require('js-file-download');
-                        fileDownload(response.data, this.props.contractEx.id + '.docx');
-                        return response.data;
+
+
                     })
                     .then((data) => {
-                        console.log(data.data)
 
                     })
                     .catch(error => {
@@ -283,74 +257,212 @@ class UpdateContractExtension extends React.Component {
 
 
                     });
-            } else {
-                window.open(this.props.contractEx.fileUrl, "_blank")
+                if (this.props.contract.fileUrl === null) {
+                    axios({
+                        url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
+                        method: "GET",
+                        headers: {
+                            Authorization: 'Bearer ' + this.props.token,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/docx'
+                        },
+                        responseType: 'arraybuffer',
 
+                    })
+                        .then((response) => {
+                            console.log(response)
+                            var fileDownload = require('js-file-download');
+                            fileDownload(response.data, this.props.contract.id + '.docx');
+                            return response.data;
+                        })
+                        .then((data) => {
+                            console.log(data.data)
+
+                        })
+                        .catch(error => {
+                            console.log(error)
+
+
+                        });
+                } else {
+                    axios({
+                        url: "https://localhost:44338/api/Signature/PostContract",
+                        method: "POST",
+                        data: {
+                            Info: this.state.company.taxCode,
+
+                        }
+                    })
+                        .then((response) => {
+
+
+                        })
+                        .then((data) => {
+
+                        })
+                        .catch(error => {
+                            console.log(error)
+
+
+                        });
+                    window.open(this.props.contract.fileUrl, "_blank")
+
+                }
+            } else {
+                axios({
+                    url: "https://localhost:44338/api/Signature/PostContract",
+                    method: "POST",
+                    data: {
+                        Info: this.state.customers[0].taxCode,
+
+                    }
+                })
+                    .then((response) => {
+
+
+                    })
+                    .then((data) => {
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+
+
+                    });
+                if (this.props.contract.fileUrl === null) {
+                    axios({
+                        url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
+                        method: "GET",
+                        headers: {
+                            Authorization: 'Bearer ' + this.props.token,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/docx'
+                        },
+                        responseType: 'arraybuffer',
+
+                    })
+                        .then((response) => {
+                            console.log(response)
+                            var fileDownload = require('js-file-download');
+                            fileDownload(response.data, this.props.contract.id + '.docx');
+                            return response.data;
+                        })
+                        .then((data) => {
+                            console.log(data.data)
+
+                        })
+                        .catch(error => {
+                            console.log(error)
+
+
+                        });
+                } else {
+                    axios({
+                        url: "https://localhost:44338/api/Signature/PostContract",
+                        method: "POST",
+                        data: {
+                            Info: this.state.customers[0].taxCode,
+
+                        }
+                    })
+                        .then((response) => {
+
+
+                        })
+                        .then((data) => {
+
+                        })
+                        .catch(error => {
+                            console.log(error)
+
+
+                        });
+                    window.open(this.props.contract.fileUrl, "_blank")
+
+                }
             }
+
         } else {
-            axios({
-                url: "https://localhost:44338/api/Signature/PostContract",
-                method: "POST",
-                data: {
-                    Info: this.state.customers[0].taxCode,
+            if (this.state.company.id !== undefined) {
+
+                if (this.props.contract.fileUrl === null) {
+                    axios({
+                        url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
+                        method: "GET",
+                        headers: {
+                            Authorization: 'Bearer ' + this.props.token,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/docx'
+                        },
+                        responseType: 'arraybuffer',
+
+                    })
+                        .then((response) => {
+                            console.log(response)
+                            var fileDownload = require('js-file-download');
+                            fileDownload(response.data, this.props.contract.id + '.docx');
+                            return response.data;
+                        })
+                        .then((data) => {
+                            console.log(data.data)
+
+                        })
+                        .catch(error => {
+                            console.log(error)
+
+
+                        });
+                } else {
+
+                    window.open(this.props.contract.fileUrl, "_blank")
 
                 }
-            })
-                .then((response) => {
-
-
-                })
-                .then((data) => {
-
-                })
-                .catch(error => {
-                    console.log(error)
-
-
-                });
-            if (this.props.contract.fileUrl === null) {
-                axios({
-                    url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
-                    method: "GET",
-                    headers: {
-                        Authorization: 'Bearer ' + this.props.token,
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/docx'
-                    },
-                    responseType: 'arraybuffer',
-
-                })
-                    .then((response) => {
-                        console.log(response)
-                        var fileDownload = require('js-file-download');
-                        fileDownload(response.data, this.props.contract.id + '.docx');
-                        return response.data;
-                    })
-                    .then((data) => {
-                        console.log(data.data)
-
-                    })
-                    .catch(error => {
-                        console.log(error)
-
-
-                    });
             } else {
-                window.open(this.props.contract.fileUrl, "_blank")
 
+                if (this.props.contract.fileUrl === null) {
+                    axios({
+                        url: '/api/v1/Contract/export-docx/' + this.props.contract.id,
+                        method: "GET",
+                        headers: {
+                            Authorization: 'Bearer ' + this.props.token,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/docx'
+                        },
+                        responseType: 'arraybuffer',
+
+                    })
+                        .then((response) => {
+                            console.log(response)
+                            var fileDownload = require('js-file-download');
+                            fileDownload(response.data, this.props.contract.id + '.docx');
+                            return response.data;
+                        })
+                        .then((data) => {
+                            console.log(data.data)
+
+                        })
+                        .catch(error => {
+                            console.log(error)
+
+
+                        });
+                } else {
+
+                    window.open(this.props.contract.fileUrl, "_blank")
+
+                }
             }
         }
 
 
-
     };
-   
+
     onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
     render() {
-        
-         
+
+
         console.log(this.state.customers)
         const bside = this.state.customers.map(customer => (
             <Descriptions title="" size="small" column={2} title="Thông tin bên B"
@@ -365,7 +477,7 @@ class UpdateContractExtension extends React.Component {
                 <Descriptions.Item label={(<><b>{"Địa chỉ Email"}</b></>)}>{customer.email}</Descriptions.Item>
                 <Descriptions.Item label={(<><b>{"Giấy phép kinh doanh"}</b></>)}>{customer.businessLicense}</Descriptions.Item>
                 <Descriptions.Item label={(<><b>{"Mã số thuế"}</b></>)}>{customer.taxCode}
-                
+
                 </Descriptions.Item>
                 <Descriptions.Item label={(<><b>{"Tài khoản số"}</b></>)}>{customer.bankAccount}</Descriptions.Item>
                 {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
@@ -406,41 +518,65 @@ class UpdateContractExtension extends React.Component {
             readonly: !this.state.isEdit, // all options from https://xdsoft.net/jodit/doc/
             toolbar: this.state.isEdit
         }
-       
 
 
-        
-            if (this.state.finish) {
-                return (
-                    <Router>
+
+
+        if (this.state.finish) {
+            return (
+                <Router>
                     <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.props.contract.id) + "/viewExtension"} />
-                    <Route exact path="/capstone/viewContract/:id/viewExtension" render={() => <ContractExtensionTable contract={this.props.contract}  role={this.props.role} />
+                    <Route exact path="/capstone/viewContract/:id/viewExtension" render={() => <ContractExtensionTable contract={this.props.contract} role={this.props.role} />
                     } /></Router>
-                );
-            } else {
-                return (
+            );
+        } else {
+            return (
 
-                    <div style={{ height: "100vh", fontSize: 14 }}>
-                        <Button type="primary" value="cancel" onClick={this.Cancel}>
-                            Trở về
+                <div style={{ height: "100vh", fontSize: 14 }}>
+                    <Button type="primary" value="cancel" onClick={this.Cancel}>
+                        Trở về
                             </Button>
 
-                        <Space direction="vertical" align="center" >
+                    <Space direction="vertical" align="center" >
 
-                            <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
-                                <Card bordered={false} >
-                                    <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>
-                                    <h6 style={{ textAlign: 'center', fontSize: 14 }}>Độc lập-tự do-hạnh phúc</h6>
-                                    <br />
-                                    <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}>{this.props.contract.contractName}</h2>
-                                    <h6 style={{ textAlign: 'center', fontSize: 14 }}>Số {this.props.contract.contractNum}</h6>
-                                    <h6 style={{ fontSize: 14 }}>Hôm nay, ngày 3 tháng 11 năm 2020,
+                        <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
+                            <Card bordered={false} >
+                                <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>
+                                <h6 style={{ textAlign: 'center', fontSize: 14 }}>Độc lập-tự do-hạnh phúc</h6>
+                                <br />
+                                <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}>{this.props.contract.contractName}</h2>
+                                <h6 style={{ textAlign: 'center', fontSize: 14 }}>Số {this.props.contract.contractNum}</h6>
+                                <h6 style={{ fontSize: 14 }}>Hôm nay, ngày 3 tháng 11 năm 2020,
                                     tại {this.props.contract.contractPlace}, chúng tôi gồm
                             </h6>
-                                </Card>
-                                {this.state.company.id === this.state.creator ? <Card>
+                            </Card>
+                            {this.state.company.id === this.state.creator ? <Card>
 
-                                    <Descriptions size="small" column={2} title={"Thông tin bên A"}  >
+                                <Descriptions size="small" column={2} title={"Thông tin bên A"}  >
+                                    <Descriptions.Item label={(<><b>{"Công ty/Tổ chức"}</b></>)}>{this.state.company.name}
+                                    </Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Địa chỉ"}</b></>)}>{this.state.company.address}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Điện thoại"}</b></>)}>{this.state.company.phoneNumber}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Địa chỉ Email"}</b></>)}>{this.state.company.email}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Giấy phép kinh doanh"}</b></>)}>{this.state.company.businessLicense}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Mã số thuế"}</b></>)}>{this.state.company.taxCode}</Descriptions.Item>
+                                    <Descriptions.Item label={(<><b>{"Tài khoản số"}</b></>)}>{this.state.company.bankAccount}</Descriptions.Item>
+                                    {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
+                                    <Descriptions.Item label={(<><b>{"Do ông(bà)"}</b></>)} span={2}>{this.state.company.name}</Descriptions.Item>
+
+                                    <Descriptions.Item label={(<><b>{"Chức vụ"}</b></>)} span={2}>
+                                        Giám đốc làm đại diện
+                        </Descriptions.Item>
+
+
+                                </Descriptions>
+                                {bside}
+
+
+                            </Card> :
+                                <Card>
+                                    {aside}
+                                    <Descriptions size="small" column={2} title={"Thông tin bên B"}  >
                                         <Descriptions.Item label={(<><b>{"Công ty/Tổ chức"}</b></>)}>{this.state.company.name}
                                         </Descriptions.Item>
                                         <Descriptions.Item label={(<><b>{"Địa chỉ"}</b></>)}>{this.state.company.address}</Descriptions.Item>
@@ -454,154 +590,129 @@ class UpdateContractExtension extends React.Component {
 
                                         <Descriptions.Item label={(<><b>{"Chức vụ"}</b></>)} span={2}>
                                             Giám đốc làm đại diện
-                        </Descriptions.Item>
-
-
-                                    </Descriptions>
-                                    {bside}
-
-
-                                </Card> :
-                                    <Card>
-                                        {aside}
-                                        <Descriptions size="small" column={2} title={"Thông tin bên B"}  >
-                                            <Descriptions.Item label={(<><b>{"Công ty/Tổ chức"}</b></>)}>{this.state.company.name}
-                                            </Descriptions.Item>
-                                            <Descriptions.Item label={(<><b>{"Địa chỉ"}</b></>)}>{this.state.company.address}</Descriptions.Item>
-                                            <Descriptions.Item label={(<><b>{"Điện thoại"}</b></>)}>{this.state.company.phoneNumber}</Descriptions.Item>
-                                            <Descriptions.Item label={(<><b>{"Địa chỉ Email"}</b></>)}>{this.state.company.email}</Descriptions.Item>
-                                            <Descriptions.Item label={(<><b>{"Giấy phép kinh doanh"}</b></>)}>{this.state.company.businessLicense}</Descriptions.Item>
-                                            <Descriptions.Item label={(<><b>{"Mã số thuế"}</b></>)}>{this.state.company.taxCode}</Descriptions.Item>
-                                            <Descriptions.Item label={(<><b>{"Tài khoản số"}</b></>)}>{this.state.company.bankAccount}</Descriptions.Item>
-                                            {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
-                                            <Descriptions.Item label={(<><b>{"Do ông(bà)"}</b></>)} span={2}>{this.state.company.name}</Descriptions.Item>
-
-                                            <Descriptions.Item label={(<><b>{"Chức vụ"}</b></>)} span={2}>
-                                                Giám đốc làm đại diện
                     </Descriptions.Item>
 
 
-                                        </Descriptions>
+                                    </Descriptions>
 
 
 
-                                    </Card>
-                                }
+                                </Card>
+                            }
 
-                            </Space>
-                            <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
-                                Giá trị hợp đồng:{this.props.contract.contractValue}
-                                <JoditEditor
+                        </Space>
+                        <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
+                            Giá trị hợp đồng:{this.props.contract.contractValue}
+                            <JoditEditor
 
-                                    value={this.props.contract.contractContent}
-                                    config={config}
-                                    tabIndex={1} // tabIndex of textarea
+                                value={this.props.contract.contractContent}
+                                config={config}
+                                tabIndex={1} // tabIndex of textarea
 
 
-                                />
-                            </Space>
-                            <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
-                                <Card>
+                            />
+                        </Space>
+                        <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
+                            <Card>
 
-                                    <Form
+                                <Form
 
-                                        name="basic"
-                                        className="lcontract-form"
+                                    name="basic"
+                                    className="lcontract-form"
 
-                                        onFinish={this.onFinish}
-                                        onFinishFailed={this.onFinishFailed}
+                                    onFinish={this.onFinish}
+                                    onFinishFailed={this.onFinishFailed}
 
-                                    >
-                                       <h6 style={{ fontSize: 14 }}>Hợp đồng có hiệu lực kể từ ngày(Sẽ hiển thị khi hợp đồng có hiệu lực) đến
+                                >
+                                    <h6 style={{ fontSize: 14 }}>Hợp đồng có hiệu lực kể từ ngày(Sẽ hiển thị khi hợp đồng có hiệu lực) đến
                                         <input
-                                                type="text"
-                                                onChange={value => this.setState({
-                                                    contractExpiredDate: value.target.value
-                                                })}
-                                            />
-                                        </h6>
-                                        <Space direction="vertical" align="start" style={{ backgroundColor: "white" }} >
-                                <Card>
+                                            type="text"
+                                            onChange={value => this.setState({
+                                                contractExpiredDate: value.target.value
+                                            })}
+                                        />
+                                    </h6>
+                                    <Space direction="vertical" align="start" style={{ backgroundColor: "white" }} >
+                                        <Card>
 
-                                    <Form
+                                            <Form
 
-                                        name="basic"
-                                        className="lcontract-form"
+                                                name="basic"
+                                                className="lcontract-form"
 
-                                        onFinish={this.onFinish}
-                                        onFinishFailed={this.onFinishFailed}
+                                                onFinish={this.onFinish}
+                                                onFinishFailed={this.onFinishFailed}
 
-                                    >
-                                        Giá trị hợp đồng:<input disabled={!this.state.isEdit} defaultValue={this.props.contract.contractValue} type="text" pattern="[0-9]*" prefix="VND"
-                                            onInput={this.handleValue} /> x1000 VNĐ
+                                            >
+                                                Giá trị hợp đồng:<input disabled={!this.state.isEdit} defaultValue={this.props.contract.contractValue} type="text" pattern="[0-9]*" prefix="VND"
+                                                    onInput={this.handleValue} /> x1000 VNĐ
                                         <h6 style={{ fontSize: 14 }}>Hợp đồng có hiệu lực kể từ ngày 3 tháng 11 năm 2020 đến
                                         <input defaultValue={this.props.contract.contractExpiredDate}
-                                                disabled={!this.state.isEdit}
-                                                type="text"
-                                                onChange={value => this.setState({
-                                                    contractExpiredDate: value.target.value
-                                                })}
-                                            />
+                                                        disabled={!this.state.isEdit}
+                                                        type="text"
+                                                        onChange={value => this.setState({
+                                                            contractExpiredDate: value.target.value
+                                                        })}
+                                                    />
 
-                                        </h6>
-                                        <Space size="large">
+                                                </h6>
+                                                <Space size="large">
 
 
-                                            <Button type="primary" value="Sign" onClick={this.onFinish}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
+                                                    <Button type="primary" value="Sign" onClick={this.onFinish}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
                                                         Tải về
                                                     </Button>
-                                            <CopyToClipboard text={"http://localhost:3000/capstone/Contract/" + this.props.contractEx.id}
-                                                onCopy={() => message.success("copied")}>
-                                                <Button type="primary">lấy link</Button>
-                                            </CopyToClipboard>
-
-                                            {this.props.role === true ? <Button type="primary" value="reject">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
+                                                    <CopyToClipboard text={"http://localhost:3000/capstone/Contract/" + this.props.contractEx.id}
+                                                        onCopy={() => message.success("copied")}>
+                                                        <Button type="primary">lấy link</Button>
+                                                    </CopyToClipboard>
+                                                    {this.props.Sign === true ? <Button type="primary" value="reject">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
                                                             Reject
                                                         </Button> : null}
-                                          
-                                            <Button type="primary" value="update" onClick={this.onEdit}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
+
+                                                    {this.props.contract.statusAsString === "Draft" && this.props.UpdateContract === true ? <Button type="primary" value="update" onClick={this.onEdit}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
                                                         Chỉnh sửa
-                                                    </Button>
-                                            {this.state.isEdit === true ? <Button type="primary" value="update" onClick={this.onUpdate}>{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
+                                                    </Button> : null}
+                                                    {this.state.isEdit === true ? <Button type="primary" value="update" onClick={this.onUpdate}>{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
                                                             nộp
                                                         </Button> : null}
-                                        </Space>
+                                                </Space>
 
-                                    </Form>
+                                            </Form>
 
-                                </Card>
-                            </Space>
-                            <Space direction="vertical" align="start" style={{ backgroundColor: "white" }} >
-                                <Card>
-                                    <TextArea rows={4} disabled={this.state.isNote} defaultValue={this.props.contract.note} onInput={
-                                        (values) => {
-                                            this.setState({
-                                                note: values.target.value
-                                            })
-                                        }
-                                    } />
-                                    <Button type="primary" value="Sign" onClick={() => {
-                                        this.setState({
-                                            isNote: !this.state.isNote
-                                        })
-                                    }}>
-                                        Viết biên bản
+                                        </Card>
+                                    </Space>
+                                    <Space direction="vertical" align="start" style={{ backgroundColor: "white" }} >
+                                        <Card>
+                                            <TextArea rows={4} disabled={this.state.isNote} defaultValue={this.props.contract.note} onInput={
+                                                (values) => {
+                                                    this.setState({
+                                                        note: values.target.value
+                                                    })
+                                                }
+                                            } />
+                                            <Button type="primary" value="Sign" onClick={() => {
+                                                this.setState({
+                                                    isNote: !this.state.isNote
+                                                })
+                                            }}>
+                                                Viết biên bản
                                                     </Button>
-                                    {this.state.isNote === false ? <Button type="primary" value="Submit" onClick={this.onNote}>
-                                        Nộp
+                                            {this.state.isNote === false ? <Button type="primary" value="Submit" onClick={this.onNote}>
+                                                Nộp
                                                     </Button> : null}
-                                </Card>
-                            </Space>
-                                    </Form>
+                                        </Card>
+                                    </Space>
+                                </Form>
 
-                                </Card>
-                            </Space>
+                            </Card>
                         </Space>
-                    </div>
+                    </Space>
+                </div>
 
-                );
-            }
-        
+            );
+        }
+
 
 
 
