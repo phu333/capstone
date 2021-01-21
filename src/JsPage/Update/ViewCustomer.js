@@ -57,6 +57,7 @@ class ViewCustomer extends React.Component {
                     isEdit: false
                 })
             })
+
             .catch(error => {
                 message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
 
@@ -105,7 +106,7 @@ class ViewCustomer extends React.Component {
                     {...layout}
                     name="basic"
                     className="employee-form"
-
+                    hideRequiredMark
                     onFinish={this.onFinish}
                     onFinishFailed={this.onFinishFailed}
 
@@ -200,7 +201,7 @@ class ViewCustomer extends React.Component {
                     <Form.Item {...tailLayout}>
                         <Space size="large">
                             {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
-                                Tạo
+                                Sửa
                             </Button> : null}
                             {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
                                 Reset
@@ -240,7 +241,7 @@ var mapStateToProps = state => {
 
     console.log(state.myLoginReducer)
     return {
-      myLoginReducer: state.myLoginReducer
+        myLoginReducer: state.myLoginReducer
     }
-  }
+}
 export default connect(mapStateToProps, mapDispatchToProps)(ViewCustomer);
