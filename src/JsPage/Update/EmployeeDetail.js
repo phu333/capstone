@@ -44,7 +44,11 @@ class EmployeeDetail extends React.Component {
         super();
         this.state = {
             finish: false,
-
+            signPermission:false,
+            employeePermission:false,
+            contractPermission:false,
+            customerPermission:false,
+            companyInfoPermission:false,
         };
         this.onFinish = this.onFinish.bind(this);
         this.onFinishFailed = this.onFinishFailed.bind(this);
@@ -55,6 +59,11 @@ class EmployeeDetail extends React.Component {
             firstname:values.name,
             lastname :values.name,
             email:values.Email,
+            signPermission:this.state.signPermission,
+            employeePermission:this.state.employeePermission,
+            contractPermission:this.state.contractPermission,
+            customerPermission:this.state.customerPermission,
+            companyInfoPermission:this.state.companyInfoPermission,
             password:"123",
             confirmPassword:"123"
         }
