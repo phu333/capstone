@@ -41,7 +41,7 @@ class SignatureList extends React.Component {
                 },
             })
                 .then((response) => {
-        
+                    console.log(response)
                     return response.data;
                 })
                 .then((data) => {
@@ -50,8 +50,8 @@ class SignatureList extends React.Component {
                             loading:false,
                             
                         })
-                        this.props.onSubmit(data.data)
-        
+                         this.props.onSubmit(data)
+                        
                     }.bind(this),5000)
                    
                 })

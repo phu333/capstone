@@ -158,7 +158,7 @@ class TemplateView extends React.Component {
             return (<FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/ContractType"} />
-                    <Route exact path="/capstone/ContractType" render={() => <ContractTypeTable ActiveDeactiveTemplate={this.props.ActiveDeactiveTemplate} UpdateTemplate={this.props.UpdateTemplate} CreateTemplate={this.props.CreateTemplate} token={this.props.jwToken} role={this.props.role} />} /></Router>
+                    <Route exact path="/capstone/ContractType" render={() => <ContractTypeTable ActiveDeactiveTemplate={this.props.ActiveDeactiveTemplate} UpdateTemplate={this.props.UpdateTemplate} CreateTemplate={this.props.CreateTemplate} token={this.props.token} role={this.props.role} />} /></Router>
             </FadeIn>
             );
         } else {
@@ -177,6 +177,8 @@ class TemplateView extends React.Component {
                                 <br />
                                 <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}><Input
                                     defaultValue={this.state.contractName}
+                                    value={this.props.template.name}
+                                    disabled={this.state.isEdit}
                                     onChange={(e) => { this.nameChange(e.target.value) }} style={{ width: "100px" }} size="small" /></h2>
                                 <h6 style={{ textAlign: 'center', fontSize: 14, fontWeight: "bold" }}>Số.../...</h6>
                                 <h6 style={{ fontSize: 14, fontWeight: "bold" }}>Hôm nay, ngày...tháng...năm....,

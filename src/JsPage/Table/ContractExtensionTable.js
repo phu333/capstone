@@ -24,7 +24,7 @@ class ContractExtensionTable extends React.Component {
             contractsCreate: [],
             contractsReciceve: [],
             contractsTotal: [],
-            ompany: {},
+            company: {},
             finish: false,
             loading: false,
         };
