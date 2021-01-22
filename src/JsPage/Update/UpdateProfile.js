@@ -299,27 +299,7 @@ class UpdateProfile extends React.Component {
                                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                         </Popover></Row>}
                                 </Form.Item>
-                                <Form.Item
-                                    label="Chức vụ"
-                                    name="role"
-                                    required
-                                >
-
-                                    {this.state.isEdit === false ?
-                                        <Row gutter={8}> <Col span={20}>
-                                            {login.role === 2 ? <Input disabled defaultValue="giám đốc" /> :
-                                                <Input disabled defaultValue="nhân viên" />}
-                                        </Col>    <Popover content={ValidationRole} trigger="hover">
-                                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                            </Popover></Row>
-                                        : <Row gutter={8}> <Col span={20}>
-                                            <Select>
-                                                <Select.Option value={2}>giám đốc</Select.Option>
-                                                <Select.Option value={3}>nhân viên</Select.Option>
-                                            </Select></Col>    <Popover content={ValidationRole} trigger="hover">
-                                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                            </Popover></Row>
-                                    }</Form.Item>
+                                
 
 
 
@@ -338,10 +318,7 @@ class UpdateProfile extends React.Component {
 
                                     </Space>
                                 </Form.Item>
-               -                 <Form.Item>
-
-                                </Form.Item>
-
+                            
 
 
 
