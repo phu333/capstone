@@ -322,7 +322,7 @@ class ContractExtensionTable extends React.Component {
             return (<FadeIn>
                 <div >
                     {this.props.ismycontract && this.props.CreateContract === true ? <Space size="large">
-                        <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContractExtension}>Tạo hợp đồng</Button>
+                        <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContractExtension}>Tạo phụ lục hợp đồng</Button>
                         
                     </Space> : null}
                     <Button type="primary" value="cancel" onClick={this.Cancel}>
