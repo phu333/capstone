@@ -165,7 +165,7 @@ class EmployeeSideMenu extends React.Component {
                     {this.state.showComponent === "CustomerList" ?
                       <Router>
                         <Redirect push to={"/capstone/" + this.state.showComponent} />
-                        <Route exact path="/capstone/CustomerList" render={() => <CustomerTable token={login.jwToken} role={login.role} />} />
+                        <Route exact path="/capstone/CustomerList" render={() => <CustomerTable ActiveDeactiveCustomer={login.ActiveDeactiveCustomer} AddCustomer={login.AddCustomer} UpdateCustomer={login.UpdateCustomer} token={login.jwToken} role={login.role} />} />
                       </Router>
                       : null}
                     {this.state.showComponent === "Contract" ?
@@ -176,15 +176,15 @@ class EmployeeSideMenu extends React.Component {
                     {this.state.showComponent === "ContractType" ?
                       <Router>
                         <Redirect push to={"/capstone/" + this.state.showComponent} />
-                        <Route exact path="/capstone/ContractType" render={() => <ContractTypeTable token={login.jwToken} role={login.role} />} /></Router> : null}
+                        <Route exact path="/capstone/ContractType" render={() => <ContractTypeTable ActiveDeactiveTemplate={login.ActiveDeactiveTemplate} UpdateTemplate={login.UpdateTemplate} CreateTemplate={login.CreateTemplate} token={login.jwToken} role={login.role} />} /></Router> : null}
                     {this.state.showComponent === "Employee" ?
                       <Router>
                         <Redirect push to={"/capstone/" + this.state.showComponent} />
-                        <Route exact path="/capstone/Employee" render={() => <EmployeeTable token={login.jwToken} role={login.role} />} /></Router> : null}
+                        <Route exact path="/capstone/Employee" render={() => <EmployeeTable ActiveDeactiveAccount={login.ActiveDeactiveAccount} UpdateAccountPermission={login.UpdateAccountPermission} token={login.jwToken} role={login.role} />} /></Router> : null}
                     {this.state.showComponent === "SignatureList" ?
                       <Router>
                         <Redirect push to={"/capstone/" + this.state.showComponent} />
-                        <Route exact path="/capstone/SignatureList" render={() => <SignatureList token={login.jwToken} role={login.role} />} /></Router> : null}
+                        <Route exact path="/capstone/SignatureList" render={() => <SignatureList ActiveDeactiveSignature={login.ActiveDeactiveSignature} UpdateSignature={login.UpdateSignature} CreateSignature={login.CreateSignature} token={login.jwToken} role={login.role} />} /></Router> : null}
                     {this.state.showComponent === "CompanyProfile" ?
                       <Router>
                         <Redirect push to={"/capstone/" + this.state.showComponent} />
@@ -194,9 +194,7 @@ class EmployeeSideMenu extends React.Component {
                       <Redirect push to={"/capstone/" + this.state.showComponent} />
                       <Route exact path="/capstone/Profile" render={() => <UpdateProfile token={login.jwToken} role={login.role} />} /></Router> : null}
 
-                  </> : <Router>
-                      <Redirect push to={"/capstone/" + this.state.showComponent} />
-                      <Route exact path="/capstone/CompanyProfile" render={() => <AddCompany token={login.jwToken} role={login.role} />} /></Router>}
+                  </> : null}
 
 
 

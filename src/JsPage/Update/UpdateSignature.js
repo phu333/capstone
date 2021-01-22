@@ -1,10 +1,10 @@
 import React from 'react';
-
+import axios from 'axios'
 import 'antd/dist/antd.css';
 import '../../index.css';
 import { createSignature, signatureInformation } from '../../actions/SignatureAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Card, Space, DatePicker } from 'antd';
+import { Form, Input, Button, Card, Space, DatePicker,message } from 'antd';
 import {
     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined
@@ -43,9 +43,29 @@ class UpdateSignature extends React.Component {
     }
     onFinish = (values) => {
         console.log(values);
-        this.setState({
-            isEdit: false
+        axios({
+            url: '/api/DigitalSignature/' + this.props.signature.id,
+            method: "PUT",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
+
+            },
+            data: values
         })
+            .then((response) => {
+
+                return response.data;
+            })
+            .then((data) => {
+                message.success("thông tin chỉnh sửa thành công")
+                this.setState({
+                    isEdit: false
+                })
+            })
+            .catch(error => {
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
+
+            });
 
 
 
@@ -72,7 +92,7 @@ class UpdateSignature extends React.Component {
         if (this.state.finish) {
             return (<Router>
                 <Redirect push to={"/capstone/signatureList" } />
-                <Route exact path="/capstone/signatureList" component={SignatureList} /></Router>);
+                <Route exact path="/capstone/signatureList" render={() => <SignatureList ActiveDeactiveSignature={this.props.ActiveDeactiveSignature} UpdateSignature={this.props.UpdateSignature} CreateSignature={this.props.CreateSignature} token={this.props.token} />} /></Router>);
         } else {
 
             return (
@@ -140,13 +160,13 @@ class UpdateSignature extends React.Component {
                             <Form.Item {...tailLayout}>
                                 <Space size="large">
                                     {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
-                                        Tạo
+                                        Nộp
                             </Button> : null}
                                     {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
                                         Reset
                             </Button> : null}
 
-                                    {this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
+                                    {this.state.isEdit === false && this.props.UpdateSignature ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
                                         Sửa
                             </Button> : null}
 

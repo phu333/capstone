@@ -21,7 +21,7 @@ class SignatureList extends React.Component {
 
         this.state = {
 
-            
+            loading:true,
             openSignature: "",
             signature:{},
 
@@ -31,7 +31,7 @@ class SignatureList extends React.Component {
     }
     componentDidMount() {
 
-        if (this.props.newSignature.length === 0) {
+       
             axios({
                 url: '/api/DigitalSignature',
                 method: "GET",
@@ -41,13 +41,19 @@ class SignatureList extends React.Component {
                 },
             })
                 .then((response) => {
-        
+                    console.log(response)
                     return response.data;
                 })
                 .then((data) => {
-        
-                    this.props.onSubmit(data.data)
-        
+                    setTimeout(function(){
+                        this.setState({
+                            loading:false,
+                            
+                        })
+                         this.props.onSubmit(data)
+                        
+                    }.bind(this),5000)
+                   
                 })
                 .catch(error => {
         
@@ -59,7 +65,7 @@ class SignatureList extends React.Component {
             
             
 
-        }
+        
 
     }
     OpenAddSignature() {
@@ -74,22 +80,25 @@ class SignatureList extends React.Component {
             return (<FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/addSignature"} />
-                    <Route exact path="/capstone/addSignature" component={AddSignature} /></Router></FadeIn>
+                    <Route exact path="/capstone/addSignature" render={() => <AddSignature ActiveDeactiveSignature={this.props.ActiveDeactiveSignature} UpdateSignature={this.props.UpdateSignature} CreateSignature={this.props.CreateSignature} token={this.props.token} />} /></Router></FadeIn>
             );
         } else if (this.state.openSignature === "openViewSignature") {
             return (<FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/updateSignature/" + this.state.signature.serial} />
-                    <Route exact path="/capstone/updateSignature/:id" render={() => <UpdateSignature signature={this.state.signature} />} />
+                    <Route exact path="/capstone/updateSignature/:id" render={() => <UpdateSignature ActiveDeactiveSignature={this.props.ActiveDeactiveSignature} UpdateSignature={this.props.UpdateSignature} CreateSignature={this.props.CreateSignature} token={this.props.token} signature={this.state.signature} />} />
 
                 </Router></FadeIn>
             );
         }
         else {
             return (<FadeIn>
-                <div style={{ height: "100vh" }}><Button type="primary" onClick={this.OpenAddSignature} icon={<UserAddOutlined />}>Thêm chữ ký mới</Button>
+                <div style={{ height: "100vh" }}>
+                    {this.props.CreateSignature ?<Button type="primary" onClick={this.OpenAddSignature} icon={<UserAddOutlined />}>Thêm chữ ký mới</Button> :null}
+                    
                     <SignatureSearch token={this.props.token} SignatureList={this.props.newSignature}/>
                     <Table dataSource={this.props.newSignature}
+                    loading={this.state.loading}
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
 
                        
@@ -176,7 +185,7 @@ var mapStateToProps = state => {
 
 
     return {
-        newSignature: state.mySignatureReducer
+        newSignature: state.mySignatureReducer,
     }
 
 

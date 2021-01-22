@@ -102,19 +102,24 @@ class TemplateUpload extends React.Component {
             })
             .then((data) => {
 
-                message.success("tao thanh cong")
+                message.success("taọ thành công")
                 this.setState({
                     finish: true
                 })
 
             })
             .catch(error => {
-
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
 
 
             });
 
     };
+    Cancel = () => {
+        this.setState({
+            finish: true
+        })
+    }
     render() {
         const config = {
             readonly: false // all options from https://xdsoft.net/jodit/doc/
@@ -122,9 +127,8 @@ class TemplateUpload extends React.Component {
         if (this.state.finish) {
             return (
                 <Router>
-                    <Redirect push to={'/capstone/contractType'} />
-                    <Route exact path='/capstone/contractType' render={() => <ContractTypeTable token={this.props.token} role={this.props.role} />
-                    } /></Router>
+                <Redirect push to={"/capstone/ContractType"} />
+                <Route exact path="/capstone/ContractType" render={() => <ContractTypeTable ActiveDeactiveTemplate={this.props.ActiveDeactiveTemplate} UpdateTemplate={this.props.UpdateTemplate} CreateTemplate={this.props.CreateTemplate} token={this.props.token} role={this.props.role} />} /></Router>
             );
         } else {
 

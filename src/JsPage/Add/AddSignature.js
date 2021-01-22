@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { createSignature, signatureInformation } from '../../actions/SignatureAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Card, Space, DatePicker,message,Row,Col,Popover } from 'antd';
+import { Form, Input, Button, Card, Space, DatePicker, message, Row, Col, Popover } from 'antd';
 import {
     QuestionCircleOutlined
 } from '@ant-design/icons';
@@ -52,37 +52,64 @@ class AddSignature extends React.Component {
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
-        
-        this.setState({
-            finish: true
-        })
 
+        
         axios({
-            url: '',
-            method: "POST",
-            data: values
+            url: '/api/v1/Company/info',
+            method: "PUT",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
+
+            }
         })
             .then((response) => {
 
                 return response.data;
             })
             .then((data) => {
+                console.log(data.data)
+                let signatureInfo={
+                    serialNumber:values.serial,
+                    expirationDate:values.expiredDate,
+                    companyId:data.data.id,
+                    company:{}
+                }
+                axios({
+                    url: '/api/DigitalSignature',
+                    method: "POST",
+                    headers: {
+                        Authorization: "Bearer " + this.props.token,
 
-                
+                    },
+                    data: signatureInfo
+                })
+                    .then((response) => {
+
+                        return response.data;
+                    })
+                    .then((data) => {
+                        setTimeout(function(){
+                            this.setState({
+                                finish: true
+                            })
+                        }.bind(this),5000)
+                        message.success("taọ thành công")
+
+
+                    })
+                    .catch(error => {
+                        message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
+                        console.log(error)
+
+                    });
+
 
             })
             .catch(error => {
+                console.log(error)
 
-                if (error.response.status === 500) {
-                    message.error(error.response.status + ' Server under maintainence');
-                } else if (error.response.status === 404) {
-                    message.error(error.response.status + ' Server not found');
-                }
 
             });
-
-
-
 
     };
 
@@ -99,8 +126,8 @@ class AddSignature extends React.Component {
 
         if (this.state.finish) {
             return (<Router>
-                <Redirect push to={"/capstone/signatureList" } />
-                <Route exact path="/capstone/signatureList" component={SignatureList} /></Router>);
+                <Redirect push to={"/capstone/signatureList"} />
+                <Route exact path="/capstone/signatureList" render={() => <SignatureList ActiveDeactiveSignature={this.props.ActiveDeactiveSignature} UpdateSignature={this.props.UpdateSignature} CreateSignature={this.props.CreateSignature} token={this.props.token} />} /></Router>);
         } else {
             return (
                 <div >
@@ -122,7 +149,7 @@ class AddSignature extends React.Component {
 
                             <Form.Item
                                 label="Số serial"
-                                name="name"
+                                name="serial"
                                 rules={[
                                     {
                                         required: true,
@@ -131,30 +158,17 @@ class AddSignature extends React.Component {
                                 ]}
                             >
                                 <Row gutter={8}> <Col span={20}><Input placeholder="Số serial" /> </Col>    <Popover content={ValidationSeri} trigger="hover">
-                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                        </Popover></Row>
+                                    <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                </Popover></Row>
                             </Form.Item>
+                           
                             <Form.Item
-                                label="Nhà cung cấp"
-                                name="name"
+                                label="Ngày hết hạn"
+                                name="expiredDate"
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Vui lòng nhập Nhà cung cấp ',
-                                    },
-                                ]}
-                            >
-                                <Row gutter={8}> <Col span={20}><Input placeholder="Nhà cung cấp" /> </Col>    <Popover content={ValidationSup} trigger="hover">
-                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                        </Popover></Row>
-                            </Form.Item>
-                            <Form.Item
-                                label="Thời hạn"
-                                name="phone"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Thời hạn',
+                                        message: 'Vui lòng nhập Ngày hết hạn',
                                     },
                                 ]}
                             >
@@ -164,8 +178,8 @@ class AddSignature extends React.Component {
                                     onChange={this.onChange}
                                     onOk={this.onOk}
                                 /> </Col>    <Popover content={ValidationDate} trigger="hover">
-                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                            </Popover></Row>
+                                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>
                             </Form.Item>
 
 

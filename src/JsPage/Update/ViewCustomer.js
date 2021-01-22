@@ -11,6 +11,7 @@ import {
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { updateCustomer } from '../../actions/CustomerAction';
+import CustomerTable from '../Table/CustomerTable'
 const layout = {
     labelCol: {
         span: 4,
@@ -39,7 +40,7 @@ class ViewCustomer extends React.Component {
     }
     onFinish = (values) => {
         axios({
-            url: '/api/v1/Company/' + this.state.company.id,
+            url: '/api/v1/Customer/' + this.props.customer.id,
             method: "PUT",
             headers: {
                 Authorization: 'Bearer ' + this.props.token,
@@ -51,19 +52,18 @@ class ViewCustomer extends React.Component {
 
                 return response.data;
             })
+            .then((data) => {
+                message.success("thông tin chỉnh sửa thành công")
+                this.setState({
+                    isEdit: false
+                })
+            })
 
             .catch(error => {
-                console.log(error)
-                if (error.response.status === 500) {
-                    message.error(error.response.status + ' Server under maintainence');
-                } else if (error.response.status === 404) {
-                    message.error(error.response.status + ' Server not found');
-                }
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
 
             });
-        this.setState({
-            isEdit: false
-        })
+
 
 
 
@@ -82,7 +82,11 @@ class ViewCustomer extends React.Component {
         console.log('Failed:', errorInfo);
     };
 
-
+    Cancel = () => {
+        this.setState({
+            finish: true
+        })
+    }
     render() {
         console.log(this.props.customer)
         var ButtonFix = this.props.myLoginReducer.map((login, index) => {
@@ -95,98 +99,106 @@ class ViewCustomer extends React.Component {
                         : null
                 }</div>)
         })
-        return (
-            <Card>
-                <br />
-                <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
-                    Trở về
+        if (this.state.finish) {
+            return (<Router>
+                <Redirect push to={"/capstone/customerList"} />
+                <Route exact path="/capstone/customerList" render={() => <CustomerTable token={this.props.token} role={this.props.role} />
+                } />
+            </Router>);
+        }
+        else {
+            return (
+                <Card>
+                    <br />
+                    <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
+                        Trở về
               </Button>
-                <h2 style={{ textAlign: 'center' }}>Thông tin khách hàng</h2>
+                    <h2 style={{ textAlign: 'center' }}>Thông tin khách hàng</h2>
 
-                <Form
-                    {...layout}
-                    name="basic"
-                    className="employee-form"
-                    hideRequiredMark
-                    onFinish={this.onFinish}
-                    onFinishFailed={this.onFinishFailed}
-
-                >
-
-                    <Form.Item
-                        label="Tên doanh nghiệp"
-                        name="name"
+                    <Form
+                        {...layout}
+                        name="basic"
+                        className="employee-form"
+                        hideRequiredMark
+                        onFinish={this.onFinish}
+                        onFinishFailed={this.onFinishFailed}
 
                     >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue={this.props.customer.name} /> :
-                            <Input defaultValue={this.props.customer.name} />}
-                    </Form.Item>
-                    <Form.Item
-                        label="Mã số thuế"
-                        name="taxCode"
 
-                    >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue={this.props.customer.taxCode} /> :
-                            <Input defaultValue={this.props.customer.taxCode} />}
-                    </Form.Item>
+                        <Form.Item
+                            label="Tên doanh nghiệp"
+                            name="name"
 
-                    <Form.Item
-                        label="Giấy phép kinh doanh"
-                        name="businessLicense"
+                        >
+                            {this.state.isEdit === false ?
+                                <Input disabled defaultValue={this.props.customer.name} /> :
+                                <Input defaultValue={this.props.customer.name} />}
+                        </Form.Item>
+                        <Form.Item
+                            label="Mã số thuế"
+                            name="taxCode"
 
-                    >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue={this.props.customer.businessLicense} /> :
-                            <Input defaultValue={this.props.customer.businessLicense} />}
-                    </Form.Item>
-                    <Form.Item
-                        label="Điện thoại"
-                        name="phoneNumber"
+                        >
+                            {this.state.isEdit === false ?
+                                <Input disabled defaultValue={this.props.customer.taxCode} /> :
+                                <Input defaultValue={this.props.customer.taxCode} />}
+                        </Form.Item>
 
-                    >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue={this.props.customer.phoneNumber} /> :
-                            <Input defaultValue={this.props.customer.phoneNumber} />}
-                    </Form.Item>
-                    <Form.Item
-                        label="Địa chỉ"
-                        name="address"
+                        <Form.Item
+                            label="Giấy phép kinh doanh"
+                            name="businessLicense"
 
-                    >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue={this.props.customer.address} /> :
-                            <Input defaultValue={this.props.customer.address} />}
-                    </Form.Item>
-                    <Form.Item
-                        label="Email"
-                        name="email"
+                        >
+                            {this.state.isEdit === false ?
+                                <Input disabled defaultValue={this.props.customer.businessLicense} /> :
+                                <Input defaultValue={this.props.customer.businessLicense} />}
+                        </Form.Item>
+                        <Form.Item
+                            label="Điện thoại"
+                            name="phoneNumber"
 
-                    >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue={this.props.customer.email} /> :
-                            <Input defaultValue={this.props.customer.email} />}
-                    </Form.Item>
-                    <Form.Item
-                        label="Số tài khoản"
-                        name="bankAccount"
+                        >
+                            {this.state.isEdit === false ?
+                                <Input disabled defaultValue={this.props.customer.phoneNumber} /> :
+                                <Input defaultValue={this.props.customer.phoneNumber} />}
+                        </Form.Item>
+                        <Form.Item
+                            label="Địa chỉ"
+                            name="address"
 
-                    >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue={this.props.customer.bankAccount} /> :
-                            <Input defaultValue={this.props.customer.bankAccount} />}
-                    </Form.Item>
-                    <Form.Item
-                        label="Người đại diện"
-                        name="role"
+                        >
+                            {this.state.isEdit === false ?
+                                <Input disabled defaultValue={this.props.customer.address} /> :
+                                <Input defaultValue={this.props.customer.address} />}
+                        </Form.Item>
+                        <Form.Item
+                            label="Email"
+                            name="email"
 
-                    >
-                        {this.state.isEdit === false ?
-                            <Input disabled defaultValue="Nguyen Van B" /> :
-                            <Input defaultValue="Nguyen Van B" />}
-                    </Form.Item>
-                    {/* <Form.Item
+                        >
+                            {this.state.isEdit === false ?
+                                <Input disabled defaultValue={this.props.customer.email} /> :
+                                <Input defaultValue={this.props.customer.email} />}
+                        </Form.Item>
+                        <Form.Item
+                            label="Số tài khoản"
+                            name="bankAccount"
+
+                        >
+                            {this.state.isEdit === false ?
+                                <Input disabled defaultValue={this.props.customer.bankAccount} /> :
+                                <Input defaultValue={this.props.customer.bankAccount} />}
+                        </Form.Item>
+                        <Form.Item
+                            label="Người đại diện"
+                            name="role"
+
+                        >
+                            {this.state.isEdit === false ?
+                                <Input disabled defaultValue="Nguyen Van B" /> :
+                                <Input defaultValue="Nguyen Van B" />}
+                        </Form.Item>
+                        {/* <Form.Item
                         label="Chức vụ"
                         name="role"
                         
@@ -199,38 +211,38 @@ class ViewCustomer extends React.Component {
 
 
 
-                    <Form.Item {...tailLayout}>
-                        <Space size="large">
-                            {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
-                                Sửa
+                        <Form.Item {...tailLayout}>
+                            <Space size="large">
+                                {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
+                                    Sửa
                             </Button> : null}
-                            {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
-                                Reset
+                                {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
+                                    Reset
                             </Button> : null}
-                            {ButtonFix}
+                                {ButtonFix}
 
 
 
-                        </Space>
-                    </Form.Item>
-                    <Form.Item>
+                            </Space>
+                        </Form.Item>
+                        <Form.Item>
 
-                    </Form.Item>
-
-
-
-
-                </Form>
+                        </Form.Item>
 
 
 
 
-            </Card >
-        );
+                    </Form>
+
+
+
+
+                </Card >
+            );
+        }
+
     }
-
 }
-
 var mapDispatchToProps = (dispatch, props) => {
     return {
         onSubmit: (token) => {

@@ -19,9 +19,11 @@ class ContractTable extends React.Component {
     super();
 
     this.state = {
+      loading: true,
       showTemplateCreate: false,
       viewTemplate: false,
       templateList: [],
+      template: {},
     };
     this.handleChange = this.handleChange.bind(this);
 
@@ -51,7 +53,14 @@ class ContractTable extends React.Component {
         this.setState({
           templateList: data.data
         })
-        this.props.onSubmit(data.data)
+        setTimeout(function () {
+          this.setState({
+            loading: false,
+
+          })
+          this.props.onSubmit(data.data)
+
+        }.bind(this), 5000)
       })
       .catch(error => {
 
@@ -62,29 +71,22 @@ class ContractTable extends React.Component {
 
   }
   render() {
-    
+
 
     if (this.state.showTemplateCreate) {
       return (<FadeIn>
         <Router>
           <Redirect push to={"/capstone/uploadTemplate"} />
-          <Route exact path="/capstone/uploadTemplate" render={() => <TemplateUpload token={this.props.token} role={this.props.role} />} /></Router>
+          <Route exact path="/capstone/uploadTemplate" render={() => <TemplateUpload ActiveDeactiveTemplate={this.props.ActiveDeactiveTemplate} UpdateTemplate={this.props.UpdateTemplate} CreateTemplate={this.props.CreateTemplate} token={this.props.token} role={this.props.role} />} /></Router>
       </FadeIn>
       );
-    } else if (this.state.showTemplateCreate) {
+    } else if (this.state.viewTemplate) {
       return (<FadeIn>
         <Router>
           <Redirect push to={"/capstone/viewTemplate"} />
-          <Route exact path="/capstone/viewTemplate" render={() => <ViewTemplate token={this.props.token} role={this.props.role} />} /></Router>
+          <Route exact path="/capstone/viewTemplate" render={() => <ViewTemplate ActiveDeactiveTemplate={this.props.ActiveDeactiveTemplate} UpdateTemplate={this.props.UpdateTemplate} CreateTemplate={this.props.CreateTemplate} template={this.state.template} token={this.props.token} role={this.props.role} />} /></Router>
       </FadeIn>
 
-
-      );
-    } else if (this.state.showTemplateCreate) {
-      return (
-        <Router>
-          <Redirect push to={"/capstone/viewTemplate"} />
-          <Route exact path="/capstone/viewTemplate" render={() => <ViewTemplate token={this.props.token} role={this.props.role} />} /></Router>
 
       );
     }
@@ -92,17 +94,17 @@ class ContractTable extends React.Component {
       if (this.props.myLoginReducer !== "logout") {
 
         var information = this.props.myLoginReducer.map((login, index) => {
-           
+
           return (<FadeIn>
             <div style={{ height: "100vh" }}>
-              {login.UpdateTemplate === true ? <Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tải lên mẫu mới</Button>
+              {login.UpdateTemplate === true ? <Button type="primary" onClick={this.handleChange} icon={<UploadOutlined />}>Tạo mẫu mới</Button>
                 : null}
               <ContractTypeSearch token={this.props.token} templateList={this.state.templateList} />
               <Table dataSource={this.props.newContractType}
-             
+                loading={this.state.loading}
                 rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}  >
-                <Column title="Stt"   key="index"
-      render={(text, record, index) => index+1}
+                <Column title="Stt" key="index"
+                  render={(text, record, index) => index + 1}
                 />
                 <Column title="Tên" dataIndex="name" key="name"
                   render={(text, record) => (
@@ -113,19 +115,20 @@ class ContractTable extends React.Component {
                 />
                 {login.ActiveDeactiveTemplate === true ?
                   <Column
-                    title="Chọn file khác"
+                    title="Chỉnh sửa"
                     key="Update"
                     align="center"
                     render={(text, record) => (
                       <Space size="middle">
                         <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={() => {
                           this.setState({
-                            viewTemplate: !this.state.viewTemplate
+                            viewTemplate: !this.state.viewTemplate,
+                            template: text
                           })
                         }}></FolderViewOutlined>
                       </Space>
                     )}
-                  /> : null}            {login.ActiveDeactiveCustomer === true ? 
+                  /> : null}            {login.ActiveDeactiveCustomer === true ?
                     <Column
                       title="Tác vụ"
                       dataIndex="status"
@@ -135,12 +138,12 @@ class ContractTable extends React.Component {
                       // sortDirections={['descend', 'ascend']}
                       render={(text, record) => (
                         <Space size="middle">
-                          {text === "Deactive" ? <Switch style={{ fontSize: '20px' }}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt"defaultunChecked  /> : <Switch style={{ fontSize: '20px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
+                          {text === "Deactive" ? <Switch style={{ fontSize: '20px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '20px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
                         </Space>
                       )}
                     />
-        :null}
-        
+                    : null}
+
               </Table></div></FadeIn>
           );
         }

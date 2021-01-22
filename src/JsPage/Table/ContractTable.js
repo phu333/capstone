@@ -317,7 +317,7 @@ class ContractTable extends Component {
                 <div >
                     {this.props.CreateContract === true ? <Space size="large">
                         <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContract}>Tạo hợp đồng</Button>
-                        <Button type="primary" icon={<UploadOutlined />} >Tải lên hợp đồng</Button>
+                        {/* <Button type="primary" icon={<UploadOutlined />} >Tải lên hợp đồng</Button> */}
                     </Space> : null}
                    
                     <ContractSearch token={this.props.token} contractList={this.state.contractsTotal} />

@@ -229,14 +229,16 @@ class CreateContract extends React.Component {
                 return response.data;
             })
             .then((data) => {
-                this.setState({
-                    finish: true
-                })
-                message.success("tao thanh cong")
+                setTimeout(function(){
+                    this.setState({
+                        finish: true
+                    })
+                }.bind(this),5000)
+                message.success("taọ thành công")
 
             })
             .catch(error => {
-                message.error("vui long kiem tra thong tin va ket noi mang")
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
                 console.log(error)
 
             });
@@ -429,9 +431,7 @@ class CreateContract extends React.Component {
                                                             nộp
                                                     </Button>
 
-                                            <Button type='primary' value='Edit'>{/*Nút này xuất hiện khi chưa ai kí hợp đồng*/}
-                                                            Lưu
-                                                    </Button>
+                                           
 
 
                                         </Space>

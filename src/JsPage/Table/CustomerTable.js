@@ -19,9 +19,10 @@ class CustomerList extends React.Component {
     super();
 
     this.state = {
+      loading: true,
       openCustomer: "",
       customer: {},
-      customers:[],
+      customers: [],
     };
 
     this.OpenAddCustomer = this.OpenAddCustomer.bind(this);
@@ -45,21 +46,28 @@ class CustomerList extends React.Component {
       .then((data) => {
         console.log(data.data)
         this.setState({
-          customers:data.data,
+          customers: data.data,
         })
-        this.props.onSubmit(data.data)
+        setTimeout(function () {
+          this.setState({
+            loading: false,
+
+          })
+          this.props.onSubmit(data.data)
+
+        }.bind(this), 5000)
 
 
       })
       .catch(error => {
-       
-      });
-      
-     
-     
-      
 
-    
+      });
+
+
+
+
+
+
 
   }
   OpenAddCustomer() {
@@ -80,35 +88,35 @@ class CustomerList extends React.Component {
       );
     } else if (this.state.openCustomer === "openViewCustomer") {
       return (<FadeIn>
-      <Router>
-        <Redirect push to={"/capstone/updateCustomer/" + this.state.customer.taxCode} />
-        <Route exact path="/capstone/updateCustomer/:id" render={() => <ViewCustomer customer={this.state.customer} />
-        } /></Router></FadeIn>
-        
-        );
+        <Router>
+          <Redirect push to={"/capstone/updateCustomer/" + this.state.customer.taxCode} />
+          <Route exact path="/capstone/updateCustomer/:id" render={() => <ViewCustomer token={this.props.token} customer={this.state.customer} />
+          } /></Router></FadeIn>
+
+      );
 
     }
     else {
       if (this.props.myLoginReducer !== "logout") {
 
         var information = this.props.myLoginReducer.map((login, index) => {
-  
-     return (<FadeIn>
-        <div style={{ height: "100vh" }}>
-        {login.AddCustomer === true ? <Button type="primary" onClick={this.OpenAddCustomer} icon={<UserAddOutlined />}>Tạo khách hàng mới</Button>:null}
-          <CustomerSearch token={this.props.token} customerList={this.state.customers} />
-          <Table dataSource={this.props.newCustomer}
 
-            rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
-            <Column title="Tên doanh nghiệp" dataIndex="name" key="name"
-              sorter={(a, b) => a.name.localeCompare(b.name)}
-              sortDirections={['descend', 'ascend']}
-              render={(text, record) => (
+          return (<FadeIn>
+            <div style={{ height: "100vh" }}>
+              {login.AddCustomer === true ? <Button type="primary" onClick={this.OpenAddCustomer} icon={<UserAddOutlined />}>Tạo khách hàng mới</Button> : null}
+              <CustomerSearch token={this.props.token} customerList={this.state.customers} />
+              <Table dataSource={this.props.newCustomer}
+                loading={this.state.loading}
+                rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
+                <Column title="Tên doanh nghiệp" dataIndex="name" key="name"
+                  sorter={(a, b) => a.name.localeCompare(b.name)}
+                  sortDirections={['descend', 'ascend']}
+                  render={(text, record) => (
 
-                <p>{text}</p>
+                    <p>{text}</p>
 
-              )} />
-{/* 
+                  )} />
+                {/* 
             <Column title="Người đại diện" dataIndex="name" key="name"
               sorter={(a, b) => a.name.localeCompare(b.name)}
               sortDirections={['descend', 'ascend']}
@@ -118,19 +126,19 @@ class CustomerList extends React.Component {
 
               )} /> */}
 
-            <Column title="Mã số thuế" dataIndex="taxCode" key="taxCode"align='center' render={(text, record) => (
+                <Column title="Mã số thuế" dataIndex="taxCode" key="taxCode" align='center' render={(text, record) => (
 
-              <p>{text}</p>
+                  <p>{text}</p>
 
-            )} />
+                )} />
 
-            <Column title="Email" dataIndex="email" key="email" render={(text, record) => (
+                <Column title="Email" dataIndex="email" key="email" render={(text, record) => (
 
-              <a>{text}</a>
+                  <a>{text}</a>
 
-            )} />
+                )} />
 
-            {/* <Column title="Trạng thái" dataIndex="status" key="status"
+                {/* <Column title="Trạng thái" dataIndex="status" key="status"
               sorter={(a, b) => a.status.localeCompare(b.status)}
               sortDirections={['descend', 'ascend']}
               render={(text, record) => {
@@ -151,50 +159,50 @@ class CustomerList extends React.Component {
                 </Tag>);
               }}
             /> */}
-            <Column
-              title="Xem thông tin"
-              key="action"
-              align="center"
-              render={(text, record) => (
-                <Space size="middle">
-                  <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
-                    () => this.setState({
-                      customer: text,
-                      openCustomer: "openViewCustomer",
-                    })
-                  } />
-                </Space>
-              )}
-            />
-            {login.ActiveDeactiveCustomer === true ? 
-            <Column
-              title="Tác vụ"
-              dataIndex="status"
-              key="status"
-              align="center"
-              // sorter={(a, b) => a.status.localeCompare(b.status)}
-              // sortDirections={['descend', 'ascend']}
-              render={(text, record) => (
-                <Space size="middle">
-                  {text === "Deactive" ? <Switch style={{ fontSize: '20px' }}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt"defaultunChecked  /> : <Switch style={{ fontSize: '20px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
-                </Space>
-              )}
-            />
-:null}
-          </Table></div></FadeIn>
-                    );
-                  }
-          
-                  )
-                } if (this.props.myLoginReducer === "Logout") {
-          
-          
-                } return (<div>{information}</div>);
-              }
-          
-            }
-          }
-          
+                <Column
+                  title="Xem thông tin"
+                  key="action"
+                  align="center"
+                  render={(text, record) => (
+                    <Space size="middle">
+                      <FolderViewOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={
+                        () => this.setState({
+                          customer: text,
+                          openCustomer: "openViewCustomer",
+                        })
+                      } />
+                    </Space>
+                  )}
+                />
+                {login.ActiveDeactiveCustomer === true ?
+                  <Column
+                    title="Tác vụ"
+                    dataIndex="status"
+                    key="status"
+                    align="center"
+                    // sorter={(a, b) => a.status.localeCompare(b.status)}
+                    // sortDirections={['descend', 'ascend']}
+                    render={(text, record) => (
+                      <Space size="middle">
+                        {text === "Deactive" ? <Switch style={{ fontSize: '20px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '20px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
+                      </Space>
+                    )}
+                  />
+                  : null}
+              </Table></div></FadeIn>
+          );
+        }
+
+        )
+      } if (this.props.myLoginReducer === "Logout") {
+
+
+      } return (<div>{information}</div>);
+    }
+
+  }
+}
+
 var mapDispatchToProps = (dispatch, props) => {
   return {
     onSubmit: (token) => {

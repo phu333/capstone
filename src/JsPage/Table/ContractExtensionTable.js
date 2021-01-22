@@ -24,7 +24,7 @@ class ContractExtensionTable extends React.Component {
             contractsCreate: [],
             contractsReciceve: [],
             contractsTotal: [],
-            ompany: {},
+            company: {},
             finish: false,
             loading: false,
         };
@@ -166,28 +166,28 @@ class ContractExtensionTable extends React.Component {
             showContractExtension: true
         })
     }
-    Donwload(text){
-        if(this.props.Sign === true){
+    Donwload(text) {
+        if (this.props.Sign === true) {
             if (this.state.company.id !== undefined) {
                 axios({
                     url: "https://localhost:44338/api/Signature/PostContract",
                     method: "POST",
                     data: {
                         Info: this.state.company.taxCode,
-    
+
                     }
                 })
                     .then((response) => {
-    
-    
+
+
                     })
                     .then((data) => {
-    
+
                     })
                     .catch(error => {
                         console.log(error)
-    
-    
+
+
                     });
                 if (text.fileUrl === null) {
                     axios({
@@ -199,7 +199,7 @@ class ContractExtensionTable extends React.Component {
                             'Accept': 'application/docx'
                         },
                         responseType: 'arraybuffer',
-    
+
                     })
                         .then((response) => {
                             console.log(response)
@@ -209,12 +209,12 @@ class ContractExtensionTable extends React.Component {
                         })
                         .then((data) => {
                             console.log(data.data)
-    
+
                         })
                         .catch(error => {
                             console.log(error)
-    
-    
+
+
                         });
                 } else {
                     axios({
@@ -222,30 +222,30 @@ class ContractExtensionTable extends React.Component {
                         method: "POST",
                         data: {
                             Info: this.state.company.taxCode,
-        
+
                         }
                     })
                         .then((response) => {
-        
-        
+
+
                         })
                         .then((data) => {
-        
+
                         })
                         .catch(error => {
                             console.log(error)
-        
-        
+
+
                         });
                     window.open(text.fileUrl, "_blank")
-                    
+
                 }
             } else {
-               
+
             }
-        }else{
+        } else {
             if (this.state.company.id !== undefined) {
-                
+
                 if (text.fileUrl === null) {
                     axios({
                         url: '/api/v1/Contract/export-docx/' + text.id,
@@ -256,7 +256,7 @@ class ContractExtensionTable extends React.Component {
                             'Accept': 'application/docx'
                         },
                         responseType: 'arraybuffer',
-    
+
                     })
                         .then((response) => {
                             console.log(response)
@@ -266,32 +266,36 @@ class ContractExtensionTable extends React.Component {
                         })
                         .then((data) => {
                             console.log(data.data)
-    
+
                         })
                         .catch(error => {
                             console.log(error)
-    
-    
+
+
                         });
                 } else {
-                    
+
                     window.open(text.fileUrl, "_blank")
-                    
+
                 }
             } else {
-               
+
             }
         }
-       
-    }
 
+    }
+    Cancel () {
+        this.setState({
+            finish: true
+        })
+    };
     render() {
 
         if (this.state.showCreateContractExtension) {
             return (<FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.props.contract.id) + "/createExtension"} />
-                    <Route exact path="/capstone/viewContract/:id/createExtension" render={() => <AddContractExtension token={this.props.token} contractId={this.props.contractId} contract={this.props.contract} role={this.props.role} />
+                    <Route exact path="/capstone/viewContract/:id/createExtension" render={() => <AddContractExtension Sign={this.props.Sign} token={this.props.token} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} ismycontract={this.props.ismycontract} contract={this.props.contract} contractId={this.props.contract.id} role={this.props.role} />
                     } /></Router></FadeIn>
 
 
@@ -308,27 +312,29 @@ class ContractExtensionTable extends React.Component {
             return (<FadeIn>
                 <Router>
                     <Redirect push to={"/capstone/viewContract/" + hash.sha1(this.state.contract.id)} />
-                    <Route exact path="/capstone/viewContract/:id" render={() => <ViewContractPage Sign={this.props.Sign} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} contract={this.props.contract} token={this.props.token} role={this.props.role} />
+                    <Route exact path="/capstone/viewContract/:id" render={() => <ViewContractPage Sign={this.props.Sign} token={this.props.token} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} ismycontract={this.props.ismycontract} contract={this.props.contract} contractId={this.props.contract.id} role={this.props.role} />
                     } /></Router></FadeIn>
 
             );
         }
         else {
-             
+
             return (<FadeIn>
                 <div >
                     {this.props.ismycontract && this.props.CreateContract === true ? <Space size="large">
                         <Button type="primary" icon={<FileAddOutlined />} onClick={this.onOpenCreateContractExtension}>Tạo hợp đồng</Button>
-                        <Button type="primary" icon={<UploadOutlined />} >Tải lên hợp đồng</Button>
+                        
                     </Space> : null}
-
+                    <Button type="primary" value="cancel" onClick={this.Cancel}>
+                            Trở về
+                            </Button>
                     <ContractSearch token={this.props.token} contractList={this.state.contractsTotal} />
                     <Table dataSource={this.props.newContract}
-                        
+                        loading={this.state.loading}
                         rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}>
                         <Column title="Stt" key="Index"
 
-                            render={(text, record, index) => index+1}
+                            render={(text, record, index) => index + 1}
                         />
                         <Column title="Tên hợp đồng" dataIndex="contractTitle" key="contractTitle"
                             render={(text, record) => (

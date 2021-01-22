@@ -84,9 +84,31 @@ class UpdateProfile extends React.Component {
         this.onFinishFailed = this.onFinishFailed.bind(this);
     }
     onFinish = (values) => {
-        this.setState({
-            isEdit: !this.state.isEdit
+        axios({
+            url: '/api/Account/update-employee',
+            method: "PUT",
+            headers: {
+                Authorization: 'Bearer ' + this.props.token,
+
+            },
+            data:values
         })
+            .then((response) => {
+
+                return response.data.data;
+            })
+            .then((data) => {
+                console.log(data)
+                message.success("thông tin chỉnh sửa thành công")
+                this.setState({
+                    isEdit: false
+                })
+            })
+            .catch(error => {
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
+
+            });
+        
 
 
 
@@ -105,7 +127,7 @@ class UpdateProfile extends React.Component {
         console.log('Failed:', errorInfo);
     };
 
-    componentWillMount(){
+    componentDidMount(){
         axios({
             url: '/api/v1/Company/info',
             method: "PUT",
@@ -120,7 +142,7 @@ class UpdateProfile extends React.Component {
             })
             .then((data) => {
                 console.log(data)
-
+                
             })
             .catch(error => {
                 console.log(error)
