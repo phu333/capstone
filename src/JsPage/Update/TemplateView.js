@@ -66,8 +66,8 @@ class TemplateView extends React.Component {
         this.rteChange = this.rteChange.bind(this);
         this.onEdit = this.onEdit.bind(this);
     }
-    
-    onEdit= () => {
+
+    onEdit = () => {
 
         this.setState({
             isEdit: !this.state.isEdit,
@@ -166,8 +166,8 @@ class TemplateView extends React.Component {
       </Button>
 
                     <Space direction="vertical" align="center" >
-                       
-                       
+
+
                         <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
                             <Card bordered={false}>
                                 <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>

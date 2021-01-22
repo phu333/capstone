@@ -751,15 +751,13 @@ class ContractView extends React.Component {
                                                 <Button type="primary">lấy link</Button>
                                             </CopyToClipboard>
 
-                                            {this.props.Sign === true ? <Button type="primary" value="reject">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
+                                            {this.props.Sign === true && this.props.contract.statusAsString === "Waiting" ? <Button type="primary" value="reject">{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
                                                             Reject
                                                         </Button> : null}
-                                            {this.props.contract.statusAsString !== "Active" && this.state.company.id === this.state.creator ?
+                                            {this.props.contract.statusAsString === "Active" ||this.props.contract.statusAsString === "Inactive"?
                                                 <Button type="primary" value="extension" onClick={this.OpenExtension}>{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
                                                             kiểm tra phụ luc
-                                                        </Button> : <Button type="primary" value="extension" onClick={this.OpenExtensionOther}>{/*nút này xuất hiện khi 2 bên đã kí hợp đồng này*/}
-                                                            kiểm tra phụ luc
-                                                        </Button>}
+                                                        </Button> : null}
                                             {this.props.contract.statusAsString === "Draft" && this.props.UpdateContract === true ? <Button type="primary" value="update" onClick={this.onEdit}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
                                                         Chỉnh sửa
                                                     </Button> : null}
