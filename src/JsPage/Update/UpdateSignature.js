@@ -87,7 +87,9 @@ class UpdateSignature extends React.Component {
             finish: true
         })
     }
-
+    componentDidMount(){
+        console.log(this.props.signature);
+    }
     render() {
         if (this.state.finish) {
             return (<Router>
@@ -115,42 +117,30 @@ class UpdateSignature extends React.Component {
 
                             <Form.Item
                                 label="Số serial"
-                                name="name"
+                                name="serial"
                                 
                             >
                                 {this.state.isEdit === false ?
-                                    <Input disabled defaultValue="123123123123" /> :
-                                    <Input defaultValue="123123123123" />}
+                                    <Input disabled defaultValue={this.props.signature.serialNumber} /> :
+                                    <Input defaultValue={this.props.signature.serialNumber} />}
                             </Form.Item>
+                           
                             <Form.Item
-                                label="Nhà cung cấp"
-                                name="name"
+                                 label="Ngày hết hạn"
+                                 name="expiredDate"
                                 
                             >
                                 {this.state.isEdit === false ?
-                                    <Input disabled defaultValue="viettel" /> :
-                                    <Input defaultValue="viettel" />}
-                            </Form.Item>
-                            <Form.Item
-                                label="Thời hạn"
-                                name="phone"
-                                
-                            >
-                                {this.state.isEdit === false ?
-                                    <RangePicker
-                                        disabled defaultValue={[moment('2019-09-03', dateFormat), moment('2019-11-22', dateFormat)]}
-                                        showTime={{ format: 'HH:mm' }}
-                                        format="YYYY-MM-DD HH:mm"
-                                        onChange={this.onChange}
-                                        onOk={this.onOk}
-                                    /> :
-                                    <RangePicker
-                                        defaultValue={[moment('2019-09-03', dateFormat), moment('2019-11-22', dateFormat)]}
-                                        showTime={{ format: 'HH:mm' }}
-                                        format="YYYY-MM-DD HH:mm"
-                                        onChange={this.onChange}
-                                        onOk={this.onOk}
-                                    />}
+                                     <Input
+                                     placeholder="ngày hết hạn"
+                                    
+                                     disabled defaultValue={this.props.signature.expirationDate}
+                                 /> :
+                                 <Input
+                                 placeholder="ngày hết hạn"
+                                 
+                                  defaultValue={this.props.signature.expirationDate}
+                             />}
 
                             </Form.Item>
 

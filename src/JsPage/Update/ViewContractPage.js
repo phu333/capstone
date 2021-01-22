@@ -730,7 +730,7 @@ class ContractView extends React.Component {
                                     >
                                         Giá trị hợp đồng:<input disabled={!this.state.isEdit} defaultValue={this.props.contract.contractValue} type="text" pattern="[0-9]*" prefix="VND"
                                             onInput={this.handleValue} /> x1000 VNĐ
-                                        <h6 style={{ fontSize: 14 }}>Hợp đồng có hiệu lực kể từ ngày 3 tháng 11 năm 2020 đến
+                                        <h6 style={{ fontSize: 14 }}>Hợp đồng có hiệu lực kể từ {this.props.contract.ActivateDate} đến
                                         <input defaultValue={this.props.contract.contractExpiredDate}
                                                 disabled={!this.state.isEdit}
                                                 type="text"

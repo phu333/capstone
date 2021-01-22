@@ -64,13 +64,10 @@ class TemplateView extends React.Component {
         // this.handleChange = this.handleChange.bind(this);
         // this.onEditorStateChange = this.onEditorStateChange.bind(this);
         this.rteChange = this.rteChange.bind(this);
-
+        this.onEdit = this.onEdit.bind(this);
     }
-    // handleEditorChange(e) {
-    //     console.log('Content was updated:', e.target.getContent());
-    //     this.setState({ content: e.target.getContent() });
-    // }
-    onEditorStateChange(editorState) {
+    
+    onEdit= () => {
 
         this.setState({
             isEdit: !this.state.isEdit,
@@ -169,7 +166,8 @@ class TemplateView extends React.Component {
       </Button>
 
                     <Space direction="vertical" align="center" >
-                        <Input placeholder="Tên template" />
+                       
+                       
                         <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
                             <Card bordered={false}>
                                 <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>
@@ -178,7 +176,7 @@ class TemplateView extends React.Component {
                                 <h2 style={{ textAlign: 'center', fontSize: 16, fontWeight: "bold" }}><Input
                                     defaultValue={this.state.contractName}
                                     value={this.props.template.name}
-                                    disabled={this.state.isEdit}
+                                    disabled={!this.state.isEdit}
                                     onChange={(e) => { this.nameChange(e.target.value) }} style={{ width: "100px" }} size="small" /></h2>
                                 <h6 style={{ textAlign: 'center', fontSize: 14, fontWeight: "bold" }}>Số.../...</h6>
                                 <h6 style={{ fontSize: 14, fontWeight: "bold" }}>Hôm nay, ngày...tháng...năm....,
@@ -257,7 +255,7 @@ class TemplateView extends React.Component {
 
                                     >
 
-                                        <h6 style={{ fontSize: 14 }}>Hợp đồng có hiệu lực kể từ ngày ... tháng ... năm .... đến
+                                        <h6 style={{ fontSize: 14 }}>Hợp đồng có hiệu lực kể từ ngày ... tháng ... năm ... đến
                                         ngày ... tháng ... năm ....
                             </h6>
                                         <Space size="large">
