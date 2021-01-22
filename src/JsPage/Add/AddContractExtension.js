@@ -5,11 +5,11 @@ import axios from 'axios'
 import ContractExtensionTable from '../Table/ContractExtensionTable'
 import { Descriptions, Space, Button, Card, Form,  message } from 'antd';
 
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
 
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 
-import 'react-quill/dist/quill.snow.css';
+
 
 import JoditEditor from "jodit-react";
 

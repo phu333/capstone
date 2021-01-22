@@ -1,29 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 import axios from 'axios'
-import {
-    FileExcelOutlined, IdcardOutlined, BankOutlined, PhoneOutlined, PrinterOutlined, HomeOutlined, MailOutlined
-    , ContactsOutlined, CalendarOutlined, DollarOutlined, DeleteOutlined, CloudUploadOutlined, AuditOutlined
-} from '@ant-design/icons';
-import { FileSaver } from 'file-saver';
+
 import ContractExtensionTable from '../Table/ContractExtensionTable'
 import { Descriptions, message, Space, Button, DatePicker, Input, Card, Form, Select, Table, Comment, List, Avatar, Pagination } from 'antd';
 import ContractTable from '../Table/ContractTable'
-import moment from 'moment'
+
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { Editor } from 'react-draft-wysiwyg';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { EditorState } from 'draft-js';
+
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import { parse } from 'semver';
+
 import JoditEditor from "jodit-react";
-const dateFormat = 'YYYY-MM-DD';
-const { RangePicker } = DatePicker;
-const { Column, ColumnGroup } = Table;
+
 const { TextArea } = Input;
-const { Option } = Select;
+
 
 var hash = require('object-hash')
 class ContractView extends React.Component {
