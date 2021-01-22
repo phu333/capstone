@@ -79,7 +79,7 @@ class UpdateProfile extends React.Component {
                             <TextField
                             placeholder="phu333"
                                 id="name"
-                                name="tên"
+                                name="Tên"
                                 label="phu333"
                                 fullWidth
                                 autoComplete="shipping address-level2"
@@ -90,7 +90,7 @@ class UpdateProfile extends React.Component {
 
                             <TextField
                                 id="username"
-                                name="tên đăng nhập"
+                                name="Tên đăng nhập"
                                 label="phu333"
                                 fullWidth
                                 autoComplete="shipping address-level2"
@@ -165,7 +165,7 @@ class UpdateProfile extends React.Component {
                             <Button type="primary" style={{
                                 margin: '0 8px',
                             }} htmlType="button">
-                                <ReloadOutlined />   Reset
+                                <ReloadOutlined />   Xóa dữ liệu đã nhập
                             </Button>
                             <Button type="primary" value="cancel" onClick={this.Cancel}>
                                 Trở về

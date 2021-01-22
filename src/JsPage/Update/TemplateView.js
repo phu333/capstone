@@ -169,7 +169,7 @@ class TemplateView extends React.Component {
       </Button>
 
                     <Space direction="vertical" align="center" >
-                        <Input placeholder="tên template" />
+                        <Input placeholder="Tên template" />
                         <Space direction="vertical" align="center" style={{ backgroundColor: "white" }} >
                             <Card bordered={false}>
                                 <h6 style={{ textAlign: 'center', fontSize: 14 }}>Cộng hòa xã hội chủ nghĩa Việt Nam</h6>
@@ -266,8 +266,7 @@ class TemplateView extends React.Component {
                                                 Nộp
                             </Button> : null}
                                             {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
-                                                Reset
-                            </Button> : null}
+                                                Xóa dữ liệu đã nhập                                </Button> : null}
 
                                             {this.state.isEdit === false && this.props.UpdateTemplate ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
                                                 Sửa

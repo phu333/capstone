@@ -130,8 +130,7 @@ class ViewUser extends React.Component {
                         <Button type="primary" style={{
                             margin: '0 8px',
                         }} htmlType="button">
-                            <RedoOutlined />    Reset
-                            </Button>
+                            <RedoOutlined />    Xóa dữ liệu đã nhập                                </Button>
                     </Form.Item>
                 </Form>
             </div >

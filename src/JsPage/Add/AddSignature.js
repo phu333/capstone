@@ -191,8 +191,7 @@ class AddSignature extends React.Component {
                                         Tạo
                                 </Button>
                                     <Button type="primary" htmlType="reset" className="login-form-button">
-                                        Reset
-                                </Button>
+                                        Xóa dữ liệu đã nhập                                </Button>
 
 
                                 </Space>

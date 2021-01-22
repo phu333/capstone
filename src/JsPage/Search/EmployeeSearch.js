@@ -102,7 +102,7 @@ class EmployeeSearch extends React.Component {
                             tìm kiếm tên nhân viên
         </Radio>
                         <Radio style={radioStyle} value={"SearchByRoles"}>
-                            tìm kiếm theo chức vụ
+                            Tìm kiếm theo chức vụ
         </Radio>
 
 

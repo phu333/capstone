@@ -179,7 +179,7 @@ class SendJoinRequest extends React.Component {
                                 <Button type="primary" style={{
                                     margin: '0 8px',
                                 }} htmlType="button">
-                                 <ReloadOutlined />   Reset
+                                 <ReloadOutlined />   Xóa dữ liệu đã nhập
                             </Button>
                             </Grid>
                         </Col>

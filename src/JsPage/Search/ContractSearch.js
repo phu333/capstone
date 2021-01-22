@@ -124,16 +124,16 @@ class ContractSearch extends React.Component {
                 <Card>
                     <Radio.Group onChange={this.handleChange} value={this.state.SearchBy}>
                         <Radio style={radioStyle} value={"SearchByContractId"}>
-                            tìm kiếm bằng mã hợp đồng
+                            Tìm kiếm bằng mã hợp đồng
         </Radio>
                         <Radio style={radioStyle} value={"SearchByContractTitle"}>
-                            tìm kiếm theo tên hợp đồng
+                            Tìm kiếm theo tên hợp đồng
         </Radio>
                         <Radio style={radioStyle} value={"SearchByContractValue"}>
-                            tìm kiếm theo giá trị hợp đồng
+                            Tìm kiếm theo giá trị hợp đồng
         </Radio>
                         <Radio style={radioStyle} value={"SearchByContractCus"}>
-                            tìm kiếm theo đối tác
+                            Tìm kiếm theo đối tác
         </Radio>
                          <Radio style={radioStyle} value={"ShowAll"}>
                             tất cả
@@ -147,7 +147,7 @@ class ContractSearch extends React.Component {
                             tất cả
                         </Radio>
                         <Radio style={radioStyle} value={"SearchByContractDuration"}>
-                            tìm kiếm theo thời hạn
+                            Tìm kiếm theo thời hạn
                         </Radio>
                         <Radio style={radioStyle} value={"1Month"}>
                             1 tháng
@@ -159,10 +159,10 @@ class ContractSearch extends React.Component {
                             1 năm
         </Radio> */}
                 {/* <Radio style={radioStyle} value={"SearchByContractDeadline"}>
-                            tìm kiếm theo ngày hết hạn
+                            Tìm kiếm theo ngày hết hạn
         </Radio>
                         <Radio style={radioStyle} value={"SearchByContractCreatedDate"}>
-                            tìm kiếm theo ngày tạo
+                            Tìm kiếm theo ngày tạo
         </Radio> */}
                 {/* </Radio.Group>
                 </Card>                 <Card>

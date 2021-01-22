@@ -115,7 +115,7 @@ class CustomerSearch extends React.Component {
                         </Radio>
 
                         <Radio style={radioStyle} value={"SearchByName"}>
-                            tìm kiếm bằng tên
+                            Tìm kiếm bằng tên
         </Radio>
 
                     </Radio.Group>

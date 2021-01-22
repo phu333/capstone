@@ -224,7 +224,7 @@ class AddCustomer extends React.Component {
                                     message: 'Vui lòng nhập tên doanh nghiệp',
                                 },
                             ]}>
-                            <Row gutter={8}> <Col span={20}><TextArea autoSize placeholder="tên doanh nghiệp" /> </Col>    <Popover content={ValidationCompany} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><TextArea autoSize placeholder="Tên doanh nghiệp" /> </Col>    <Popover content={ValidationCompany} trigger="hover">
                                 <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                         </Form.Item>
@@ -372,8 +372,7 @@ class AddCustomer extends React.Component {
                                     Tạo
                                 </Button>
                                 <Button type="primary" htmlType="reset" className="login-form-button">
-                                    Reset
-                                </Button>
+                                    Xóa dữ liệu đã nhập                                </Button>
 
 
                             </Space>

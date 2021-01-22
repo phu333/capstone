@@ -289,8 +289,7 @@ class ViewCustomer extends React.Component {
                                     Sửa
                             </Button> : null}
                                 {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
-                                    Reset
-                            </Button> : null}
+                                    Xóa dữ liệu đã nhập                                </Button> : null}
                                 {ButtonFix}
 
 

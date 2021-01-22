@@ -94,10 +94,10 @@ class ContractTypeSearch extends React.Component {
                 <Card>
                     <Radio.Group onChange={this.handleChange} value={this.state.SearchBy}>
                         <Radio style={radioStyle} value={"SearchByContractType"}>
-                            tìm kiếm bằng loại hợp đồng
+                            Tìm kiếm bằng loại hợp đồng
         </Radio>
                         <Radio style={radioStyle} value={"SearchByCreater"}>
-                            tìm kiếm theo tên người tạo
+                            Tìm kiếm theo tên người tạo
         </Radio>
                         <Radio style={radioStyle} value={"all"}>
                             tất cả
@@ -123,7 +123,7 @@ class ContractTypeSearch extends React.Component {
         </Radio>
 
                         <Radio style={radioStyle} value={"SearchByCreateDate"}>
-                            tìm kiếm theo ngày tạo
+                            Tìm kiếm theo ngày tạo
         </Radio>
                     </Radio.Group>
                 </Card>
