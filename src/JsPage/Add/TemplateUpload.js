@@ -219,7 +219,7 @@ class TemplateUpload extends React.Component {
                                     >
                                         Giá trị hợp đồng:........
                                         
-                                    <h6 style={{ fontSize: 14 }}>Hợp đồng có hiệu lực kể từ ngày 3 tháng 11 năm 2020 đến
+                                    <h6 style={{ fontSize: 14 }}>Hợp đồng có hiệu lực kể từ ngày ... tháng ... năm ... đến
                                         ngày ... tháng ... năm ....
                             </h6>
                                         <Space size="large">

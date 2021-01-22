@@ -67,13 +67,15 @@ class AddSignature extends React.Component {
                 return response.data;
             })
             .then((data) => {
-                console.log(data.data)
+                console.log(data.data.id)
                 let signatureInfo={
                     serialNumber:values.serial,
                     expirationDate:values.expiredDate,
-                    companyId:data.data.id,
-                    company:{}
+                    companyId: parseInt(data.data.id) ,
+                    company:data.data,
+                    
                 }
+                console.log(signatureInfo)
                 axios({
                     url: '/api/DigitalSignature',
                     method: "POST",
@@ -165,19 +167,13 @@ class AddSignature extends React.Component {
                             <Form.Item
                                 label="Ngày hết hạn"
                                 name="expiredDate"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Ngày hết hạn',
-                                    },
-                                ]}
+                                
                             >
-                                <Row gutter={8}> <Col span={20}> <RangePicker
-                                    showTime={{ format: 'HH:mm' }}
-                                    format="YYYY-MM-DD HH:mm"
-                                    onChange={this.onChange}
-                                    onOk={this.onOk}
-                                /> </Col>    <Popover content={ValidationDate} trigger="hover">
+                                <Row gutter={8}> <Col span={20}>  <Input
+                                                placeholder="ngày hết hạn"
+                                                type="date"
+                                                
+                                            /> </Col>    <Popover content={ValidationDate} trigger="hover">
                                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                             </Form.Item>

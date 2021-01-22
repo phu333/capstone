@@ -10,10 +10,11 @@ import SignatureSearch from '../Search/SignatureSearch'
 import { createSignature, signatureInformation } from '../../actions/SignatureAction'
 import { connect } from 'react-redux'
 import "../Column.css"
+
 import FadeIn from 'react-fade-in'
 import { UserAddOutlined, EditOutlined, DeleteOutlined, UserOutlined,FolderViewOutlined } from "@ant-design/icons"
 const { Column, ColumnGroup } = Table;
-
+var hash = require('object-hash')
 
 class SignatureList extends React.Component {
     constructor() {
@@ -85,7 +86,7 @@ class SignatureList extends React.Component {
         } else if (this.state.openSignature === "openViewSignature") {
             return (<FadeIn>
                 <Router>
-                    <Redirect push to={"/capstone/updateSignature/" + this.state.signature.serial} />
+                    <Redirect push to={"/capstone/updateSignature/" + hash.sha1(this.state.signature.serialNumber)} />
                     <Route exact path="/capstone/updateSignature/:id" render={() => <UpdateSignature ActiveDeactiveSignature={this.props.ActiveDeactiveSignature} UpdateSignature={this.props.UpdateSignature} CreateSignature={this.props.CreateSignature} token={this.props.token} signature={this.state.signature} />} />
 
                 </Router></FadeIn>
@@ -103,16 +104,16 @@ class SignatureList extends React.Component {
 
                        
 
-                        <Column title="Nhà cung cấp" dataIndex="provider"
+                        <Column title="Số serial" dataIndex="serialNumber"
                          sorter={(a, b) => a.provider.localeCompare(b.provider)}
                          sortDirections={['descend', 'ascend']}
-                         key="provider" />
+                         key="serialNumber" />
 
                         <Column title="Ngày hết hạn"
                          sorter={(a, b) => a.expired.localeCompare(b.expired)}
                          sortDirections={['descend', 'ascend']}
-                         dataIndex="expired" key="expired" />
-                        <Column title="Trạng thái" dataIndex="status" key="status"
+                         dataIndex="expirationDate" key="expirationDate" />
+                        {/* <Column title="Trạng thái" dataIndex="status" key="status"
                          sorter={(a, b) => a.status.localeCompare(b.status)}
                          sortDirections={['descend', 'ascend']}
                             render={(text, record) => {
@@ -142,7 +143,7 @@ class SignatureList extends React.Component {
                                     {text.toUpperCase()}
                                 </Tag>);
                             }}
-                        />
+                        /> */}
 
                         <Column
                             title="Chi tiết"

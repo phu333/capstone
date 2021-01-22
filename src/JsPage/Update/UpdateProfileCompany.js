@@ -106,12 +106,7 @@ class UpdateProfileCompany extends React.Component {
                 })
             })
             .catch(error => {
-                console.log(error)
-                if (error.response.status === 500) {
-                    message.error(error.response.status + ' Server under maintainence');
-                } else if (error.response.status === 404) {
-                    message.error(error.response.status + ' Server not found');
-                }
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
 
             });
 
@@ -134,7 +129,7 @@ class UpdateProfileCompany extends React.Component {
     }; onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-    componentDidMount() {
+    UNSAFE_componentWillMount() {
         axios({
             url: '/api/v1/Company/info',
             method: "PUT",
@@ -161,7 +156,7 @@ class UpdateProfileCompany extends React.Component {
     }
     render() {
         console.log(this.state.company.name)
-        const name = "hello"
+        
 
 
         return (
@@ -178,7 +173,7 @@ class UpdateProfileCompany extends React.Component {
                             {...layout}
                             name="basic"
                             className="employee-form"
-                            hideRequiredMark
+                            
                             onFinish={this.onFinish}
                             onFinishFailed={this.onFinishFailed}
 
@@ -345,7 +340,7 @@ class UpdateProfileCompany extends React.Component {
                             <Form.Item {...tailLayout}>
                                 <Space size="large">
                                     {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
-                                        Tạo
+                                        Nộp
                             </Button> : null}
                                     {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
                                         Reset
