@@ -362,7 +362,7 @@ class CreateContract extends React.Component {
                                         <Select
                                             showSearch
                                             style={{ width: 400 }}
-                                            placeholder='chọn khách hàng'
+                                            placeholder='Chọn khách hàng'
                                             optionFilterProp='customer'
                                             onChange={this.handleChange}
                                             onSearch={this.handleChange}
