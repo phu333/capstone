@@ -145,7 +145,7 @@ class AddUserAdmin extends React.Component {
                 >
 
                     <Form.Item
-                        label={<label style={{ color: "white" }}> tên</label>}
+                        label={<label style={{ color: "white" }}>Tên</label>}
                         name="firstName"
                         rules={[
                             {
@@ -193,7 +193,7 @@ class AddUserAdmin extends React.Component {
 
                     </Form.Item>
                     <Form.Item
-                        label={<label style={{ color: "white" }}>cmnd/cmt</label>}
+                        label={<label style={{ color: "white" }}>Cmnd/cmt</label>}
                         name="userId"
                         rules={[
 
@@ -221,7 +221,7 @@ class AddUserAdmin extends React.Component {
                             },
                         ]}
                     >
-                        <Row gutter={8}> <Col span={20}><Input placeholder="tên người dùng" /> </Col>    <Popover content={Validation} trigger="hover">
+                        <Row gutter={8}> <Col span={20}><Input placeholder="Tên người dùng" /> </Col>    <Popover content={Validation} trigger="hover">
                             <Button shape="circle" style={{ border: "none",backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{color:'white'}} />} />
                         </Popover></Row>
 
@@ -248,7 +248,7 @@ class AddUserAdmin extends React.Component {
                         </Popover></Row>
                     </Form.Item>
                     <Form.Item
-                        label={<label style={{ color: "white" }}>xác nhận mật khẩu</label>}
+                        label={<label style={{ color: "white" }}>Xác nhận mật khẩu</label>}
                         name="confirmPassword"
                         dependencies={['password']}
                         hasFeedback
@@ -389,8 +389,7 @@ class AddUserAdmin extends React.Component {
                                 Tạo
                                 </Button>
                             <Button type="primary" htmlType="reset" >
-                                Reset
-                                </Button>
+                                Xóa dữ liệu đã nhập                                </Button>
 
 
                         </Space>

@@ -343,8 +343,7 @@ class UpdateProfileCompany extends React.Component {
                                         Nộp
                             </Button> : null}
                                     {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
-                                        Reset
-                            </Button> : null}
+                                        Xóa dữ liệu đã nhập                                </Button> : null}
 
                                     {this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
                                         Sửa

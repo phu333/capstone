@@ -162,7 +162,7 @@ class EmployeeDetail extends React.Component {
                                 },
                             ]}
                         >
-                             <Row gutter={8}> <Col span={20}><Input placeholder="tên người dùng" /> </Col>    <Popover content={names} trigger="hover">
+                             <Row gutter={8}> <Col span={20}><Input placeholder="Tên người dùng" /> </Col>    <Popover content={names} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
@@ -294,8 +294,7 @@ class EmployeeDetail extends React.Component {
                                     Tạo
                                 </Button>
                                 <Button type="primary" htmlType="reset" >
-                                    Reset
-                                </Button>
+                                    Xóa dữ liệu đã nhập                                </Button>
 
 
                             </Space>

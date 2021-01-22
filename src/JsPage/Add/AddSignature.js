@@ -21,7 +21,7 @@ const layout = {
 };
 const tailLayout = {
     wrapperCol: {
-        offset: 6,
+        offset: 8,
         span: 10,
     },
 };
@@ -53,7 +53,7 @@ class AddSignature extends React.Component {
     }
     onFinish = (values) => {
 
-        
+
         axios({
             url: '/api/v1/Company/info',
             method: "PUT",
@@ -90,11 +90,11 @@ class AddSignature extends React.Component {
                         return response.data;
                     })
                     .then((data) => {
-                        setTimeout(function(){
+                        setTimeout(function () {
                             this.setState({
                                 finish: true
                             })
-                        }.bind(this),5000)
+                        }.bind(this), 5000)
                         message.success("taọ thành công")
 
 
@@ -143,7 +143,7 @@ class AddSignature extends React.Component {
                             {...layout}
                             name="basic"
                             className="employee-form"
-
+                            hideRequiredMark
                             onFinish={this.onFinish}
                             onFinishFailed={this.onFinishFailed}
 
@@ -163,7 +163,7 @@ class AddSignature extends React.Component {
                                     <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                 </Popover></Row>
                             </Form.Item>
-                           
+
                             <Form.Item
                                 label="Ngày hết hạn"
                                 name="expiredDate"
@@ -187,8 +187,7 @@ class AddSignature extends React.Component {
                                         Tạo
                                 </Button>
                                     <Button type="primary" htmlType="reset" className="login-form-button">
-                                        Reset
-                                </Button>
+                                        Xóa dữ liệu đã nhập                                </Button>
 
 
                                 </Space>

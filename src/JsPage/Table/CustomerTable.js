@@ -103,7 +103,7 @@ class CustomerList extends React.Component {
 
           return (<FadeIn>
             <div style={{ height: "100vh" }}>
-              {login.AddCustomer === true ? <Button type="primary" onClick={this.OpenAddCustomer} icon={<UserAddOutlined />}>Tạo khách hàng mới</Button> : null}
+              {login.AddCustomer === true ? <Button type="primary" onClick={this.OpenAddCustomer} icon={<UserAddOutlined />}>Thêm thông tin khách hàng</Button> : null}
               <CustomerSearch token={this.props.token} customerList={this.state.customers} />
               <Table dataSource={this.props.newCustomer}
                 loading={this.state.loading}

@@ -27,7 +27,7 @@ const IconFont = createFromIconfontCN({
 });
 const layout = {
     labelCol: {
-        span: 6,
+        span: 8,
 
     },
     wrapperCol: {
@@ -36,14 +36,14 @@ const layout = {
 };
 const tailLayout = {
     wrapperCol: {
-        offset: 6,
-        span: 10,
+        offset: 8,
+        span: 12,
     },
 };
 const middleLayout = {
     wrapperCol: {
-        offset: 6,
-        span: 10,
+        offset: 8,
+        span: 12,
     },
 };
 
@@ -252,7 +252,7 @@ class LoginPage extends React.Component {
                                 onFinishFailed={this.onFinishFailed}
                             >
                                 {/* <IconFont type="icon-javascript" style={{ fontSize: '60px', color: '#08c', marginLeft: "40%" }} /> */}
-                                <img src={logo} type="icon-javascript" style={{ height: '180px', width: '300px', color: '#08c', marginLeft: "25%" }} alt="Logo" />
+                                <img src={logo} type="icon-javascript" style={{ height: '180px', width: '300px', color: '#08c', marginLeft: "32%" }} alt="Logo" />
                                 <Form.Item
                                     label={<label style={{ color: "white" }}>Email người dùng</label>}
                                     name="username"
