@@ -6,34 +6,14 @@ import ContractTable from '../Table/ContractTable'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 
 
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
 import axios from 'axios'
-import 'react-quill/dist/quill.snow.css';
+
 import JoditEditor from 'jodit-react';
 const { Option } = Select;
-const { RangePicker } = DatePicker;
-const { Column, ColumnGroup } = Table;
-const options = [
-    {
-        value: 'Công ty tnhh Microsoft',
-    },
-    {
-        value: 'Công ty tnvh google',
-    },
-    {
-        value: 'Công ty cổ phần amazon',
-    },
-];
 
-function makeid(length) {
-    var result = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-}
+
+
 class CreateContract extends React.Component {
     constructor() {
         super();

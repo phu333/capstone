@@ -47,29 +47,7 @@ const middleLayout = {
     },
 };
 
-const userList = [
-    {
-        username: "phu111",
-        password: "123",
 
-    },
-    {
-        username: "phu222",
-        password: "123",
-
-    },
-    {
-        username: "phu333",
-        password: "123",
-
-    },
-    {
-        username: "phu444",
-        password: "123",
-
-    },
-
-]
 const initialState = {
     role: "",
     othersPage: "",
@@ -164,7 +142,9 @@ class LoginPage extends React.Component {
                                 
                                 loginInfo[data[i].permissionName]=data[i].enabled
                             }
-                            console.log(loginInfo)
+                            this.setState({
+                                othersPage: ""
+                            })
                             this.props.onSubmit(loginInfo)
                         })
                   
