@@ -189,7 +189,7 @@ class UpdateProfile extends React.Component {
                             >
 
                                 <Form.Item
-                                    label=" tên"
+                                    label="Tên"
                                     name="firstName"
                                     rules={[
 
