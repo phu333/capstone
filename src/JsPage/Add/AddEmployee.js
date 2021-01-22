@@ -1,5 +1,5 @@
 import React from 'react';
-// import Popup from 'reactjs-popup';
+
 import 'antd/dist/antd.css';
 import '../../index.css';
 import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
@@ -8,10 +8,7 @@ import { Form, Input, Button, Switch, Space, Card, Select, Col, Row, Popover, me
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import { CloseOutlined, CheckOutlined, QuestionCircleOutlined } from '@ant-design/icons';
-// import {
-//     IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-//     , CloudUploadOutlined, RedoOutlined, ReloadOutlined
-// } from '@ant-design/icons';
+
 import EmployeeTable from '../Table/EmployeeTable'
 import axios from 'axios'
 import "../Column.css"

@@ -1,14 +1,13 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import '../../index.css';
-import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
-import { connect } from 'react-redux'
+
 import LoginPage from './LoginPage'
 import { Form, Input, Button, Row, Space, Card, Popover, Col,message } from 'antd';
 import {
     QuestionCircleOutlined
 } from '@ant-design/icons';
-import EmployeeTable from '../Table/EmployeeTable'
+
 import axios from 'axios'
 import "../Column.css"
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'

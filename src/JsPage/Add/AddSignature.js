@@ -4,13 +4,13 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { createSignature, signatureInformation } from '../../actions/SignatureAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Card, Space, DatePicker, message, Row, Col, Popover } from 'antd';
+import { Form, Input, Button, Card, Space, message, Row, Col, Popover } from 'antd';
 import {
     QuestionCircleOutlined
 } from '@ant-design/icons';
 import SignatureList from '../Table/SignatureList'
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
-const { RangePicker } = DatePicker;
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+
 const layout = {
     labelCol: {
         span: 8,
