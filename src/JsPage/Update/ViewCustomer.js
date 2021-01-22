@@ -3,18 +3,20 @@ import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import '../../index.css';
 import axios from 'axios'
-import { Form, Input, Button, message, Card, Space } from 'antd';
+import { Form, Input, Button, message, Card, Space,Popover,Row,Col } from 'antd';
 import {
-    IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
+    QuestionCircleOutlined, BankOutlined, HomeOutlined, MailOutlined
     , CloudUploadOutlined, RedoOutlined
 } from '@ant-design/icons';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { updateCustomer } from '../../actions/CustomerAction';
 import CustomerTable from '../Table/CustomerTable'
+const { TextArea } = Input;
+
 const layout = {
     labelCol: {
-        span: 4,
+        span: 8,
     },
     wrapperCol: {
         span: 10,
@@ -22,10 +24,48 @@ const layout = {
 };
 const tailLayout = {
     wrapperCol: {
-        offset: 6,
+        offset: 8,
         span: 10,
     },
 };
+const ValidationCompany = (
+
+    <p>Tên công ty khách hàng sẽ được in trên hợp đồng</p>
+
+);
+const ValidationAdd = (
+
+    <p>Số địa chỉ công ty khách hàng sẽ được in trên hợp đồng</p>
+
+);const ValidationPresentor = (
+
+    <p>Người đại diện cho công ty khách</p>
+
+);const ValidationCertificate = (
+
+    <p>Mã giấy phép kinh doanh do nhà nước cấp</p>
+
+);const ValidationEmail = (
+
+    <p>Địa chỉ email của khách </p>
+
+);const ValidationTax = (
+
+    <p>Mã số thuế của công ty khách hàng </p>
+
+);const ValidationRole = (
+
+    <p>Chức vụ trong của người đại diện công ty khách</p>
+
+);const ValidationPhone = (
+
+    <p>Số điện thoại công ty khách trong khoảng 10 ký tự</p>
+
+);const ValidationBank = (
+
+    <p>8 số cuối của mã số ngân hàng trên thẻ của công ty khách</p>
+
+);
 
 class ViewCustomer extends React.Component {
     constructor() {
@@ -131,8 +171,12 @@ class ViewCustomer extends React.Component {
 
                         >
                             {this.state.isEdit === false ?
-                                <Input disabled defaultValue={this.props.customer.name} /> :
-                                <Input defaultValue={this.props.customer.name} />}
+                                <Row gutter={8}> <Col span={20}><TextArea autoSize disabled defaultValue={this.props.customer.name} /> </Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row> :
+                            <Row gutter={8}> <Col span={20}><TextArea autoSize defaultValue={this.props.customer.name} /> </Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>}
                         </Form.Item>
                         <Form.Item
                             label="Mã số thuế"
@@ -140,8 +184,12 @@ class ViewCustomer extends React.Component {
 
                         >
                             {this.state.isEdit === false ?
-                                <Input disabled defaultValue={this.props.customer.taxCode} /> :
-                                <Input defaultValue={this.props.customer.taxCode} />}
+                                <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.props.customer.taxCode} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row> :
+                                <Row gutter={8}> <Col span={20}><Input defaultValue={this.props.customer.taxCode} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>}
                         </Form.Item>
 
                         <Form.Item
@@ -150,8 +198,12 @@ class ViewCustomer extends React.Component {
 
                         >
                             {this.state.isEdit === false ?
-                                <Input disabled defaultValue={this.props.customer.businessLicense} /> :
-                                <Input defaultValue={this.props.customer.businessLicense} />}
+                                <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.props.customer.businessLicense} /> </Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>:
+                                <Row gutter={8}> <Col span={20}><Input defaultValue={this.props.customer.businessLicense} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>}
                         </Form.Item>
                         <Form.Item
                             label="Điện thoại"
@@ -159,8 +211,12 @@ class ViewCustomer extends React.Component {
 
                         >
                             {this.state.isEdit === false ?
-                                <Input disabled defaultValue={this.props.customer.phoneNumber} /> :
-                                <Input defaultValue={this.props.customer.phoneNumber} />}
+                                <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.props.customer.phoneNumber} /> </Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>:
+                                <Row gutter={8}> <Col span={20}><Input defaultValue={this.props.customer.phoneNumber} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>}
                         </Form.Item>
                         <Form.Item
                             label="Địa chỉ"
@@ -168,8 +224,12 @@ class ViewCustomer extends React.Component {
 
                         >
                             {this.state.isEdit === false ?
-                                <Input disabled defaultValue={this.props.customer.address} /> :
-                                <Input defaultValue={this.props.customer.address} />}
+                               <Row gutter={8}> <Col span={20}> <Input disabled defaultValue={this.props.customer.address} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                               <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                           </Popover></Row> :
+                              <Row gutter={8}> <Col span={20}> <Input defaultValue={this.props.customer.address} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                              <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                          </Popover></Row>}
                         </Form.Item>
                         <Form.Item
                             label="Email"
@@ -177,8 +237,12 @@ class ViewCustomer extends React.Component {
 
                         >
                             {this.state.isEdit === false ?
-                                <Input disabled defaultValue={this.props.customer.email} /> :
-                                <Input defaultValue={this.props.customer.email} />}
+                               <Row gutter={8}> <Col span={20}> <Input disabled defaultValue={this.props.customer.email} /> </Col>    <Popover content={ValidationCompany} trigger="hover">
+                               <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                           </Popover></Row>:
+                                <Row gutter={8}> <Col span={20}><Input defaultValue={this.props.customer.email} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>}
                         </Form.Item>
                         <Form.Item
                             label="Số tài khoản"
@@ -186,8 +250,12 @@ class ViewCustomer extends React.Component {
 
                         >
                             {this.state.isEdit === false ?
-                                <Input disabled defaultValue={this.props.customer.bankAccount} /> :
-                                <Input defaultValue={this.props.customer.bankAccount} />}
+                               <Row gutter={8}> <Col span={20}> <Input disabled defaultValue={this.props.customer.bankAccount} /> </Col>    <Popover content={ValidationCompany} trigger="hover">
+                               <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                           </Popover></Row>:
+                                <Row gutter={8}> <Col span={20}><Input defaultValue={this.props.customer.bankAccount} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>}
                         </Form.Item>
                         <Form.Item
                             label="Người đại diện"
@@ -195,8 +263,12 @@ class ViewCustomer extends React.Component {
 
                         >
                             {this.state.isEdit === false ?
-                                <Input disabled defaultValue="Nguyen Van B" /> :
-                                <Input defaultValue="Nguyen Van B" />}
+                               <Row gutter={8}> <Col span={20}><Input disabled defaultValue="Nguyen Van B" /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                               <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                           </Popover></Row> :
+                              <Row gutter={8}> <Col span={20}>  <Input defaultValue="Nguyen Van B" /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                              <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                          </Popover></Row>}
                         </Form.Item>
                         {/* <Form.Item
                         label="Chức vụ"

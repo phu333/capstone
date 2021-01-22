@@ -29,7 +29,7 @@ const layout = {
 };
 const tailLayout = {
     wrapperCol: {
-        offset: 6,
+        offset: 10,
         span: 10,
     },
 };
@@ -287,7 +287,7 @@ class AddEmployee extends React.Component {
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="Tên" /> </Col>    <Popover content={ValidationLName} trigger="hover">
-                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined  style={{verticalAlign:'baseline'}} />} />
                             </Popover></Row>
                         </Form.Item>
                         <Form.Item
@@ -302,7 +302,7 @@ class AddEmployee extends React.Component {
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="Họ" /> </Col>    <Popover content={ValidationFName} trigger="hover">
-                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined  style={{verticalAlign:'baseline'}} />} />
                             </Popover></Row>
                         </Form.Item>
                         {/* <Form.Item
@@ -316,7 +316,7 @@ class AddEmployee extends React.Component {
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="cmnd/cmt" /> </Col>    <Popover content={names} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined  style={{verticalAlign:'baseline'}} />} />
                     </Popover></Row>
                         </Form.Item> */}
                         <Form.Item
@@ -330,7 +330,7 @@ class AddEmployee extends React.Component {
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="tên người dùng" /> </Col>    <Popover content={names} trigger="hover">
-                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined  style={{verticalAlign:'baseline'}} />} />
                             </Popover></Row>
                         </Form.Item>
 
@@ -354,7 +354,7 @@ class AddEmployee extends React.Component {
                             ]}
                         >
                             <Input prefix="+84" placeholder="số điện thoại" /> </Col>    <Popover content={names} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined  style={{verticalAlign:'baseline'}} />} />
                     </Popover></Row>
                         </Form.Item> */}
                         {/* <Form.Item
@@ -368,7 +368,7 @@ class AddEmployee extends React.Component {
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="Địa chỉ" /> </Col>    <Popover content={names} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined  style={{verticalAlign:'baseline'}} />} />
                     </Popover></Row>
                         </Form.Item> */}
                         <Form.Item
@@ -386,7 +386,7 @@ class AddEmployee extends React.Component {
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="Email" /> </Col>    <Popover content={ValidationEmail} trigger="hover">
-                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined  style={{verticalAlign:'baseline'}} />} />
                             </Popover></Row>
                         </Form.Item>
                         <Form.Item
@@ -415,7 +415,7 @@ class AddEmployee extends React.Component {
                                                 Sign: !this.state.Sign
                                             })
                                             console.log(this.state.Sign)
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="Ký hợp đồng"
                                     />
                                     <p></p>
@@ -426,7 +426,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 GetContractList: !this.state.GetContractList
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="quản lý danh sách hợp đồng"
                                     />
                                     <p></p>
@@ -437,7 +437,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 ActiveDeactiveContract: !this.state.ActiveDeactiveContract
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="kích hoạt/vô hiệu hóa hợp đồng"
                                     />
                                     <p></p>
@@ -448,7 +448,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 UpdateContract: !this.state.UpdateContract
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="Chỉnh sửa hợp đồng"
                                     />
                                     <p></p>
@@ -459,7 +459,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 CreateContract: !this.state.CreateContract
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="Tạo hợp đồng"
                                     />
                                     <p></p>
@@ -470,7 +470,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 GetAllCompanyTemplate: !this.state.GetAllCompanyTemplate
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="Quản lý danh sách mẫu hợp đồng"
                                     />
                                     <p></p>
@@ -481,7 +481,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 ActiveDeactiveTemplate: !this.state.ActiveDeactiveTemplate
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="Kích hoạt/vô hiệu hóa mẫu hợp đồng"
                                     />
                                     <p></p>
@@ -492,7 +492,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 UpdateTemplate: !this.state.UpdateTemplate
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="chỉnh sửa mẫu hợp đồng"
                                     />
                                     <p></p>
@@ -503,7 +503,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 CreateTemplate: !this.state.CreateTemplate
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="Tạo mẫu hợp đồng"
                                     />
                                     <p></p>
@@ -514,7 +514,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 UpdateCustomer: !this.state.UpdateCustomer
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="Chỉnh sửa thông tin khách hàng"
                                     />
                                     <p></p>
@@ -525,7 +525,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 GetCompanyAdminList:!this.state.GetCompanyAdminList
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="Ký"
                                     />
                                     <p></p>
@@ -536,7 +536,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 ActiveDeactiveAccount: !this.state.ActiveDeactiveAccount
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="Kích hoạt/vô hiệu hóa thông tin nhân viên"
                                     />
                                     <p></p>
@@ -547,7 +547,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 GetCompanyAccountListByCompanyId: !this.state.GetCompanyAccountListByCompanyId
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="quản lý danh sách nhân viên"
                                     />
                                     <p></p>
@@ -558,7 +558,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 UpdateAccountPermission: !this.state.UpdateAccountPermission
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="chỉnh sửa quyền nhân viên"
                                     />
                                     <p></p>
@@ -569,7 +569,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 CreateAccount: !this.state.CreateAccount
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="tạo tài khoản nhân viên"
                                     />
                                     <p></p>
@@ -580,7 +580,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 ActiveDeactiveSignature: !this.state.ActiveDeactiveSignature
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="Kích hoạt/vô hiệu hóa chữ ký"
                                     />
                                     <p></p>
@@ -591,7 +591,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 UpdateSignature: !this.state.UpdateSignature
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="chỉnh sửa thông tin chữ ký"
                                     />
                                     <p></p>
@@ -602,7 +602,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 CreateSignature: !this.state.CreateSignature
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="Thêm chữ ký vào công ty"
                                     />
                                     <p></p>
@@ -613,7 +613,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 GetAllCompanyList:!this.state.GetAllCompanyList
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="Ký"
                                     />
                                     <p></p>
@@ -624,7 +624,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 GetAllCompanyAccount: !this.state.GetAllCompanyAccount
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="quản lý danh sách nhân viên công ty"
                                     />
                                     <p></p>
@@ -635,7 +635,7 @@ class AddEmployee extends React.Component {
                                             this.setState({
                                                 ActiveDeactiveCustomer: !this.state.ActiveDeactiveCustomer
                                             })
-                                        }} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />}
+                                        }} checkedChildren={<CheckOutlined  style={{verticalAlign:'baseline'}} />} unCheckedChildren={<CloseOutlined  style={{verticalAlign:'baseline'}} />} />}
                                         label="Kích hoạt/vô hiệu hóa khách hàng"
                                     />
                                     <p></p>

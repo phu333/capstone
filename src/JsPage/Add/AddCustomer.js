@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import { createCustomer, customerInformation } from '../../actions/CustomerAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Row, Space, Card, message,Col,Popover } from 'antd';
+import { Form, Input, Button, Row, Space, Card, message, Col, Popover } from 'antd';
 import CustomerTable from '../Table/CustomerTable'
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
@@ -22,7 +22,7 @@ const layout = {
 };
 const tailLayout = {
     wrapperCol: {
-        offset: 6,
+        offset: 9,
         span: 10,
     },
 };
@@ -40,31 +40,31 @@ const ValidationAdd = (
 
     <p>Số địa chỉ công ty khách hàng sẽ được in trên hợp đồng</p>
 
-);const ValidationPresentor = (
+); const ValidationPresentor = (
 
     <p>Người đại diện cho công ty khách</p>
 
-);const ValidationCertificate = (
+); const ValidationCertificate = (
 
     <p>Mã giấy phép kinh doanh do nhà nước cấp</p>
 
-);const ValidationEmail = (
+); const ValidationEmail = (
 
     <p>Địa chỉ email của khách </p>
 
-);const ValidationTax = (
+); const ValidationTax = (
 
     <p>Mã số thuế của công ty khách hàng </p>
 
-);const ValidationRole = (
+); const ValidationRole = (
 
     <p>Chức vụ trong của người đại diện công ty khách</p>
 
-);const ValidationPhone = (
+); const ValidationPhone = (
 
     <p>Số điện thoại công ty khách trong khoảng 10 ký tự</p>
 
-);const ValidationBank = (
+); const ValidationBank = (
 
     <p>8 số cuối của mã số ngân hàng trên thẻ của công ty khách</p>
 
@@ -80,14 +80,14 @@ class AddCustomer extends React.Component {
     }
     onFinish = (values) => {
         axios({
-            url: '/api/v1/Company?Name='+values.name,
+            url: '/api/v1/Company?Name=' + values.name,
             method: "GET",
             headers: {
                 Authorization: 'Bearer ' + this.props.token,
 
             },
-            
-            
+
+
         })
             .then((response) => {
 
@@ -95,24 +95,24 @@ class AddCustomer extends React.Component {
             })
             .then((data) => {
 
-                for(let i = 0; i< data.data.length;i++){
-                    if(data.data[i]["name"] === values.name){
-                        values.id=data.data[i].id
+                for (let i = 0; i < data.data.length; i++) {
+                    if (data.data[i]["name"] === values.name) {
+                        values.id = data.data[i].id
                         axios({
                             url: '/api/v1/Customer',
                             method: "POST",
                             headers: {
                                 Authorization: 'Bearer ' + this.props.token,
-                
+
                             },
                             data: values
                         })
                             .then((response) => {
-                
+
                                 return response.data;
                             })
                             .then((data) => {
-                
+
                                 message.success("taọ thành công")
 
                                 this.setState({
@@ -120,41 +120,41 @@ class AddCustomer extends React.Component {
                                 })
                             })
                             .catch(error => {
-                
+
                                 message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
-                
+
                             });
                         return true;
-                    }else{
+                    } else {
                         axios({
                             url: '/api/v1/Customer',
                             method: "POST",
                             headers: {
                                 Authorization: 'Bearer ' + this.props.token,
-                
+
                             },
                             data: values
                         })
                             .then((response) => {
-                
+
                                 return response.data;
                             })
                             .then((data) => {
-                
+
                                 message.success("tao thanh cong")
                                 this.setState({
                                     finish: true
                                 })
-                
+
                             })
                             .catch(error => {
-                
+
                                 if (error.response.status === 500) {
                                     message.error(error.response.status + ' Server under maintainence');
                                 } else if (error.response.status === 404) {
                                     message.error(error.response.status + ' Server not found');
                                 }
-                
+
                             });
                         return false;
                     }
@@ -170,8 +170,8 @@ class AddCustomer extends React.Component {
                 }
 
             });
-        
-        
+
+
 
         // this.setState({
         //     finish: true
@@ -192,7 +192,7 @@ class AddCustomer extends React.Component {
             return (<Router>
                 <Redirect push to={"/capstone/customerList"} />
                 <Route exact path="/capstone/customerList" render={() => <CustomerTable token={this.props.token} role={this.props.role} />
-                    } />
+                } />
             </Router>);
         } else {
 
@@ -203,18 +203,18 @@ class AddCustomer extends React.Component {
                     <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
                         Trở về
               </Button>
-                    <h2 style={{ textAlign: 'center' }}>Tạo khách hàng</h2>
+                    <h2 style={{ textAlign: 'center' }}>Thêm thông tin khách hàng</h2>
 
                     <Form
                         {...layout}
                         name="basic"
                         className="employee-form"
-hideRequiredMark
+                        hideRequiredMark
                         onFinish={this.onFinish}
                         onFinishFailed={this.onFinishFailed}
 
                     >
-                        
+
                         <Form.Item
                             label="Tên doanh nghiệp"
                             name="name"
@@ -225,8 +225,8 @@ hideRequiredMark
                                 },
                             ]}>
                             <Row gutter={8}> <Col span={20}><TextArea autoSize placeholder="tên doanh nghiệp" /> </Col>    <Popover content={ValidationCompany} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Mã số thuế"
@@ -239,13 +239,13 @@ hideRequiredMark
                                 {
 
                                     message: 'Vui lòng nhập 10 ký tự',
-                                   
+
                                 },
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input type="text" placeholder="Mã số thuế" /> </Col>    <Popover content={ValidationTax} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
 
                         <Form.Item
@@ -259,8 +259,8 @@ hideRequiredMark
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input type="text" placeholder="Giấy phép kinh doanh" /> </Col>    <Popover content={ValidationCertificate} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Điện thoại"
@@ -278,9 +278,9 @@ hideRequiredMark
                                 },
                             ]}
                         >
-                           <Row gutter={8}> <Col span={20}> <Input type="number" prefix="+84" placeholder="Điện thoại" /> </Col>    <Popover content={ValidationPhone} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                            <Row gutter={8}> <Col span={20}> <Input type="number" prefix="+84" placeholder="Điện thoại" /> </Col>    <Popover content={ValidationPhone} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Địa chỉ"
@@ -292,9 +292,9 @@ hideRequiredMark
                                 },
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><TextArea autoSize  placeholder="Địa chỉ" /> </Col>    <Popover content={ValidationAdd} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                            <Row gutter={8}> <Col span={20}><TextArea autoSize placeholder="Địa chỉ" /> </Col>    <Popover content={ValidationAdd} trigger="hover">
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Email"
@@ -311,8 +311,8 @@ hideRequiredMark
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="Email" /> </Col>    <Popover content={ValidationEmail} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Số tài khoản"
@@ -321,8 +321,8 @@ hideRequiredMark
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập Số tài khoản',
-                                    
-                                },{
+
+                                }, {
 
                                     message: 'Vui lòng nhập 10 ký tự',
                                     min: 8,
@@ -331,8 +331,8 @@ hideRequiredMark
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input type='number' placeholder="Số tài khoản" /> </Col>    <Popover content={ValidationBank} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Người đại diện"
@@ -345,8 +345,8 @@ hideRequiredMark
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="Người đại diện" /> </Col>    <Popover content={ValidationPresentor} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
                         <Form.Item
                             label="Chức vụ"
@@ -359,8 +359,8 @@ hideRequiredMark
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="Chức vụ" /> </Col>    <Popover content={ValidationRole} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
+                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                            </Popover></Row>
                         </Form.Item>
 
 
