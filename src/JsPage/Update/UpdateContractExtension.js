@@ -1,17 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { DeleteOutlined, SearchOutlined, FileOutlined } from "@ant-design/icons"
+
 import ContractExtensionTable from '../Table/ContractExtensionTable'
 import { Select, DatePicker, Input, Space, Button, message, Descriptions, Table, InputNumber, Form, Comment, Card, Avatar, Pagination } from 'antd';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
-import moment from 'moment'
+
 import axios from 'axios'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import JoditEditor from "jodit-react";
-const { Column } = Table;
-const { Option } = Select;
-const { RangePicker } = DatePicker;
-const dateFormat = 'YYYY-MM-DD';
+
 const { TextArea } = Input;
 var hash = require('object-hash')
 

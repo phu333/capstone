@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { connect } from 'react-redux'
 
 import { Offline, Online } from "react-detect-offline";
-const { TabPane } = Tabs;
+
 class App extends React.Component {
 
   render() {

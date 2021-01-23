@@ -1,18 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 import 'antd/dist/antd.css';
 import { connect } from 'react-redux'
 import ContractTypeTable from '../Table/ContractTypeTable'
-import { MailOutlined, PrinterOutlined, IdcardOutlined, HomeOutlined, PhoneOutlined, BankOutlined, ContactsOutlined } from '@ant-design/icons';
 import { Card, Button, Space, message, Descriptions, Select, Form, Input } from 'antd';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
-import { FormBuilder } from 'react-formio';
+
 import axios from 'axios'
 import 'reactjs-popup/dist/index.css';
 import FadeIn from 'react-fade-in'
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-import 'react-quill/dist/quill.snow.css';
+
+
 import JoditEditor from "jodit-react";
 
 
