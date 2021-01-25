@@ -234,16 +234,17 @@ class AddCustomer extends React.Component {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Vui lòng nhập tên mst',
+                                    message: 'Vui lòng nhập mã số thuế',
                                 },
                                 {
-
+                                    min: 10,
+                                    max: 10,
                                     message: 'Vui lòng nhập 10 ký tự',
-
                                 },
+
                             ]}
                         >
-                            <Row gutter={8}> <Col span={20}><Input type="text" placeholder="Mã số thuế" /> </Col>    <Popover content={ValidationTax} trigger="hover">
+                            <Row gutter={8}> <Col span={20}><Input type="number" placeholder="Mã số thuế" /> </Col>    <Popover content={ValidationTax} trigger="hover">
                                 <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                         </Form.Item>
@@ -255,6 +256,10 @@ class AddCustomer extends React.Component {
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập giấy phép',
+                                }, {
+                                    min: 10,
+                                    max: 10,
+                                    message: 'Vui lòng nhập 10 ký tự',
                                 },
                             ]}
                         >
@@ -268,7 +273,7 @@ class AddCustomer extends React.Component {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Vui lòng nhập sdt',
+                                    message: 'Vui lòng nhập số điện thoại',
                                 },
                                 {
 
@@ -288,7 +293,12 @@ class AddCustomer extends React.Component {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Vui lòng nhập Địa chỉ',
+                                    message: 'Vui lòng nhập địa chỉ',
+
+                                }, {
+
+                                    message: 'Vui lòng nhập dưới 100 ký tự',
+                                    max: 100,
                                 },
                             ]}
                         >
@@ -317,17 +327,12 @@ class AddCustomer extends React.Component {
                         <Form.Item
                             label="Số tài khoản"
                             name="bankAccount"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập Số tài khoản',
+                            rules={[{
 
-                                }, {
-
-                                    message: 'Vui lòng nhập 10 ký tự',
-                                    min: 8,
-                                    max: 8,
-                                },
+                                message: 'Vui lòng nhập 8 ký tự',
+                                min: 8,
+                                max: 8,
+                            },
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input type='number' placeholder="Số tài khoản" /> </Col>    <Popover content={ValidationBank} trigger="hover">

@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import '../../index.css';
 import { createEmployee, employeeInformation } from '../../actions/EmployeeAction'
 import axios from 'axios'
-import { Space, Card, Button, Descriptions,Select, Avatar, Form, Input, Popover, Row, Col, message } from 'antd';
+import { Space, Card, Button, Descriptions, Select, Avatar, Form, Input, Popover, Row, Col, message } from 'antd';
 import {
     QuestionCircleOutlined, UserOutlined
 } from '@ant-design/icons';
@@ -91,7 +91,7 @@ class UpdateProfile extends React.Component {
                 Authorization: 'Bearer ' + this.props.token,
 
             },
-            data:values
+            data: values
         })
             .then((response) => {
 
@@ -108,7 +108,7 @@ class UpdateProfile extends React.Component {
                 message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
 
             });
-        
+
 
 
 
@@ -127,7 +127,7 @@ class UpdateProfile extends React.Component {
         console.log('Failed:', errorInfo);
     };
 
-    componentDidMount(){
+    componentDidMount() {
         axios({
             url: '/api/v1/Company/info',
             method: "PUT",
@@ -142,7 +142,7 @@ class UpdateProfile extends React.Component {
             })
             .then((data) => {
                 console.log(data)
-                
+
             })
             .catch(error => {
                 console.log(error)
@@ -196,7 +196,10 @@ class UpdateProfile extends React.Component {
                                         {
                                             required: true,
                                             message: 'Vui lòng nhập tên ',
-                                        },
+                                        }, {
+                                            max: 50,
+                                            message: 'Vui lòng không nhập quá 50 ký tự'
+                                        }
                                     ]}
                                 >
                                     {this.state.isEdit === false ?
@@ -214,7 +217,10 @@ class UpdateProfile extends React.Component {
                                         {
                                             required: true,
                                             message: 'Vui lòng nhập họ ',
-                                        },
+                                        }, {
+                                            max: 50,
+                                            message: 'Vui lòng không nhập quá 50 ký tự'
+                                        }
                                     ]}
                                 >
                                     {this.state.isEdit === false ? <Row gutter={8}> <Col span={20}><Input disabled placeholder="Họ" /> </Col>    <Popover content={ValidationFName} trigger="hover">
@@ -235,7 +241,17 @@ class UpdateProfile extends React.Component {
                                 <Form.Item
                                     label="Mật khẩu"
                                     name="password"
-                                    required
+                                    rules={[
+
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng không để trống ',
+                                        }, {
+                                            max: 6,
+                                            min: 6,
+                                            message: 'Vui lòng không nhập 6 ký tự'
+                                        }
+                                    ]}
                                 >
                                     {this.state.isEdit === false ?
                                         <Row gutter={8}> <Col span={20}>  <Input.Password disabled defaultValue="123" /> </Col>    <Popover content={name} trigger="hover">
@@ -247,7 +263,7 @@ class UpdateProfile extends React.Component {
 
                                 </Form.Item>
                                 {this.state.isEdit === false ?
-                                   <p></p>: <Form.Item
+                                    <p></p> : <Form.Item
                                         label="Xác nhận mật khẩu"
                                         name="Cpassword"
                                         required
@@ -255,19 +271,29 @@ class UpdateProfile extends React.Component {
                                         <Row gutter={8}> <Col span={20}>  <Input.Password defaultValue="123" /></Col>    <Popover content={name} trigger="hover">
                                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                         </Popover></Row>
-                                    </Form.Item> }
+                                    </Form.Item>}
 
 
                                 <Form.Item
                                     label="Điện thoại"
                                     name="phone"
+                                    rules={[
+                                        {
+                                            max: 10,
 
+                                            message: 'Vui lòng không quá 10 ký tự'
+                                        }, {
+                                            min: 6,
+
+                                            message: 'Vui lòng không dưới 6 ký tự'
+                                        }
+                                    ]}
                                 >
                                     {this.state.isEdit === false ?
-                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue="123123" /></Col>    <Popover content={ValidationPhone} trigger="hover">
+                                        <Row gutter={8}> <Col span={20}><Input type="number" disabled defaultValue="123123" /></Col>    <Popover content={ValidationPhone} trigger="hover">
                                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                         </Popover></Row> :
-                                        <Row gutter={8}> <Col span={20}><Input defaultValue="123123" /></Col>    <Popover content={ValidationPhone} trigger="hover">
+                                        <Row gutter={8}> <Col span={20}><Input type="number" defaultValue="123123" /></Col>    <Popover content={ValidationPhone} trigger="hover">
                                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                         </Popover></Row>}
                                 </Form.Item>
@@ -289,7 +315,16 @@ class UpdateProfile extends React.Component {
                                 <Form.Item
                                     label="Email"
                                     name="email"
-
+                                    rules={[
+                                        {
+                                            type: 'email',
+                                            message: 'The input is not valid E-mail!',
+                                        },
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Email',
+                                        },
+                                    ]}
                                 >
                                     {this.state.isEdit === false ?
                                         <Row gutter={8}> <Col span={20}><Input disabled defaultValue={login.email} /></Col>    <Popover content={ValidationEmail} trigger="hover">
@@ -299,7 +334,7 @@ class UpdateProfile extends React.Component {
                                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                         </Popover></Row>}
                                 </Form.Item>
-                                
+
 
 
 
@@ -318,7 +353,7 @@ class UpdateProfile extends React.Component {
 
                                     </Space>
                                 </Form.Item>
-                            
+
 
 
 

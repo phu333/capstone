@@ -33,6 +33,39 @@ class ContractTable extends React.Component {
       showTemplateCreate: !this.state.showTemplateCreate,
     })
   }
+  handleChangeS(index, info) {
+    if (info == "Deactive") { info = false }
+    else { info = true }
+    let Status = {
+        id: index,
+
+        enabled: info
+    }
+    axios({
+        url: '/api/Account/permission',
+        data: Status,
+        method: "PUT",
+        headers: {
+            Authorization: 'Bearer ' + this.props.token,
+
+        }
+
+    })
+        .then((response) => {
+
+            return response.data;
+        })
+        .then((data) => {
+            console.log(data.data)
+            message.success("Trạng thái đã được cập nhật")
+
+        })
+        .catch(error => {
+            message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
+
+        });
+
+}
   componentDidMount() {
 
 
@@ -113,7 +146,7 @@ class ContractTable extends React.Component {
 
                   )}
                 />
-                {login.ActiveDeactiveTemplate === true ?
+                {login.UpdateTemplate === true ?
                   <Column
                     title="Chỉnh sửa"
                     key="Update"
@@ -138,7 +171,8 @@ class ContractTable extends React.Component {
                       // sortDirections={['descend', 'ascend']}
                       render={(text, record) => (
                         <Space size="middle">
-                          {text === "Deactive" ? <Switch style={{ fontSize: '20px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '20px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
+                          {text === "Deactive" ? <Switch style={{ fontSize: '20px' }}   checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '20px' }}   checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
+                          {/* onChange={() => this.handleChangeS(record.id, text)} */}
                         </Space>
                       )}
                     />

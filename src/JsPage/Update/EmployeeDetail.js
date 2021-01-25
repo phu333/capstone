@@ -125,30 +125,20 @@ class EmployeeDetail extends React.Component {
                     >
 
                         <Form.Item
-                            label="Họ và tên"
+                            label="Họ "
                             name="name"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Vui lòng nhập tên ',
+                                    message: 'Vui lòng nhập họ ',
                                 },
+                                {
+                                    max: 50,
+                                    message: 'Vui lòng không nhập quá 50 ký tự'
+                                }
                             ]}
                         >
                              <Row gutter={8}> <Col span={20}><Input placeholder="Họ và tên" /> </Col>    <Popover content={names} trigger="hover">
-                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                    </Popover></Row>
-                        </Form.Item>
-                        <Form.Item
-                            label="cmnd/cmt"
-                            name="id"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập cmnd/cmt ',
-                                },
-                            ]}
-                        >
-                             <Row gutter={8}> <Col span={20}><Input placeholder="cmnd/cmt" /> </Col>    <Popover content={names} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
@@ -160,12 +150,35 @@ class EmployeeDetail extends React.Component {
                                     required: true,
                                     message: 'Vui lòng nhập tên người dùng',
                                 },
+                                {
+                                    max: 50,
+                                    message: 'Vui lòng không nhập quá 50 ký tự'
+                                }
                             ]}
                         >
                              <Row gutter={8}> <Col span={20}><Input placeholder="Tên người dùng" /> </Col>    <Popover content={names} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>
+                        <Form.Item
+                            label="cmnd/cmt"
+                            name="id"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Vui lòng nhập cmnd/cmt ',
+                                },                                {
+                                    max: 9,
+                                    min:9,
+                                    message: 'Vui lòng nhập đúng 9 ký tự'
+                                }
+                            ]}
+                        >
+                             <Row gutter={8}> <Col span={20}><Input type="number" placeholder="cmnd/cmt" /> </Col>    <Popover content={names} trigger="hover">
+                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                    </Popover></Row>
+                        </Form.Item>
+                        
 
 
                         <Form.Item
@@ -175,7 +188,7 @@ class EmployeeDetail extends React.Component {
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập sdt',
-                                    min: 10,
+                                    min: 6,
                                     max: 10,
                                 },
                                 {
@@ -196,7 +209,12 @@ class EmployeeDetail extends React.Component {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Vui lòng nhập Địa chỉ',
+                                    message: 'Vui lòng nhập địa chỉ',
+                                    
+                                },{
+    
+                                    message: 'Vui lòng nhập dưới 100 ký tự',
+                                    max: 100,
                                 },
                             ]}
                         >
