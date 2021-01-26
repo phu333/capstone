@@ -138,7 +138,9 @@ class CustomerList extends React.Component {
               <CustomerSearch token={this.props.token} customerList={this.state.customers} />
               <Table dataSource={this.props.newCustomer}
                 loading={this.state.loading}
-                rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} >
+                rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'} 
+                // rowClassName={(record, index) => record.status === 0 ? 'table-row-light' : 'table-row-dark'}
+                >
                 <Column title="Tên doanh nghiệp" dataIndex="name" key="name"
                   sorter={(a, b) => a.name.localeCompare(b.name)}
                   sortDirections={['descend', 'ascend']}

@@ -346,7 +346,11 @@ class AddCustomer extends React.Component {
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập Người đại diện',
-                                },
+                                },{
+
+                                    message: 'Vui lòng nhập dưới 50 ký tự',
+                                    max: 50,
+                                }
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="Người đại diện" /> </Col>    <Popover content={ValidationPresentor} trigger="hover">
