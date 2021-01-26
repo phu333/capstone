@@ -75,17 +75,10 @@ class SignatureList extends React.Component {
         })
     }
     handleChangeS(index, info) {
-        if (info == "Deactive") { info = false }
-        else { info = true }
-        let Status = {
-            id: index,
-
-            enabled: info
-        }
+        
         axios({
-            url: '/api/Account/permission',
-            data: Status,
-            method: "PUT",
+            url: '/api/DigitalSignature/'+index,
+            method: "DELETE",
             headers: {
                 Authorization: 'Bearer ' + this.props.token,
 
@@ -99,7 +92,33 @@ class SignatureList extends React.Component {
             .then((data) => {
                 console.log(data.data)
                 message.success("Trạng thái đã được cập nhật")
-
+                axios({
+                    url: '/api/DigitalSignature',
+                    method: "GET",
+                    headers: {
+                        Authorization: "Bearer " + this.props.token,
+        
+                    },
+                })
+                    .then((response) => {
+                        console.log(response)
+                        return response.data;
+                    })
+                    .then((data) => {
+                        setTimeout(function () {
+                            this.setState({
+                                loading: false,
+        
+                            })
+                            this.props.onSubmit(data)
+        
+                        }.bind(this), 5000)
+        
+                    })
+                    .catch(error => {
+                
+                    });
+        
             })
             .catch(error => {
                 message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
@@ -198,8 +217,7 @@ class SignatureList extends React.Component {
                             key="status"
                             render={(text, record) => (
                                 <Space size="middle">
-                                     {text === "Deactive" ? <Switch style={{ fontSize: '20px' }}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '20px' }}   checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />} 
-                                     {/* onChange={() => this.handleChangeS(record.id, text)} */}
+                                     <DeleteOutlined style={{ fontSize: '30px', color: '#08c' }} theme="outlined" onClick={() => this.handleChangeS(record.id)} />
                                 </Space>
                             )}
                         /></Table></div></FadeIn>

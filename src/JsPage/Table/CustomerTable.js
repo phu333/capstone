@@ -71,15 +71,13 @@ class CustomerList extends React.Component {
 
   }
   handleChangeS(index, info) {
-    if (info == "Deactive") { info = false }
-    else { info = true }
+    if (info == "0") { info = 1 }
+    else { info = 0 }
     let Status = {
-        id: index,
-
         enabled: info
     }
     axios({
-        url: '/api/Account/permission',
+        url: '/api/v1/Customer/'+index+'/change-status',
         data: Status,
         method: "PUT",
         headers: {
@@ -217,8 +215,8 @@ class CustomerList extends React.Component {
                     // sortDirections={['descend', 'ascend']}
                     render={(text, record) => (
                       <Space size="middle">
-                          {text === "Deactive" ? <Switch style={{ fontSize: '20px' }}   checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '20px' }}   checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
-                          {/* onChange={() => this.handleChangeS(record.id, text)} */}
+                          {text === "0" ? <Switch style={{ fontSize: '20px' }} onChange={() => this.handleChangeS(record.id, text)}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '20px' }}  onChange={() => this.handleChangeS(record.id, text)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
+                      
                       </Space>
                     )}
                   />
