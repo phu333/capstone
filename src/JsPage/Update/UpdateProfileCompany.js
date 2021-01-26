@@ -156,30 +156,30 @@ class UpdateProfileCompany extends React.Component {
     }
     render() {
         console.log(this.state.company.name)
-        
-        if(this.state.company.name === undefined){
-            return(<></>);
-        }else{
+
+        if (this.state.company.name === undefined) {
+            return (<></>);
+        } else {
             return (
 
 
                 <React.Fragment>
                     <h2 style={{ textAlign: 'center' }}>Thông tin doanh nghiệp</h2>
                     <Space direction="horizontal" align="start"  >
-    
-    
+
+
                         <Card style={{ width: 1000, minHeight: 600 }}>
-    
+
                             <Form
                                 {...layout}
                                 name="basic"
                                 className="employee-form"
-                                
+
                                 onFinish={this.onFinish}
                                 onFinishFailed={this.onFinishFailed}
-    
+
                             >
-                                
+
                                 <Form.Item
                                     label="Tên doanh nghiệp"
                                     name="name"
@@ -187,15 +187,15 @@ class UpdateProfileCompany extends React.Component {
                                         {
                                             required: true,
                                             message: 'Vui lòng nhập tên doanh nghiệp',
-                                        },                            {
-                                        
+                                        }, {
+
                                             message: 'Vui lòng nhập dưới 250 ký tự',
                                             max: 250,
                                         }
                                     ]}
                                 >
                                     {this.state.isEdit === false ?
-    
+
                                         <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationCompany} trigger="hover">
                                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                         </Popover></Row> :
@@ -207,9 +207,9 @@ class UpdateProfileCompany extends React.Component {
                                     label="Mã số thuế"
                                     name="taxCode"
                                     rules={[
-    
+
                                         {
-    
+
                                             message: 'Vui lòng nhập 10 ký tự',
                                             min: 10,
                                             max: 10,
@@ -228,9 +228,9 @@ class UpdateProfileCompany extends React.Component {
                                     label="Điện thoại"
                                     name="phoneNumber"
                                     rules={[
-    
+
                                         {
-    
+                                            required: true,
                                             message: 'Vui lòng nhập 10 ký tự',
                                             min: 6,
                                             max: 10,
@@ -252,9 +252,9 @@ class UpdateProfileCompany extends React.Component {
                                         {
                                             required: true,
                                             message: 'Vui lòng nhập địa chỉ',
-                                            
-                                        },{
-            
+
+                                        }, {
+
                                             message: 'Vui lòng nhập dưới 100 ký tự',
                                             max: 100,
                                         },
@@ -297,7 +297,7 @@ class UpdateProfileCompany extends React.Component {
                                         {
                                             required: true,
                                             message: 'Vui lòng nhập giấy phép',
-                                        },                                {
+                                        }, {
                                             min: 10,
                                             max: 10,
                                             message: 'Vui lòng nhập 10 ký tự',
@@ -319,9 +319,9 @@ class UpdateProfileCompany extends React.Component {
                                         {
                                             required: true,
                                             message: 'Vui lòng nhập Số tài khoản',
-    
+
                                         }, {
-    
+
                                             message: 'Vui lòng nhập 8 ký tự',
                                             min: 8,
                                             max: 8,
@@ -343,12 +343,12 @@ class UpdateProfileCompany extends React.Component {
                                         {
                                             required: true,
                                             message: 'Vui lòng nhập người đại diện',
-                                            
-                                        },{
-            
+
+                                        }, {
+
                                             message: 'Vui lòng nhập dưới 50 ký tự',
                                             max: 50,
-                                        },]}   
+                                        },]}
                                 >
                                     {this.state.isEdit === false ?
                                         <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationPresentor} trigger="hover">
@@ -358,9 +358,9 @@ class UpdateProfileCompany extends React.Component {
                                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                         </Popover></Row>}
                                 </Form.Item>
-    
-    
-    
+
+
+
                                 {/* <Form.Item
                                     label="Chức vụ"
                                     name="role"
@@ -374,10 +374,10 @@ class UpdateProfileCompany extends React.Component {
                                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                         </Popover></Row>}
                                 </Form.Item> */}
-    
-    
-    
-    
+
+
+
+
                                 <Form.Item {...tailLayout}>
                                     <Space size="large">
                                         {this.state.isEdit === true ? <Button type="primary" htmlType="submit" className="login-form-button">
@@ -385,31 +385,31 @@ class UpdateProfileCompany extends React.Component {
                                 </Button> : null}
                                         {this.state.isEdit === true ? <Button type="primary" htmlType="reset" className="login-form-button">
                                             Xóa dữ liệu đã nhập                                </Button> : null}
-    
+
                                         {this.state.isEdit === false ? <Button type="primary" onClick={this.onEdit} className="login-form-button">
                                             Sửa
                                 </Button> : null}
-    
-    
+
+
                                     </Space>
                                 </Form.Item>
                                 <Form.Item>
-    
+
                                 </Form.Item>
-    
-    
-    
-    
+
+
+
+
                             </Form>
-    
+
                         </Card></Space>
                 </React.Fragment>
-    
-    
+
+
             );
         }
 
-        
+
     }
 }
 

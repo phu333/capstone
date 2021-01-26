@@ -37,7 +37,7 @@ class ContractTable extends React.Component {
     if (info == "0") { info = 1 }
     else { info = 0 }
     let Status = {
-      enabled: info
+      status: info
     }
     axios({
       url: '/api/v1/ContractType/' + index + '/change-status',
