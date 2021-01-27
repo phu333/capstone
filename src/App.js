@@ -2,7 +2,7 @@ import React from 'react';
 
 import './App.css';
 import LoginPage from './JsPage/Login/LoginPage'
-
+import Search from './JsPage/Login/SearchContract'
 import { Tabs, Result, Button } from 'antd';
 import FadeIn from 'react-fade-in'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
@@ -23,9 +23,12 @@ class App extends React.Component {
 
 
 
-              <><Redirect exact from="/" to={"/capstone/Login"} />
+              <>
+              <Redirect exact from="/" to={"/capstone/Login"} />
 
-                <Route exact path="/capstone/Login" component={LoginPage} /></>
+                <Route exact path="/capstone/Login" component={LoginPage} />
+                <Route exact path="/capstone/Search" component={Search} />
+                </>
 
 
 
