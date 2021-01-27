@@ -80,7 +80,7 @@ class AddCustomer extends React.Component {
     }
     onFinish = (values) => {
         axios({
-            url: '/api/v1/Company?Name=' + values.name,
+            url: '/api/v1/Company?TaxCode=' + values.TaxCode,
             method: "GET",
             headers: {
                 Authorization: 'Bearer ' + this.props.token,
@@ -96,7 +96,7 @@ class AddCustomer extends React.Component {
             .then((data) => {
 
                 for (let i = 0; i < data.data.length; i++) {
-                    if (data.data[i]["name"] === values.name) {
+                    if (data.data[i]["taxCode"] === values.TaxCode) {
                         values.id = data.data[i].id
                         axios({
                             url: '/api/v1/Customer',

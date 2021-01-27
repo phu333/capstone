@@ -11,7 +11,8 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 
 import JoditEditor from "jodit-react";
-
+const Cryptr = require('cryptr')
+const cryptr = new Cryptr('myTotalySecretKey');
 const { TextArea } = Input;
 
 
@@ -736,7 +737,7 @@ class ContractView extends React.Component {
                                             <Button type="primary" value="Sign" onClick={this.onFinish}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
                                                         Tải về
                                                     </Button>
-                                            <CopyToClipboard text={"http://localhost:3001/capstone/Contract/" + this.props.contract.id}
+                                            <CopyToClipboard text={"http://localhost:3001/capstone/Contract/" + cryptr.encrypt(this.props.contract.id) }
                                                 onCopy={() => message.success("copied")}>
                                                 <Button type="primary">lấy link</Button>
                                             </CopyToClipboard>
