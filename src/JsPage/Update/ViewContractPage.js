@@ -569,7 +569,7 @@ class ContractView extends React.Component {
                 </Descriptions.Item>
                 <Descriptions.Item label={(<><b>{"Tài khoản số"}</b></>)}>{customer.bankAccount}</Descriptions.Item>
                 {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
-                <Descriptions.Item label={(<><b>{"Do ông(bà):"}</b></>)} span={2}>{customer.name}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Do ông(bà):"}</b></>)} span={2}>{customer.representative}</Descriptions.Item>
 
                 <Descriptions.Item label={(<><b>{"Chức vụ"}</b></>)} span={2}>
                     làm đại diện
@@ -593,7 +593,7 @@ class ContractView extends React.Component {
                 <Descriptions.Item label={(<><b>{"Mã số thuế"}</b></>)}>{customer.taxCode}</Descriptions.Item>
                 <Descriptions.Item label={(<><b>{"Tài khoản số"}</b></>)}>{customer.bankAccount}</Descriptions.Item>
                 {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
-                <Descriptions.Item label={(<><b>{"Do ông(bà):"}</b></>)} span={2}>{customer.name}</Descriptions.Item>
+                <Descriptions.Item label={(<><b>{"Do ông(bà):"}</b></>)} span={2}>{customer.representative}</Descriptions.Item>
 
                 <Descriptions.Item label={(<><b>{"Chức vụ"}</b></>)} span={2}>
                     làm đại diện
@@ -681,7 +681,7 @@ class ContractView extends React.Component {
                                             <Descriptions.Item label={(<><b>{"Mã số thuế"}</b></>)}>{this.state.company.taxCode}</Descriptions.Item>
                                             <Descriptions.Item label={(<><b>{"Tài khoản số"}</b></>)}>{this.state.company.bankAccount}</Descriptions.Item>
                                             {/* <Descriptions.Item label={(<b><PrinterOutlined />{"Số Fax:"}</b>)}>123123123123</Descriptions.Item> */}
-                                            <Descriptions.Item label={(<><b>{"Do ông(bà)"}</b></>)} span={2}>{this.state.company.name}</Descriptions.Item>
+                                            <Descriptions.Item label={(<><b>{"Do ông(bà)"}</b></>)} span={2}>{this.state.company.representative}</Descriptions.Item>
 
                                             <Descriptions.Item label={(<><b>{"Chức vụ"}</b></>)} span={2}>
                                                 Giám đốc làm đại diện
