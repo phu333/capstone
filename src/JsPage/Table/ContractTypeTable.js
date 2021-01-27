@@ -33,6 +33,37 @@ class ContractTable extends React.Component {
       showTemplateCreate: !this.state.showTemplateCreate,
     })
   }
+  handleChangeS(index, info) {
+    if (info == "0") { info = 1 }
+    else { info = 0 }
+    let Status = {
+      status: info
+    }
+    axios({
+      url: '/api/v1/ContractType/' + index + '/change-status',
+      data: Status,
+      method: "PUT",
+      headers: {
+        Authorization: 'Bearer ' + this.props.token,
+
+      }
+
+    })
+      .then((response) => {
+
+        return response.data;
+      })
+      .then((data) => {
+        console.log(data.data)
+        message.success("Trạng thái đã được cập nhật")
+
+      })
+      .catch(error => {
+        message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
+
+      });
+
+  }
   componentDidMount() {
 
 
@@ -102,7 +133,10 @@ class ContractTable extends React.Component {
               <ContractTypeSearch token={this.props.token} templateList={this.state.templateList} />
               <Table dataSource={this.props.newContractType}
                 loading={this.state.loading}
-                rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}  >
+                rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
+              // rowClassName={(record, index) => record.status === 0 ? 'table-row-light' : 'table-row-dark'}
+
+              >
                 <Column title="Stt" key="index"
                   render={(text, record, index) => index + 1}
                 />
@@ -113,7 +147,7 @@ class ContractTable extends React.Component {
 
                   )}
                 />
-                {login.ActiveDeactiveTemplate === true ?
+                {login.UpdateTemplate === true ?
                   <Column
                     title="Chỉnh sửa"
                     key="Update"
@@ -138,7 +172,7 @@ class ContractTable extends React.Component {
                       // sortDirections={['descend', 'ascend']}
                       render={(text, record) => (
                         <Space size="middle">
-                          {text === "Deactive" ? <Switch style={{ fontSize: '20px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '20px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
+                          {text === "0" ? <Switch style={{ fontSize: '20px' }} onChange={() => this.handleChangeS(record.id, text)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '20px' }} onChange={() => this.handleChangeS(record.id, text)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
                         </Space>
                       )}
                     />

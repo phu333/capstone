@@ -68,12 +68,12 @@ class AddSignature extends React.Component {
             })
             .then((data) => {
                 console.log(data.data.id)
-                let signatureInfo={
-                    serialNumber:values.serial,
-                    expirationDate:values.expiredDate,
-                    companyId: parseInt(data.data.id) ,
-                    company:data.data,
-                    
+                let signatureInfo = {
+                    serialNumber: values.serial,
+                    expirationDate: values.expiredDate,
+                    companyId: parseInt(data.data.id),
+                    company: data.data,
+
                 }
                 console.log(signatureInfo)
                 axios({
@@ -156,10 +156,14 @@ class AddSignature extends React.Component {
                                     {
                                         required: true,
                                         message: 'Vui lòng nhập Số serial ',
-                                    },
+                                    }, {
+                                        max: 10,
+                                        message:'Vui lòng không nhập quá 10 ký tự'
+                                    }
+
                                 ]}
                             >
-                                <Row gutter={8}> <Col span={20}><Input placeholder="Số serial" /> </Col>    <Popover content={ValidationSeri} trigger="hover">
+                                <Row gutter={8}> <Col span={20}><Input type="number" placeholder="Số serial" /> </Col>    <Popover content={ValidationSeri} trigger="hover">
                                     <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                 </Popover></Row>
                             </Form.Item>
@@ -167,13 +171,13 @@ class AddSignature extends React.Component {
                             <Form.Item
                                 label="Ngày hết hạn"
                                 name="expiredDate"
-                                
+
                             >
                                 <Row gutter={8}> <Col span={20}>  <Input
-                                                placeholder="ngày hết hạn"
-                                                type="date"
-                                                
-                                            /> </Col>    <Popover content={ValidationDate} trigger="hover">
+                                    placeholder="ngày hết hạn"
+                                    type="date"
+
+                                /> </Col>    <Popover content={ValidationDate} trigger="hover">
                                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                     </Popover></Row>
                             </Form.Item>

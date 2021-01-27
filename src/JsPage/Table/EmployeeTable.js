@@ -73,6 +73,37 @@ class EmployeeList extends React.Component {
 
 
   }
+  handleChangeS(index, info) {
+    if (info == "0") { info = 1 }
+    else { info = 0 }
+    let Status = {
+      status: info
+    }
+    axios({
+        url: '/api/v1/Company/'+index+'/change-status',
+        data: Status,
+        method: "PUT",
+        headers: {
+            Authorization: 'Bearer ' + this.props.token,
+
+        }
+
+    })
+        .then((response) => {
+
+            return response.data;
+        })
+        .then((data) => {
+            console.log(data.data)
+            message.success("Trạng thái đã được cập nhật")
+
+        })
+        .catch(error => {
+            message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
+
+        });
+
+}
   OpenAddEmployee() {
     this.setState({
       openEmployee: "openAddEmployee",
@@ -215,7 +246,7 @@ class EmployeeList extends React.Component {
                 )}
               />: null}
              
-              {login.ActiveDeactiveAccount === true ?
+              {/* {login.ActiveDeactiveAccount === true ?
                 <Column
                   title="Trạng thái"
                   dataIndex="status"
@@ -223,10 +254,11 @@ class EmployeeList extends React.Component {
                   key="status"
                   render={(text, record) => (
                     <Space size="middle">
-                      {text === "Deactive" ? <Switch style={{ fontSize: '30px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '30px' }} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
+                          {text === "0" ? <Switch style={{ fontSize: '20px' }}  onChange={() => this.handleChangeS(record.id, text)}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '20px' }}  onChange={() => this.handleChangeS(record.id, text)}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
                     </Space>
                   )}
-                /> : null}</Table></div></FadeIn>
+                /> : null} */}
+                </Table></div></FadeIn>
         );
       }
 

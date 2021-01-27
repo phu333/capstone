@@ -164,6 +164,10 @@ class AddUserAdmin extends React.Component {
                                     required: true,
                                     message: 'Vui lòng nhập tên ',
                                 },
+                                {
+                                    max: 50,
+                                    message: 'Vui lòng không nhập quá 50 ký tự'
+                                }
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="Họ" /></Col>    <Popover content={ValidationLPresentor} trigger="hover">
@@ -177,6 +181,10 @@ class AddUserAdmin extends React.Component {
                                     required: true,
                                     message: 'Vui lòng nhập tên ',
                                 },
+                                {
+                                    max: 50,
+                                    message: 'Vui lòng không nhập quá 50 ký tự'
+                                }
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><Input placeholder="Tên" /></Col>    <Popover content={ValidationFPresentor} trigger="hover">
@@ -293,6 +301,10 @@ class AddUserAdmin extends React.Component {
                                     required: true,
                                     message: 'Vui lòng nhập tên ',
                                 },
+                                {
+                                    max: 50,
+                                    message: 'Vui lòng không nhập quá 50 ký tự'
+                                }
                             ]}
                         >
                             <Row gutter={8}> <Col span={20}><TextArea autoSize /></Col>

@@ -1,17 +1,13 @@
-import React from 'react';
-import axios from 'axios'
-import 'antd/dist/antd.css';
-import '../../index.css';
-import { createSignature, signatureInformation } from '../../actions/SignatureAction'
-import { connect } from 'react-redux'
-import { Form, Input, Button, Card, Space, DatePicker,message } from 'antd';
 import {
-    IdcardOutlined, BankOutlined, HomeOutlined, MailOutlined
-    , CloudUploadOutlined, RedoOutlined
+    QuestionCircleOutlined
 } from '@ant-design/icons';
-import moment from 'moment'
-import SignatureList from '../Table/SignatureList'
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { Button, Card, Col, DatePicker, Form, Input, message, Popover, Row, Space } from 'antd';
+import 'antd/dist/antd.css';
+import axios from 'axios';
+import React from 'react';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import '../../index.css';
+import SignatureList from '../Table/SignatureList';
 const dateFormat = 'YYYY-MM-DD';
 const { RangePicker } = DatePicker;
 const layout = {
@@ -28,7 +24,15 @@ const tailLayout = {
         span: 10,
     },
 };
+const ValidationSeri = (
 
+    <p>Số seri của chữ ký điện tử mà quý khách muốn sử dụng trong Hisign</p>
+
+); const ValidationDate = (
+
+    <p>Hạn sử dụng chữ ký mà quý khách muốn sử dụng trong Hisign</p>
+
+);
 class UpdateSignature extends React.Component {
     constructor() {
         super();
@@ -87,13 +91,13 @@ class UpdateSignature extends React.Component {
             finish: true
         })
     }
-    componentDidMount(){
+    componentDidMount() {
         console.log(this.props.signature);
     }
     render() {
         if (this.state.finish) {
             return (<Router>
-                <Redirect push to={"/capstone/signatureList" } />
+                <Redirect push to={"/capstone/signatureList"} />
                 <Route exact path="/capstone/signatureList" render={() => <SignatureList ActiveDeactiveSignature={this.props.ActiveDeactiveSignature} UpdateSignature={this.props.UpdateSignature} CreateSignature={this.props.CreateSignature} token={this.props.token} />} /></Router>);
         } else {
 
@@ -118,29 +122,41 @@ class UpdateSignature extends React.Component {
                             <Form.Item
                                 label="Số serial"
                                 name="serial"
-                                
+
                             >
                                 {this.state.isEdit === false ?
-                                    <Input disabled defaultValue={this.props.signature.serialNumber} /> :
-                                    <Input defaultValue={this.props.signature.serialNumber} />}
+                                    <Row gutter={8}> <Col span={20}>
+                                        <Input disabled defaultValue={this.props.signature.serialNumber} /> </Col>    <Popover content={ValidationSeri} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row> : <Row gutter={8}> <Col span={20}>
+                                            <Input defaultValue={this.props.signature.serialNumber} /> </Col>    <Popover content={ValidationSeri} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row>}
                             </Form.Item>
-                           
+
                             <Form.Item
-                                 label="Ngày hết hạn"
-                                 name="expiredDate"
-                                
+                                label="Ngày hết hạn"
+                                name="expiredDate"
+
                             >
                                 {this.state.isEdit === false ?
-                                     <Input
-                                     placeholder="ngày hết hạn"
-                                    
-                                     disabled defaultValue={this.props.signature.expirationDate}
-                                 /> :
-                                 <Input
-                                 placeholder="ngày hết hạn"
-                                 
-                                  defaultValue={this.props.signature.expirationDate}
-                             />}
+                                    <Row gutter={8}> <Col span={20}>
+                                        <Input
+                                            placeholder="ngày hết hạn"
+
+                                            disabled defaultValue={this.props.signature.expirationDate}
+                                        /> </Col>    <Popover content={ValidationDate} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row>
+                                    :
+                                    <Row gutter={8}> <Col span={20}>
+                                        <Input
+                                            placeholder="ngày hết hạn"
+
+                                            defaultValue={this.props.signature.expirationDate}
+                                        /> </Col>    <Popover content={ValidationDate} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                        </Popover></Row>}
 
                             </Form.Item>
 

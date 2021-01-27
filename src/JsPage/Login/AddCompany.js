@@ -139,7 +139,11 @@ class AddCompany extends React.Component {
                                 {
                                     required: true,
                                     message: 'Vui lòng nhập tên doanh nghiệp',
-                                },
+                                },                            {
+                                
+                                    message: 'Vui lòng nhập dưới 250 ký tự',
+                                    max: 250,
+                                }
                             ]}>
                             <Row gutter={8}> <Col span={20}><TextArea autoSize placeholder="Tên doanh nghiệp" /> </Col>    <Popover content={ValidationCompany} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
@@ -178,7 +182,7 @@ class AddCompany extends React.Component {
                             {
                                 
                                 message: 'Vui lòng nhập 10 ký tự',
-                                min: 10,
+                                min: 6,
                                 max: 10,
                             },
                         ]}
@@ -190,7 +194,17 @@ class AddCompany extends React.Component {
                     <Form.Item
                         label="Địa chỉ"
                         name="address"
-                        required
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng nhập địa chỉ',
+                                
+                            },{
+
+                                message: 'Vui lòng nhập dưới 100 ký tự',
+                                max: 100,
+                            },
+                        ]}
                     >
                         <Row gutter={8}> <Col span={20}><TextArea autoSize /></Col>    <Popover content={ValidationAdd} trigger="hover">
                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
@@ -217,7 +231,18 @@ class AddCompany extends React.Component {
                     <Form.Item
                         label="Giấy phép kinh doanh"
                         name="businessLicense"
-                        required
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng nhập giấy phép kinh doanh',
+                                
+                            },{
+
+                                message: 'Vui lòng nhập 10 ký tự',
+                                min: 8,
+                                max: 8,
+                            },
+                        ]}
                     >
                         <Row gutter={8}> <Col span={20}><Input type="number" /></Col>    <Popover content={ValidationCertificate} trigger="hover">
                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
@@ -246,8 +271,16 @@ class AddCompany extends React.Component {
                     <Form.Item
                         label="Người đại diện"
                         name="comRepresentative"
-                        required
-                    >
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng nhập người đại diện',
+                                
+                            },{
+
+                                message: 'Vui lòng nhập dưới 50 ký tự',
+                                max: 50,
+                            },]}                    >
                         <Row gutter={8}> <Col span={20}><Input type="number" /></Col>    <Popover content={ValidationPresentor} trigger="hover">
                             <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                         </Popover></Row>
