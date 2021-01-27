@@ -277,8 +277,8 @@ class AddCustomer extends React.Component {
 
                                 }, {
 
-                                    message: 'Vui lòng nhập dưới 100 ký tự',
-                                    max: 100,
+                                    message: 'Vui lòng nhập dưới 250 ký tự',
+                                    max: 250,
                                 },
                             ]}
                         >
@@ -292,7 +292,7 @@ class AddCustomer extends React.Component {
                             name="bankAccount"
                             rules={[{
 
-                                message: 'Vui lòng nhập 8 ký tự',
+                                message: 'Vui lòng nhập 8 ký tự cuối thẻ',
                                 min: 8,
                                 max: 8,
                             },

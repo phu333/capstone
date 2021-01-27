@@ -213,8 +213,8 @@ class EmployeeDetail extends React.Component {
                                     
                                 },{
     
-                                    message: 'Vui lòng nhập dưới 100 ký tự',
-                                    max: 100,
+                                    message: 'Vui lòng nhập dưới 250 ký tự',
+                                    max: 250,
                                 },
                             ]}
                         >

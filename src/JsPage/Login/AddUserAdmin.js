@@ -173,7 +173,7 @@ class AddUserAdmin extends React.Component {
                                             }
                                         ]}
                                     >
-                                        <Row gutter={8}> <Col span={22}><Input placeholder="Họ" /></Col>    <Popover content={ValidationLPresentor} trigger="hover">
+                                        <Row gutter={8}> <Col span={22}><Input placeholder="Tên" /></Col>    <Popover content={ValidationFPresentor} trigger="hover">
                                             <Button shape="circle" style={{ border: "none", backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'white' }} />} />
                                         </Popover></Row>                    </Form.Item>
                                 </Col><Col span={12}>
@@ -183,7 +183,7 @@ class AddUserAdmin extends React.Component {
                                         rules={[
                                             {
                                                 required: true,
-                                                message: 'Vui lòng nhập tên ',
+                                                message: 'Vui lòng nhập họ',
                                             },
                                             {
                                                 max: 50,
@@ -191,7 +191,7 @@ class AddUserAdmin extends React.Component {
                                             }
                                         ]}
                                     >
-                                        <Row gutter={8}> <Col span={22}><Input placeholder="Tên" /></Col>    <Popover content={ValidationFPresentor} trigger="hover">
+                                        <Row gutter={8}> <Col span={22}><Input placeholder="Tên" /></Col>    <Popover content={ValidationLPresentor} trigger="hover">
                                             <Button shape="circle" style={{ border: "none", backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'white' }} />} />
                                         </Popover></Row>
 
@@ -400,7 +400,7 @@ class AddUserAdmin extends React.Component {
 
                                     }, {
 
-                                        message: 'Vui lòng nhập 8 ký tự',
+                                        message: 'Vui lòng nhập 8 ký tự cuối thẻ',
                                         min: 8,
                                         max: 8,
                                     },
