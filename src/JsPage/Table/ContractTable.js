@@ -5,7 +5,7 @@ import "../Column.css"
 import axios from 'axios'
 import {
     FolderViewOutlined, DownloadOutlined, FormOutlined, FileAddOutlined, UploadOutlined, ContainerOutlined,
-    FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined
+    FileProtectOutlined, UserSwitchOutlined, UserAddOutlined, LogoutOutlined, MonitorOutlined,DeleteOutlined
 } from "@ant-design/icons"
 import ChooseContractTemplate from '../Add/ChooseContractTemplate'
 import ViewContractPage from '../Update/ViewContractPage'
