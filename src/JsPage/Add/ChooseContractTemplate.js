@@ -11,20 +11,7 @@ import 'reactjs-popup/dist/index.css';
 import JoditEditor from "jodit-react";
 import FadeIn from 'react-fade-in'
 const { Column } = Table;
-const dataSource = [
-    {
-        key: '1',
-        contract_type: 'Hop dong lao dong',
 
-        fileName: 'template1.dot',
-    },
-    {
-        key: '2',
-        contract_type: 'Hop dong lao dong',
-
-        fileName: 'template1.dot',
-    },
-];
 
 
 class ChooseContractTemplate extends React.Component {
@@ -46,7 +33,7 @@ class ChooseContractTemplate extends React.Component {
             showTemplateCreate: true,
             template: value,
         })
-        console.log(this.state.template)
+        
     }
     Cancel = () => {
         this.setState({
@@ -148,7 +135,7 @@ class ChooseContractTemplate extends React.Component {
                                                     showTemplateCreate: true,
                                                     template: text,
                                                 })
-                                                console.log(this.state.template)
+                                                
                                             }}>Tạo hợp đồng với mẫu này</Button>
                                         </Space>
                                     )}

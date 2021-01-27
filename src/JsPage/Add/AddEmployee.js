@@ -174,13 +174,13 @@ class AddEmployee extends React.Component {
                         this.setState({
                             current: data.data.filter(values => values.email === employeeInfo.email)
                         })
-                        console.log(this.state.Sign)
+                        
                         let permissionList = [
 
                         ]
 
                         for (let i = 0; i < permissionList.length; i++) {
-                            console.log('its ok')
+                            
                             axios({
                                 url: '/api/Account/permission',
                                 method: "PUT",
@@ -216,19 +216,15 @@ class AddEmployee extends React.Component {
                     })
                     .catch(error => {
 
-                        // if (error.response.status === 500) {
-                        //   message.error(error.response.status + ' Server under maintainence');
-                        // } else if (error.response.status === 404) {
-                        //   message.error(error.response.status + ' Server not found');
-                        // }
+                        message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
 
                     });
 
-                message.success("tao thanh cong")
+                    message.success("taọ thành công")
 
             })
             .catch(error => {
-                console.log(error)
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
             });
 
     };
@@ -241,13 +237,9 @@ class AddEmployee extends React.Component {
         })
     }
     render() {
-        console.log(this.state.Sign)
+        
         var i = 0;
-        function onChange(e) {
-            if (e.target == "checked") { i--; }
-            else { i++ }
-            console.log('checked = ${e.target.checked}');
-        }
+        
         if (this.state.finish) {
             return (<Router>
                 <Redirect push to={"/capstone/employee"} />

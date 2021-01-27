@@ -85,7 +85,7 @@ class TemplateUpload extends React.Component {
             name: this.state.contractName,
             content: this.state.contractContent.replace(/[\t ]+\</g, "<")
         }
-        console.log(this.state.contractContent)
+       
         axios({
             url: '/api/v1/ContractType',
             method: "POST",

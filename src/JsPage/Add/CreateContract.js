@@ -55,7 +55,7 @@ class CreateContract extends React.Component {
             customers: [],
             company: {},
         };
-        this.handleChange = this.handleChange.bind(this);
+      
         this.handleValue = this.handleValue.bind(this);
 
         this.rteChange = this.rteChange.bind(this);
@@ -82,7 +82,7 @@ class CreateContract extends React.Component {
                 return response.data;
             })
             .then((data) => {
-                console.log(data.data)
+                
                 this.setState({
                     customers: data.data,
                 })
@@ -90,7 +90,7 @@ class CreateContract extends React.Component {
 
             })
             .catch(error => {
-                console.log(error)
+               
 
 
             });
@@ -107,14 +107,14 @@ class CreateContract extends React.Component {
                 return response.data;
             })
             .then((data) => {
-                console.log(data.data)
+               
                 this.setState({
                     company: data.data
                 })
-                console.log(this.state.company)
+                
             })
             .catch(error => {
-                console.log(error)
+               
 
 
             });
@@ -145,7 +145,7 @@ class CreateContract extends React.Component {
             footer: footer,
             isMainContract: true,
         }
-        console.log(contract)
+        
         axios({
             url: "/api/v1/Contract",
             method: "POST",
@@ -170,7 +170,7 @@ class CreateContract extends React.Component {
             })
             .catch(error => {
                 message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
-                console.log(error)
+                
 
             });
 
@@ -192,46 +192,19 @@ class CreateContract extends React.Component {
     onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-    handleChange(value) {
-        console.log(value);
-        
-    }
+    
     handleValue(value) {
-        console.log(value)
+        
         this.setState({
             contractValue: parseFloat(value.target.value)
         })
     }
     render() {
-        var today = new Date()
+       
         const config = {
             readonly: false // all options from https://xdsoft.net/jodit/doc/
         }
-        // const Complete = () => (
-        //     <AutoComplete
-
-        //     style={{ width: 400 }}
-        //     placeholder='Chọn khách hàng'
-
-        //     items={this.state.customers}
-
-        //     getItemValue={(item) => item.name}
-        //     renderItem={(item, isHighlighted) =>
-        //         <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
-        //           {item.name}
-        //         </div>
-        //       }
-        //       value={this.state.BSide.Name}
-        //       onChange={(e) =>  this.setState({
-        //         customerName:e.target.value
-        //       })}
-        //       onSelect={(val) => this.setState({
-        //           BSide:val
-        //       })}
-        // />
-
-
-        //   );
+        
         if (this.state.finish) {
             return (
                 <Router>

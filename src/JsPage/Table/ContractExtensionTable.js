@@ -60,7 +60,7 @@ class ContractExtensionTable extends React.Component {
                 this.setState({
                     company: data.data
                 })
-                console.log(data.data.taxCode)
+                
                 axios({
                     url: '/api/v1/Contract/get-by-taxcode?taxCode=' + data.data.taxCode,
                     method: "GET",
@@ -74,7 +74,7 @@ class ContractExtensionTable extends React.Component {
                         return response.data;
                     })
                     .then((data) => {
-                        console.log(data)
+                       
                         this.setState({
                             contractsReciceve: data.data.filter(values => values.statusAsString !== "Draft")
                         })
@@ -91,7 +91,7 @@ class ContractExtensionTable extends React.Component {
                                 return response.data;
                             })
                             .then((data) => {
-                                console.log(data)
+                                
                                 this.setState({
                                     contractsCreate: data.data,
 
@@ -121,7 +121,7 @@ class ContractExtensionTable extends React.Component {
 
                                         })
                                         .catch(error => {
-                                            console.log(error)
+                                           
 
 
                                         });
@@ -150,7 +150,7 @@ class ContractExtensionTable extends React.Component {
 
             })
             .catch(error => {
-                console.log(error)
+                
 
 
             });
@@ -185,7 +185,7 @@ class ContractExtensionTable extends React.Component {
 
                     })
                     .catch(error => {
-                        console.log(error)
+                        
 
 
                     });
@@ -202,17 +202,17 @@ class ContractExtensionTable extends React.Component {
 
                     })
                         .then((response) => {
-                            console.log(response)
+                            
                             var fileDownload = require('js-file-download');
                             fileDownload(response.data, text.id + '.docx');
                             return response.data;
                         })
                         .then((data) => {
-                            console.log(data.data)
+                            
 
                         })
                         .catch(error => {
-                            console.log(error)
+                            
 
 
                         });
@@ -233,7 +233,7 @@ class ContractExtensionTable extends React.Component {
 
                         })
                         .catch(error => {
-                            console.log(error)
+                           
 
 
                         });
@@ -259,17 +259,17 @@ class ContractExtensionTable extends React.Component {
 
                     })
                         .then((response) => {
-                            console.log(response)
+                           
                             var fileDownload = require('js-file-download');
                             fileDownload(response.data, text.id + '.docx');
                             return response.data;
                         })
                         .then((data) => {
-                            console.log(data.data)
+                           
 
                         })
                         .catch(error => {
-                            console.log(error)
+                            
 
 
                         });
@@ -356,26 +356,7 @@ class ContractExtensionTable extends React.Component {
                                 <p>{text.companyName}</p>
 
                             )} />
-                        {/* <Column title="Chủ hợp đồng" dataIndex="customer" key="customer"
-                            render={(text, record) => (
-
-                                <p>{text.CreatorcompanyName}</p>
-
-                            )} /> */}
-                        {/* <Column title="Ngày hết hạn" dataIndex="contractExpiredDate" key="contractExpiredDate"
-                            sorter={(a, b) => a.deadline.localeCompare(b.deadline)}
-                            sortDirections={['descend', 'ascend']}
-                            render={(text, record) => (
-
-                                <p>{text}</p>
-
-                            )} /> */}
-                        {/* <Column title="bên tạo hợp đồng" dataIndex="ben_tao_hd" key="ben_tao_hd"
-                            render={(text, record) => (
-
-                                <p>{text}</p>
-
-                            )} /> */}
+                       
                         <Column title="Giá trị hợp đồng" dataIndex="contractValue" key="contractValue"
                             align='right'
                             render={(text, record) => `${text} VNĐ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
