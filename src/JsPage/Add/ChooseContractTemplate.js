@@ -33,9 +33,10 @@ class ChooseContractTemplate extends React.Component {
 
         this.state = {
             showTemplateCreate: false,
-            template:{},
+            template: {},
             finish: false,
-            templateList:[]
+            loading: false,
+            templateList: []
         };
         this.handleChange = this.handleChange.bind(this);
 
@@ -43,7 +44,7 @@ class ChooseContractTemplate extends React.Component {
     handleChange(value) {
         this.setState({
             showTemplateCreate: true,
-            template:value,
+            template: value,
         })
         console.log(this.state.template)
     }
@@ -56,35 +57,39 @@ class ChooseContractTemplate extends React.Component {
 
 
     };
-    componentDidMount(){
+    componentDidMount() {
+        this.setState({
+            loading: true
+        })
         axios({
             url: '/api/v1/ContractType',
             method: "GET",
             headers: {
-              Authorization: 'Bearer ' + this.props.token,
-      
+                Authorization: 'Bearer ' + this.props.token,
+
             }
         })
             .then((response) => {
-    
+
                 return response.data;
             })
             .then((data) => {
-    
+
                 this.setState({
-                  templateList:data.data
+                    templateList: data.data,
+                    loading: false,
                 })
-    
+
             })
             .catch(error => {
-    
-               
+
+
             });
     }
     render() {
         const config = {
             readonly: true, // all options from https://xdsoft.net/jodit/doc/
-            toolbar:false
+            toolbar: false
         }
         if (this.state.finish) {
             return (<Router>
@@ -107,48 +112,48 @@ class ChooseContractTemplate extends React.Component {
                             Trở về
                     </Button>
                         <ContractTypeSearch /><FadeIn>
-                        <Table dataSource={this.state.templateList} >
-                        <Column title="Stt" dataIndex="id" key="id" />
-                            <Column title="loại hợp đồng" dataIndex="name" key="name" />
-                            
-                            
-
-                            <Column
-                                title="Xem trước"
-                                key="action"
-                                render={(text, record) => (
-                                    <Space size="middle">
-                                        <Popup trigger={<Button type="primary" icon={<FileOutlined />} >Xem trước</Button>} position="right center">
-                                            <JoditEditor
-
-                                                value={text.content}
-                                                config={config}
-                                                tabIndex={1} // tabIndex of textarea
+                            <Table dataSource={this.state.templateList} loading={this.state.loading} >
+                                <Column title="Stt" dataIndex="id" key="id" />
+                                <Column title="loại hợp đồng" dataIndex="name" key="name" />
 
 
-                                            />
-                                        </Popup>
 
-                                    </Space>
-                                )}
-                            />
-                            <Column
-                                title="Chọn hợp đồng"
-                                key="action"
-                                fixed="right"
-                                render={(text, record) => (
-                                    <Space size="middle">
-                                        <Button type="primary" icon={<FileOutlined />} onClick={()=>{
-                                            this.setState({
-                                                showTemplateCreate: true,
-                                                template:text,
-                                            })
-                                            console.log(this.state.template)
-                                        }}>Tạo hợp đồng với mẫu này</Button>
-                                    </Space>
-                                )}
-                            />
-                        </Table></FadeIn></div>
+                                <Column
+                                    title="Xem trước"
+                                    key="action"
+                                    render={(text, record) => (
+                                        <Space size="middle">
+                                            <Popup trigger={<Button type="primary" icon={<FileOutlined />} >Xem trước</Button>} position="right center">
+                                                <JoditEditor
+
+                                                    value={text.content}
+                                                    config={config}
+                                                    tabIndex={1} // tabIndex of textarea
+
+
+                                                />
+                                            </Popup>
+
+                                        </Space>
+                                    )}
+                                />
+                                <Column
+                                    title="Chọn hợp đồng"
+                                    key="action"
+                                    fixed="right"
+                                    render={(text, record) => (
+                                        <Space size="middle">
+                                            <Button type="primary" icon={<FileOutlined />} onClick={() => {
+                                                this.setState({
+                                                    showTemplateCreate: true,
+                                                    template: text,
+                                                })
+                                                console.log(this.state.template)
+                                            }}>Tạo hợp đồng với mẫu này</Button>
+                                        </Space>
+                                    )}
+                                />
+                            </Table></FadeIn></div>
                 );
             }
 

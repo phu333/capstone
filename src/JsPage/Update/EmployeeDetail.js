@@ -161,12 +161,12 @@ class EmployeeDetail extends React.Component {
                     </Popover></Row>
                         </Form.Item>
                         <Form.Item
-                            label="cmnd/cmt"
+                            label="Chứng minh nhân dân"
                             name="id"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Vui lòng nhập cmnd/cmt ',
+                                    message: 'Vui lòng nhập Chứng minh nhân dân ',
                                 },                                {
                                     max: 9,
                                     min:9,
@@ -174,7 +174,7 @@ class EmployeeDetail extends React.Component {
                                 }
                             ]}
                         >
-                             <Row gutter={8}> <Col span={20}><Input type="number" placeholder="cmnd/cmt" /> </Col>    <Popover content={names} trigger="hover">
+                             <Row gutter={8}> <Col span={20}><Input type="number" placeholder="Chứng minh nhân dân" /> </Col>    <Popover content={names} trigger="hover">
                         <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                     </Popover></Row>
                         </Form.Item>

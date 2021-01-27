@@ -382,9 +382,7 @@ class CreateContract extends React.Component {
 
                                 onChange={this.rteChange}
                             />
-                            <Space direction='vertical' align='center' style={{ backgroundColor: 'white' }} >
-                                Giá trị hợp đồng:<input type="text" pattern="[0-9]*" prefix="VND"
-                                    onInput={this.handleValue} /> x1000 VNĐ
+                            <Space direction='horizontal' align='center' style={{ backgroundColor: 'white' }} >
                                 <Card bordered={false}>
 
                                     <Form
@@ -396,7 +394,8 @@ class CreateContract extends React.Component {
                                         onFinishFailed={this.onFinishFailed}
 
                                     >
-
+                              <h6 style={{ fontSize: 14 }}>  Giá trị hợp đồng:<input type="text" pattern="[0-9]*" prefix="VND"
+                                    onInput={this.handleValue} /> x1000 VNĐ</h6>
                                         <h6 style={{ fontSize: 14 }}>Hợp đồng có hiệu lực kể từ ngày(Sẽ hiển thị khi hợp đồng có hiệu lực) đến
                                         <input
                                                 type="text"
