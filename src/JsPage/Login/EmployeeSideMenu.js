@@ -140,6 +140,7 @@ class EmployeeSideMenu extends React.Component {
                       {this.state.showComponent === "SignatureList" ? "Danh sách chữ ký" : null}
                       {this.state.showComponent === "Profile" ? "Thông tin cá nhân" : null}
                       {this.state.showComponent === "CompanyProfile" ? "Thông tin công ty" : null}
+                      {this.state.showComponent === "chooseTemplate" ? "Danh sách loại hợp đồng" : null}
                     </> : this.state.showComponent === "AddCompany" ? "Tạo doanh nghiệp" : null}
                     
                   </Breadcrumb.Item>

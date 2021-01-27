@@ -78,7 +78,6 @@ class ContractSearch extends React.Component {
                 })
                 .then((data) => {
 
-
                     this.props.onSubmit(data.data)
 
 

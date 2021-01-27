@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import { createCustomer, customerInformation } from '../../actions/CustomerAction'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Row, Space, Card, message, Col, Popover } from 'antd';
+import { Form, Input, Button, Row, Space, Card, message, Col, Popover, Select } from 'antd';
 import CustomerTable from '../Table/CustomerTable'
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
@@ -212,7 +212,6 @@ class AddCustomer extends React.Component {
                         hideRequiredMark
                         onFinish={this.onFinish}
                         onFinishFailed={this.onFinishFailed}
-
                     >
 
                         <Form.Item
@@ -267,26 +266,7 @@ class AddCustomer extends React.Component {
                                 <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                         </Form.Item>
-                        <Form.Item
-                            label="Điện thoại"
-                            name="phoneNumber"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập số điện thoại',
-                                },
-                                {
 
-                                    message: 'Vui lòng nhập 10 ký tự',
-                                    min: 10,
-                                    max: 10,
-                                },
-                            ]}
-                        >
-                            <Row gutter={8}> <Col span={20}> <Input type="number" prefix="+84" placeholder="Điện thoại" /> </Col>    <Popover content={ValidationPhone} trigger="hover">
-                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                            </Popover></Row>
-                        </Form.Item>
                         <Form.Item
                             label="Địa chỉ"
                             name="address"
@@ -297,8 +277,8 @@ class AddCustomer extends React.Component {
 
                                 }, {
 
-                                    message: 'Vui lòng nhập dưới 100 ký tự',
-                                    max: 100,
+                                    message: 'Vui lòng nhập dưới 250 ký tự',
+                                    max: 250,
                                 },
                             ]}
                         >
@@ -306,30 +286,13 @@ class AddCustomer extends React.Component {
                                 <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                         </Form.Item>
-                        <Form.Item
-                            label="Email"
-                            name="Email"
-                            rules={[
-                                {
-                                    type: 'email',
-                                    message: 'The input is not valid E-mail!',
-                                },
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập Email',
-                                },
-                            ]}
-                        >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Email" /> </Col>    <Popover content={ValidationEmail} trigger="hover">
-                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                            </Popover></Row>
-                        </Form.Item>
+
                         <Form.Item
                             label="Số tài khoản"
                             name="bankAccount"
                             rules={[{
 
-                                message: 'Vui lòng nhập 8 ký tự',
+                                message: 'Vui lòng nhập 8 ký tự cuối thẻ',
                                 min: 8,
                                 max: 8,
                             },
@@ -339,39 +302,85 @@ class AddCustomer extends React.Component {
                                 <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                             </Popover></Row>
                         </Form.Item>
-                        <Form.Item
-                            label="Người đại diện"
-                            name="representative"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập Người đại diện',
-                                },{
+                        <Row gutter={2}>
+                            <Col span={12} >
+                                <Form.Item
+                                    label="Email"
+                                    name="Email"
+                                    style={{width:'800px'}}
+                                    rules={[
+                                        {
+                                            type: 'email',
+                                            message: 'The input is not valid E-mail!',
+                                        },
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Email',
+                                        },
+                                    ]}
+                                >
+                                    <Row gutter={8}> <Col span={20}><Input placeholder="Email" /> </Col>    <Popover content={ValidationEmail} trigger="hover">
+                                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>
+                                </Form.Item>
+                            </Col><Col span={12}>
+                                <Form.Item
+                                    label="Điện thoại"
+                                    name="phoneNumber"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập số điện thoại',
+                                        },
+                                        {
 
-                                    message: 'Vui lòng nhập dưới 50 ký tự',
-                                    max: 50,
-                                }
-                            ]}
-                        >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Người đại diện" /> </Col>    <Popover content={ValidationPresentor} trigger="hover">
-                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                            </Popover></Row>
-                        </Form.Item>
-                        <Form.Item
-                            label="Chức vụ"
-                            name="role"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Vui lòng nhập Chức vụ',
-                                },
-                            ]}
-                        >
-                            <Row gutter={8}> <Col span={20}><Input placeholder="Chức vụ" /> </Col>    <Popover content={ValidationRole} trigger="hover">
-                                <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                            </Popover></Row>
-                        </Form.Item>
+                                            message: 'Vui lòng nhập 10 ký tự',
+                                            min: 10,
+                                            max: 10,
+                                        },
+                                    ]}
+                                >
+                                    <Row gutter={8}> <Col span={20}> <Input type="number" prefix="+84" placeholder="Điện thoại" /> </Col>    <Popover content={ValidationPhone} trigger="hover">
+                                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>
+                                </Form.Item></Col></Row>
+                        <Row gutter={2}>
+                            <Col span={12} >
+                                <Form.Item
+                                    label="Người đại diện"
+                                    name="representative"
+                                    style={{width:'800px'}}
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Người đại diện',
+                                        }, {
 
+                                            message: 'Vui lòng nhập dưới 50 ký tự',
+                                            max: 50,
+                                        }
+                                    ]}
+                                >
+                                    <Row gutter={8}> <Col span={20}><Input placeholder="Người đại diện" /> </Col>    <Popover content={ValidationPresentor} trigger="hover">
+                                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>
+                                </Form.Item></Col><Col span={12}>
+                                <Form.Item
+                                    label="Chức vụ"
+                                    name="role"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Vui lòng nhập Chức vụ',
+                                        },
+                                    ]}
+                                >
+                                    <Select>
+                                        <Select.Option value={2}>giám đốc</Select.Option>
+                                        <Select.Option value={3}>nhân viên</Select.Option>
+                                    </Select>
+                                </Form.Item>
+                            </Col></Row>
 
 
 
