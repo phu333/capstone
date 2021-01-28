@@ -67,7 +67,7 @@ class AddSignature extends React.Component {
                 return response.data;
             })
             .then((data) => {
-                console.log(data.data.id)
+                
                 let signatureInfo = {
                     serialNumber: values.serial,
                     expirationDate: values.expiredDate,
@@ -75,7 +75,7 @@ class AddSignature extends React.Component {
                     company: data.data,
 
                 }
-                console.log(signatureInfo)
+                
                 axios({
                     url: '/api/DigitalSignature',
                     method: "POST",
@@ -101,14 +101,14 @@ class AddSignature extends React.Component {
                     })
                     .catch(error => {
                         message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
-                        console.log(error)
+                        
 
                     });
 
 
             })
             .catch(error => {
-                console.log(error)
+                message.error("Đã có lỗi xảy ra vui lòng kiểm tra thông tin đã nhập và thử lại sau")
 
 
             });

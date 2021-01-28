@@ -142,9 +142,9 @@ class AddUserAdmin extends React.Component {
             return (
                 <Card style={{ backgroundColor: 'rgb(8, 59, 102)' }}>
                     <br />
-                    <div style={{backgroundColor:'whitesmoke'}}>
-                                            <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
-                        Trở về
+                    <div style={{ backgroundColor: 'whitesmoke' }}>
+                        <Button style={{ width: '80px' }} type="primary" value="cancel" onClick={this.Cancel}>
+                            Trở về
               </Button>
                         <h2 style={{ textAlign: 'center', color: '#0099ff' }}>Tạo thông tin Admin</h2>
 
@@ -153,7 +153,7 @@ class AddUserAdmin extends React.Component {
                             name="basic"
                             className="employee-form"
                             hideRequiredMark
-                            
+
                             onFinish={this.onFinish}
                             onFinishFailed={this.onFinishFailed}
                         >
@@ -167,10 +167,7 @@ class AddUserAdmin extends React.Component {
                                                 required: true,
                                                 message: 'Vui lòng nhập tên ',
                                             },
-                                            {
-                                                max: 50,
-                                                message: 'Vui lòng không nhập quá 50 ký tự'
-                                            }
+
                                         ]}
                                     >
                                         <Row gutter={8}> <Col span={22}><Input placeholder="Tên" /></Col>    <Popover content={ValidationFPresentor} trigger="hover">
@@ -185,10 +182,7 @@ class AddUserAdmin extends React.Component {
                                                 required: true,
                                                 message: 'Vui lòng nhập họ',
                                             },
-                                            {
-                                                max: 50,
-                                                message: 'Vui lòng không nhập quá 50 ký tự'
-                                            }
+
                                         ]}
                                     >
                                         <Row gutter={8}> <Col span={22}><Input placeholder="Tên" /></Col>    <Popover content={ValidationLPresentor} trigger="hover">
@@ -239,22 +233,7 @@ class AddUserAdmin extends React.Component {
 
                                     </Form.Item>
                                 </Col></Row>
-                            {/* <Form.Item
-                        label={<label style={{ color: "#0099ff" }}>Tên người dùng</label>}
-                        name="userName"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng nhập tên người dùng',
-                                min: 6,
-                            },
-                        ]}
-                    >
-                        <Row gutter={8}> <Col span={20}><Input placeholder="Tên người dùng" /> </Col>    <Popover content={Validation} trigger="hover">
-                            <Button shape="circle" style={{ border: "none",backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{color:'white'}} />} />
-                        </Popover></Row>
 
-                    </Form.Item> */}
                             <Row gutter={2}>
                                 <Col span={12} >
                                     <Form.Item
@@ -372,15 +351,10 @@ class AddUserAdmin extends React.Component {
                                         message: 'Vui lòng nhập mst ',
 
                                     },
-                                    {
 
-                                        message: 'Vui lòng nhập 10 ký tự',
-                                        min: 10,
-                                        max: 10,
-                                    },
                                 ]}
                             >
-                                <Row gutter={8}> <Col span={20}><Input type="number" /></Col>    <Popover content={ValidationTax} trigger="hover">
+                                <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationTax} trigger="hover">
                                     <Button shape="circle" style={{ border: "none", backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'white' }} />} />
                                 </Popover></Row>
                             </Form.Item>
@@ -389,7 +363,7 @@ class AddUserAdmin extends React.Component {
                                 name="businessLicense"
                                 required
                             >
-                                <Row gutter={8}> <Col span={20}><Input type="number" /></Col>    <Popover content={ValidationCertificate} trigger="hover">
+                                <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationCertificate} trigger="hover">
                                     <Button shape="circle" style={{ border: "none", backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'white' }} />} />
                                 </Popover></Row>
                             </Form.Item>
@@ -401,15 +375,10 @@ class AddUserAdmin extends React.Component {
                                         required: true,
                                         message: 'Vui lòng nhập Số tài khoản',
 
-                                    }, {
-
-                                        message: 'Vui lòng nhập 8 ký tự cuối thẻ',
-                                        min: 8,
-                                        max: 8,
                                     },
                                 ]}
                             >
-                                <Row gutter={8}> <Col span={20}><Input type="number" /></Col>    <Popover content={ValidationBank} trigger="hover">
+                                <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationBank} trigger="hover">
                                     <Button shape="circle" style={{ border: "none", backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'white' }} />} />
                                 </Popover></Row>
                             </Form.Item>

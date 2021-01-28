@@ -106,41 +106,7 @@ class ContractTypeSearch extends React.Component {
 
                     </Radio.Group>
                 </Card>
-                {/* <Card>
-                    <Radio.Group onChange={this.onChangeSecondSearchValue} value={this.state.secondSearchValue}>
-                        <Radio style={radioStyle} value={"all"}>
-                            tất cả
-                        </Radio>
-
-                        <Radio style={radioStyle} value={"1Month"}>
-                            1 tháng
-        </Radio>
-                        <Radio style={radioStyle} value={"1Quarter"}>
-                            1 quý
-        </Radio>
-                        <Radio style={radioStyle} value={"1Year"}>
-                            1 năm
-        </Radio>
-
-                        <Radio style={radioStyle} value={"SearchByCreateDate"}>
-                            Tìm kiếm theo ngày tạo
-        </Radio>
-                    </Radio.Group>
-                </Card>
-                <Card>
-                    <Radio.Group onChange={this.onChangeThirdSearchValue} value={this.state.thirdSearchValue}>
-                        <Radio style={radioStyle} value={"all"}>
-                            tất cả
-                        </Radio>
-                        <Radio style={radioStyle} value={"active"}>
-                            đang có hiệu lực
-        </Radio>
-
-                        <Radio style={radioStyle} value={"deactive"}>
-                            hết hiệu lực
-        </Radio>
-                    </Radio.Group>
-                </Card> */}
+                
             </Space>
         )
         return (

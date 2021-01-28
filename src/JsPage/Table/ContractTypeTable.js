@@ -54,7 +54,7 @@ class ContractTable extends React.Component {
         return response.data;
       })
       .then((data) => {
-        console.log(data.data)
+        
         message.success("Trạng thái đã được cập nhật")
 
       })

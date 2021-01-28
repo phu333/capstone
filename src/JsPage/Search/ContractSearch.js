@@ -140,49 +140,7 @@ class ContractSearch extends React.Component {
 
                     </Radio.Group>
                 </Card>
-                {/* <Card>
-                    <Radio.Group onChange={this.onChangeSecondSearchValue} value={this.state.secondSearchValue}>
-                        <Radio style={radioStyle} value={"all"}>
-                            tất cả
-                        </Radio>
-                        <Radio style={radioStyle} value={"SearchByContractDuration"}>
-                            Tìm kiếm theo thời hạn
-                        </Radio>
-                        <Radio style={radioStyle} value={"1Month"}>
-                            1 tháng
-        </Radio>
-                        <Radio style={radioStyle} value={"1Quarter"}>
-                            1 quý
-        </Radio>
-                        <Radio style={radioStyle} value={"1Year"}>
-                            1 năm
-        </Radio> */}
-                {/* <Radio style={radioStyle} value={"SearchByContractDeadline"}>
-                            Tìm kiếm theo ngày hết hạn
-        </Radio>
-                        <Radio style={radioStyle} value={"SearchByContractCreatedDate"}>
-                            Tìm kiếm theo ngày tạo
-        </Radio> */}
-                {/* </Radio.Group>
-                </Card>                 <Card>
-                    <Radio.Group onChange={this.handleChange} value={this.state.SearchBy}>
-                         <Radio style={radioStyle} value={"all"}>
-                            tất cả
-                        </Radio> 
-                        <Radio style={radioStyle} value={"SearchActive"}>
-                            đang có hiệu lực
-        </Radio>
-                        <Radio style={radioStyle} value={"SearchPending"}>
-                            đang chờ duyệt
-        </Radio>
-                        <Radio style={radioStyle} value={"SearchWaiting"}>
-                            đang chờ ký
-        </Radio>
-                        <Radio style={radioStyle} value={"SearchDeactive"}>
-                            hết hiệu lực
-        </Radio>
-                    </Radio.Group>
-                </Card>*/}
+               
             </Space>
         )
         return (
@@ -223,31 +181,7 @@ class ContractSearch extends React.Component {
                                 {this.state.SearchBy === "SearchByContractValue" ? <> <InputNumber
                                     onInput={values => this.setState({ SearchValue: values.target.value })} style={{ width: '300px' }} />
                                 </> : null}
-                                {/* {this.state.SearchBy === "SearchActive" ? <> <Input onInput={values => this.setState({ SearchValue: "Active" })} style={{ width: '300px',visibility:'hidden' }} />
-                                </> : null}                                    
-                                 {this.state.SearchBy === "SearchPending" ? <> <Input onInput={values => this.setState({ SearchValue: "Draft" })} style={{ width: '300px',visibility:'hidden' }} />
-                                </> : null}                                    
-                                 {this.state.SearchBy === "SearchWaiting" ? <> <Input onInput={values => this.setState({ SearchValue: "waiting for customer" })} style={{ width: '300px',visibility:'hidden' }} />
-                                </> : null}
-                                {this.state.SearchBy === "SearchDeactive" ? <> <Input onInput={values => this.setState({ SearchValue: "rejected" })} style={{ width: '0px',visibility:'hidden' }} />
-                                </> : null} */}
-                                {/* {this.state.secondSearchValue === "SearchByContractDuration" ? <><RangePicker
-                                    showTime={{ format: 'HH:mm' }}
-                                    format="YYYY-MM-DD HH:mm"
-                                    onChange={this.onChange}
-                                    onOk={this.onOk}
-                                />
-                                </>
-                                    : null}
-                                {this.state.secondSearchValue === "SearchByContractDeadline" ? <>
-                                    <DatePicker showTime onChange={this.onChange} onOk={this.onOk} />
-                                </>
-                                    : null}
-                                {this.state.secondSearchValue === "SearchByContractCreatedDate" ? <>
-                                    <DatePicker showTime onChange={this.onChange} onOk={this.onOk} />
-
-                                </>
-                                    : null} */}
+                                
                                 <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined style={{verticalAlign:'baseline'}} />} />
                             </Space>
                         </Form>

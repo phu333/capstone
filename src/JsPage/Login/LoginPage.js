@@ -69,7 +69,7 @@ class LoginPage extends React.Component {
     }
     componentDidMount() {
         let loginInfo = JSON.parse(localStorage.getItem("loginInfo")) 
-        console.log(loginInfo)
+        
         if (loginInfo != undefined && loginInfo != null) {
             this.props.onSubmit(loginInfo)
         } else {
@@ -103,7 +103,7 @@ class LoginPage extends React.Component {
                 return response.data;
             })
             .then((data) => {
-                console.log(data.data)
+               
                 
                     let loginInfo = {
                         id: data.data.id,
@@ -129,7 +129,7 @@ class LoginPage extends React.Component {
                             return response.data;
                         })
                         .then((data) => {
-                            console.log(data)
+                            
                             for(let i = 0; i < data.length; i++){
                                 if(data[i].permissionName.includes("GetAllCompanyAccount(ByCompanyId)") )
                                 {data[i].permissionName="GetAllCompanyAccount"}
@@ -153,7 +153,7 @@ class LoginPage extends React.Component {
                   
                         });
                     
-                    console.log(loginInfo)
+                    
                 
 
 

@@ -108,18 +108,7 @@ class CustomerSearch extends React.Component {
 
                     </Radio.Group>
                 </Card>
-                {/* <Card>
-                    <Radio.Group onChange={this.onChangeSecondSearchValue} value={this.state.secondSearchValue}>
-                        <Radio style={radioStyle} value={"all"}>
-                            tất cả
-                        </Radio>
-
-                        <Radio style={radioStyle} value={"SearchByName"}>
-                            Tìm kiếm bằng tên
-        </Radio>
-
-                    </Radio.Group>
-                </Card> */}
+               
 
             </Space>
         )
@@ -150,14 +139,14 @@ class CustomerSearch extends React.Component {
                                     <Button icon={<MenuOutlined />}>Tìm kiếm bằng</Button>
                                 </Dropdown>
 
-                                {/* <Form.Item name="Search"> */}
+                               
                                     {this.state.SearchBy === "SearchByCompanyName" ? <> <Input onInput={values => this.setState({ SearchValue: values.target.value })} style={{ width: '300px' }} />
                                     </> : null}
                                     {this.state.SearchBy === "SearchByTaxCode" ?
                                         <> <Input onInput={values => this.setState({ SearchValue: values.target.value })} style={{ width: '300px' }} />
                                         </>
                                         : null}
-                                {/* </Form.Item> */}
+                              
                                 <Button type="primary" htmlType="submit" shape="circle" icon={<SearchOutlined style={{verticalAlign:'baseline'}} />} />
 
 

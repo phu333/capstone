@@ -100,37 +100,7 @@ class SignatureSearch extends React.Component {
 
                     </Radio.Group>
                 </Card>
-                {/* <Card>
-                    <Radio.Group onChange={this.onChangeSecondSearchValue} value={this.state.secondSearchValue}>
-                        <Radio style={radioStyle} value={"all"}>
-                            tất cả
-                        </Radio>
-
-                        <Radio style={radioStyle} value={"SearchByGivenDate"}>
-                            Ngày cấp
-        </Radio>
-                        <Radio style={radioStyle} value={"SearchByDeadline"}>
-                            Ngày hết hạn
-        </Radio>
-                        <Radio style={radioStyle} value={"SearchInAPeriod"}>
-                            Trong khoản thời gian
-        </Radio>
-                    </Radio.Group>
-                </Card> */}
-                {/* <Card>
-                    <Radio.Group onChange={this.onChangeThirdSearchValue} value={this.state.thirdSearchValue}>
-                        <Radio style={radioStyle} value={"all"}>
-                            tất cả
-                        </Radio>
-                        <Radio style={radioStyle} value={"active"}>
-                            đang có hiệu lực
-        </Radio>
-
-                        <Radio style={radioStyle} value={"deactive"}>
-                            hết hiệu lực
-        </Radio>
-                    </Radio.Group>
-                </Card> */}
+               
             </Space>
         )
         return (

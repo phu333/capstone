@@ -2,8 +2,8 @@ import 'antd/dist/antd.css';
 import { Menu, Layout } from 'antd';
 import { Breadcrumb, Avatar, Descriptions, Space, Tag, Affix, Button } from 'antd';
 import React from 'react';
-import { Badge } from 'antd';
-import AddCompany from './AddCompany'
+
+
 import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import Chart from './ChartProfile'
 import { UserOutlined, ToolOutlined, NotificationOutlined, LogoutOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
@@ -15,18 +15,13 @@ import UpdateProfileCompany from '../Update/UpdateProfileCompany'
 import EmployeeTable from '../Table/EmployeeTable'
 import SignatureList from '../Table/SignatureList'
 import Header from '../Login/Header'
-import { createFromIconfontCN } from '@ant-design/icons';
+
 import { connect } from 'react-redux'
 import "../Column.css"
 import FadeIn from 'react-fade-in'
 import logo from '../../logo/Capture.PNG'
-import axios from 'axios'
-const IconFont = createFromIconfontCN({
-  scriptUrl: [
-    '//at.alicdn.com/t/font_1788044_0dwu4guekcwr.js', // icon-javascript, icon-java, icon-shoppingcart (overrided)
-    '//at.alicdn.com/t/font_1788592_a5xf2bdic3u.js', // icon-shoppingcart, icon-python
-  ],
-});
+
+
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
 class EmployeeSideMenu extends React.Component {
