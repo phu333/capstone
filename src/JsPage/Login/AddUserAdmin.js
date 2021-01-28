@@ -428,6 +428,7 @@ class AddUserAdmin extends React.Component {
                                 <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
                             </Popover></Row>
                         </Form.Item>
+                        <p></p> 
                     </div>
                     <Form.Item {...tailLayout}>
                         <Space size="large">
