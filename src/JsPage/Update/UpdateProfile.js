@@ -250,6 +250,9 @@ class UpdateProfile extends React.Component {
                                             max: 6,
                                             min: 6,
                                             message: 'Vui lòng không nhập 6 ký tự'
+                                        }, {
+                                            pattern: /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!#$%\-_=+<>])([a-zA-Z0-9!#$%\-_=+<>]+)$/,
+                                            message: "Xin hãy nhập có ít nhất 1 ký tự hoa,1 ký tự thường,1 số, 1 dấu đặc biệt"
                                         }
                                     ]}
                                 >

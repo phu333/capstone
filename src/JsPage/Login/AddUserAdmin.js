@@ -271,7 +271,10 @@ class AddUserAdmin extends React.Component {
 
                                                 message: 'Vui lòng nhập 6 kí tự',
                                                 min: 6,
-                                            },
+                                            }, {
+                                                pattern: /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!#$%\-_=+<>])([a-zA-Z0-9!#$%\-_=+<>]+)$/,
+                                                message: "Xin hãy nhập có ít nhất 1 ký tự hoa,1 ký tự thường,1 số, 1 dấu đặc biệt"
+                                            }
                                         ]}
                                     >
                                         <Row gutter={8}> <Col span={22}><Input.Password /></Col>    <Popover content={ValidationPass} trigger="hover">
