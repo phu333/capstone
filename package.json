@@ -2,6 +2,10 @@
   "name": "ant-app",
   "version": "0.1.0",
   "private": false,
+  "engines": {
+    "node": "10.16.0",
+    "npm":"6.9.0"
+  },
   "homepage": "http://phu333.github.io/capstone",
   "dependencies": {
     "@ant-design/charts": "^1.0.1",
