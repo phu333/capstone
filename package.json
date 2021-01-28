@@ -165,5 +165,5 @@
     ]
   },
   "theme": "./theme.js",
-  "proxy": "http://localhost:5000"
+  "proxy": "https://hisign-api.azurewebsites.net"
 }

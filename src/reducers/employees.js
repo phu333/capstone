@@ -7,10 +7,10 @@ const myEmployeeReducer = (state = initialState, action) => {
             return state;
         case 'CREATE_employee':
 
-            console.log(action.employeeList)
+            
             state = initialState
             state = action.employeeList
-            console.log(state)
+           
 
 
             return [...state];
@@ -18,7 +18,7 @@ const myEmployeeReducer = (state = initialState, action) => {
             console.log(action.employee.id)
 
             var New = state.filter(employee => employee.id !== action.employee.id)
-            console.log(New)
+           
             state = New
             state.push(action.employee)
             return [...state];

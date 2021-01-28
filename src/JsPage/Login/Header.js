@@ -96,9 +96,9 @@ class Header extends Component {
                     <Space direction="horizontal" size="small" >
                     <Avatar size={30} icon={<UserOutlined />} />
                     <Dropdown overlay={menu} trigger={['click']}>
-                    <h style={{color:'white'}} className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                    <div style={{color:'white'}} className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                         {login.username} <DownOutlined />
-                    </h>
+                    </div>
                     </Dropdown>
                     </Space>
                     </Space>

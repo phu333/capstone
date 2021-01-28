@@ -6,7 +6,7 @@ const myContractExtensionReducer = (state = initialState, action) => {
         case 'CREATE_contractExtension':
             state.push(action.contractExtension)
             
-            return [...state];
+            return action.contractExtension;
         case 'UPDATE_contractExtension':
             state.push(action.contractExtension)
             return [...state];

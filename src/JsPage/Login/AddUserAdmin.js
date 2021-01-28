@@ -99,7 +99,29 @@ class AddUserAdmin extends React.Component {
 
     }
     onFinish = (values) => {
-        console.log(values);
+        values["permissions"] = [
+            { userId: "", permissionId: 3, permissionName: "Sign", enabled: true },
+            { userId: "", permissionId: 4, permissionName: "GetContractList(ByCompanyId)", enabled: true },
+            { userId: "", permissionId: 5, permissionName: "ActiveDeactiveContract", enabled: true },
+            { userId: "", permissionId: 6, permissionName: "UpdateContract", enabled: true },
+            { userId: "", permissionId: 7, permissionName: "CreateContract", enabled: true },
+            { userId: "", permissionId: 8, permissionName: "GetAllCompanyTemplate(ByCompanyId)", enabled: true },
+            { userId: "", permissionId: 9, permissionName: "ActiveDeactiveTemplate", enabled: true },
+            { userId: "", permissionId: 10, permissionName: "UpdateTemplate", enabled: true },
+            { userId: "", permissionId: 11, permissionName: "UpdateCustomer", enabled: true },
+            { userId: "", permissionId: 12, permissionName: "CreateTemplate", enabled: true },
+            { userId: "", permissionId: 13, permissionName: "GetCompanyAdminList(ByRole)", enabled: true },
+            { userId: "", permissionId: 14, permissionName: "ActiveDeactiveAccount", enabled: true },
+            { userId: "", permissionId: 15, permissionName: "GetCompanyAccountListByCompanyId", enabled: true },
+            { userId: "", permissionId: 16, permissionName: "UpdateAccountPermission", enabled: true },
+            { userId: "", permissionId: 17, permissionName: "CreateAccount", enabled: true },
+            { userId: "", permissionId: 18, permissionName: "ActiveDeactiveSignature", enabled: true },
+            { userId: "", permissionId: 19, permissionName: "UpdateSignature", enabled: true },
+            { userId: "", permissionId: 20, permissionName: "CreateSignature", enabled: true },
+            { userId: "", permissionId: 21, permissionName: "GetAllCompanyList", enabled: true },
+            { userId: "", permissionId: 22, permissionName: "GetAllCompanyAccount(ByCompanyId)", enabled: true },
+            { userId: "", permissionId: 23, permissionName: "ActiveDeactiveCustomer", enabled: true },
+        ];
         axios({
             url: '/api/Account/register',
             method: "POST",
@@ -162,37 +184,29 @@ class AddUserAdmin extends React.Component {
                                     <Form.Item
                                         label={<label style={{ color: "#0099ff" }}>Tên</label>}
                                         name="firstName"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message: 'Vui lòng nhập tên ',
-                                            },
 
-                                        ]}
                                     >
                                         <Row gutter={8}> <Col span={22}><Input placeholder="Tên" /></Col>    <Popover content={ValidationFPresentor} trigger="hover">
                                             <Button shape="circle" style={{ border: "none", backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'white' }} />} />
-                                        </Popover></Row>                    </Form.Item>
-                                </Col><Col span={12}>
+                                        </Popover></Row>
+                                    </Form.Item>
+                                </Col>
+                                <Col span={12}>
                                     <Form.Item
                                         label={<label style={{ color: "#0099ff" }}>Họ </label>}
                                         name="lastName"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message: 'Vui lòng nhập họ',
-                                            },
 
-                                        ]}
                                     >
-                                        <Row gutter={8}> <Col span={22}><Input placeholder="Tên" /></Col>    <Popover content={ValidationLPresentor} trigger="hover">
+                                        <Row gutter={8}> <Col span={22}><Input placeholder="Họ" /></Col>    <Popover content={ValidationLPresentor} trigger="hover">
                                             <Button shape="circle" style={{ border: "none", backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'white' }} />} />
                                         </Popover></Row>
 
 
                                     </Form.Item>
-                                </Col></Row>
+                                </Col>
+                            </Row>
                             <Row gutter={2}>
+
                                 <Col span={12} >
                                     <Form.Item
                                         label={<label style={{ color: "#0099ff" }}>Email</label>}
@@ -213,7 +227,8 @@ class AddUserAdmin extends React.Component {
                                         </Popover></Row>
 
                                     </Form.Item>
-                                </Col><Col span={12}>
+                                </Col>
+                                <Col span={12}>
                                     <Form.Item
                                         label={<label style={{ color: "#0099ff" }}>Chứng minh nhân dân</label>}
                                         name="userId"
@@ -232,9 +247,23 @@ class AddUserAdmin extends React.Component {
                                         </Popover></Row>
 
                                     </Form.Item>
-                                </Col></Row>
+                                </Col>
+                            </Row>
 
                             <Row gutter={2}>
+                                <Col span={12}>
+                                    <Form.Item
+                                        label={<label style={{ color: "#0099ff" }}>Tên username </label>}
+                                        name="username"
+
+                                    >
+                                        <Row gutter={8}> <Col span={22}><Input placeholder="username" /></Col>    <Popover content={ValidationLPresentor} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none", backgroundColor: 'rgb(8, 59, 102)' }} size="small" icon={<QuestionCircleOutlined style={{ color: 'white' }} />} />
+                                        </Popover></Row>
+
+
+                                    </Form.Item>
+                                </Col>
                                 <Col span={12} >
                                     <Form.Item
                                         label={<label style={{ color: "#0099ff" }}>Mật khẩu</label>}
@@ -286,22 +315,7 @@ class AddUserAdmin extends React.Component {
                                     </Form.Item>
                                 </Col></Row>
                             <Row gutter={2}>
-                                <Col span={12} >
-                                    <Form.Item
-                                        label={<label style={{ color: "#0099ff" }}>Chức vụ</label>}
-                                        name="userRole"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message: 'Vui lòng nhập Chức vụ',
-                                            },
-                                        ]}
-                                    >
-                                        <Select>
-                                            <Select.Option value={2}>giám đốc</Select.Option>
-                                            <Select.Option value={3}>nhân viên</Select.Option>
-                                        </Select>
-                                    </Form.Item></Col><Col span={12}>
+                                <Col span={12}>
                                     <Form.Item
                                         label={<label style={{ color: "#0099ff" }}>Điện thoại</label>}
                                         name="phoneNumber"

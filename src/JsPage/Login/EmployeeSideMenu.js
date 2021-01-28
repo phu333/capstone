@@ -155,7 +155,7 @@ class EmployeeSideMenu extends React.Component {
                     {this.state.showComponent === "Chart" ?
                       <Router>
                         <Redirect push to={"/capstone/" + this.state.showComponent} />
-                        <Route exact path="/capstone/Chart" component={Chart} />
+                        <Route exact path="/capstone/Chart" render={() => <Chart  token={login.jwToken} role={login.role} />} />
                       </Router>
                       : null}
                     {this.state.showComponent === "CustomerList" ?
@@ -223,7 +223,7 @@ class EmployeeSideMenu extends React.Component {
   }
 }
 var mapStateToProps = state => {
-  console.log(state.myLoginReducer)
+  
   return {
     myLoginReducer: state.myLoginReducer
   }

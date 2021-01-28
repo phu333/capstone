@@ -7,10 +7,10 @@ const myCustomerReducer = (state = initialState, action) => {
         case 'LIST_customer':
             return state;
         case 'CREATE_customer':
-            console.log(action.customerList)
+           
             state = initialState
             state = action.customerList
-                console.log(state)
+              
             
             
             return [...state];

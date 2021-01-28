@@ -7,7 +7,7 @@ const myLoginReducer = (state = initialState, action) => {
       state.pop()
       state.push(action.login)
       localStorage.setItem("loginInfo",JSON.stringify(action.login) )
-      console.log(action.login)
+      
       return [...state];
     case 'LOGOUT':
       localStorage.removeItem("loginInfo")
