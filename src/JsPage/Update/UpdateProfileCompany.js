@@ -170,7 +170,7 @@ class UpdateProfileCompany extends React.Component {
 
                         <Card style={{ width: 1000, minHeight: 600 }}>
 
-                            <Form
+                        <Form
                                 {...layout}
                                 name="basic"
                                 className="employee-form"
@@ -179,31 +179,34 @@ class UpdateProfileCompany extends React.Component {
                                 onFinishFailed={this.onFinishFailed}
 
                             >
+                                <Row gutter={2}>
+                                    <Col span={12}>
 
-                                <Form.Item
-                                    label="Tên doanh nghiệp"
-                                    name="name"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập tên doanh nghiệp',
-                                        }, {
+                                        <Form.Item
+                                            label="Tên doanh nghiệp"
+                                            name="name"
 
-                                            message: 'Vui lòng nhập dưới 250 ký tự',
-                                            max: 250,
-                                        }
-                                    ]}
-                                >
-                                    {this.state.isEdit === false ?
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Vui lòng nhập tên doanh nghiệp',
+                                                }, {
 
-                                        <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationCompany} trigger="hover">
-                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                        </Popover></Row> :
-                                        <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationCompany} trigger="hover">
-                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                        </Popover></Row>}
-                                </Form.Item>
-                                <Form.Item
+                                                    message: 'Vui lòng nhập dưới 250 ký tự',
+                                                    max: 250,
+                                                }
+                                            ]}
+                                        >
+                                            {this.state.isEdit === false ?
+
+                                                <Row gutter={8}> <Col span={20}><Input disabled defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                                                    <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                                </Popover></Row> :
+                                                <Row gutter={8}> <Col span={20}><Input defaultValue={this.state.company.name} /></Col>    <Popover content={ValidationCompany} trigger="hover">
+                                                    <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                                </Popover></Row>}
+                                        </Form.Item></Col><Col span={12}>
+                                        <Form.Item
                                             label="Mã số thuế"
                                             name="taxCode"
                                             rules={[
@@ -220,10 +223,9 @@ class UpdateProfileCompany extends React.Component {
                                                 <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
                                             </Popover></Row>
                                         </Form.Item>
-
-                                <Row gutter={2}>
+                                    </Col>
                                     <Col span={12}>
-                                                                            
+
                                         <Form.Item
                                             label="Địa chỉ"
                                             name="address"
