@@ -418,14 +418,6 @@ class AddUserAdmin extends React.Component {
                             </Space>
                         </Form.Item>
 
-
-
-
-
-
-
-
-
                     </Form>
 
 
