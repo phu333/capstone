@@ -80,7 +80,7 @@ class ContractTable extends React.Component {
         return response.data;
       })
       .then((data) => {
-
+console.log(data)
         this.setState({
           templateList: data.data
         })

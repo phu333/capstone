@@ -46,7 +46,7 @@ class CustomerList extends React.Component {
       .then((data) => {
         console.log(data.data)
         this.setState({
-          customers: data.data,
+          customers: data .data,
         })
         setTimeout(function () {
           this.setState({
@@ -217,7 +217,7 @@ class CustomerList extends React.Component {
                     // sortDirections={['descend', 'ascend']}
                     render={(text, record) => (
                       <Space size="middle">
-                          {text === "0" ? <Switch style={{ fontSize: '20px' }} onChange={() => this.handleChangeS(record.id, text)}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked /> : <Switch style={{ fontSize: '20px' }}  onChange={() => this.handleChangeS(record.id, text)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked />}
+                          {text == "1" ? <Switch style={{ fontSize: '20px' }} onChange={() => this.handleChangeS(record.id, text)}  checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultChecked /> : <Switch style={{ fontSize: '20px' }}  onChange={() => this.handleChangeS(record.id, text)} checkedChildren="Vô hiệu hóa" unCheckedChildren="kích hoạt" defaultunChecked />}
                       
                       </Space>
                     )}
