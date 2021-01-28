@@ -209,7 +209,7 @@ class CreateContract extends React.Component {
             return (
                 <Router>
                     <Redirect push to={'/capstone/contract'} />
-                    <Route exact path='/capstone/contract' render={() => <ContractTable token={this.props.token} role={this.props.role} />
+                    <Route exact path='/capstone/contract' render={() => <ContractTable Sign={this.props.Sign} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} token={this.props.token} role={this.props.role} />
                     } /></Router>
             );
         } else {
