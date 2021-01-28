@@ -316,8 +316,7 @@ class ContractView extends React.Component {
             });
     }
     onFinish = () => {
-        console.log(this.state.company.taxCode)
-        console.log(this.state.customers[0].taxCode)
+        
         if (this.props.Sign === true) {
             if (this.state.company.id !== undefined) {
                 axios({
@@ -325,18 +324,18 @@ class ContractView extends React.Component {
                     method: "POST",
                     data: {
                         Info: this.state.company.taxCode,
-
+                        Id:this.props.contract.id,
                     }
                 })
                     .then((response) => {
 
-
+                        message.success("Tiện ích đã nhận được thông tin xác thực")
                     })
                     .then((data) => {
-
+                        
                     })
                     .catch(error => {
-                        console.log(error)
+                        message.error("Vui lòng kiểm tra kết nối mang")
 
 
                     });
@@ -359,11 +358,11 @@ class ContractView extends React.Component {
                             return response.data;
                         })
                         .then((data) => {
-                            console.log(data.data)
+                           message.success("Tải về thành công")
 
                         })
                         .catch(error => {
-                            console.log(error)
+                            message.error("Vui lòng kiểm tra kết nối mang")
 
 
                         });
@@ -373,19 +372,18 @@ class ContractView extends React.Component {
                         method: "POST",
                         data: {
                             Info: this.state.company.taxCode,
-
+                            Id:this.props.contract.id,
                         }
                     })
                         .then((response) => {
 
-
+                            message.success("Tiện ích đã nhận được thông tin xác thực")
                         })
                         .then((data) => {
 
                         })
                         .catch(error => {
-                            console.log(error)
-
+                            message.error("Vui lòng kiểm tra kết nối mang")
 
                         });
                     window.open(this.props.contract.fileUrl, "_blank")
@@ -397,18 +395,18 @@ class ContractView extends React.Component {
                     method: "POST",
                     data: {
                         Info: this.state.customers[0].taxCode,
-
+                        Id:this.props.contract.id,
                     }
                 })
                     .then((response) => {
 
-
+                        message.success("Tiện ích đã nhận được thông tin xác thực")
                     })
                     .then((data) => {
 
                     })
                     .catch(error => {
-                        console.log(error)
+                        message.error("Vui lòng kiểm tra kết nối mang")
 
 
                     });
@@ -431,12 +429,11 @@ class ContractView extends React.Component {
                             return response.data;
                         })
                         .then((data) => {
-                            console.log(data.data)
+                            message.success("Tải về thành công")
 
                         })
                         .catch(error => {
-                            console.log(error)
-
+                            message.error("Vui lòng kiểm tra kết nối mang")
 
                         });
                 } else {
@@ -445,19 +442,18 @@ class ContractView extends React.Component {
                         method: "POST",
                         data: {
                             Info: this.state.customers[0].taxCode,
-
+                            Id:this.props.contract.id,
                         }
                     })
                         .then((response) => {
-
+                            message.success("Tiện ích đã nhận được thông tin xác thực")
 
                         })
                         .then((data) => {
 
                         })
                         .catch(error => {
-                            console.log(error)
-
+                            message.error("Vui lòng kiểm tra kết nối mang")
 
                         });
                     window.open(this.props.contract.fileUrl, "_blank")
@@ -487,11 +483,12 @@ class ContractView extends React.Component {
                             return response.data;
                         })
                         .then((data) => {
-                            console.log(data.data)
+                            message.success("Tải về thành công")
+
 
                         })
                         .catch(error => {
-                            console.log(error)
+                            message.error("Vui lòng kiểm tra kết nối mang")
 
 
                         });
@@ -521,11 +518,12 @@ class ContractView extends React.Component {
                             return response.data;
                         })
                         .then((data) => {
-                            console.log(data.data)
+                            message.success("Tải về thành công")
+
 
                         })
                         .catch(error => {
-                            console.log(error)
+                            message.error("Vui lòng kiểm tra kết nối mang")
 
 
                         });
