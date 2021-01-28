@@ -81,14 +81,14 @@ class ChooseContractTemplate extends React.Component {
         if (this.state.finish) {
             return (<Router>
                 <Redirect push to={"/capstone/contract"} />
-                <Route exact path="/capstone/contract" render={() => <ContractTable token={this.props.token} role={this.props.role} />
+                <Route exact path="/capstone/contract" render={() => <ContractTable Sign={this.props.Sign} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} token={this.props.token} role={this.props.role} />
                 } /></Router>);
         } else {
             if (this.state.showTemplateCreate) {
                 return (
                     <Router>
                         <Redirect push to={"/capstone/createContract"} />
-                        <Route exact path="/capstone/createContract" render={() => <CreateContract template={this.state.template} token={this.props.token} role={this.props.role} />
+                        <Route exact path="/capstone/createContract" render={() => <CreateContract Sign={this.props.Sign} GetContractList={this.props.GetContractList} UpdateContract={this.props.UpdateContract} ActiveDeactiveContract={this.props.ActiveDeactiveContract} CreateContract={this.props.CreateContract} template={this.state.template} token={this.props.token} role={this.props.role} />
                         } /></Router>
 
                 );
