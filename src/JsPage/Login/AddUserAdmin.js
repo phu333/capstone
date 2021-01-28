@@ -100,17 +100,19 @@ class AddUserAdmin extends React.Component {
     }
     onFinish = (values) => {
         values["permissions"] = [
+            { userId: "", permissionId: 1, permissionName: "UpdateCompany", enabled: true },
+            { userId: "", permissionId: 2, permissionName: "AddCustomer", enabled: true },
             { userId: "", permissionId: 3, permissionName: "Sign", enabled: true },
-            { userId: "", permissionId: 4, permissionName: "GetContractList(ByCompanyId)", enabled: true },
+            { userId: "", permissionId: 4, permissionName: "GetContractList", enabled: true },
             { userId: "", permissionId: 5, permissionName: "ActiveDeactiveContract", enabled: true },
             { userId: "", permissionId: 6, permissionName: "UpdateContract", enabled: true },
             { userId: "", permissionId: 7, permissionName: "CreateContract", enabled: true },
-            { userId: "", permissionId: 8, permissionName: "GetAllCompanyTemplate(ByCompanyId)", enabled: true },
+            { userId: "", permissionId: 8, permissionName: "GetAllCompanyTemplate", enabled: true },
             { userId: "", permissionId: 9, permissionName: "ActiveDeactiveTemplate", enabled: true },
             { userId: "", permissionId: 10, permissionName: "UpdateTemplate", enabled: true },
             { userId: "", permissionId: 11, permissionName: "UpdateCustomer", enabled: true },
             { userId: "", permissionId: 12, permissionName: "CreateTemplate", enabled: true },
-            { userId: "", permissionId: 13, permissionName: "GetCompanyAdminList(ByRole)", enabled: true },
+            { userId: "", permissionId: 13, permissionName: "GetCompanyAdminList", enabled: true },
             { userId: "", permissionId: 14, permissionName: "ActiveDeactiveAccount", enabled: true },
             { userId: "", permissionId: 15, permissionName: "GetCompanyAccountListByCompanyId", enabled: true },
             { userId: "", permissionId: 16, permissionName: "UpdateAccountPermission", enabled: true },
@@ -119,7 +121,7 @@ class AddUserAdmin extends React.Component {
             { userId: "", permissionId: 19, permissionName: "UpdateSignature", enabled: true },
             { userId: "", permissionId: 20, permissionName: "CreateSignature", enabled: true },
             { userId: "", permissionId: 21, permissionName: "GetAllCompanyList", enabled: true },
-            { userId: "", permissionId: 22, permissionName: "GetAllCompanyAccount(ByCompanyId)", enabled: true },
+            { userId: "", permissionId: 22, permissionName: "GetAllCompanyAccount", enabled: true },
             { userId: "", permissionId: 23, permissionName: "ActiveDeactiveCustomer", enabled: true },
         ];
         axios({
@@ -186,13 +188,7 @@ class AddUserAdmin extends React.Component {
                                 <Form.Item
                                     label={ "Họ "}
                                     name="lastName"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập họ',
-                                        },
-
-                                    ]}
+                                    
                                 >
                                     <Row gutter={8}> <Col span={22}><Input placeholder="Tên" /></Col>    <Popover content={ValidationLPresentor} trigger="hover">
                                         <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
@@ -204,13 +200,7 @@ class AddUserAdmin extends React.Component {
                                 <Form.Item
                                     label={ "Tên "}
                                     name="firstName"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Vui lòng nhập tên ',
-                                        },
-
-                                    ]}
+                                   
                                 >
                                     <Row gutter={8}> <Col span={22}><Input placeholder="Tên" /></Col>    <Popover content={ValidationFPresentor} trigger="hover">
                                         <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{  verticalAlign: 'center' }} />} />
@@ -241,18 +231,15 @@ class AddUserAdmin extends React.Component {
                             </Col><Col span={12}>
                                 <Form.Item
                                     label={ "Chức vụ "}
-                                    name="userRole"
+                                    name="username"
                                     rules={[
                                         {
                                             required: true,
-                                            message: 'Vui lòng nhập Chức vụ',
+                                            message: 'Vui lòng tên user',
                                         },
                                     ]}
                                 >
-                                    <Select>
-                                        <Select.Option value={2}>giám đốc</Select.Option>
-                                        <Select.Option value={3}>nhân viên</Select.Option>
-                                    </Select>
+                                    <Input placeholder="text" />
                                 </Form.Item>
                             </Col></Row>
 
