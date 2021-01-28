@@ -717,7 +717,8 @@ class ContractView extends React.Component {
                                         onFinishFailed={this.onFinishFailed}
 
                                     >
-                                        Giá trị hợp đồng:<input disabled={!this.state.isEdit} defaultValue={this.props.contract.contractValue} type="text" pattern="[0-9]*" prefix="VND"
+                                        Giá trị hợp đồng:<input disabled={!this.state.isEdit}
+                                         defaultValue={`${this.props.contract.contractValue} VNĐ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} type="text" pattern="[0-9]*" prefix="VND"
                                             onInput={this.handleValue} /> x1000 VNĐ
                                         <h6 style={{ fontSize: 14 }}>Hợp đồng có hiệu lực kể từ {this.props.contract.ActivateDate} đến
                                         <input defaultValue={this.props.contract.contractExpiredDate}
