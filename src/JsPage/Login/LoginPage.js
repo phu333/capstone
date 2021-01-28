@@ -131,20 +131,14 @@ class LoginPage extends React.Component {
                         .then((data) => {
                             
                             for(let i = 0; i < data.length; i++){
-                                if(data[i].permissionName.includes("GetAllCompanyAccount(ByCompanyId)") )
-                                {data[i].permissionName="GetAllCompanyAccount"}
-                                if(data[i].permissionName.includes("GetCompanyAdminList(ByRole)") )
-                                {data[i].permissionName="GetCompanyAdminListByR"}
-                                if(data[i].permissionName.includes("GetAllCompanyAccount(ByCompanyId)") )
-                                {data[i].permissionName="GetAllCompanyAccountByC"}
-                                if(data[i].permissionName.includes("GetAllCompanyAccount(ByCompanyId)") )
-                                {data[i].permissionName="GetAllCompanyAccountByC"}
+                                
                                 
                                 loginInfo[data[i].permissionName]=data[i].enabled
                             }
                             this.setState({
                                 othersPage: ""
                             })
+                           
                             this.props.onSubmit(loginInfo)
                         })
                   
