@@ -265,7 +265,7 @@ class AddUserAdmin extends React.Component {
                                             },
                                             {
 
-                                                message: 'Vui lòng nhập dưới 6 kí tự',
+                                                message: 'Vui lòng nhập trên 6 kí tự',
                                                 min: 6,
                                             }, {
                                                 pattern: /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!#$%\-_=+<>])([a-zA-Z0-9!#$%\-_=+<>]+)$/,
