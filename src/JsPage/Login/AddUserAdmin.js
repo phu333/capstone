@@ -123,6 +123,10 @@ class AddUserAdmin extends React.Component {
             { userId: "", permissionId: 21, permissionName: "GetAllCompanyList", enabled: true },
             { userId: "", permissionId: 22, permissionName: "GetAllCompanyAccount", enabled: true },
             { userId: "", permissionId: 23, permissionName: "ActiveDeactiveCustomer", enabled: true },
+            { userId: "", permissionId: 24, permissionName: "GetCompanyAdminList", enabled: true },
+            { userId: "", permissionId: 25, permissionName: "GetAllCompanyTemplate", enabled: true },
+            { userId: "", permissionId: 26, permissionName: "GetContractList", enabled: true },
+            { userId: "", permissionId: 27, permissionName: "GetAllCompanyAccount", enabled: true },
         ];
         console.log(values)
         axios({

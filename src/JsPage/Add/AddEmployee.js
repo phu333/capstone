@@ -119,16 +119,16 @@ class AddEmployee extends React.Component {
             role: values.role,
             permissions: [
                 { userId: "", permissionId: 3, permissionName: "Sign", enabled: this.state.Sign },
-                { userId: "", permissionId: 4, permissionName: "GetContractList(ByCompanyId)", enabled: this.state.GetContractList },
+                { userId: "", permissionId: 4, permissionName: "GetContractList", enabled: this.state.GetContractList },
                 { userId: "", permissionId: 5, permissionName: "ActiveDeactiveContract", enabled: this.state.ActiveDeactiveContract },
                 { userId: "", permissionId: 6, permissionName: "UpdateContract", enabled: this.state.UpdateContract },
                 { userId: "", permissionId: 7, permissionName: "CreateContract", enabled: this.state.CreateContract },
-                { userId: "", permissionId: 8, permissionName: "GetAllCompanyTemplate(ByCompanyId)", enabled: this.state.GetAllCompanyTemplate },
+                { userId: "", permissionId: 8, permissionName: "GetAllCompanyTemplate", enabled: this.state.GetAllCompanyTemplate },
                 { userId: "", permissionId: 9, permissionName: "ActiveDeactiveTemplate", enabled: this.state.ActiveDeactiveTemplate },
                 { userId: "", permissionId: 10, permissionName: "UpdateTemplate", enabled: this.state.UpdateTemplate },
                 { userId: "", permissionId: 11, permissionName: "UpdateCustomer", enabled: this.state.UpdateCustomer },
                 { userId: "", permissionId: 12, permissionName: "CreateTemplate", enabled: this.state.CreateTemplate },
-                { userId: "", permissionId: 13, permissionName: "GetCompanyAdminList(ByRole)", enabled: this.state.GetCompanyAdminList },
+                { userId: "", permissionId: 13, permissionName: "GetCompanyAdminList", enabled: this.state.GetCompanyAdminList },
                 { userId: "", permissionId: 14, permissionName: "ActiveDeactiveAccount", enabled: this.state.ActiveDeactiveAccount },
                 { userId: "", permissionId: 15, permissionName: "GetCompanyAccountListByCompanyId", enabled: this.state.GetCompanyAccountListByCompanyId },
                 { userId: "", permissionId: 16, permissionName: "UpdateAccountPermission", enabled: this.state.UpdateAccountPermission },
@@ -137,7 +137,7 @@ class AddEmployee extends React.Component {
                 { userId: "", permissionId: 19, permissionName: "UpdateSignature", enabled: this.state.UpdateSignature },
                 { userId: "", permissionId: 20, permissionName: "CreateSignature", enabled: this.state.CreateSignature },
                 { userId: "", permissionId: 21, permissionName: "GetAllCompanyList", enabled: this.state.GetAllCompanyList },
-                { userId: "", permissionId: 22, permissionName: "GetAllCompanyAccount(ByCompanyId)", enabled: this.state.GetAllCompanyAccount },
+                { userId: "", permissionId: 22, permissionName: "GetAllCompanyAccount", enabled: this.state.GetAllCompanyAccount },
                 { userId: "", permissionId: 23, permissionName: "ActiveDeactiveCustomer", enabled: this.state.ActiveDeactiveCustomer },
             ]
         }
