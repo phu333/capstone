@@ -181,7 +181,7 @@ class AddUserAdmin extends React.Component {
                         {...layout}
                         name="basic"
                         className="employee-form"
-                        
+                        hideRequiredMark
 
                         onFinish={this.onFinish}
                         onFinishFailed={this.onFinishFailed}
@@ -202,7 +202,7 @@ class AddUserAdmin extends React.Component {
 
                                     </Form.Item>
                                 </Col><Col span={12}>
-                                <Form.Item
+                                    <Form.Item
                                         label="Tên "
                                         name="firstName"
 
@@ -349,6 +349,7 @@ class AddUserAdmin extends React.Component {
                         <div style={{ backgroundColor: 'white' }} >
 
                             <br />
+
                             <Form.Item
                                 label={"Tên doanh nghiệp "}
                                 name="companyName"
@@ -367,62 +368,64 @@ class AddUserAdmin extends React.Component {
                                     <Popover content={ValidationCompany} trigger="hover">
                                         <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
                                     </Popover></Row>
-                            </Form.Item>
-                            <Form.Item
-                                label={"Mã số thuế "}
-                                name="taxCode"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập mst ',
+                            </Form.Item>                            <Row gutter={2}>
+                                <Col span={12}>
+                                    <Form.Item
+                                        label={"Mã số thuế "}
+                                        name="taxCode"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Vui lòng nhập mst ',
 
-                                    },
+                                            },
 
-                                ]}
-                            >
-                                <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationTax} trigger="hover">
-                                    <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
-                                </Popover></Row>
-                            </Form.Item>
-                            <Form.Item
-                                label={"Giấy phép kinh doanh "}
-                                name="businessLicense"
-                                required
-                            >
-                                <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationCertificate} trigger="hover">
-                                    <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
-                                </Popover></Row>
-                            </Form.Item>
-                            <Form.Item
-                                label={"Tài khoản ngân hàng "}
-                                name="bankAccount"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Số tài khoản',
+                                        ]}
+                                    >
+                                        <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationTax} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
+                                        </Popover></Row>
+                                    </Form.Item></Col><Col span={12}>
+                                    <Form.Item
+                                        label={"Giấy phép kinh doanh "}
+                                        name="businessLicense"
+                                        required
+                                    >
+                                        <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationCertificate} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
+                                        </Popover></Row>
+                                    </Form.Item></Col><Col span={12}>
+                                    <Form.Item
+                                        label={"Tài khoản ngân hàng "}
+                                        name="bankAccount"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Vui lòng nhập Số tài khoản',
 
-                                    },
-                                ]}
-                            >
-                                <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationBank} trigger="hover">
-                                    <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
-                                </Popover></Row>
-                            </Form.Item>
-
-                            <Form.Item
-                                label={"Địa chỉ "}
-                                name="address"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui lòng nhập Địa chỉ',
-                                    },
-                                ]}
-                            >
-                                <Row gutter={8}> <Col span={20}><TextArea autoSize placeholder="Địa chỉ" /></Col>    <Popover content={ValidationAdd} trigger="hover">
-                                    <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
-                                </Popover></Row>
-                            </Form.Item>
+                                            },
+                                        ]}
+                                    >
+                                        <Row gutter={8}> <Col span={20}><Input type="text" /></Col>    <Popover content={ValidationBank} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
+                                        </Popover></Row>
+                                    </Form.Item>
+                                </Col><Col span={12}>
+                                    <Form.Item
+                                        label={"Địa chỉ "}
+                                        name="address"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Vui lòng nhập Địa chỉ',
+                                            },
+                                        ]}
+                                    >
+                                        <Row gutter={8}> <Col span={20}><TextArea autoSize placeholder="Địa chỉ" /></Col>    <Popover content={ValidationAdd} trigger="hover">
+                                            <Button shape="circle" style={{ border: "none", backgroundColor: 'white' }} size="small" icon={<QuestionCircleOutlined style={{ verticalAlign: 'center' }} />} />
+                                        </Popover></Row>
+                                    </Form.Item>
+                                </Col></Row>
                             <p></p>
                         </div>
                         <Form.Item {...tailLayout}>
