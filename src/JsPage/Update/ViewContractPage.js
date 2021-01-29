@@ -736,7 +736,7 @@ class ContractView extends React.Component {
                                             <Button type="primary" value="Sign" onClick={this.onFinish}>{/*Nút này xuất hiện khi chưa ai kí hợp đồng nhưng chỉ có director mới thấy*/}
                                                         Tải về
                                                     </Button>
-                                            <CopyToClipboard text={"https://hisignguestweb.web.app/Contract/" + cryptr.encrypt(this.props.contract.id) }
+                                            <CopyToClipboard text={"http://localhost:3001/Contract/" + cryptr.encrypt(this.props.contract.id) }
                                                 onCopy={() => message.success("copied")}>
                                                 <Button type="primary">lấy link</Button>
                                             </CopyToClipboard>
