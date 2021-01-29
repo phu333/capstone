@@ -357,12 +357,9 @@ class AddCustomer extends React.Component {
                                         }
                                     ]}
                                 >
-                                    <Row gutter={8}> <Col span={20}>                                            <Select>
-                                        <Select.Option value={2}>giám đốc</Select.Option>
-                                        <Select.Option value={3}>nhân viên</Select.Option>
-                                    </Select></Col>    <Popover content={ValidationPresentor} trigger="hover">
-                                            <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
-                                        </Popover></Row>
+                                    <Row gutter={8}> <Col span={20}><Input placeholder="Người đại diện" /> </Col>    <Popover content={ValidationPresentor} trigger="hover">
+                                        <Button shape="circle" style={{ border: "none" }} size="small" icon={<QuestionCircleOutlined />} />
+                                    </Popover></Row>
                                 </Form.Item></Col><Col span={12}>
                                 <Form.Item
                                     label="Chức vụ"
